@@ -188,33 +188,28 @@ export default function Treemap({ firms, colorLayer, onFirmClick, selectedFirm }
             maxWidth: 300,
           }}
         >
-          <div className="font-semibold text-sm mb-1">{hoveredFirm.firmName}</div>
-          <div className="text-[10px] text-gray-400 mb-2">{FIRM_TYPE_LABELS[hoveredFirm.firmType]}</div>
+          <div className="font-semibold text-sm mb-0.5">{hoveredFirm.firmName}</div>
+          <div className="text-[10px] text-gray-400 mb-2">{FIRM_TYPE_LABELS[hoveredFirm.firmType]} &middot; {hoveredFirm.totalJobs} open roles</div>
           <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
-            <span className="text-gray-500">Jobs</span>
-            <span>{hoveredFirm.totalJobs}</span>
-            <span className="text-gray-500">PhD demand</span>
-            <span>{hoveredFirm.phdDemandPct}%</span>
-            <span className="text-gray-500">AI/ML focus</span>
-            <span>{hoveredFirm.mlAiFocusPct}%</span>
-            <span className="text-gray-500">Remote</span>
-            <span>{hoveredFirm.remotePct}%</span>
             {hoveredFirm.salaryStats && (
               <>
                 <span className="text-gray-500">Median salary</span>
                 <span>${(hoveredFirm.salaryStats.median / 1000).toFixed(0)}k</span>
               </>
             )}
+            {hoveredFirm.topLanguages?.length > 0 && (
+              <>
+                <span className="text-gray-500">Top tech</span>
+                <span>{hoveredFirm.topLanguages.slice(0, 3).map(([l]) => l).join(", ")}</span>
+              </>
+            )}
+            {hoveredFirm.locationDistribution?.length > 0 && (
+              <>
+                <span className="text-gray-500">Locations</span>
+                <span>{hoveredFirm.locationDistribution.slice(0, 3).map(([l]) => l).join(", ")}</span>
+              </>
+            )}
           </div>
-          {hoveredFirm.topLanguages?.length > 0 && (
-            <div className="mt-2 text-[10px] text-gray-400">
-              Top:{" "}
-              {hoveredFirm.topLanguages
-                .slice(0, 5)
-                .map(([l]) => l)
-                .join(", ")}
-            </div>
-          )}
         </div>
       )}
 
