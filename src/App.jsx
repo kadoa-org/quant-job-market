@@ -144,7 +144,7 @@ export default function App() {
           <span className="text-[14px] sm:text-[14.5px] font-medium text-[#191919]">Quant Job Market</span>
           <span className="hidden sm:inline-flex items-center gap-1 text-[11px] text-[#10b981] ml-1.5">
             <span className="relative flex h-1.5 w-1.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10b981] opacity-75"></span><span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#10b981]"></span></span>
-            live
+            updated daily
           </span>
         </div>
 
