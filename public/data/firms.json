@@ -1,0 +1,6335 @@
+[
+  {
+    "firmName": "BlackRock",
+    "firmSlug": "blackrock",
+    "firmType": "asset_manager",
+    "companyLogo": null,
+    "totalJobs": 519,
+    "jobsByRole": {
+      "software_engineering": 91,
+      "data_science": 28,
+      "operations": 95,
+      "risk_management": 22,
+      "quantitative_research": 18,
+      "other": 70,
+      "quantitative_development": 72,
+      "portfolio_management": 35,
+      "machine_learning": 7,
+      "sales_trading": 53,
+      "hft_systems": 2,
+      "compliance": 16,
+      "quantitative_trading": 10
+    },
+    "jobsBySeniority": {
+      "vp_director": 203,
+      "mid": 257,
+      "senior": 29,
+      "junior": 25,
+      "lead": 3,
+      "intern": 1,
+      "executive": 1
+    },
+    "jobsByEducation": {
+      "not_specified": 361,
+      "bachelors": 137,
+      "phd_required": 2,
+      "masters": 15,
+      "phd_preferred": 4
+    },
+    "jobsByWorkMode": {
+      "not_specified": 512,
+      "onsite": 3,
+      "hybrid": 4
+    },
+    "topLanguages": [
+      [
+        "Python",
+        101
+      ],
+      [
+        "SQL",
+        72
+      ],
+      [
+        "Java",
+        64
+      ],
+      [
+        "TypeScript",
+        24
+      ],
+      [
+        "JavaScript",
+        18
+      ],
+      [
+        "C#",
+        17
+      ],
+      [
+        "C++",
+        16
+      ],
+      [
+        "R",
+        8
+      ],
+      [
+        "Go",
+        7
+      ],
+      [
+        "Perl",
+        5
+      ]
+    ],
+    "topSkills": [
+      [
+        "Risk Modeling",
+        75
+      ],
+      [
+        "Data Engineering",
+        70
+      ],
+      [
+        "ML/AI",
+        58
+      ],
+      [
+        "Portfolio Optimization",
+        43
+      ],
+      [
+        "Derivatives Pricing",
+        27
+      ],
+      [
+        "Statistics",
+        17
+      ],
+      [
+        "Alpha Research",
+        17
+      ],
+      [
+        "Market Microstructure",
+        11
+      ],
+      [
+        "Factor Models",
+        10
+      ],
+      [
+        "Backtesting",
+        6
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        93
+      ],
+      [
+        "Gurgaon",
+        73
+      ],
+      [
+        "Mumbai",
+        39
+      ],
+      [
+        "Edinburgh",
+        38
+      ],
+      [
+        "London",
+        38
+      ],
+      [
+        "Atlanta",
+        22
+      ],
+      [
+        "BU3-Budapest-GTC White House",
+        22
+      ],
+      [
+        "San Francisco",
+        16
+      ],
+      [
+        "Mexico City",
+        12
+      ],
+      [
+        "Singapore",
+        12
+      ]
+    ],
+    "salaryStats": {
+      "count": 38,
+      "min": 71250,
+      "max": 225000,
+      "median": 122500,
+      "avg": 129980
+    },
+    "phdDemandPct": 1,
+    "mlAiFocusPct": 15,
+    "remotePct": 1
+  },
+  {
+    "firmName": "Point72",
+    "firmSlug": "point72",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 289,
+    "jobsByRole": {
+      "portfolio_management": 27,
+      "machine_learning": 14,
+      "quantitative_research": 43,
+      "quantitative_development": 40,
+      "other": 33,
+      "operations": 19,
+      "hft_systems": 3,
+      "data_science": 28,
+      "software_engineering": 63,
+      "risk_management": 10,
+      "quantitative_trading": 4,
+      "compliance": 4,
+      "sales_trading": 1
+    },
+    "jobsBySeniority": {
+      "senior": 92,
+      "intern": 31,
+      "mid": 143,
+      "junior": 18,
+      "lead": 4,
+      "vp_director": 1
+    },
+    "jobsByEducation": {
+      "masters": 34,
+      "phd_preferred": 8,
+      "not_specified": 121,
+      "bachelors": 122,
+      "phd_required": 4
+    },
+    "jobsByWorkMode": {
+      "not_specified": 284,
+      "onsite": 5
+    },
+    "topLanguages": [
+      [
+        "Python",
+        149
+      ],
+      [
+        "SQL",
+        85
+      ],
+      [
+        "C++",
+        37
+      ],
+      [
+        "Java",
+        34
+      ],
+      [
+        "C#",
+        29
+      ],
+      [
+        "R",
+        23
+      ],
+      [
+        "JavaScript",
+        18
+      ],
+      [
+        "TypeScript",
+        12
+      ],
+      [
+        "MATLAB",
+        8
+      ],
+      [
+        "Scala",
+        8
+      ]
+    ],
+    "topSkills": [
+      [
+        "Data Engineering",
+        47
+      ],
+      [
+        "Alpha Research",
+        37
+      ],
+      [
+        "Risk Modeling",
+        33
+      ],
+      [
+        "ML/AI",
+        32
+      ],
+      [
+        "Statistics",
+        26
+      ],
+      [
+        "Backtesting",
+        22
+      ],
+      [
+        "Portfolio Optimization",
+        19
+      ],
+      [
+        "Derivatives Pricing",
+        14
+      ],
+      [
+        "NLP",
+        11
+      ],
+      [
+        "Market Microstructure",
+        11
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        136
+      ],
+      [
+        "Warsaw",
+        43
+      ],
+      [
+        "Stamford",
+        33
+      ],
+      [
+        "London",
+        31
+      ],
+      [
+        "Bengaluru",
+        28
+      ],
+      [
+        "Hong Kong",
+        24
+      ],
+      [
+        "Singapore",
+        18
+      ],
+      [
+        "Chicago",
+        8
+      ],
+      [
+        "Dubai",
+        7
+      ],
+      [
+        "Tokyo",
+        7
+      ]
+    ],
+    "salaryStats": {
+      "count": 140,
+      "min": 70000,
+      "max": 300000,
+      "median": 155000,
+      "avg": 165450
+    },
+    "phdDemandPct": 4,
+    "mlAiFocusPct": 19,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Qube RT (QRT)",
+    "firmSlug": "qrt",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 259,
+    "jobsByRole": {
+      "hft_systems": 55,
+      "operations": 13,
+      "quantitative_trading": 4,
+      "quantitative_development": 48,
+      "data_science": 19,
+      "software_engineering": 66,
+      "quantitative_research": 28,
+      "other": 15,
+      "compliance": 2,
+      "risk_management": 5,
+      "machine_learning": 4
+    },
+    "jobsBySeniority": {
+      "junior": 13,
+      "intern": 13,
+      "mid": 148,
+      "senior": 79,
+      "lead": 6
+    },
+    "jobsByEducation": {
+      "bachelors": 47,
+      "not_specified": 182,
+      "masters": 19,
+      "phd_preferred": 9,
+      "phd_required": 2
+    },
+    "jobsByWorkMode": {
+      "not_specified": 258,
+      "hybrid": 1
+    },
+    "topLanguages": [
+      [
+        "Python",
+        149
+      ],
+      [
+        "C++",
+        66
+      ],
+      [
+        "C#",
+        30
+      ],
+      [
+        "SQL",
+        27
+      ],
+      [
+        "C",
+        18
+      ],
+      [
+        "Rust",
+        16
+      ],
+      [
+        "Go",
+        12
+      ],
+      [
+        "R",
+        10
+      ],
+      [
+        "MATLAB",
+        10
+      ],
+      [
+        "Java",
+        9
+      ]
+    ],
+    "topSkills": [
+      [
+        "Data Engineering",
+        41
+      ],
+      [
+        "Market Microstructure",
+        37
+      ],
+      [
+        "Alpha Research",
+        25
+      ],
+      [
+        "ML/AI",
+        21
+      ],
+      [
+        "Statistics",
+        17
+      ],
+      [
+        "Risk Modeling",
+        15
+      ],
+      [
+        "NLP",
+        13
+      ],
+      [
+        "Derivatives Pricing",
+        10
+      ],
+      [
+        "Backtesting",
+        7
+      ],
+      [
+        "Time Series",
+        6
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "London",
+        97
+      ],
+      [
+        "Hong Kong",
+        57
+      ],
+      [
+        "Paris",
+        38
+      ],
+      [
+        "New York",
+        19
+      ],
+      [
+        "Sydney",
+        16
+      ],
+      [
+        "Singapore",
+        10
+      ],
+      [
+        "Mumbai",
+        10
+      ],
+      [
+        "Zurich",
+        7
+      ],
+      [
+        "Shanghai",
+        5
+      ],
+      [
+        "Houston",
+        5
+      ]
+    ],
+    "salaryStats": {
+      "count": 7,
+      "min": 150000,
+      "max": 230000,
+      "median": 220000,
+      "avg": 200714
+    },
+    "phdDemandPct": 4,
+    "mlAiFocusPct": 15,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Millennium",
+    "firmSlug": "mlp",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 225,
+    "jobsByRole": {
+      "portfolio_management": 7,
+      "quantitative_trading": 4,
+      "quantitative_development": 49,
+      "risk_management": 9,
+      "other": 29,
+      "quantitative_research": 12,
+      "compliance": 9,
+      "software_engineering": 35,
+      "operations": 36,
+      "hft_systems": 14,
+      "data_science": 10,
+      "machine_learning": 9,
+      "sales_trading": 2
+    },
+    "jobsBySeniority": {
+      "senior": 115,
+      "mid": 96,
+      "vp_director": 1,
+      "lead": 11,
+      "junior": 2
+    },
+    "jobsByEducation": {
+      "bachelors": 85,
+      "not_specified": 128,
+      "phd_preferred": 5,
+      "masters": 7
+    },
+    "jobsByWorkMode": {
+      "not_specified": 216,
+      "onsite": 5,
+      "hybrid": 3,
+      "remote": 1
+    },
+    "topLanguages": [
+      [
+        "Python",
+        95
+      ],
+      [
+        "SQL",
+        49
+      ],
+      [
+        "C++",
+        37
+      ],
+      [
+        "Java",
+        30
+      ],
+      [
+        "C#",
+        16
+      ],
+      [
+        "KDB+/Q",
+        10
+      ],
+      [
+        "Go",
+        9
+      ],
+      [
+        "TypeScript",
+        7
+      ],
+      [
+        "JavaScript",
+        7
+      ],
+      [
+        "R",
+        5
+      ]
+    ],
+    "topSkills": [
+      [
+        "Risk Modeling",
+        41
+      ],
+      [
+        "ML/AI",
+        33
+      ],
+      [
+        "Data Engineering",
+        30
+      ],
+      [
+        "Derivatives Pricing",
+        22
+      ],
+      [
+        "Alpha Research",
+        16
+      ],
+      [
+        "Market Microstructure",
+        16
+      ],
+      [
+        "Statistics",
+        14
+      ],
+      [
+        "Portfolio Optimization",
+        10
+      ],
+      [
+        "Backtesting",
+        7
+      ],
+      [
+        "NLP",
+        7
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        66
+      ],
+      [
+        "India",
+        43
+      ],
+      [
+        "Bangalore",
+        40
+      ],
+      [
+        "Karnataka",
+        40
+      ],
+      [
+        "London",
+        39
+      ],
+      [
+        "Singapore",
+        21
+      ],
+      [
+        "Hong Kong",
+        17
+      ],
+      [
+        "Dublin",
+        11
+      ],
+      [
+        "Ireland",
+        11
+      ],
+      [
+        "Miami",
+        8
+      ]
+    ],
+    "salaryStats": {
+      "count": 50,
+      "min": 70000,
+      "max": 175000,
+      "median": 160000,
+      "avg": 146800
+    },
+    "phdDemandPct": 2,
+    "mlAiFocusPct": 18,
+    "remotePct": 2
+  },
+  {
+    "firmName": "Jane Street",
+    "firmSlug": "janestreet-com",
+    "firmType": "proprietary",
+    "companyLogo": null,
+    "totalJobs": 217,
+    "jobsByRole": {
+      "compliance": 8,
+      "hft_systems": 46,
+      "software_engineering": 42,
+      "operations": 11,
+      "other": 41,
+      "portfolio_management": 1,
+      "sales_trading": 1,
+      "data_science": 4,
+      "quantitative_trading": 18,
+      "quantitative_research": 20,
+      "quantitative_development": 20,
+      "machine_learning": 5
+    },
+    "jobsBySeniority": {
+      "mid": 134,
+      "senior": 58,
+      "junior": 5,
+      "intern": 18,
+      "lead": 2
+    },
+    "jobsByEducation": {
+      "bachelors": 41,
+      "not_specified": 172,
+      "masters": 4
+    },
+    "jobsByWorkMode": {
+      "not_specified": 207,
+      "onsite": 10
+    },
+    "topLanguages": [
+      [
+        "Python",
+        59
+      ],
+      [
+        "OCaml",
+        28
+      ],
+      [
+        "C#",
+        12
+      ],
+      [
+        "C",
+        11
+      ],
+      [
+        "SQL",
+        8
+      ],
+      [
+        "C++",
+        7
+      ],
+      [
+        "Java",
+        4
+      ],
+      [
+        "Haskell",
+        3
+      ],
+      [
+        "TypeScript",
+        2
+      ]
+    ],
+    "topSkills": [
+      [
+        "ML/AI",
+        37
+      ],
+      [
+        "Statistics",
+        24
+      ],
+      [
+        "Alpha Research",
+        11
+      ],
+      [
+        "Risk Modeling",
+        9
+      ],
+      [
+        "Cybersecurity",
+        9
+      ],
+      [
+        "Data Engineering",
+        8
+      ],
+      [
+        "Time Series",
+        7
+      ],
+      [
+        "Reinforcement Learning",
+        6
+      ],
+      [
+        "machine_learning",
+        6
+      ],
+      [
+        "Derivatives Pricing",
+        5
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        88
+      ],
+      [
+        "London",
+        56
+      ],
+      [
+        "HKG",
+        56
+      ],
+      [
+        "SGP",
+        15
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 19,
+    "remotePct": 0
+  },
+  {
+    "firmName": "PIMCO",
+    "firmSlug": "pimco",
+    "firmType": "asset_manager",
+    "companyLogo": null,
+    "totalJobs": 138,
+    "jobsByRole": {
+      "quantitative_development": 14,
+      "software_engineering": 6,
+      "portfolio_management": 17,
+      "sales_trading": 25,
+      "data_science": 2,
+      "quantitative_trading": 1,
+      "quantitative_research": 9,
+      "operations": 39,
+      "other": 15,
+      "risk_management": 1,
+      "compliance": 9
+    },
+    "jobsBySeniority": {
+      "senior": 36,
+      "vp_director": 19,
+      "intern": 2,
+      "lead": 8,
+      "mid": 61,
+      "junior": 11,
+      "executive": 1
+    },
+    "jobsByEducation": {
+      "masters": 9,
+      "not_specified": 92,
+      "bachelors": 35,
+      "phd_preferred": 2
+    },
+    "jobsByWorkMode": {
+      "not_specified": 129,
+      "onsite": 9
+    },
+    "topLanguages": [
+      [
+        "Python",
+        17
+      ],
+      [
+        "Java",
+        6
+      ],
+      [
+        "SQL",
+        5
+      ],
+      [
+        "C++",
+        3
+      ],
+      [
+        "MATLAB",
+        2
+      ],
+      [
+        "JavaScript",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Risk Modeling",
+        19
+      ],
+      [
+        "Portfolio Optimization",
+        12
+      ],
+      [
+        "Data Engineering",
+        10
+      ],
+      [
+        "Statistics",
+        9
+      ],
+      [
+        "Alpha Research",
+        8
+      ],
+      [
+        "Derivatives Pricing",
+        5
+      ],
+      [
+        "Factor Models",
+        2
+      ],
+      [
+        "ML/AI",
+        2
+      ],
+      [
+        "Backtesting",
+        1
+      ],
+      [
+        "Execution Algorithms",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Newport Beach",
+        42
+      ],
+      [
+        "New York",
+        29
+      ],
+      [
+        "London",
+        19
+      ],
+      [
+        "Austin",
+        14
+      ],
+      [
+        "Dublin",
+        7
+      ],
+      [
+        "San Diego",
+        4
+      ],
+      [
+        "Newton Beach",
+        3
+      ],
+      [
+        "Sydney",
+        3
+      ],
+      [
+        "Munich",
+        3
+      ],
+      [
+        "PIMCO Texas Offsite",
+        2
+      ]
+    ],
+    "salaryStats": {
+      "count": 4,
+      "min": 82000,
+      "max": 265000,
+      "median": 123500,
+      "avg": 148500
+    },
+    "phdDemandPct": 1,
+    "mlAiFocusPct": 3,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Wellington",
+    "firmSlug": "wellington",
+    "firmType": "asset_manager",
+    "companyLogo": null,
+    "totalJobs": 125,
+    "jobsByRole": {
+      "portfolio_management": 16,
+      "compliance": 5,
+      "risk_management": 4,
+      "software_engineering": 13,
+      "other": 21,
+      "operations": 15,
+      "quantitative_development": 12,
+      "sales_trading": 24,
+      "quantitative_trading": 3,
+      "quantitative_research": 7,
+      "data_science": 3,
+      "machine_learning": 1,
+      "hft_systems": 1
+    },
+    "jobsBySeniority": {
+      "mid": 51,
+      "intern": 3,
+      "senior": 41,
+      "vp_director": 10,
+      "junior": 3,
+      "lead": 17
+    },
+    "jobsByEducation": {
+      "bachelors": 25,
+      "not_specified": 99,
+      "masters": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 118,
+      "onsite": 5,
+      "hybrid": 2
+    },
+    "topLanguages": [
+      [
+        "Python",
+        13
+      ],
+      [
+        "SQL",
+        9
+      ],
+      [
+        "Java",
+        5
+      ],
+      [
+        "R",
+        3
+      ],
+      [
+        "JavaScript",
+        2
+      ],
+      [
+        "MATLAB",
+        1
+      ],
+      [
+        "C#",
+        1
+      ],
+      [
+        "C",
+        1
+      ],
+      [
+        "NodeJS",
+        1
+      ],
+      [
+        "TypeScript",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Risk Modeling",
+        16
+      ],
+      [
+        "Alpha Research",
+        11
+      ],
+      [
+        "Data Engineering",
+        7
+      ],
+      [
+        "Portfolio Optimization",
+        7
+      ],
+      [
+        "Derivatives Pricing",
+        6
+      ],
+      [
+        "Factor Models",
+        2
+      ],
+      [
+        "Execution Algorithms",
+        2
+      ],
+      [
+        "Market Microstructure",
+        2
+      ],
+      [
+        "ML/AI",
+        2
+      ],
+      [
+        "Fixed Income",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Boston",
+        70
+      ],
+      [
+        "London",
+        18
+      ],
+      [
+        "Central Singapore",
+        6
+      ],
+      [
+        "Frankfurt",
+        4
+      ],
+      [
+        "Central Hong Kong",
+        4
+      ],
+      [
+        "New York",
+        3
+      ],
+      [
+        "Needham",
+        3
+      ],
+      [
+        "Luxembourg",
+        2
+      ],
+      [
+        "Tokyo",
+        2
+      ],
+      [
+        "Chicago",
+        2
+      ]
+    ],
+    "salaryStats": {
+      "count": 80,
+      "min": 60000,
+      "max": 120000,
+      "median": 90000,
+      "avg": 95625
+    },
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 4,
+    "remotePct": 2
+  },
+  {
+    "firmName": "DRW",
+    "firmSlug": "drw",
+    "firmType": "proprietary",
+    "companyLogo": null,
+    "totalJobs": 122,
+    "jobsByRole": {
+      "other": 12,
+      "machine_learning": 5,
+      "hft_systems": 30,
+      "operations": 7,
+      "compliance": 1,
+      "quantitative_development": 32,
+      "quantitative_research": 10,
+      "sales_trading": 2,
+      "data_science": 3,
+      "quantitative_trading": 5,
+      "software_engineering": 14,
+      "portfolio_management": 1
+    },
+    "jobsBySeniority": {
+      "mid": 75,
+      "senior": 32,
+      "lead": 4,
+      "vp_director": 4,
+      "junior": 7
+    },
+    "jobsByEducation": {
+      "not_specified": 85,
+      "bachelors": 35,
+      "masters": 1,
+      "phd_required": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 119,
+      "onsite": 2,
+      "remote": 1
+    },
+    "topLanguages": [
+      [
+        "Python",
+        50
+      ],
+      [
+        "C++",
+        31
+      ],
+      [
+        "Java",
+        10
+      ],
+      [
+        "SQL",
+        5
+      ],
+      [
+        "C",
+        3
+      ],
+      [
+        "Rust",
+        3
+      ],
+      [
+        "R",
+        2
+      ],
+      [
+        "Go",
+        1
+      ],
+      [
+        "MATLAB",
+        1
+      ],
+      [
+        "Elixir",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Alpha Research",
+        22
+      ],
+      [
+        "Risk Modeling",
+        19
+      ],
+      [
+        "Data Engineering",
+        17
+      ],
+      [
+        "Market Microstructure",
+        15
+      ],
+      [
+        "ML/AI",
+        14
+      ],
+      [
+        "Backtesting",
+        12
+      ],
+      [
+        "Execution Algorithms",
+        7
+      ],
+      [
+        "Derivatives Pricing",
+        6
+      ],
+      [
+        "Portfolio Optimization",
+        6
+      ],
+      [
+        "Statistics",
+        5
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Chicago",
+        38
+      ],
+      [
+        "London",
+        33
+      ],
+      [
+        "New York",
+        19
+      ],
+      [
+        "Singapore",
+        18
+      ],
+      [
+        "Montréal",
+        9
+      ],
+      [
+        "Greenwich",
+        7
+      ],
+      [
+        "Tel Aviv",
+        5
+      ],
+      [
+        "Austin",
+        3
+      ],
+      [
+        "Amsterdam",
+        3
+      ],
+      [
+        "Houston",
+        2
+      ]
+    ],
+    "salaryStats": {
+      "count": 3,
+      "min": 155000,
+      "max": 250000,
+      "median": 250000,
+      "avg": 218333
+    },
+    "phdDemandPct": 1,
+    "mlAiFocusPct": 13,
+    "remotePct": 1
+  },
+  {
+    "firmName": "Susquehanna (SIG)",
+    "firmSlug": "susquehanna",
+    "firmType": "proprietary",
+    "companyLogo": null,
+    "totalJobs": 107,
+    "jobsByRole": {
+      "quantitative_development": 11,
+      "software_engineering": 11,
+      "operations": 11,
+      "quantitative_trading": 10,
+      "quantitative_research": 12,
+      "other": 21,
+      "compliance": 8,
+      "portfolio_management": 12,
+      "hft_systems": 6,
+      "sales_trading": 1,
+      "data_science": 1,
+      "machine_learning": 3
+    },
+    "jobsBySeniority": {
+      "junior": 14,
+      "mid": 42,
+      "intern": 15,
+      "senior": 35,
+      "vp_director": 1
+    },
+    "jobsByEducation": {
+      "bachelors": 51,
+      "not_specified": 39,
+      "phd_required": 10,
+      "masters": 4,
+      "phd_preferred": 3
+    },
+    "jobsByWorkMode": {
+      "not_specified": 88,
+      "onsite": 17,
+      "hybrid": 1,
+      "remote": 1
+    },
+    "topLanguages": [
+      [
+        "Python",
+        42
+      ],
+      [
+        "C++",
+        15
+      ],
+      [
+        "C#",
+        13
+      ],
+      [
+        "SQL",
+        12
+      ],
+      [
+        "Java",
+        4
+      ],
+      [
+        "JavaScript",
+        2
+      ],
+      [
+        "R",
+        2
+      ],
+      [
+        "C",
+        2
+      ],
+      [
+        "TypeScript",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Alpha Research",
+        15
+      ],
+      [
+        "ML/AI",
+        12
+      ],
+      [
+        "Statistics",
+        10
+      ],
+      [
+        "Market Microstructure",
+        7
+      ],
+      [
+        "Backtesting",
+        6
+      ],
+      [
+        "Data Engineering",
+        5
+      ],
+      [
+        "Derivatives Pricing",
+        5
+      ],
+      [
+        "Time Series",
+        2
+      ],
+      [
+        "Risk Modeling",
+        2
+      ],
+      [
+        "Execution Algorithms",
+        2
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Bala Cynwyd (Philadelphia Area)",
+        42
+      ],
+      [
+        "Pennsylvania United States",
+        42
+      ],
+      [
+        "Sydney",
+        22
+      ],
+      [
+        "Australia",
+        22
+      ],
+      [
+        "Dublin",
+        18
+      ],
+      [
+        "Ireland",
+        18
+      ],
+      [
+        "New York",
+        11
+      ],
+      [
+        "New York United States",
+        11
+      ],
+      [
+        "Hong Kong",
+        8
+      ],
+      [
+        "China",
+        8
+      ]
+    ],
+    "salaryStats": {
+      "count": 3,
+      "min": 150000,
+      "max": 300000,
+      "median": 225000,
+      "avg": 225000
+    },
+    "phdDemandPct": 12,
+    "mlAiFocusPct": 11,
+    "remotePct": 2
+  },
+  {
+    "firmName": "T. Rowe Price",
+    "firmSlug": "t-rowe-price",
+    "firmType": "asset_manager",
+    "companyLogo": "https://troweprice.wd5.myworkdayjobs.com/logo.png",
+    "totalJobs": 106,
+    "jobsByRole": {
+      "machine_learning": 7,
+      "portfolio_management": 13,
+      "quantitative_research": 4,
+      "risk_management": 5,
+      "compliance": 6,
+      "sales_trading": 24,
+      "other": 16,
+      "operations": 9,
+      "software_engineering": 9,
+      "data_science": 8,
+      "hft_systems": 2,
+      "quantitative_development": 3
+    },
+    "jobsBySeniority": {
+      "senior": 50,
+      "junior": 4,
+      "mid": 32,
+      "vp_director": 10,
+      "lead": 10
+    },
+    "jobsByEducation": {
+      "bachelors": 23,
+      "phd_required": 1,
+      "not_specified": 81,
+      "phd_preferred": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 106
+    },
+    "topLanguages": [
+      [
+        "Python",
+        8
+      ],
+      [
+        "Java",
+        4
+      ],
+      [
+        "JavaScript",
+        2
+      ],
+      [
+        "SQL",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "ML/AI",
+        18
+      ],
+      [
+        "Risk Modeling",
+        8
+      ],
+      [
+        "Data Engineering",
+        8
+      ],
+      [
+        "Alpha Research",
+        5
+      ],
+      [
+        "Portfolio Optimization",
+        4
+      ],
+      [
+        "Derivatives Pricing",
+        3
+      ],
+      [
+        "Factor Models",
+        2
+      ],
+      [
+        "quantitative_analysis",
+        1
+      ],
+      [
+        "portfolio_management",
+        1
+      ],
+      [
+        "Market Microstructure",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Baltimore",
+        47
+      ],
+      [
+        "Owings Mills",
+        47
+      ],
+      [
+        "MD - Building 4",
+        20
+      ],
+      [
+        "MD - Building 2",
+        13
+      ],
+      [
+        "MD - Building 3",
+        8
+      ],
+      [
+        "New York",
+        6
+      ],
+      [
+        "Colorado Springs",
+        3
+      ],
+      [
+        "CO - Building 2",
+        3
+      ],
+      [
+        "MD - Technology Center",
+        2
+      ],
+      [
+        "London",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 101,
+      "min": 55000,
+      "max": 182000,
+      "median": 110000,
+      "avg": 115629
+    },
+    "phdDemandPct": 2,
+    "mlAiFocusPct": 20,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Balyasny Asset Management",
+    "firmSlug": "bam",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 102,
+    "jobsByRole": {
+      "portfolio_management": 9,
+      "quantitative_trading": 2,
+      "quantitative_research": 19,
+      "other": 11,
+      "operations": 9,
+      "quantitative_development": 21,
+      "software_engineering": 11,
+      "risk_management": 4,
+      "data_science": 4,
+      "machine_learning": 4,
+      "compliance": 3,
+      "hft_systems": 5
+    },
+    "jobsBySeniority": {
+      "senior": 46,
+      "mid": 43,
+      "junior": 5,
+      "intern": 3,
+      "lead": 4,
+      "vp_director": 1
+    },
+    "jobsByEducation": {
+      "bachelors": 44,
+      "masters": 8,
+      "not_specified": 45,
+      "phd_preferred": 5
+    },
+    "jobsByWorkMode": {
+      "not_specified": 99,
+      "onsite": 2,
+      "remote": 1
+    },
+    "topLanguages": [
+      [
+        "Python",
+        56
+      ],
+      [
+        "SQL",
+        27
+      ],
+      [
+        "C++",
+        12
+      ],
+      [
+        "C#",
+        12
+      ],
+      [
+        "Java",
+        6
+      ],
+      [
+        "R",
+        3
+      ],
+      [
+        "C",
+        2
+      ],
+      [
+        "TypeScript",
+        2
+      ],
+      [
+        "Go",
+        2
+      ],
+      [
+        "PowerShell",
+        2
+      ]
+    ],
+    "topSkills": [
+      [
+        "Risk Modeling",
+        20
+      ],
+      [
+        "Alpha Research",
+        18
+      ],
+      [
+        "Data Engineering",
+        17
+      ],
+      [
+        "Portfolio Optimization",
+        13
+      ],
+      [
+        "Derivatives Pricing",
+        10
+      ],
+      [
+        "Backtesting",
+        9
+      ],
+      [
+        "Statistics",
+        8
+      ],
+      [
+        "ML/AI",
+        8
+      ],
+      [
+        "Market Microstructure",
+        7
+      ],
+      [
+        "Execution Algorithms",
+        5
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        56
+      ],
+      [
+        "London",
+        26
+      ],
+      [
+        "Hong Kong",
+        17
+      ],
+      [
+        "Singapore",
+        13
+      ],
+      [
+        "Chicago",
+        13
+      ],
+      [
+        "Warsaw",
+        10
+      ],
+      [
+        "Tokyo",
+        6
+      ],
+      [
+        "Dubai",
+        3
+      ],
+      [
+        "Greenwich",
+        3
+      ],
+      [
+        "Houston",
+        2
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 5,
+    "mlAiFocusPct": 10,
+    "remotePct": 1
+  },
+  {
+    "firmName": "Brookfield Asset Management",
+    "firmSlug": "brookfield-asset-management",
+    "firmType": "asset_manager",
+    "companyLogo": null,
+    "totalJobs": 99,
+    "jobsByRole": {
+      "other": 19,
+      "portfolio_management": 14,
+      "software_engineering": 7,
+      "operations": 31,
+      "quantitative_development": 12,
+      "sales_trading": 11,
+      "compliance": 3,
+      "quantitative_research": 1,
+      "risk_management": 1
+    },
+    "jobsBySeniority": {
+      "mid": 47,
+      "vp_director": 11,
+      "senior": 30,
+      "junior": 9,
+      "intern": 1,
+      "lead": 1
+    },
+    "jobsByEducation": {
+      "not_specified": 66,
+      "bachelors": 32,
+      "masters": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 96,
+      "onsite": 3
+    },
+    "topLanguages": [
+      [
+        "SQL",
+        8
+      ],
+      [
+        "C#",
+        4
+      ],
+      [
+        "XML",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Data Engineering",
+        10
+      ],
+      [
+        "Portfolio Optimization",
+        8
+      ],
+      [
+        "Risk Modeling",
+        6
+      ],
+      [
+        "Derivatives Pricing",
+        3
+      ],
+      [
+        "ML/AI",
+        1
+      ],
+      [
+        "Market Microstructure",
+        1
+      ],
+      [
+        "Factor Models",
+        1
+      ],
+      [
+        "Alpha Research",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Brookfield Place",
+        34
+      ],
+      [
+        "Brookfield Place New York",
+        31
+      ],
+      [
+        "Mumbai - 10th Floor",
+        12
+      ],
+      [
+        "Ventura",
+        12
+      ],
+      [
+        "Hiranandani Gardens",
+        12
+      ],
+      [
+        "Powai",
+        12
+      ],
+      [
+        "London - One Canada Square",
+        10
+      ],
+      [
+        "Level 25",
+        6
+      ],
+      [
+        "Level 26",
+        4
+      ],
+      [
+        "Bengaluru - COWRKS",
+        3
+      ]
+    ],
+    "salaryStats": {
+      "count": 6,
+      "min": 65000,
+      "max": 125000,
+      "median": 112500,
+      "avg": 103333
+    },
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 1,
+    "remotePct": 0
+  },
+  {
+    "firmName": "WorldQuant",
+    "firmSlug": "worldquant",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 96,
+    "jobsByRole": {
+      "quantitative_research": 20,
+      "other": 5,
+      "operations": 3,
+      "quantitative_trading": 2,
+      "hft_systems": 6,
+      "quantitative_development": 22,
+      "software_engineering": 11,
+      "machine_learning": 14,
+      "portfolio_management": 7,
+      "data_science": 6
+    },
+    "jobsBySeniority": {
+      "mid": 51,
+      "senior": 25,
+      "intern": 8,
+      "lead": 8,
+      "junior": 3,
+      "vp_director": 1
+    },
+    "jobsByEducation": {
+      "bachelors": 28,
+      "not_specified": 49,
+      "phd_preferred": 5,
+      "masters": 14
+    },
+    "jobsByWorkMode": {
+      "not_specified": 96
+    },
+    "topLanguages": [
+      [
+        "Python",
+        76
+      ],
+      [
+        "C++",
+        44
+      ],
+      [
+        "SQL",
+        14
+      ],
+      [
+        "Java",
+        8
+      ],
+      [
+        "C",
+        7
+      ],
+      [
+        "JavaScript",
+        5
+      ],
+      [
+        "TypeScript",
+        4
+      ],
+      [
+        "Go",
+        3
+      ],
+      [
+        "Rust",
+        1
+      ],
+      [
+        "R",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "ML/AI",
+        34
+      ],
+      [
+        "Alpha Research",
+        26
+      ],
+      [
+        "Data Engineering",
+        17
+      ],
+      [
+        "Portfolio Optimization",
+        13
+      ],
+      [
+        "Statistics",
+        10
+      ],
+      [
+        "NLP",
+        5
+      ],
+      [
+        "Optimization",
+        4
+      ],
+      [
+        "Market Microstructure",
+        3
+      ],
+      [
+        "Reinforcement Learning",
+        3
+      ],
+      [
+        "Factor Models",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Budapest",
+        15
+      ],
+      [
+        "Hanoi OR Ho Chi Minh City",
+        11
+      ],
+      [
+        "Singapore",
+        8
+      ],
+      [
+        "Yerevan",
+        7
+      ],
+      [
+        "London",
+        6
+      ],
+      [
+        "Montevideo",
+        6
+      ],
+      [
+        "Ramat Gan",
+        4
+      ],
+      [
+        "Beijing OR Shanghai",
+        4
+      ],
+      [
+        "Mumbai",
+        3
+      ],
+      [
+        "Taipei",
+        3
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 5,
+    "mlAiFocusPct": 36,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Squarepoint Capital",
+    "firmSlug": "squarepoint",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 83,
+    "jobsByRole": {
+      "operations": 9,
+      "other": 7,
+      "software_engineering": 15,
+      "quantitative_development": 17,
+      "data_science": 2,
+      "quantitative_research": 13,
+      "quantitative_trading": 6,
+      "risk_management": 1,
+      "compliance": 1,
+      "hft_systems": 12
+    },
+    "jobsBySeniority": {
+      "mid": 45,
+      "senior": 25,
+      "junior": 12,
+      "intern": 1
+    },
+    "jobsByEducation": {
+      "bachelors": 43,
+      "not_specified": 31,
+      "masters": 8,
+      "phd_required": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 83
+    },
+    "topLanguages": [
+      [
+        "Python",
+        45
+      ],
+      [
+        "C++",
+        25
+      ],
+      [
+        "KDB+/Q",
+        20
+      ],
+      [
+        "Rust",
+        11
+      ],
+      [
+        "Java",
+        10
+      ],
+      [
+        "C",
+        5
+      ],
+      [
+        "JavaScript",
+        5
+      ],
+      [
+        "SQL",
+        5
+      ],
+      [
+        "TypeScript",
+        4
+      ],
+      [
+        "Go",
+        2
+      ]
+    ],
+    "topSkills": [
+      [
+        "Alpha Research",
+        16
+      ],
+      [
+        "Data Engineering",
+        12
+      ],
+      [
+        "Statistics",
+        11
+      ],
+      [
+        "Risk Modeling",
+        8
+      ],
+      [
+        "Market Microstructure",
+        7
+      ],
+      [
+        "Backtesting",
+        5
+      ],
+      [
+        "ML/AI",
+        5
+      ],
+      [
+        "Portfolio Optimization",
+        5
+      ],
+      [
+        "Execution Algorithms",
+        4
+      ],
+      [
+        "Optimization",
+        3
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "London",
+        60
+      ],
+      [
+        "Montreal",
+        49
+      ],
+      [
+        "Singapore",
+        38
+      ],
+      [
+        "New York",
+        32
+      ],
+      [
+        "Bangalore",
+        22
+      ],
+      [
+        "Hong Kong",
+        18
+      ],
+      [
+        "Warsaw",
+        12
+      ],
+      [
+        "Houston",
+        12
+      ],
+      [
+        "Paris",
+        12
+      ],
+      [
+        "Boston",
+        10
+      ]
+    ],
+    "salaryStats": {
+      "count": 22,
+      "min": 100000,
+      "max": 225000,
+      "median": 150000,
+      "avg": 144205
+    },
+    "phdDemandPct": 1,
+    "mlAiFocusPct": 8,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Hudson River Trading",
+    "firmSlug": "hudsonrivertrading",
+    "firmType": "proprietary",
+    "companyLogo": null,
+    "totalJobs": 74,
+    "jobsByRole": {
+      "software_engineering": 21,
+      "hft_systems": 16,
+      "quantitative_research": 3,
+      "other": 11,
+      "data_science": 1,
+      "operations": 11,
+      "risk_management": 3,
+      "compliance": 3,
+      "quantitative_development": 3,
+      "machine_learning": 1,
+      "sales_trading": 1
+    },
+    "jobsBySeniority": {
+      "intern": 1,
+      "senior": 24,
+      "junior": 6,
+      "mid": 40,
+      "lead": 2,
+      "vp_director": 1
+    },
+    "jobsByEducation": {
+      "not_specified": 32,
+      "bachelors": 41,
+      "phd_required": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 69,
+      "onsite": 5
+    },
+    "topLanguages": [
+      [
+        "Python",
+        46
+      ],
+      [
+        "C++",
+        17
+      ],
+      [
+        "SQL",
+        11
+      ],
+      [
+        "C",
+        2
+      ],
+      [
+        "Go",
+        2
+      ],
+      [
+        "JavaScript",
+        2
+      ],
+      [
+        "TypeScript",
+        2
+      ],
+      [
+        "Perl",
+        2
+      ],
+      [
+        "R",
+        1
+      ],
+      [
+        "MATLAB",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Market Microstructure",
+        7
+      ],
+      [
+        "Statistics",
+        6
+      ],
+      [
+        "ML/AI",
+        4
+      ],
+      [
+        "Risk Modeling",
+        4
+      ],
+      [
+        "Alpha Research",
+        3
+      ],
+      [
+        "Data Engineering",
+        3
+      ],
+      [
+        "Execution Algorithms",
+        2
+      ],
+      [
+        "Backtesting",
+        1
+      ],
+      [
+        "HPC",
+        1
+      ],
+      [
+        "Signal Processing",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        46
+      ],
+      [
+        "London",
+        26
+      ],
+      [
+        "Singapore",
+        18
+      ],
+      [
+        "Chicago",
+        15
+      ],
+      [
+        "Austin",
+        10
+      ],
+      [
+        "Seattle",
+        10
+      ],
+      [
+        "Boulder",
+        3
+      ],
+      [
+        "Dublin",
+        2
+      ],
+      [
+        "Carteret",
+        1
+      ],
+      [
+        "Mumbai",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 43,
+      "min": 80000,
+      "max": 300000,
+      "median": 212500,
+      "avg": 209651
+    },
+    "phdDemandPct": 1,
+    "mlAiFocusPct": 7,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Tower Research",
+    "firmSlug": "tower-research",
+    "firmType": "proprietary",
+    "companyLogo": null,
+    "totalJobs": 70,
+    "jobsByRole": {
+      "risk_management": 5,
+      "other": 6,
+      "operations": 11,
+      "hft_systems": 12,
+      "quantitative_development": 8,
+      "quantitative_trading": 7,
+      "machine_learning": 2,
+      "software_engineering": 13,
+      "quantitative_research": 5,
+      "compliance": 1
+    },
+    "jobsBySeniority": {
+      "mid": 46,
+      "junior": 3,
+      "intern": 5,
+      "senior": 16
+    },
+    "jobsByEducation": {
+      "bachelors": 39,
+      "not_specified": 25,
+      "masters": 4,
+      "phd_preferred": 1,
+      "phd_required": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 67,
+      "onsite": 3
+    },
+    "topLanguages": [
+      [
+        "Python",
+        35
+      ],
+      [
+        "C++",
+        20
+      ],
+      [
+        "SQL",
+        9
+      ],
+      [
+        "Java",
+        5
+      ],
+      [
+        "Rust",
+        4
+      ],
+      [
+        "Go",
+        2
+      ],
+      [
+        "R",
+        2
+      ],
+      [
+        "JavaScript",
+        2
+      ],
+      [
+        "C",
+        2
+      ],
+      [
+        "Bash",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "ML/AI",
+        9
+      ],
+      [
+        "Alpha Research",
+        9
+      ],
+      [
+        "Market Microstructure",
+        9
+      ],
+      [
+        "Statistics",
+        9
+      ],
+      [
+        "Risk Modeling",
+        7
+      ],
+      [
+        "Derivatives Pricing",
+        4
+      ],
+      [
+        "Backtesting",
+        4
+      ],
+      [
+        "Data Engineering",
+        3
+      ],
+      [
+        "Optimization",
+        2
+      ],
+      [
+        "Portfolio Optimization",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        20
+      ],
+      [
+        "Gurgaon",
+        18
+      ],
+      [
+        "Singapore",
+        12
+      ],
+      [
+        "Hong Kong",
+        8
+      ],
+      [
+        "Montreal",
+        7
+      ],
+      [
+        "London",
+        7
+      ],
+      [
+        "Shanghai",
+        7
+      ],
+      [
+        "Chicago",
+        3
+      ],
+      [
+        "Paris",
+        2
+      ],
+      [
+        "Amsterdam",
+        2
+      ]
+    ],
+    "salaryStats": {
+      "count": 4,
+      "min": 150000,
+      "max": 200000,
+      "median": 162500,
+      "avg": 168750
+    },
+    "phdDemandPct": 3,
+    "mlAiFocusPct": 13,
+    "remotePct": 0
+  },
+  {
+    "firmName": "D. E. Shaw",
+    "firmSlug": "d-e-shaw-group-job-listings",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 66,
+    "jobsByRole": {
+      "other": 19,
+      "sales_trading": 4,
+      "operations": 3,
+      "data_science": 3,
+      "quantitative_development": 7,
+      "portfolio_management": 4,
+      "quantitative_research": 7,
+      "machine_learning": 5,
+      "compliance": 4,
+      "software_engineering": 2,
+      "hft_systems": 7,
+      "quantitative_trading": 1
+    },
+    "jobsBySeniority": {
+      "senior": 11,
+      "mid": 46,
+      "lead": 4,
+      "junior": 2,
+      "intern": 3
+    },
+    "jobsByEducation": {
+      "not_specified": 66
+    },
+    "jobsByWorkMode": {
+      "not_specified": 63,
+      "onsite": 3
+    },
+    "topLanguages": [],
+    "topSkills": [
+      [
+        "ML/AI",
+        7
+      ],
+      [
+        "Data Engineering",
+        3
+      ],
+      [
+        "Alpha Research",
+        3
+      ],
+      [
+        "portfolio_optimization",
+        1
+      ],
+      [
+        "Risk Modeling",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        58
+      ],
+      [
+        "Denver",
+        5
+      ],
+      [
+        "London",
+        3
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 15,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Optiver",
+    "firmSlug": "optiver",
+    "firmType": "market_maker",
+    "companyLogo": null,
+    "totalJobs": 65,
+    "jobsByRole": {
+      "quantitative_trading": 5,
+      "risk_management": 2,
+      "hft_systems": 21,
+      "operations": 5,
+      "other": 5,
+      "software_engineering": 5,
+      "quantitative_development": 7,
+      "compliance": 3,
+      "quantitative_research": 3,
+      "data_science": 4,
+      "machine_learning": 4,
+      "sales_trading": 1
+    },
+    "jobsBySeniority": {
+      "senior": 16,
+      "mid": 37,
+      "vp_director": 1,
+      "lead": 3,
+      "junior": 5,
+      "intern": 3
+    },
+    "jobsByEducation": {
+      "not_specified": 56,
+      "bachelors": 6,
+      "phd_preferred": 1,
+      "masters": 1,
+      "phd_required": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 62,
+      "onsite": 3
+    },
+    "topLanguages": [
+      [
+        "Python",
+        26
+      ],
+      [
+        "C++",
+        10
+      ],
+      [
+        "C",
+        6
+      ],
+      [
+        "SQL",
+        3
+      ],
+      [
+        "Rust",
+        3
+      ],
+      [
+        "R",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "ML/AI",
+        10
+      ],
+      [
+        "Market Microstructure",
+        8
+      ],
+      [
+        "Data Engineering",
+        7
+      ],
+      [
+        "Risk Modeling",
+        5
+      ],
+      [
+        "Derivatives Pricing",
+        4
+      ],
+      [
+        "Statistics",
+        3
+      ],
+      [
+        "Alpha Research",
+        2
+      ],
+      [
+        "Signal Processing",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Amsterdam",
+        20
+      ],
+      [
+        "Sydney",
+        18
+      ],
+      [
+        "Chicago",
+        6
+      ],
+      [
+        "Shanghai",
+        5
+      ],
+      [
+        "Austin",
+        4
+      ],
+      [
+        "New York",
+        4
+      ],
+      [
+        "Taipei",
+        2
+      ],
+      [
+        "London",
+        2
+      ],
+      [
+        "Durham",
+        1
+      ],
+      [
+        "Mumbai",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 6,
+      "min": 85000,
+      "max": 270000,
+      "median": 175000,
+      "avg": 167500
+    },
+    "phdDemandPct": 3,
+    "mlAiFocusPct": 20,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Jump Trading",
+    "firmSlug": "jump-trading",
+    "firmType": "proprietary",
+    "companyLogo": "https://www.jumptrading.com/cdn/68af4da447dcf4db12fcb35f/68af4da447dcf4db12fcb4bd_jump%20logo%20red.webp",
+    "totalJobs": 62,
+    "jobsByRole": {
+      "other": 3,
+      "operations": 6,
+      "quantitative_trading": 5,
+      "software_engineering": 4,
+      "quantitative_development": 9,
+      "hft_systems": 14,
+      "risk_management": 3,
+      "quantitative_research": 14,
+      "data_science": 3,
+      "machine_learning": 1
+    },
+    "jobsBySeniority": {
+      "mid": 32,
+      "senior": 18,
+      "intern": 11,
+      "junior": 1
+    },
+    "jobsByEducation": {
+      "bachelors": 17,
+      "not_specified": 39,
+      "masters": 6
+    },
+    "jobsByWorkMode": {
+      "not_specified": 60,
+      "onsite": 1,
+      "hybrid": 1
+    },
+    "topLanguages": [
+      [
+        "Python",
+        32
+      ],
+      [
+        "C++",
+        19
+      ],
+      [
+        "SQL",
+        8
+      ],
+      [
+        "R",
+        4
+      ],
+      [
+        "Go",
+        4
+      ],
+      [
+        "C",
+        3
+      ],
+      [
+        "MATLAB",
+        3
+      ],
+      [
+        "Rust",
+        2
+      ],
+      [
+        "KDB+/Q",
+        1
+      ],
+      [
+        "C#",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Data Engineering",
+        11
+      ],
+      [
+        "ML/AI",
+        11
+      ],
+      [
+        "Statistics",
+        10
+      ],
+      [
+        "Alpha Research",
+        10
+      ],
+      [
+        "Market Microstructure",
+        4
+      ],
+      [
+        "Risk Modeling",
+        3
+      ],
+      [
+        "Execution Algorithms",
+        2
+      ],
+      [
+        "Portfolio Optimization",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Chicago",
+        12
+      ],
+      [
+        "Shanghai",
+        11
+      ],
+      [
+        "New York",
+        9
+      ],
+      [
+        "Singapore",
+        8
+      ],
+      [
+        "Hong Kong",
+        7
+      ],
+      [
+        "Sydney",
+        7
+      ],
+      [
+        "London",
+        7
+      ],
+      [
+        "Amsterdam",
+        2
+      ],
+      [
+        "Mumbai",
+        2
+      ],
+      [
+        "Austin",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 18,
+      "min": 70720,
+      "max": 225000,
+      "median": 150000,
+      "avg": 159207
+    },
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 23,
+    "remotePct": 2
+  },
+  {
+    "firmName": "Voleon",
+    "firmSlug": "voleon",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 61,
+    "jobsByRole": {
+      "operations": 6,
+      "other": 13,
+      "sales_trading": 1,
+      "software_engineering": 13,
+      "compliance": 1,
+      "data_science": 5,
+      "quantitative_research": 13,
+      "quantitative_development": 7,
+      "quantitative_trading": 2
+    },
+    "jobsBySeniority": {
+      "mid": 24,
+      "senior": 30,
+      "vp_director": 2,
+      "junior": 1,
+      "intern": 1,
+      "lead": 3
+    },
+    "jobsByEducation": {
+      "bachelors": 22,
+      "not_specified": 38,
+      "phd_required": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 48,
+      "onsite": 3,
+      "hybrid": 7,
+      "remote": 3
+    },
+    "topLanguages": [
+      [
+        "Python",
+        19
+      ],
+      [
+        "SQL",
+        9
+      ],
+      [
+        "R",
+        8
+      ],
+      [
+        "Go",
+        6
+      ],
+      [
+        "C++",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Statistics",
+        17
+      ],
+      [
+        "ML/AI",
+        14
+      ],
+      [
+        "Portfolio Optimization",
+        11
+      ],
+      [
+        "Risk Modeling",
+        9
+      ],
+      [
+        "Data Engineering",
+        8
+      ],
+      [
+        "Alpha Research",
+        7
+      ],
+      [
+        "Reinforcement Learning",
+        3
+      ],
+      [
+        "Market Microstructure",
+        3
+      ],
+      [
+        "Optimization",
+        2
+      ],
+      [
+        "Execution Algorithms",
+        2
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Berkeley",
+        25
+      ],
+      [
+        "New York",
+        7
+      ],
+      [
+        "London",
+        5
+      ],
+      [
+        "Canada",
+        2
+      ],
+      [
+        "Toronto",
+        1
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 2,
+    "mlAiFocusPct": 31,
+    "remotePct": 16
+  },
+  {
+    "firmName": "Maven Securities",
+    "firmSlug": "mavensecurities",
+    "firmType": "market_maker",
+    "companyLogo": null,
+    "totalJobs": 41,
+    "jobsByRole": {
+      "machine_learning": 1,
+      "quantitative_trading": 9,
+      "portfolio_management": 7,
+      "hft_systems": 5,
+      "compliance": 3,
+      "other": 5,
+      "operations": 1,
+      "software_engineering": 2,
+      "quantitative_development": 3,
+      "risk_management": 1,
+      "quantitative_research": 4
+    },
+    "jobsBySeniority": {
+      "mid": 22,
+      "intern": 2,
+      "junior": 2,
+      "vp_director": 2,
+      "senior": 13
+    },
+    "jobsByEducation": {
+      "not_specified": 30,
+      "bachelors": 6,
+      "masters": 4,
+      "phd_preferred": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 38,
+      "hybrid": 1,
+      "onsite": 2
+    },
+    "topLanguages": [
+      [
+        "Python",
+        16
+      ],
+      [
+        "C++",
+        8
+      ],
+      [
+        "SQL",
+        6
+      ],
+      [
+        "C#",
+        5
+      ],
+      [
+        "JavaScript",
+        5
+      ],
+      [
+        "R",
+        2
+      ],
+      [
+        "TypeScript",
+        2
+      ],
+      [
+        "Julia",
+        1
+      ],
+      [
+        "C",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Alpha Research",
+        11
+      ],
+      [
+        "Derivatives Pricing",
+        7
+      ],
+      [
+        "Risk Modeling",
+        6
+      ],
+      [
+        "Market Microstructure",
+        6
+      ],
+      [
+        "Statistics",
+        5
+      ],
+      [
+        "ML/AI",
+        4
+      ],
+      [
+        "Data Engineering",
+        4
+      ],
+      [
+        "Portfolio Optimization",
+        4
+      ],
+      [
+        "Signal Processing",
+        2
+      ],
+      [
+        "Time Series",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "London",
+        22
+      ],
+      [
+        "Chicago",
+        10
+      ],
+      [
+        "Amsterdam",
+        5
+      ],
+      [
+        "Hong Kong",
+        3
+      ],
+      [
+        "New York",
+        2
+      ],
+      [
+        "Monaco",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 2,
+      "min": 115000,
+      "max": 205000,
+      "median": 160000,
+      "avg": 160000
+    },
+    "phdDemandPct": 2,
+    "mlAiFocusPct": 10,
+    "remotePct": 2
+  },
+  {
+    "firmName": "Citadel",
+    "firmSlug": "citadel",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 40,
+    "jobsByRole": {
+      "other": 2,
+      "quantitative_research": 19,
+      "software_engineering": 8,
+      "quantitative_trading": 2,
+      "portfolio_management": 3,
+      "quantitative_development": 4,
+      "hft_systems": 2
+    },
+    "jobsBySeniority": {
+      "mid": 10,
+      "junior": 15,
+      "senior": 2,
+      "intern": 13
+    },
+    "jobsByEducation": {
+      "not_specified": 6,
+      "bachelors": 21,
+      "phd_required": 12,
+      "phd_preferred": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 40
+    },
+    "topLanguages": [
+      [
+        "Python",
+        27
+      ],
+      [
+        "C++",
+        25
+      ],
+      [
+        "R",
+        17
+      ],
+      [
+        "MATLAB",
+        2
+      ],
+      [
+        "Julia",
+        1
+      ],
+      [
+        "JavaScript",
+        1
+      ],
+      [
+        "SQL",
+        1
+      ],
+      [
+        "Java",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "ML/AI",
+        27
+      ],
+      [
+        "NLP",
+        25
+      ],
+      [
+        "Statistics",
+        19
+      ],
+      [
+        "Time Series",
+        14
+      ],
+      [
+        "Backtesting",
+        11
+      ],
+      [
+        "Alpha Research",
+        6
+      ],
+      [
+        "Data Engineering",
+        3
+      ],
+      [
+        "Portfolio Optimization",
+        2
+      ],
+      [
+        "pattern recognition",
+        2
+      ],
+      [
+        "Market Microstructure",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        19
+      ],
+      [
+        "Singapore",
+        13
+      ],
+      [
+        "London",
+        12
+      ],
+      [
+        "Miami",
+        11
+      ],
+      [
+        "Hong Kong",
+        10
+      ],
+      [
+        "Greenwich",
+        6
+      ],
+      [
+        "Houston",
+        4
+      ],
+      [
+        "Paris",
+        4
+      ],
+      [
+        "Zurich",
+        4
+      ],
+      [
+        "Dublin",
+        2
+      ]
+    ],
+    "salaryStats": {
+      "count": 11,
+      "min": 212500,
+      "max": 262500,
+      "median": 250000,
+      "avg": 244318
+    },
+    "phdDemandPct": 33,
+    "mlAiFocusPct": 68,
+    "remotePct": 0
+  },
+  {
+    "firmName": "AQR Capital",
+    "firmSlug": "aqr",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 38,
+    "jobsByRole": {
+      "quantitative_trading": 2,
+      "sales_trading": 4,
+      "other": 3,
+      "quantitative_development": 11,
+      "compliance": 5,
+      "data_science": 3,
+      "software_engineering": 2,
+      "operations": 4,
+      "quantitative_research": 3,
+      "portfolio_management": 1
+    },
+    "jobsBySeniority": {
+      "mid": 22,
+      "junior": 3,
+      "vp_director": 10,
+      "senior": 3
+    },
+    "jobsByEducation": {
+      "not_specified": 24,
+      "bachelors": 13,
+      "masters": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 36,
+      "hybrid": 2
+    },
+    "topLanguages": [
+      [
+        "Python",
+        9
+      ],
+      [
+        "SQL",
+        4
+      ],
+      [
+        "Java",
+        4
+      ],
+      [
+        "C#",
+        2
+      ],
+      [
+        "JavaScript",
+        1
+      ],
+      [
+        "TypeScript",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Portfolio Optimization",
+        7
+      ],
+      [
+        "Data Engineering",
+        4
+      ],
+      [
+        "ML/AI",
+        4
+      ],
+      [
+        "Alpha Research",
+        4
+      ],
+      [
+        "Statistics",
+        4
+      ],
+      [
+        "Market Microstructure",
+        3
+      ],
+      [
+        "Derivatives Pricing",
+        2
+      ],
+      [
+        "Risk Modeling",
+        2
+      ],
+      [
+        "Execution Algorithms",
+        1
+      ],
+      [
+        "Backtesting",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Greenwich",
+        19
+      ],
+      [
+        "Bengaluru",
+        15
+      ],
+      [
+        "London",
+        3
+      ],
+      [
+        "Bangalore",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 3,
+      "min": 180000,
+      "max": 247500,
+      "median": 187500,
+      "avg": 205000
+    },
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 18,
+    "remotePct": 5
+  },
+  {
+    "firmName": "DV Trading",
+    "firmSlug": "dv-trading",
+    "firmType": "proprietary",
+    "companyLogo": "https://s5-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/140/100/original/26254412.jpeg?1740174068",
+    "totalJobs": 35,
+    "jobsByRole": {
+      "other": 3,
+      "machine_learning": 1,
+      "software_engineering": 2,
+      "risk_management": 1,
+      "compliance": 2,
+      "quantitative_trading": 11,
+      "sales_trading": 4,
+      "hft_systems": 4,
+      "quantitative_research": 2,
+      "quantitative_development": 2,
+      "operations": 3
+    },
+    "jobsBySeniority": {
+      "senior": 13,
+      "intern": 5,
+      "mid": 12,
+      "junior": 2,
+      "lead": 1,
+      "vp_director": 2
+    },
+    "jobsByEducation": {
+      "bachelors": 18,
+      "not_specified": 15,
+      "masters": 2
+    },
+    "jobsByWorkMode": {
+      "not_specified": 33,
+      "remote": 1,
+      "onsite": 1
+    },
+    "topLanguages": [
+      [
+        "Python",
+        19
+      ],
+      [
+        "SQL",
+        13
+      ],
+      [
+        "C++",
+        7
+      ],
+      [
+        "R",
+        3
+      ],
+      [
+        "C#",
+        2
+      ],
+      [
+        "C",
+        1
+      ],
+      [
+        "Bash",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Alpha Research",
+        10
+      ],
+      [
+        "Statistics",
+        9
+      ],
+      [
+        "Data Engineering",
+        4
+      ],
+      [
+        "ML/AI",
+        3
+      ],
+      [
+        "Time Series",
+        2
+      ],
+      [
+        "Risk Modeling",
+        2
+      ],
+      [
+        "Market Microstructure",
+        2
+      ],
+      [
+        "Optimization",
+        1
+      ],
+      [
+        "Derivatives Pricing",
+        1
+      ],
+      [
+        "Portfolio Optimization",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "London",
+        13
+      ],
+      [
+        "Chicago",
+        12
+      ],
+      [
+        "New York",
+        9
+      ],
+      [
+        "Dubai",
+        1
+      ],
+      [
+        "Singapore",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 18,
+      "min": 62400,
+      "max": 249600,
+      "median": 100000,
+      "avg": 122022
+    },
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 9,
+    "remotePct": 3
+  },
+  {
+    "firmName": "Schonfeld",
+    "firmSlug": "schonfeld",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 35,
+    "jobsByRole": {
+      "operations": 8,
+      "risk_management": 5,
+      "quantitative_research": 7,
+      "quantitative_development": 2,
+      "other": 4,
+      "compliance": 1,
+      "quantitative_trading": 1,
+      "software_engineering": 5,
+      "data_science": 2
+    },
+    "jobsBySeniority": {
+      "mid": 15,
+      "vp_director": 1,
+      "senior": 13,
+      "intern": 5,
+      "junior": 1
+    },
+    "jobsByEducation": {
+      "bachelors": 16,
+      "not_specified": 14,
+      "masters": 5
+    },
+    "jobsByWorkMode": {
+      "not_specified": 33,
+      "onsite": 2
+    },
+    "topLanguages": [
+      [
+        "Python",
+        19
+      ],
+      [
+        "C++",
+        4
+      ],
+      [
+        "SQL",
+        3
+      ],
+      [
+        "KDB+/Q",
+        3
+      ],
+      [
+        "C#",
+        2
+      ],
+      [
+        "R",
+        2
+      ],
+      [
+        "Java",
+        2
+      ],
+      [
+        "Rust",
+        1
+      ],
+      [
+        "Go",
+        1
+      ],
+      [
+        "TypeScript",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Risk Modeling",
+        9
+      ],
+      [
+        "Derivatives Pricing",
+        5
+      ],
+      [
+        "Alpha Research",
+        4
+      ],
+      [
+        "Portfolio Optimization",
+        4
+      ],
+      [
+        "Data Engineering",
+        3
+      ],
+      [
+        "Market Microstructure",
+        3
+      ],
+      [
+        "ML/AI",
+        3
+      ],
+      [
+        "Statistics",
+        2
+      ],
+      [
+        "Backtesting",
+        2
+      ],
+      [
+        "Stochastic Calculus",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        3
+      ],
+      [
+        "London",
+        1
+      ],
+      [
+        "Hong Kong",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 16,
+      "min": 60000,
+      "max": 300000,
+      "median": 170000,
+      "avg": 165938
+    },
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 9,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Virtu",
+    "firmSlug": "virtu",
+    "firmType": "market_maker",
+    "companyLogo": "https://s2-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/467/800/original/Virtu_Logo_Symbol_Color_CMYK.png?1563812969",
+    "totalJobs": 32,
+    "jobsByRole": {
+      "other": 1,
+      "software_engineering": 4,
+      "hft_systems": 6,
+      "compliance": 1,
+      "operations": 4,
+      "sales_trading": 3,
+      "quantitative_research": 6,
+      "quantitative_development": 2,
+      "machine_learning": 1,
+      "quantitative_trading": 4
+    },
+    "jobsBySeniority": {
+      "senior": 8,
+      "mid": 18,
+      "junior": 6
+    },
+    "jobsByEducation": {
+      "not_specified": 20,
+      "bachelors": 7,
+      "phd_preferred": 2,
+      "masters": 1,
+      "phd_required": 2
+    },
+    "jobsByWorkMode": {
+      "not_specified": 31,
+      "hybrid": 1
+    },
+    "topLanguages": [
+      [
+        "Python",
+        20
+      ],
+      [
+        "C++",
+        12
+      ],
+      [
+        "SQL",
+        10
+      ],
+      [
+        "Java",
+        10
+      ],
+      [
+        "Go",
+        2
+      ],
+      [
+        "Perl",
+        1
+      ],
+      [
+        "C#",
+        1
+      ],
+      [
+        "JavaScript",
+        1
+      ],
+      [
+        "TypeScript",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Market Microstructure",
+        6
+      ],
+      [
+        "Statistics",
+        5
+      ],
+      [
+        "Risk Modeling",
+        4
+      ],
+      [
+        "Execution Algorithms",
+        2
+      ],
+      [
+        "ML/AI",
+        2
+      ],
+      [
+        "Derivatives Pricing",
+        2
+      ],
+      [
+        "Data Engineering",
+        2
+      ],
+      [
+        "Reinforcement Learning",
+        1
+      ],
+      [
+        "Optimization",
+        1
+      ],
+      [
+        "Alpha Research",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        11
+      ],
+      [
+        "Singapore",
+        8
+      ],
+      [
+        "Dublin",
+        7
+      ],
+      [
+        "Austin",
+        4
+      ],
+      [
+        "Palm Beach",
+        2
+      ],
+      [
+        "Hong Kong",
+        2
+      ],
+      [
+        "New Jersey",
+        1
+      ],
+      [
+        "London",
+        1
+      ],
+      [
+        "England",
+        1
+      ],
+      [
+        "Boston",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 12,
+      "min": 125000,
+      "max": 300000,
+      "median": 200000,
+      "avg": 210833
+    },
+    "phdDemandPct": 13,
+    "mlAiFocusPct": 6,
+    "remotePct": 3
+  },
+  {
+    "firmName": "Stevens Capital Management",
+    "firmSlug": "stevens-capital-management",
+    "firmType": "proprietary",
+    "companyLogo": "https://recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/000/009/398/original/SCM_Blue_logo.png?1578924440",
+    "totalJobs": 29,
+    "jobsByRole": {
+      "portfolio_management": 1,
+      "other": 2,
+      "quantitative_research": 13,
+      "quantitative_development": 9,
+      "hft_systems": 4
+    },
+    "jobsBySeniority": {
+      "junior": 1,
+      "mid": 17,
+      "intern": 2,
+      "senior": 9
+    },
+    "jobsByEducation": {
+      "bachelors": 21,
+      "not_specified": 5,
+      "phd_preferred": 3
+    },
+    "jobsByWorkMode": {
+      "not_specified": 25,
+      "remote": 2,
+      "hybrid": 2
+    },
+    "topLanguages": [
+      [
+        "C++",
+        21
+      ],
+      [
+        "Python",
+        15
+      ],
+      [
+        "Perl",
+        5
+      ],
+      [
+        "R",
+        4
+      ],
+      [
+        "Java",
+        3
+      ]
+    ],
+    "topSkills": [
+      [
+        "Alpha Research",
+        12
+      ],
+      [
+        "Time Series",
+        6
+      ],
+      [
+        "Market Microstructure",
+        5
+      ],
+      [
+        "Execution Algorithms",
+        5
+      ],
+      [
+        "Portfolio Optimization",
+        4
+      ],
+      [
+        "Statistics",
+        4
+      ],
+      [
+        "Factor Models",
+        3
+      ],
+      [
+        "Risk Modeling",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Radnor",
+        20
+      ],
+      [
+        "Jersey City",
+        9
+      ]
+    ],
+    "salaryStats": {
+      "count": 27,
+      "min": 75000,
+      "max": 150000,
+      "median": 150000,
+      "avg": 130556
+    },
+    "phdDemandPct": 10,
+    "mlAiFocusPct": 0,
+    "remotePct": 14
+  },
+  {
+    "firmName": "Bridgewater",
+    "firmSlug": "bridgewater",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 27,
+    "jobsByRole": {
+      "other": 6,
+      "data_science": 3,
+      "quantitative_development": 2,
+      "quantitative_research": 6,
+      "operations": 4,
+      "software_engineering": 3,
+      "compliance": 1,
+      "sales_trading": 2
+    },
+    "jobsBySeniority": {
+      "mid": 22,
+      "senior": 2,
+      "intern": 1,
+      "lead": 1,
+      "vp_director": 1
+    },
+    "jobsByEducation": {
+      "not_specified": 27
+    },
+    "jobsByWorkMode": {
+      "not_specified": 27
+    },
+    "topLanguages": [],
+    "topSkills": [
+      [
+        "Alpha Research",
+        5
+      ],
+      [
+        "Data Engineering",
+        2
+      ],
+      [
+        "Risk Modeling",
+        2
+      ],
+      [
+        "ML/AI",
+        2
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Westport",
+        10
+      ],
+      [
+        "New York",
+        8
+      ],
+      [
+        "Singapore",
+        1
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 19,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Old Mission Capital",
+    "firmSlug": "old-mission-capital",
+    "firmType": "market_maker",
+    "companyLogo": null,
+    "totalJobs": 26,
+    "jobsByRole": {
+      "quantitative_trading": 8,
+      "hft_systems": 3,
+      "software_engineering": 2,
+      "quantitative_development": 3,
+      "portfolio_management": 1,
+      "other": 1,
+      "operations": 2,
+      "sales_trading": 1,
+      "quantitative_research": 5
+    },
+    "jobsBySeniority": {
+      "junior": 3,
+      "mid": 15,
+      "senior": 8
+    },
+    "jobsByEducation": {
+      "bachelors": 17,
+      "not_specified": 4,
+      "masters": 3,
+      "phd_preferred": 2
+    },
+    "jobsByWorkMode": {
+      "onsite": 6,
+      "not_specified": 20
+    },
+    "topLanguages": [
+      [
+        "Python",
+        22
+      ],
+      [
+        "C++",
+        11
+      ],
+      [
+        "Java",
+        6
+      ],
+      [
+        "R",
+        6
+      ],
+      [
+        "MATLAB",
+        6
+      ],
+      [
+        "SQL",
+        3
+      ],
+      [
+        "JavaScript",
+        1
+      ],
+      [
+        "TypeScript",
+        1
+      ],
+      [
+        "Ruby",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Derivatives Pricing",
+        8
+      ],
+      [
+        "Risk Management",
+        7
+      ],
+      [
+        "Statistics",
+        6
+      ],
+      [
+        "Alpha Research",
+        5
+      ],
+      [
+        "Market Microstructure",
+        4
+      ],
+      [
+        "Portfolio Optimization",
+        3
+      ],
+      [
+        "Risk Modeling",
+        3
+      ],
+      [
+        "Backtesting",
+        3
+      ],
+      [
+        "ML/AI",
+        2
+      ],
+      [
+        "Data Engineering",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Chicago",
+        18
+      ],
+      [
+        "London",
+        4
+      ],
+      [
+        "New York",
+        4
+      ],
+      [
+        "IL or New York",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 10,
+      "min": 85000,
+      "max": 237500,
+      "median": 186250,
+      "avg": 187750
+    },
+    "phdDemandPct": 8,
+    "mlAiFocusPct": 8,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Akuna Capital",
+    "firmSlug": "akuna-capital",
+    "firmType": "proprietary",
+    "companyLogo": "https://akunacapital.com/wp-content/themes/akuna/resources/images/white-logo.svg",
+    "totalJobs": 26,
+    "jobsByRole": {
+      "quantitative_trading": 5,
+      "other": 3,
+      "hft_systems": 8,
+      "compliance": 2,
+      "quantitative_development": 2,
+      "operations": 1,
+      "quantitative_research": 3,
+      "software_engineering": 1,
+      "data_science": 1
+    },
+    "jobsBySeniority": {
+      "mid": 18,
+      "intern": 3,
+      "junior": 2,
+      "senior": 3
+    },
+    "jobsByEducation": {
+      "bachelors": 25,
+      "not_specified": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 23,
+      "onsite": 3
+    },
+    "topLanguages": [
+      [
+        "Python",
+        11
+      ],
+      [
+        "C++",
+        10
+      ],
+      [
+        "SQL",
+        2
+      ],
+      [
+        "VBA",
+        1
+      ],
+      [
+        "Java",
+        1
+      ],
+      [
+        "Scala",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "ML/AI",
+        4
+      ],
+      [
+        "Statistics",
+        4
+      ],
+      [
+        "Market Microstructure",
+        3
+      ],
+      [
+        "Optimization",
+        3
+      ],
+      [
+        "Risk Modeling",
+        2
+      ],
+      [
+        "Signal Processing",
+        2
+      ],
+      [
+        "Portfolio Optimization",
+        2
+      ],
+      [
+        "Alpha Research",
+        1
+      ],
+      [
+        "Backtesting",
+        1
+      ],
+      [
+        "Derivatives Pricing",
+        1
+      ]
+    ],
+    "locationDistribution": [],
+    "salaryStats": null,
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 19,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Chicago Trading",
+    "firmSlug": "chicago-trading",
+    "firmType": "proprietary",
+    "companyLogo": null,
+    "totalJobs": 24,
+    "jobsByRole": {
+      "other": 4,
+      "operations": 2,
+      "quantitative_development": 5,
+      "hft_systems": 4,
+      "machine_learning": 1,
+      "software_engineering": 1,
+      "compliance": 1,
+      "sales_trading": 1,
+      "quantitative_research": 3,
+      "quantitative_trading": 1,
+      "data_science": 1
+    },
+    "jobsBySeniority": {
+      "junior": 1,
+      "mid": 6,
+      "senior": 14,
+      "lead": 2,
+      "vp_director": 1
+    },
+    "jobsByEducation": {
+      "bachelors": 5,
+      "not_specified": 16,
+      "masters": 1,
+      "phd_preferred": 2
+    },
+    "jobsByWorkMode": {
+      "not_specified": 16,
+      "hybrid": 8
+    },
+    "topLanguages": [
+      [
+        "Python",
+        11
+      ],
+      [
+        "C++",
+        7
+      ],
+      [
+        "Java",
+        3
+      ],
+      [
+        "SQL",
+        2
+      ],
+      [
+        "JavaScript",
+        1
+      ],
+      [
+        "TypeScript",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Statistics",
+        4
+      ],
+      [
+        "Backtesting",
+        3
+      ],
+      [
+        "Risk Modeling",
+        3
+      ],
+      [
+        "Derivatives Pricing",
+        3
+      ],
+      [
+        "Market Microstructure",
+        3
+      ],
+      [
+        "Alpha Research",
+        3
+      ],
+      [
+        "ML/AI",
+        1
+      ],
+      [
+        "Factor Models",
+        1
+      ],
+      [
+        "Portfolio Optimization",
+        1
+      ],
+      [
+        "Execution Algorithms",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Chicago",
+        22
+      ],
+      [
+        "New York",
+        10
+      ],
+      [
+        "Amsterdam",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 23,
+      "min": 85000,
+      "max": 250000,
+      "median": 200000,
+      "avg": 188587
+    },
+    "phdDemandPct": 8,
+    "mlAiFocusPct": 8,
+    "remotePct": 33
+  },
+  {
+    "firmName": "Flow Traders",
+    "firmSlug": "flow-traders",
+    "firmType": "market_maker",
+    "companyLogo": null,
+    "totalJobs": 23,
+    "jobsByRole": {
+      "other": 4,
+      "hft_systems": 4,
+      "quantitative_trading": 7,
+      "machine_learning": 2,
+      "compliance": 4,
+      "sales_trading": 1,
+      "quantitative_research": 1
+    },
+    "jobsBySeniority": {
+      "junior": 2,
+      "senior": 15,
+      "intern": 1,
+      "mid": 5
+    },
+    "jobsByEducation": {
+      "bachelors": 16,
+      "not_specified": 3,
+      "masters": 3,
+      "phd_preferred": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 23
+    },
+    "topLanguages": [
+      [
+        "Python",
+        11
+      ],
+      [
+        "C++",
+        4
+      ],
+      [
+        "R",
+        3
+      ],
+      [
+        "SQL",
+        3
+      ],
+      [
+        "MATLAB",
+        2
+      ],
+      [
+        "Bash",
+        1
+      ],
+      [
+        "Rust",
+        1
+      ],
+      [
+        "TypeScript",
+        1
+      ],
+      [
+        "Java",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Statistics",
+        3
+      ],
+      [
+        "ML/AI",
+        2
+      ],
+      [
+        "Alpha Research",
+        2
+      ],
+      [
+        "Market Microstructure",
+        2
+      ],
+      [
+        "Risk Modeling",
+        2
+      ],
+      [
+        "Portfolio Optimization",
+        1
+      ],
+      [
+        "Backtesting",
+        1
+      ],
+      [
+        "Derivatives Pricing",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Amsterdam",
+        9
+      ],
+      [
+        "Hong Kong",
+        9
+      ],
+      [
+        "New York",
+        3
+      ],
+      [
+        "London",
+        2
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 4,
+    "mlAiFocusPct": 9,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Arrowstreet Capital",
+    "firmSlug": "arrowstreet-capital",
+    "firmType": "hedge_fund",
+    "companyLogo": "https://arrowstreetcapital.wd5.myworkdayjobs.com/wday/cxs/arrowstreetcapital/Arrowstreet/sidebarimage/c85bcaaf546d10011614f46fe7810000",
+    "totalJobs": 23,
+    "jobsByRole": {
+      "software_engineering": 9,
+      "other": 3,
+      "risk_management": 1,
+      "machine_learning": 1,
+      "quantitative_development": 5,
+      "compliance": 1,
+      "operations": 1,
+      "quantitative_research": 2
+    },
+    "jobsBySeniority": {
+      "senior": 18,
+      "mid": 3,
+      "junior": 2
+    },
+    "jobsByEducation": {
+      "not_specified": 13,
+      "bachelors": 10
+    },
+    "jobsByWorkMode": {
+      "not_specified": 23
+    },
+    "topLanguages": [
+      [
+        "Python",
+        15
+      ],
+      [
+        "C#",
+        4
+      ],
+      [
+        "R",
+        3
+      ],
+      [
+        "MATLAB",
+        2
+      ],
+      [
+        "SQL",
+        1
+      ],
+      [
+        "C++",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Data Engineering",
+        4
+      ],
+      [
+        "Statistics",
+        4
+      ],
+      [
+        "Time Series",
+        4
+      ],
+      [
+        "ML/AI",
+        2
+      ],
+      [
+        "Alpha Research",
+        2
+      ],
+      [
+        "Portfolio Optimization",
+        2
+      ],
+      [
+        "NLP",
+        1
+      ],
+      [
+        "Risk Modeling",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Boston",
+        13
+      ]
+    ],
+    "salaryStats": {
+      "count": 23,
+      "min": 65000,
+      "max": 170000,
+      "median": 115000,
+      "avg": 119130
+    },
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 9,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Citadel Securities",
+    "firmSlug": "citadel-securities",
+    "firmType": "market_maker",
+    "companyLogo": null,
+    "totalJobs": 20,
+    "jobsByRole": {
+      "other": 2,
+      "data_science": 1,
+      "quantitative_research": 2,
+      "quantitative_trading": 3,
+      "software_engineering": 6,
+      "hft_systems": 4,
+      "operations": 1,
+      "risk_management": 1
+    },
+    "jobsBySeniority": {
+      "junior": 3,
+      "mid": 11,
+      "intern": 5,
+      "senior": 1
+    },
+    "jobsByEducation": {
+      "bachelors": 6,
+      "phd_required": 2,
+      "not_specified": 12
+    },
+    "jobsByWorkMode": {
+      "not_specified": 20
+    },
+    "topLanguages": [
+      [
+        "Python",
+        11
+      ],
+      [
+        "SQL",
+        5
+      ],
+      [
+        "C++",
+        4
+      ],
+      [
+        "KDB+/Q",
+        3
+      ],
+      [
+        "R",
+        2
+      ],
+      [
+        "Bash",
+        2
+      ],
+      [
+        "Rust",
+        1
+      ],
+      [
+        "Go",
+        1
+      ],
+      [
+        "Haskell",
+        1
+      ],
+      [
+        "OCaml",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "NLP",
+        6
+      ],
+      [
+        "Alpha Research",
+        4
+      ],
+      [
+        "Data Engineering",
+        3
+      ],
+      [
+        "ML/AI",
+        3
+      ],
+      [
+        "Market Microstructure",
+        3
+      ],
+      [
+        "Risk Modeling",
+        3
+      ],
+      [
+        "machine_learning",
+        3
+      ],
+      [
+        "Statistics",
+        2
+      ],
+      [
+        "Time Series",
+        2
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Miami",
+        9
+      ],
+      [
+        "New York",
+        9
+      ],
+      [
+        "London",
+        6
+      ],
+      [
+        "Singapore",
+        5
+      ],
+      [
+        "Sydney",
+        4
+      ],
+      [
+        "Hong Kong",
+        3
+      ],
+      [
+        "Gurgaon",
+        2
+      ],
+      [
+        "Paris",
+        1
+      ],
+      [
+        "Dublin",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 10,
+      "min": 51600,
+      "max": 225000,
+      "median": 150000,
+      "avg": 144108
+    },
+    "phdDemandPct": 10,
+    "mlAiFocusPct": 20,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Two Sigma",
+    "firmSlug": "twosigma",
+    "firmType": "hedge_fund",
+    "companyLogo": "https://www.twosigma.com/wp-content/themes/tsmb/assets/public/img/logo.svg",
+    "totalJobs": 18,
+    "jobsByRole": {
+      "quantitative_research": 4,
+      "other": 5,
+      "data_science": 2,
+      "quantitative_trading": 1,
+      "quantitative_development": 1,
+      "operations": 3,
+      "software_engineering": 1,
+      "hft_systems": 1
+    },
+    "jobsBySeniority": {
+      "junior": 2,
+      "mid": 13,
+      "intern": 1,
+      "senior": 2
+    },
+    "jobsByEducation": {
+      "phd_preferred": 2,
+      "bachelors": 10,
+      "not_specified": 6
+    },
+    "jobsByWorkMode": {
+      "hybrid": 7,
+      "not_specified": 11
+    },
+    "topLanguages": [
+      [
+        "Python",
+        9
+      ],
+      [
+        "Java",
+        5
+      ],
+      [
+        "C++",
+        3
+      ],
+      [
+        "SQL",
+        2
+      ],
+      [
+        "JavaScript",
+        2
+      ],
+      [
+        "C",
+        2
+      ],
+      [
+        "Rust",
+        1
+      ],
+      [
+        "Ruby",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "ML/AI",
+        5
+      ],
+      [
+        "Statistics",
+        4
+      ],
+      [
+        "Alpha Research",
+        2
+      ],
+      [
+        "Reinforcement Learning",
+        1
+      ],
+      [
+        "Execution Algorithms",
+        1
+      ],
+      [
+        "Order Book Analysis",
+        1
+      ],
+      [
+        "Portfolio Optimization",
+        1
+      ],
+      [
+        "Market Microstructure",
+        1
+      ],
+      [
+        "Data Engineering",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        10
+      ],
+      [
+        "London",
+        4
+      ],
+      [
+        "NY New York",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 14,
+      "min": 45600,
+      "max": 250000,
+      "median": 145000,
+      "avg": 144329
+    },
+    "phdDemandPct": 11,
+    "mlAiFocusPct": 39,
+    "remotePct": 39
+  },
+  {
+    "firmName": "Belvedere Trading",
+    "firmSlug": "belvedere-trading",
+    "firmType": "proprietary",
+    "companyLogo": null,
+    "totalJobs": 17,
+    "jobsByRole": {
+      "compliance": 1,
+      "quantitative_trading": 3,
+      "software_engineering": 1,
+      "other": 3,
+      "risk_management": 1,
+      "quantitative_research": 1,
+      "hft_systems": 6,
+      "data_science": 1
+    },
+    "jobsBySeniority": {
+      "mid": 5,
+      "senior": 10,
+      "lead": 2
+    },
+    "jobsByEducation": {
+      "not_specified": 17
+    },
+    "jobsByWorkMode": {
+      "not_specified": 17
+    },
+    "topLanguages": [
+      [
+        "C++",
+        3
+      ],
+      [
+        "Java",
+        1
+      ],
+      [
+        "Python",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Risk Modeling",
+        5
+      ],
+      [
+        "Market Microstructure",
+        2
+      ],
+      [
+        "Alpha Research",
+        1
+      ],
+      [
+        "Backtesting",
+        1
+      ],
+      [
+        "Derivatives Pricing",
+        1
+      ],
+      [
+        "Data Engineering",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Chicago",
+        14
+      ],
+      [
+        "Illinois",
+        14
+      ],
+      [
+        "New York",
+        2
+      ],
+      [
+        "Singapore",
+        1
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 6,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Verition",
+    "firmSlug": "verition",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 17,
+    "jobsByRole": {
+      "portfolio_management": 3,
+      "quantitative_development": 3,
+      "quantitative_research": 6,
+      "hft_systems": 1,
+      "operations": 1,
+      "other": 2,
+      "risk_management": 1
+    },
+    "jobsBySeniority": {
+      "mid": 9,
+      "intern": 3,
+      "senior": 4,
+      "junior": 1
+    },
+    "jobsByEducation": {
+      "not_specified": 10,
+      "bachelors": 7
+    },
+    "jobsByWorkMode": {
+      "not_specified": 17
+    },
+    "topLanguages": [
+      [
+        "Python",
+        12
+      ],
+      [
+        "SQL",
+        5
+      ],
+      [
+        "C++",
+        5
+      ],
+      [
+        "R",
+        3
+      ],
+      [
+        "Java",
+        2
+      ],
+      [
+        "C#",
+        1
+      ],
+      [
+        "MATLAB",
+        1
+      ],
+      [
+        "KDB+/Q",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Risk Modeling",
+        6
+      ],
+      [
+        "Alpha Research",
+        5
+      ],
+      [
+        "ML/AI",
+        4
+      ],
+      [
+        "Portfolio Optimization",
+        3
+      ],
+      [
+        "Backtesting",
+        2
+      ],
+      [
+        "Derivatives Pricing",
+        2
+      ],
+      [
+        "Market Microstructure",
+        2
+      ],
+      [
+        "Data Engineering",
+        1
+      ],
+      [
+        "Time Series",
+        1
+      ],
+      [
+        "NLP",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Hong Kong",
+        3
+      ],
+      [
+        "New York",
+        2
+      ],
+      [
+        "Chicago",
+        1
+      ],
+      [
+        "Illinois",
+        1
+      ],
+      [
+        "London",
+        1
+      ],
+      [
+        "Norwalk",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 6,
+      "min": 100000,
+      "max": 150000,
+      "median": 110000,
+      "avg": 120000
+    },
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 24,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Brevan Howard",
+    "firmSlug": "brevan-howard",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 15,
+    "jobsByRole": {
+      "operations": 1,
+      "compliance": 1,
+      "quantitative_research": 2,
+      "quantitative_trading": 3,
+      "quantitative_development": 3,
+      "other": 2,
+      "software_engineering": 1,
+      "risk_management": 2
+    },
+    "jobsBySeniority": {
+      "senior": 4,
+      "mid": 5,
+      "intern": 6
+    },
+    "jobsByEducation": {
+      "bachelors": 4,
+      "not_specified": 10,
+      "phd_preferred": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 15
+    },
+    "topLanguages": [
+      [
+        "Python",
+        8
+      ],
+      [
+        "SQL",
+        2
+      ],
+      [
+        "Java",
+        2
+      ],
+      [
+        "Go",
+        1
+      ],
+      [
+        "C#",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Statistics",
+        4
+      ],
+      [
+        "Backtesting",
+        4
+      ],
+      [
+        "Risk Modeling",
+        3
+      ],
+      [
+        "ML/AI",
+        2
+      ],
+      [
+        "Derivatives Pricing",
+        2
+      ],
+      [
+        "Market Microstructure",
+        1
+      ],
+      [
+        "Alpha Research",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Bangalore",
+        6
+      ],
+      [
+        "Abu Dhabi",
+        5
+      ],
+      [
+        "Geneva",
+        2
+      ],
+      [
+        "London",
+        1
+      ],
+      [
+        "New York",
+        1
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 7,
+    "mlAiFocusPct": 13,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Wolverine",
+    "firmSlug": "wolverine",
+    "firmType": "proprietary",
+    "companyLogo": null,
+    "totalJobs": 15,
+    "jobsByRole": {
+      "software_engineering": 3,
+      "quantitative_research": 3,
+      "hft_systems": 3,
+      "quantitative_trading": 3,
+      "operations": 2,
+      "compliance": 1
+    },
+    "jobsBySeniority": {
+      "mid": 11,
+      "junior": 1,
+      "senior": 3
+    },
+    "jobsByEducation": {
+      "not_specified": 5,
+      "bachelors": 10
+    },
+    "jobsByWorkMode": {
+      "not_specified": 13,
+      "onsite": 2
+    },
+    "topLanguages": [
+      [
+        "C++",
+        6
+      ],
+      [
+        "Python",
+        3
+      ],
+      [
+        "SQL",
+        2
+      ],
+      [
+        "C#",
+        1
+      ],
+      [
+        "Java",
+        1
+      ],
+      [
+        "R",
+        1
+      ],
+      [
+        "MATLAB",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Market Microstructure",
+        5
+      ],
+      [
+        "Statistics",
+        3
+      ],
+      [
+        "Data Engineering",
+        2
+      ],
+      [
+        "Alpha Research",
+        2
+      ],
+      [
+        "ML/AI",
+        2
+      ],
+      [
+        "Risk Management",
+        2
+      ],
+      [
+        "Derivatives Pricing",
+        1
+      ],
+      [
+        "Backtesting",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Chicago",
+        15
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 13,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Five Rings Capital",
+    "firmSlug": "five-rings",
+    "firmType": "proprietary",
+    "companyLogo": "https://s8-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/055/000/original/white_logo.jpg?1711549361",
+    "totalJobs": 15,
+    "jobsByRole": {
+      "quantitative_trading": 3,
+      "operations": 5,
+      "compliance": 1,
+      "software_engineering": 3,
+      "quantitative_research": 2,
+      "quantitative_development": 1
+    },
+    "jobsBySeniority": {
+      "junior": 4,
+      "mid": 8,
+      "intern": 3
+    },
+    "jobsByEducation": {
+      "not_specified": 9,
+      "bachelors": 5,
+      "phd_required": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 9,
+      "onsite": 6
+    },
+    "topLanguages": [
+      [
+        "Python",
+        7
+      ],
+      [
+        "SQL",
+        4
+      ],
+      [
+        "Perl",
+        2
+      ],
+      [
+        "C++",
+        2
+      ],
+      [
+        "R",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Alpha Research",
+        1
+      ]
+    ],
+    "locationDistribution": [],
+    "salaryStats": {
+      "count": 10,
+      "min": 87500,
+      "max": 300000,
+      "median": 256250,
+      "avg": 223750
+    },
+    "phdDemandPct": 7,
+    "mlAiFocusPct": 0,
+    "remotePct": 0
+  },
+  {
+    "firmName": "PDT Partners",
+    "firmSlug": "pdtpartners-com",
+    "firmType": "proprietary",
+    "companyLogo": null,
+    "totalJobs": 15,
+    "jobsByRole": {
+      "operations": 3,
+      "hft_systems": 3,
+      "other": 2,
+      "software_engineering": 4,
+      "machine_learning": 1,
+      "quantitative_research": 2
+    },
+    "jobsBySeniority": {
+      "mid": 13,
+      "senior": 2
+    },
+    "jobsByEducation": {
+      "not_specified": 6,
+      "bachelors": 7,
+      "phd_preferred": 2
+    },
+    "jobsByWorkMode": {
+      "hybrid": 12,
+      "not_specified": 3
+    },
+    "topLanguages": [
+      [
+        "Python",
+        8
+      ],
+      [
+        "C++",
+        6
+      ],
+      [
+        "Java",
+        3
+      ],
+      [
+        "R",
+        2
+      ],
+      [
+        "MATLAB",
+        2
+      ]
+    ],
+    "topSkills": [
+      [
+        "ML/AI",
+        2
+      ],
+      [
+        "Alpha Research",
+        2
+      ],
+      [
+        "Market Microstructure",
+        1
+      ],
+      [
+        "Data Engineering",
+        1
+      ],
+      [
+        "Statistics",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        14
+      ],
+      [
+        "London",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 3,
+      "min": 180000,
+      "max": 220000,
+      "median": 190000,
+      "avg": 196667
+    },
+    "phdDemandPct": 13,
+    "mlAiFocusPct": 13,
+    "remotePct": 80
+  },
+  {
+    "firmName": "Archimed",
+    "firmSlug": "archimed",
+    "firmType": "private_equity",
+    "companyLogo": null,
+    "totalJobs": 14,
+    "jobsByRole": {
+      "sales_trading": 7,
+      "operations": 2,
+      "other": 3,
+      "compliance": 2
+    },
+    "jobsBySeniority": {
+      "vp_director": 1,
+      "mid": 6,
+      "executive": 2,
+      "senior": 2,
+      "intern": 3
+    },
+    "jobsByEducation": {
+      "not_specified": 9,
+      "masters": 1,
+      "bachelors": 4
+    },
+    "jobsByWorkMode": {
+      "not_specified": 14
+    },
+    "topLanguages": [],
+    "topSkills": [],
+    "locationDistribution": [
+      [
+        "Lyon",
+        8
+      ],
+      [
+        "Hasselt",
+        1
+      ],
+      [
+        "Tokyo",
+        1
+      ],
+      [
+        "Singapore",
+        1
+      ],
+      [
+        "Geneva",
+        1
+      ],
+      [
+        "Brussels",
+        1
+      ],
+      [
+        "Monheim am Rhein",
+        1
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 0,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Garda Capital Partners",
+    "firmSlug": "garda-capital-partners",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 14,
+    "jobsByRole": {
+      "other": 3,
+      "software_engineering": 5,
+      "quantitative_research": 3,
+      "data_science": 1,
+      "quantitative_trading": 1,
+      "machine_learning": 1
+    },
+    "jobsBySeniority": {
+      "senior": 3,
+      "intern": 4,
+      "mid": 6,
+      "junior": 1
+    },
+    "jobsByEducation": {
+      "not_specified": 3,
+      "bachelors": 9,
+      "masters": 2
+    },
+    "jobsByWorkMode": {
+      "not_specified": 14
+    },
+    "topLanguages": [
+      [
+        "Python",
+        9
+      ],
+      [
+        "SQL",
+        5
+      ],
+      [
+        "C#",
+        3
+      ],
+      [
+        "Java",
+        2
+      ],
+      [
+        "C++",
+        2
+      ],
+      [
+        "JavaScript",
+        1
+      ],
+      [
+        "R",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "ML/AI",
+        3
+      ],
+      [
+        "Data Engineering",
+        2
+      ],
+      [
+        "Backtesting",
+        2
+      ],
+      [
+        "Statistics",
+        2
+      ],
+      [
+        "Derivatives Pricing",
+        1
+      ],
+      [
+        "Risk Modeling",
+        1
+      ],
+      [
+        "Portfolio Optimization",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "New York",
+        6
+      ],
+      [
+        "Geneva",
+        5
+      ],
+      [
+        "Switzerland",
+        5
+      ],
+      [
+        "Wayzata",
+        3
+      ],
+      [
+        "Minnesota",
+        3
+      ],
+      [
+        "Zug",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 5,
+      "min": 93600,
+      "max": 200000,
+      "median": 150000,
+      "avg": 142370
+    },
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 29,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Geneva Trading",
+    "firmSlug": "geneva-trading",
+    "firmType": "proprietary",
+    "companyLogo": "https://s7-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/195/600/original/Geneva_Trading_Career_Page_Logo.jpg?1692125629",
+    "totalJobs": 12,
+    "jobsByRole": {
+      "quantitative_development": 2,
+      "quantitative_trading": 5,
+      "risk_management": 1,
+      "hft_systems": 2,
+      "portfolio_management": 1,
+      "operations": 1
+    },
+    "jobsBySeniority": {
+      "mid": 8,
+      "vp_director": 1,
+      "junior": 2,
+      "senior": 1
+    },
+    "jobsByEducation": {
+      "not_specified": 8,
+      "bachelors": 4
+    },
+    "jobsByWorkMode": {
+      "not_specified": 10,
+      "onsite": 2
+    },
+    "topLanguages": [
+      [
+        "Python",
+        4
+      ],
+      [
+        "SQL",
+        3
+      ],
+      [
+        "C++",
+        2
+      ],
+      [
+        "C#",
+        1
+      ],
+      [
+        "R",
+        1
+      ],
+      [
+        "MATLAB",
+        1
+      ],
+      [
+        "KDB+/Q",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Market Microstructure",
+        7
+      ],
+      [
+        "Risk Modeling",
+        2
+      ],
+      [
+        "Data Engineering",
+        1
+      ],
+      [
+        "Derivatives Pricing",
+        1
+      ],
+      [
+        "Statistics",
+        1
+      ],
+      [
+        "Optimization",
+        1
+      ],
+      [
+        "ML/AI",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Chicago Office",
+        4
+      ],
+      [
+        "Dublin Ireland Office",
+        1
+      ],
+      [
+        "London",
+        1
+      ],
+      [
+        "England",
+        1
+      ]
+    ],
+    "salaryStats": {
+      "count": 6,
+      "min": 36000,
+      "max": 120000,
+      "median": 87500,
+      "avg": 82167
+    },
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 8,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Renaissance Technologies",
+    "firmSlug": "renaissance-technologies",
+    "firmType": "hedge_fund",
+    "companyLogo": "https://www.rentec.com/img/logos/renaissance-logo-full-color-cmyk.jpg",
+    "totalJobs": 11,
+    "jobsByRole": {
+      "operations": 2,
+      "quantitative_development": 3,
+      "hft_systems": 5,
+      "quantitative_research": 1
+    },
+    "jobsBySeniority": {
+      "mid": 9,
+      "senior": 2
+    },
+    "jobsByEducation": {
+      "not_specified": 2,
+      "bachelors": 8,
+      "masters": 1
+    },
+    "jobsByWorkMode": {
+      "not_specified": 11
+    },
+    "topLanguages": [
+      [
+        "C++",
+        4
+      ],
+      [
+        "C",
+        3
+      ],
+      [
+        "SQL",
+        1
+      ],
+      [
+        "Java",
+        1
+      ],
+      [
+        "Rust",
+        1
+      ],
+      [
+        "Python",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Statistics",
+        3
+      ],
+      [
+        "Alpha Research",
+        2
+      ],
+      [
+        "Risk Modeling",
+        1
+      ],
+      [
+        "Market Microstructure",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "East Setauket",
+        8
+      ],
+      [
+        "New York",
+        3
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 0,
+    "remotePct": 0
+  },
+  {
+    "firmName": "TransMarket Group",
+    "firmSlug": "transmarket-group",
+    "firmType": "proprietary",
+    "companyLogo": null,
+    "totalJobs": 11,
+    "jobsByRole": {
+      "quantitative_trading": 5,
+      "quantitative_research": 1,
+      "hft_systems": 5
+    },
+    "jobsBySeniority": {
+      "senior": 7,
+      "junior": 1,
+      "intern": 2,
+      "mid": 1
+    },
+    "jobsByEducation": {
+      "not_specified": 7,
+      "bachelors": 4
+    },
+    "jobsByWorkMode": {
+      "not_specified": 5,
+      "onsite": 6
+    },
+    "topLanguages": [
+      [
+        "Python",
+        6
+      ],
+      [
+        "C++",
+        3
+      ],
+      [
+        "Bash",
+        3
+      ],
+      [
+        "SQL",
+        2
+      ],
+      [
+        "Java",
+        1
+      ],
+      [
+        "C#",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Market Microstructure",
+        3
+      ],
+      [
+        "Data Engineering",
+        2
+      ],
+      [
+        "Time Series",
+        1
+      ],
+      [
+        "Risk Modeling",
+        1
+      ],
+      [
+        "Backtesting",
+        1
+      ]
+    ],
+    "locationDistribution": [],
+    "salaryStats": null,
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 0,
+    "remotePct": 0
+  },
+  {
+    "firmName": "IMC",
+    "firmSlug": "imc",
+    "firmType": "market_maker",
+    "companyLogo": "https://www.imc.com/favicon.ico",
+    "totalJobs": 10,
+    "jobsByRole": {
+      "software_engineering": 1,
+      "quantitative_research": 1,
+      "operations": 2,
+      "hft_systems": 1,
+      "compliance": 1,
+      "other": 1,
+      "data_science": 1,
+      "machine_learning": 1,
+      "quantitative_trading": 1
+    },
+    "jobsBySeniority": {
+      "mid": 9,
+      "lead": 1
+    },
+    "jobsByEducation": {
+      "not_specified": 10
+    },
+    "jobsByWorkMode": {
+      "not_specified": 10
+    },
+    "topLanguages": [
+      [
+        "Java",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Data Engineering",
+        1
+      ],
+      [
+        "ML/AI",
+        1
+      ]
+    ],
+    "locationDistribution": [],
+    "salaryStats": null,
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 20,
+    "remotePct": 0
+  },
+  {
+    "firmName": "Acadian",
+    "firmSlug": "acadian",
+    "firmType": "hedge_fund",
+    "companyLogo": null,
+    "totalJobs": 7,
+    "jobsByRole": {
+      "quantitative_development": 1,
+      "machine_learning": 2,
+      "software_engineering": 1,
+      "data_science": 1,
+      "operations": 1,
+      "portfolio_management": 1
+    },
+    "jobsBySeniority": {
+      "vp_director": 3,
+      "senior": 3,
+      "mid": 1
+    },
+    "jobsByEducation": {
+      "not_specified": 4,
+      "bachelors": 3
+    },
+    "jobsByWorkMode": {
+      "hybrid": 6,
+      "onsite": 1
+    },
+    "topLanguages": [
+      [
+        "Python",
+        2
+      ],
+      [
+        "SQL",
+        1
+      ]
+    ],
+    "topSkills": [
+      [
+        "Risk Modeling",
+        2
+      ],
+      [
+        "ML/AI",
+        2
+      ],
+      [
+        "Alpha Research",
+        1
+      ],
+      [
+        "Data Engineering",
+        1
+      ],
+      [
+        "Portfolio Optimization",
+        1
+      ]
+    ],
+    "locationDistribution": [
+      [
+        "Boston",
+        7
+      ],
+      [
+        "Massachusetts",
+        7
+      ]
+    ],
+    "salaryStats": null,
+    "phdDemandPct": 0,
+    "mlAiFocusPct": 43,
+    "remotePct": 86
+  }
+]
