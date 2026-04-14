@@ -231,6 +231,18 @@ export default function Dashboard({ jobs, firms }) {
           </ResponsiveContainer>
         </ChartCard>
 
+        {/* Technologies & Tools */}
+        <ChartCard title="Technologies & Tools" subtitle="Frameworks, platforms, and tools mentioned in postings">
+          <ResponsiveContainer width="100%" height={350}>
+            <BarChart data={techData} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 80 }}>
+              <XAxis type="number" tick={{ fill: "#9ca3af", fontSize: 10 }} />
+              <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={75} />
+              <Tooltip contentStyle={tooltipStyle} />
+              <Bar dataKey="value" fill="#10b981" radius={[0, 3, 3, 0]} barSize={18} />
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartCard>
+
         {/* Role Categories */}
         <ChartCard title="Role Categories" subtitle="Distribution of quant-relevant job types">
           <ResponsiveContainer width="100%" height={350}>
@@ -295,17 +307,6 @@ export default function Dashboard({ jobs, firms }) {
           </ResponsiveContainer>
         </ChartCard>
 
-        {/* Technologies */}
-        <ChartCard title="Technologies & Tools" subtitle="Frameworks, platforms, and tools mentioned in postings">
-          <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={techData} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 80 }}>
-              <XAxis type="number" tick={{ fill: "#9ca3af", fontSize: 10 }} />
-              <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={75} />
-              <Tooltip contentStyle={tooltipStyle} />
-              <Bar dataKey="value" fill="#10b981" radius={[0, 3, 3, 0]} barSize={18} />
-            </BarChart>
-          </ResponsiveContainer>
-        </ChartCard>
       </div>
     </div>
   );
