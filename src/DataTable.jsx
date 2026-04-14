@@ -81,17 +81,17 @@ export default function DataTable({ jobs }) {
           <thead className="sticky top-0 bg-[#fcfcfc] z-10">
             <tr className="text-[#5c5c5f] border-b border-black/[0.06]">
               {[
-                { key: "firmName", label: "Firm", w: "w-36" },
-                { key: "jobTitle", label: "Title", w: "w-64" },
-                { key: "roleCategory", label: "Role", w: "w-28" },
-                { key: "locations", label: "Location", w: "w-28" },
-                { key: "seniorityLevel", label: "Seniority", w: "w-20" },
-                { key: "salary", label: "Salary", w: "w-16" },
-                { key: "programmingLanguages", label: "Languages", w: "w-32" },
-                { key: "datePosted", label: "Posted", w: "w-20" },
-              ].map(({ key, label, w }) => (
+                { key: "firmName", label: "Firm", w: "w-28 sm:w-36" },
+                { key: "jobTitle", label: "Title", w: "w-48 sm:w-64" },
+                { key: "roleCategory", label: "Role", w: "w-24 sm:w-28", hide: "hidden sm:table-cell" },
+                { key: "locations", label: "Location", w: "w-24 sm:w-28" },
+                { key: "seniorityLevel", label: "Seniority", w: "w-20", hide: "hidden md:table-cell" },
+                { key: "salary", label: "Salary", w: "w-16", hide: "hidden md:table-cell" },
+                { key: "programmingLanguages", label: "Languages", w: "w-32", hide: "hidden lg:table-cell" },
+                { key: "datePosted", label: "Posted", w: "w-20", hide: "hidden lg:table-cell" },
+              ].map(({ key, label, w, hide }) => (
                 <th key={key} onClick={() => toggleSort(key)}
-                  className={`${w} px-4 py-2 text-left text-[11px] font-medium uppercase tracking-wider cursor-pointer hover:text-gray-600 select-none`}>
+                  className={`${w} ${hide || ""} px-3 sm:px-4 py-2 text-left text-[11px] font-medium uppercase tracking-wider cursor-pointer hover:text-gray-600 select-none`}>
                   {label}{sortIcon(key)}
                 </th>
               ))}
@@ -100,8 +100,8 @@ export default function DataTable({ jobs }) {
           <tbody>
             {paged.map((j) => (
               <tr key={j.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
-                <td className="px-4 py-2.5 text-gray-900 font-medium">{j.firmName}</td>
-                <td className="px-4 py-2.5">
+                <td className="px-3 sm:px-4 py-2.5 text-gray-900 font-medium">{j.firmName}</td>
+                <td className="px-3 sm:px-4 py-2.5">
                   {(j.url || j.applyUrl) ? (
                     <a href={j.url || j.applyUrl} target="_blank" rel="noreferrer" className="text-violet-600 hover:text-violet-700 hover:underline underline-offset-2">
                       {j.jobTitle || "View posting"}
@@ -110,16 +110,16 @@ export default function DataTable({ jobs }) {
                     <span className="text-gray-500">{j.jobTitle || "-"}</span>
                   )}
                 </td>
-                <td className="px-4 py-2.5 text-gray-500">{ROLE_LABELS[j.roleCategory] || j.roleCategory}</td>
-                <td className="px-4 py-2.5 text-gray-500">{j.locations.slice(0, 2).join(", ")}</td>
-                <td className="px-4 py-2.5 text-gray-500">{SENIORITY_LABELS[j.seniorityLevel] || j.seniorityLevel}</td>
-                <td className="px-4 py-2.5 text-gray-500">{j.salary ? `$${(j.salary / 1000).toFixed(0)}k` : "-"}</td>
-                <td className="px-4 py-2.5">
+                <td className="hidden sm:table-cell px-3 sm:px-4 py-2.5 text-gray-500">{ROLE_LABELS[j.roleCategory] || j.roleCategory}</td>
+                <td className="px-3 sm:px-4 py-2.5 text-gray-500">{j.locations.slice(0, 2).join(", ")}</td>
+                <td className="hidden md:table-cell px-3 sm:px-4 py-2.5 text-gray-500">{SENIORITY_LABELS[j.seniorityLevel] || j.seniorityLevel}</td>
+                <td className="hidden md:table-cell px-3 sm:px-4 py-2.5 text-gray-500">{j.salary ? `$${(j.salary / 1000).toFixed(0)}k` : "-"}</td>
+                <td className="hidden lg:table-cell px-3 sm:px-4 py-2.5">
                   {j.programmingLanguages.slice(0, 3).map((l) => (
                     <span key={l} className="inline-block bg-gray-100 text-gray-600 rounded px-1.5 py-0.5 mr-1 mb-0.5 text-[10px]">{l}</span>
                   ))}
                 </td>
-                <td className="px-4 py-2.5 text-gray-400">{j.datePosted || "-"}</td>
+                <td className="hidden lg:table-cell px-3 sm:px-4 py-2.5 text-gray-400">{j.datePosted || "-"}</td>
               </tr>
             ))}
           </tbody>

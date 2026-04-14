@@ -136,14 +136,14 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
     { key: "assetClasses", label: "Asset Class", options: assetClassOptions },
   ];
 
-  const chipClass = (active) => `flex items-center gap-1 h-[22px] rounded-[7.5px] text-[13.5px] font-normal bg-white border transition-colors ${
+  const chipClass = (active) => `flex items-center gap-1 h-[22px] rounded-[7.5px] text-[12px] sm:text-[13.5px] font-normal bg-white border transition-colors whitespace-nowrap ${
     active ? "border-[#d4d4d4] text-[#191919]" : "border-[#d4d4d4] text-[#5c5c5f] hover:text-[#191919] hover:border-[#b0b0b0]"
   }`;
 
   const closeIcon = <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M3 3l6 6M9 3l-6 6"/></svg>;
 
   return (
-    <div className="flex items-center gap-2 px-5 py-[5px] border-b border-black/[0.04] bg-[#fcfcfc] relative z-[100]">
+    <div className="flex items-center gap-2 px-3 sm:px-5 py-[5px] border-b border-black/[0.04] bg-[#fcfcfc] relative z-[100] overflow-x-auto">
       {/* Firm single-select */}
       <div className="relative">
         <button onClick={() => toggle("firm")} className={chipClass(!!selectedFirm)}>
