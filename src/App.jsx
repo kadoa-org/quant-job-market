@@ -142,7 +142,6 @@ export default function App() {
         <div className="flex items-center gap-2 min-w-0">
           <div className="w-2 h-2 rounded-full bg-violet-500 flex-shrink-0" />
           <span className="text-[14px] sm:text-[14.5px] font-medium text-[#191919] truncate">Quant Job Market</span>
-          <span className="text-[12px] text-[#5c5c5f] hidden sm:inline">by <a href="https://kadoa.com" target="_blank" rel="noreferrer" className="hover:text-[#191919]">Kadoa</a></span>
         </div>
 
         <div className="flex items-center gap-0.5 flex-shrink-0">
@@ -208,8 +207,9 @@ export default function App() {
         rel="noopener noreferrer"
         className="fixed bottom-3 right-3 z-[2000] hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-gray-200 text-[11px] shadow-sm hover:border-violet-300 transition-colors"
       >
-        <span className="text-gray-400">Missing a firm?</span>
-        <span className="text-violet-600">Open an issue or PR &rarr;</span>
+        <span className="text-gray-400">Updated daily</span>
+        <span className="text-gray-300">&middot;</span>
+        <span className="text-violet-600">Missing a firm? &rarr;</span>
       </a>
     </div>
   );

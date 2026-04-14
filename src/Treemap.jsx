@@ -217,7 +217,7 @@ export default function Treemap({ firms, colorLayer, onFirmClick, selectedFirm }
       {colorLayer === "firmType" && (
         <div className="absolute bottom-3 left-3 hidden sm:flex flex-wrap gap-x-3 gap-y-1 bg-white/80 rounded-lg px-3 py-2 backdrop-blur-sm border border-gray-200 shadow-sm">
           {Object.entries(FIRM_TYPE_COLORS)
-            .filter(([type]) => type !== "other" && type !== "consulting" && type !== "exchange")
+            .filter(([type]) => type !== "other" && type !== "consulting" && type !== "exchange" && type !== "sovereign_fund" && type !== "bank")
             .map(([type, color]) => (
               <div key={type} className="flex items-center gap-1.5">
                 <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: color }} />
