@@ -131,6 +131,15 @@ export default function Dashboard({ jobs, firms }) {
     [jobs],
   );
 
+  // --- Work mode ---
+  const workModeData = useMemo(() => {
+    const counts = countBy(jobs, (j) => j.workMode);
+    const labels = { onsite: "Onsite", hybrid: "Hybrid", remote: "Remote", not_specified: "Not Specified" };
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, value]) => ({ name: labels[name] || name, value }));
+  }, [jobs]);
+
   // --- Education ---
   const educationData = useMemo(() => {
     const counts = countBy(jobs, (j) => j.educationRequirement);
@@ -256,18 +265,14 @@ export default function Dashboard({ jobs, firms }) {
           </ResponsiveContainer>
         </ChartCard>
 
-        {/* PhD demand by firm */}
-        <ChartCard title="PhD Demand by Firm" subtitle="% of jobs requiring or preferring PhD (firms with 15+ jobs)">
+        {/* Education Requirements */}
+        <ChartCard title="Education Requirements" subtitle="Minimum education level mentioned in job postings">
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={phdByFirm} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 100 }}>
-              <XAxis type="number" tick={{ fill: "#9ca3af", fontSize: 10 }} tickFormatter={(v) => `${v}%`} />
-              <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={95} />
-              <Tooltip contentStyle={tooltipStyle} formatter={(v) => `${v}%`} />
-              <Bar dataKey="phdPct" radius={[0, 3, 3, 0]}>
-                {phdByFirm.map((entry) => (
-                  <Cell key={entry.name} fill={FIRM_TYPE_COLORS[entry.firmType] || "#6b7280"} />
-                ))}
-              </Bar>
+            <BarChart data={educationData} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 90 }}>
+              <XAxis type="number" tick={{ fill: "#9ca3af", fontSize: 10 }} />
+              <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={85} />
+              <Tooltip contentStyle={tooltipStyle} />
+              <Bar dataKey="value" fill="#8b5cf6" radius={[0, 3, 3, 0]} barSize={18} />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
@@ -296,18 +301,14 @@ export default function Dashboard({ jobs, firms }) {
           </ResponsiveContainer>
         </ChartCard>
 
-        {/* Education Requirements */}
-        <ChartCard title="Education Requirements">
+        {/* Work Mode */}
+        <ChartCard title="Work Mode" subtitle="Onsite vs hybrid vs remote across all postings">
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={educationData} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 90 }}>
+            <BarChart data={workModeData} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 90 }}>
               <XAxis type="number" tick={{ fill: "#9ca3af", fontSize: 10 }} />
               <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={85} />
               <Tooltip contentStyle={tooltipStyle} />
-              <Bar dataKey="value" radius={[0, 3, 3, 0]}>
-                {educationData.map((_, i) => (
-                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                ))}
-              </Bar>
+              <Bar dataKey="value" fill="#10b981" radius={[0, 3, 3, 0]} barSize={18} />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
