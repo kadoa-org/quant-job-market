@@ -32,15 +32,12 @@ Open [http://localhost:5181](http://localhost:5181)
 
 ## Data
 
-All data is bundled as static JSON files. No backend required.
-
-The dataset is stored as a SQLite database (`public/data/jobs.db`) and loaded client-side using [sql.js](https://sql.js.org/) (SQLite compiled to WASM). No backend required.
+The dataset is stored as a SQLite database (`public/data/jobs.db`) and loaded client-side using [sql.js](https://sql.js.org/) (SQLite compiled to WASM). No backend required. A JSON export (`public/data/jobs.json`) is also available for direct use with pandas, R, etc.
 
 | File | Description |
 |------|-------------|
-| `public/data/jobs.db` | SQLite database with all jobs and firm stats |
+| `public/data/jobs.db` | SQLite database with all classified jobs |
 | `public/data/jobs.json` | JSON export of all classified job postings |
-| `public/data/firms.json` | JSON export of per-firm aggregated statistics |
 
 ## Data sources
 
