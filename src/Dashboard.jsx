@@ -219,9 +219,9 @@ export default function Dashboard({ jobs, firms }) {
         {/* Programming Languages */}
         <ChartCard title="Programming Languages" subtitle="Number of job postings mentioning each language">
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={languageData} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 55 }}>
+            <BarChart data={languageData} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 75 }}>
               <XAxis type="number" tick={{ fill: "#9ca3af", fontSize: 10 }} />
-              <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={50} />
+              <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={70} />
               <Tooltip contentStyle={tooltipStyle} />
               <Bar dataKey="value" fill="#8b5cf6" radius={[0, 3, 3, 0]} barSize={18} />
             </BarChart>
