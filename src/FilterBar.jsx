@@ -19,7 +19,7 @@ function FilterDropdown({ options, selected, onChange, onClose, singleSelect }) 
     : options;
 
   return (
-    <div ref={ref} className="absolute top-full left-0 mt-1 z-[200] bg-white border border-[#e0e0e0] rounded-lg shadow-lg min-w-[220px] max-h-[340px] flex flex-col overflow-hidden">
+    <div ref={ref} className="absolute top-full left-0 mt-1 z-[200] bg-white border border-[#e0e0e0] rounded-lg shadow-lg min-w-[180px] sm:min-w-[220px] max-h-[60vh] sm:max-h-[340px] flex flex-col overflow-hidden">
       {options.length > 6 && (
         <div className="px-2 py-1.5 border-b border-[#f0f0f0]">
           <input
@@ -143,7 +143,7 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
   const closeIcon = <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M3 3l6 6M9 3l-6 6"/></svg>;
 
   return (
-    <div className="flex items-center gap-2 px-3 sm:px-5 py-[5px] border-b border-black/[0.04] bg-[#fcfcfc] relative z-[100] overflow-x-auto">
+    <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-[5px] border-b border-black/[0.04] bg-[#fcfcfc] relative z-[100]">
       {/* Firm single-select */}
       <div className="relative">
         <button onClick={() => toggle("firm")} className={chipClass(!!selectedFirm)}>

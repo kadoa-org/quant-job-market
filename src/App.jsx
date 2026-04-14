@@ -206,7 +206,7 @@ export default function App() {
         href="https://github.com/kadoa-org/quant-job-market/issues"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-3 right-3 z-[2000] flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-gray-200 text-[11px] shadow-sm hover:border-violet-300 transition-colors"
+        className="fixed bottom-3 right-3 z-[2000] hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-gray-200 text-[11px] shadow-sm hover:border-violet-300 transition-colors"
       >
         <span className="text-gray-400">Missing a firm?</span>
         <span className="text-violet-600">Open an issue or PR &rarr;</span>

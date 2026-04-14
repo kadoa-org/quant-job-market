@@ -220,7 +220,7 @@ export default function Treemap({ firms, colorLayer, onFirmClick, selectedFirm }
 
       {/* Firm type legend at bottom */}
       {colorLayer === "firmType" && (
-        <div className="absolute bottom-3 left-3 flex flex-wrap gap-x-3 gap-y-1 bg-white/80 rounded-lg px-3 py-2 backdrop-blur-sm border border-gray-200 shadow-sm">
+        <div className="absolute bottom-3 left-3 hidden sm:flex flex-wrap gap-x-3 gap-y-1 bg-white/80 rounded-lg px-3 py-2 backdrop-blur-sm border border-gray-200 shadow-sm">
           {Object.entries(FIRM_TYPE_COLORS)
             .filter(([type]) => type !== "other" && type !== "consulting" && type !== "exchange")
             .map(([type, color]) => (
