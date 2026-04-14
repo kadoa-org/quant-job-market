@@ -141,8 +141,8 @@ export default function App() {
       <header className="h-11 flex items-center justify-between px-3 sm:px-5 border-b border-black/[0.06] bg-[#fcfcfc] flex-shrink-0">
         <div className="flex items-center gap-2 min-w-0">
           <div className="w-2 h-2 rounded-full bg-violet-500 flex-shrink-0" />
-          <span className="text-[14px] sm:text-[14.5px] font-medium text-[#191919] truncate">Quant Job Market</span>
-          <span className="text-[11px] text-[#b0b0b0] hidden sm:inline">Updated daily</span>
+          <span className="text-[14px] sm:text-[14.5px] font-medium text-[#191919]">Quant Job Market</span>
+          <span className="hidden sm:inline text-[12px] text-[#c8c8cc] ml-1">&middot; updated daily</span>
         </div>
 
         <div className="flex items-center gap-0.5 flex-shrink-0">
