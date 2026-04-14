@@ -216,22 +216,6 @@ export default function Dashboard({ jobs, firms }) {
           </ResponsiveContainer>
         </ChartCard>
 
-        {/* PhD demand by firm */}
-        <ChartCard title="PhD Demand by Firm" subtitle="% of jobs requiring or preferring PhD (firms with 10+ jobs)">
-          <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={phdByFirm} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 100 }}>
-              <XAxis type="number" tick={{ fill: "#9ca3af", fontSize: 10 }} tickFormatter={(v) => `${v}%`} />
-              <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={95} />
-              <Tooltip contentStyle={tooltipStyle} formatter={(v) => `${v}%`} />
-              <Bar dataKey="phdPct" radius={[0, 3, 3, 0]}>
-                {phdByFirm.map((entry) => (
-                  <Cell key={entry.name} fill={FIRM_TYPE_COLORS[entry.firmType] || "#6b7280"} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </ChartCard>
-
         {/* Programming Languages */}
         <ChartCard title="Programming Languages" subtitle="Number of job postings mentioning each language">
           <ResponsiveContainer width="100%" height={350}>
@@ -268,6 +252,22 @@ export default function Dashboard({ jobs, firms }) {
               <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={65} />
               <Tooltip contentStyle={tooltipStyle} />
               <Bar dataKey="value" fill="#06b6d4" radius={[0, 3, 3, 0]} barSize={18} />
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartCard>
+
+        {/* PhD demand by firm */}
+        <ChartCard title="PhD Demand by Firm" subtitle="% of jobs requiring or preferring PhD (firms with 15+ jobs)">
+          <ResponsiveContainer width="100%" height={350}>
+            <BarChart data={phdByFirm} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 100 }}>
+              <XAxis type="number" tick={{ fill: "#9ca3af", fontSize: 10 }} tickFormatter={(v) => `${v}%`} />
+              <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={95} />
+              <Tooltip contentStyle={tooltipStyle} formatter={(v) => `${v}%`} />
+              <Bar dataKey="phdPct" radius={[0, 3, 3, 0]}>
+                {phdByFirm.map((entry) => (
+                  <Cell key={entry.name} fill={FIRM_TYPE_COLORS[entry.firmType] || "#6b7280"} />
+                ))}
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
