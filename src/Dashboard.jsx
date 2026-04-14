@@ -84,17 +84,17 @@ export default function Dashboard({ jobs, firms }) {
     });
   }, [jobs]);
 
-  // --- PhD demand by firm (top 15) ---
+  // --- PhD demand by firm (top 10) ---
   const phdByFirm = useMemo(() => {
     return firms
-      .filter((f) => f.totalJobs >= 10)
+      .filter((f) => f.totalJobs >= 15)
       .map((f) => ({
         name: f.firmName,
         phdPct: f.phdDemandPct || 0,
         firmType: f.firmType,
       }))
       .sort((a, b) => b.phdPct - a.phdPct)
-      .slice(0, 15);
+      .slice(0, 10);
   }, [firms]);
 
   // --- Role distribution ---
