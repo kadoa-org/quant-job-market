@@ -131,14 +131,8 @@ export default function Dashboard({ jobs, firms }) {
     [jobs],
   );
 
-  // --- Work mode ---
-  const workModeData = useMemo(() => {
-    const counts = countBy(jobs, (j) => j.workMode);
-    const labels = { onsite: "Onsite", hybrid: "Hybrid", remote: "Remote", not_specified: "Not Specified" };
-    return Object.entries(counts)
-      .sort((a, b) => b[1] - a[1])
-      .map(([name, value]) => ({ name: labels[name] || name, value }));
-  }, [jobs]);
+  // --- Technologies ---
+  const techData = useMemo(() => toSorted(countArrayItems(jobs, (j) => j.technologies), 12), [jobs]);
 
   // --- Education ---
   const educationData = useMemo(() => {
@@ -301,12 +295,12 @@ export default function Dashboard({ jobs, firms }) {
           </ResponsiveContainer>
         </ChartCard>
 
-        {/* Work Mode */}
-        <ChartCard title="Work Mode" subtitle="Onsite vs hybrid vs remote across all postings">
+        {/* Technologies */}
+        <ChartCard title="Technologies & Tools" subtitle="Frameworks, platforms, and tools mentioned in postings">
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={workModeData} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 90 }}>
+            <BarChart data={techData} layout="vertical" margin={{ top: 0, right: 10, bottom: 0, left: 80 }}>
               <XAxis type="number" tick={{ fill: "#9ca3af", fontSize: 10 }} />
-              <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={85} />
+              <YAxis type="category" dataKey="name" tick={{ fill: "#6b7280", fontSize: 10 }} width={75} />
               <Tooltip contentStyle={tooltipStyle} />
               <Bar dataKey="value" fill="#10b981" radius={[0, 3, 3, 0]} barSize={18} />
             </BarChart>
