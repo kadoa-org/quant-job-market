@@ -188,19 +188,15 @@ export default function Dashboard({ jobs, firms }) {
     <div className="h-full overflow-auto p-5">
       {/* Stat cards */}
       <div className="grid grid-cols-5 gap-3 mb-5">
-        <StatCard title="Quant Jobs" value={jobs.length.toLocaleString()} subtitle={`${firms.length} firms`} />
+        <StatCard title="Quant Jobs" value={jobs.length.toLocaleString()} subtitle="open positions" />
+        <StatCard title="Firms" value={firms.length} subtitle="hiring now" />
         <StatCard
           title="Median Salary"
           value={medianSalary ? `$${(medianSalary / 1000).toFixed(0)}k` : "n/a"}
           subtitle={`${salaries.length} disclosed`}
         />
-        <StatCard title="PhD Demand" value={`${phdPct}%`} subtitle="required or preferred" />
-        <StatCard
-          title="Top Location"
-          value={locationData[0]?.name || "n/a"}
-          subtitle={`${locationData[0]?.value || 0} jobs`}
-        />
-        <StatCard title="Top Role" value={roleData[0]?.name || "n/a"} subtitle={`${roleData[0]?.value || 0} jobs`} />
+        <StatCard title="Top Language" value={languageData[0]?.name || "n/a"} subtitle={`${languageData[0]?.value || 0} jobs`} />
+        <StatCard title="Top Location" value={locationData[0]?.name || "n/a"} subtitle={`${locationData[0]?.value || 0} jobs`} />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
