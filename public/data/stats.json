@@ -1,0 +1,414 @@
+{
+  "totalJobs": 3590,
+  "totalFirms": 48,
+  "roleDistribution": {
+    "quantitative_trading": 165,
+    "operations": 410,
+    "compliance": 126,
+    "software_engineering": 524,
+    "quantitative_research": 336,
+    "quantitative_development": 512,
+    "other": 416,
+    "hft_systems": 350,
+    "machine_learning": 104,
+    "sales_trading": 190,
+    "portfolio_management": 199,
+    "data_science": 164,
+    "risk_management": 94
+  },
+  "seniorityDistribution": {
+    "junior": 220,
+    "mid": 1754,
+    "intern": 185,
+    "senior": 1004,
+    "lead": 101,
+    "vp_director": 321,
+    "executive": 5
+  },
+  "educationDistribution": {
+    "not_specified": 2160,
+    "bachelors": 1166,
+    "phd_required": 39,
+    "masters": 167,
+    "phd_preferred": 58
+  },
+  "workModeDistribution": {
+    "not_specified": 3400,
+    "onsite": 124,
+    "remote": 9,
+    "hybrid": 57
+  },
+  "firmTypeDistribution": {
+    "proprietary": 911,
+    "market_maker": 217,
+    "hedge_fund": 1492,
+    "asset_manager": 956,
+    "private_equity": 14
+  },
+  "topLanguages": [
+    [
+      "Python",
+      1354
+    ],
+    [
+      "C++",
+      526
+    ],
+    [
+      "SQL",
+      465
+    ],
+    [
+      "Java",
+      254
+    ],
+    [
+      "C#",
+      157
+    ],
+    [
+      "R",
+      126
+    ],
+    [
+      "C",
+      93
+    ],
+    [
+      "JavaScript",
+      83
+    ],
+    [
+      "TypeScript",
+      78
+    ],
+    [
+      "Go",
+      66
+    ],
+    [
+      "Rust",
+      58
+    ],
+    [
+      "MATLAB",
+      43
+    ],
+    [
+      "KDB+/Q",
+      42
+    ],
+    [
+      "OCaml",
+      37
+    ],
+    [
+      "PowerShell",
+      19
+    ],
+    [
+      "Perl",
+      18
+    ],
+    [
+      "Bash",
+      18
+    ],
+    [
+      "Scala",
+      18
+    ],
+    [
+      "Haskell",
+      4
+    ],
+    [
+      "Verilog/VHDL",
+      4
+    ],
+    [
+      "VBA",
+      4
+    ],
+    [
+      "Julia",
+      3
+    ],
+    [
+      "Spark",
+      2
+    ],
+    [
+      "SystemVerilog",
+      2
+    ],
+    [
+      "Ruby",
+      2
+    ],
+    [
+      "Kotlin",
+      2
+    ],
+    [
+      "NodeJS",
+      2
+    ],
+    [
+      "Node.js",
+      1
+    ],
+    [
+      "F#",
+      1
+    ],
+    [
+      "Elixir",
+      1
+    ]
+  ],
+  "topSkills": [
+    [
+      "ML/AI",
+      440
+    ],
+    [
+      "Risk Modeling",
+      371
+    ],
+    [
+      "Data Engineering",
+      369
+    ],
+    [
+      "Alpha Research",
+      309
+    ],
+    [
+      "Statistics",
+      259
+    ],
+    [
+      "Market Microstructure",
+      224
+    ],
+    [
+      "Portfolio Optimization",
+      202
+    ],
+    [
+      "Derivatives Pricing",
+      155
+    ],
+    [
+      "Backtesting",
+      109
+    ],
+    [
+      "NLP",
+      100
+    ],
+    [
+      "Time Series",
+      70
+    ],
+    [
+      "Execution Algorithms",
+      45
+    ],
+    [
+      "Optimization",
+      29
+    ],
+    [
+      "Factor Models",
+      20
+    ],
+    [
+      "Reinforcement Learning",
+      19
+    ],
+    [
+      "Monte Carlo",
+      12
+    ],
+    [
+      "Signal Processing",
+      11
+    ],
+    [
+      "Computer Vision",
+      10
+    ],
+    [
+      "Stochastic Calculus",
+      6
+    ],
+    [
+      "experiment design",
+      6
+    ],
+    [
+      "dataset generation",
+      6
+    ],
+    [
+      "time series analysis",
+      6
+    ],
+    [
+      "feature engineering",
+      6
+    ],
+    [
+      "model building",
+      6
+    ],
+    [
+      "risk management",
+      6
+    ],
+    [
+      "Probability",
+      6
+    ],
+    [
+      "Bayesian Methods",
+      5
+    ],
+    [
+      "Order Book Analysis",
+      4
+    ],
+    [
+      "algorithmic trading",
+      4
+    ],
+    [
+      "Risk Management",
+      3
+    ]
+  ],
+  "topLocations": [
+    [
+      "New York",
+      817
+    ],
+    [
+      "London",
+      556
+    ],
+    [
+      "Chicago",
+      202
+    ],
+    [
+      "Hong Kong",
+      199
+    ],
+    [
+      "Singapore",
+      187
+    ],
+    [
+      "Boston",
+      97
+    ],
+    [
+      "England",
+      96
+    ],
+    [
+      "Greater London",
+      94
+    ],
+    [
+      "Gurgaon",
+      83
+    ],
+    [
+      "Sydney",
+      82
+    ],
+    [
+      "Warsaw",
+      71
+    ],
+    [
+      "Bangalore",
+      68
+    ],
+    [
+      "Paris",
+      63
+    ],
+    [
+      "Mumbai",
+      61
+    ],
+    [
+      "Montreal",
+      57
+    ],
+    [
+      "HKG",
+      56
+    ],
+    [
+      "India",
+      55
+    ],
+    [
+      "Bengaluru",
+      51
+    ],
+    [
+      "Dublin",
+      50
+    ],
+    [
+      "Amsterdam",
+      48
+    ],
+    [
+      "Baltimore",
+      48
+    ],
+    [
+      "Owings Mills",
+      48
+    ],
+    [
+      "Newport Beach",
+      44
+    ],
+    [
+      "Bala Cynwyd (Philadelphia Area)",
+      42
+    ],
+    [
+      "Pennsylvania United States",
+      42
+    ],
+    [
+      "Karnataka",
+      39
+    ],
+    [
+      "Edinburgh",
+      38
+    ],
+    [
+      "Greenwich",
+      37
+    ],
+    [
+      "France",
+      35
+    ],
+    [
+      "Tokyo",
+      34
+    ]
+  ]
+}
