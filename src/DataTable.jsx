@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from "react";
 import { ROLE_LABELS, SENIORITY_LABELS } from "./constants";
 
-export default function DataTable({ jobs }) {
-  const [search, setSearch] = useState("");
+export default function DataTable({ jobs, search: externalSearch, onSearchChange }) {
+  const [internalSearch, setInternalSearch] = useState("");
+  const search = externalSearch !== undefined ? externalSearch : internalSearch;
+  const setSearch = onSearchChange || setInternalSearch;
   const [sortBy, setSortBy] = useState("firmName");
   const [sortOrder, setSortOrder] = useState("asc");
   const [page, setPage] = useState(1);

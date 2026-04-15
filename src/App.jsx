@@ -30,17 +30,19 @@ function parseUrl() {
     const val = params.get(key);
     if (val) filters[key] = val.split(",");
   }
-  return { view, firm, filters };
+  const search = params.get("q") || "";
+  return { view, firm, filters, search };
 }
 
 // Write state to URL params (replace, no history spam)
-function syncUrl(view, filters, selectedFirm) {
+function syncUrl(view, filters, selectedFirm, search) {
   const params = new URLSearchParams();
   if (view !== "firms") params.set("view", view);
   if (selectedFirm) params.set("firm", selectedFirm);
   for (const [key, values] of Object.entries(filters)) {
     if (values.length > 0) params.set(key, values.join(","));
   }
+  if (search) params.set("q", search);
   const qs = params.toString();
   const url = qs ? `?${qs}` : window.location.pathname;
   window.history.replaceState(null, "", url);
@@ -57,9 +59,10 @@ export default function App() {
   const [view, setView] = useState(initial.view);
   const [filters, setFilters] = useState(initial.filters);
   const [selectedFirm, setSelectedFirm] = useState(initial.firm);
+  const [search, setSearch] = useState(initial.search);
 
   // Sync state to URL on change
-  useEffect(() => { syncUrl(view, filters, selectedFirm); }, [view, filters, selectedFirm]);
+  useEffect(() => { syncUrl(view, filters, selectedFirm, search); }, [view, filters, selectedFirm, search]);
 
   // Load data from SQLite
   useEffect(() => {
@@ -201,7 +204,7 @@ export default function App() {
             selectedFirm={selectedFirm}
           />
         )}
-        {view === "table" && <DataTable jobs={filteredJobs} />}
+        {view === "table" && <DataTable jobs={filteredJobs} search={search} onSearchChange={setSearch} />}
         {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
       </main>
 
