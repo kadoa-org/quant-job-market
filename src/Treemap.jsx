@@ -102,7 +102,7 @@ export default function Treemap({ firms, colorLayer, onFirmClick, selectedFirm }
   const hoveredFirm = hovered ? firms.find((f) => f.firmName === hovered) : null;
 
   return (
-    <div ref={containerRef} className="w-full h-full relative">
+    <div ref={containerRef} className="w-full h-[calc(100vh-7rem)] sm:h-full relative">
       <svg width={dims.w} height={dims.h} style={{ display: "block", maxWidth: "100%" }}>
         {tiles.map((tile) => {
           const isSelected = selectedFirm === tile.data.firmName;

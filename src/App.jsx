@@ -140,8 +140,8 @@ export default function App() {
   const totalFirms = filteredFirms.length;
 
   return (
-    <div className="h-screen w-screen flex flex-col">
-      <header className="h-11 flex items-center justify-between px-3 sm:px-5 border-b border-black/[0.06] bg-[#fcfcfc] flex-shrink-0">
+    <div className="min-h-screen sm:h-screen w-screen flex flex-col">
+      <header className="h-11 flex items-center justify-between px-3 sm:px-5 border-b border-black/[0.06] bg-[#fcfcfc] flex-shrink-0 sticky top-0 z-30 sm:static">
         <div className="flex items-center gap-2 min-w-0">
           <span className="text-[15px]">📊</span>
           <span className="text-[14px] sm:text-[14.5px] font-medium text-[#191919]">Quant Job Market</span>
@@ -192,7 +192,7 @@ export default function App() {
 
       <FilterBar filters={filters} setFilters={setFilters} jobs={filteredJobs} allJobs={jobs} selectedFirm={selectedFirm} onClearFirm={() => setSelectedFirm(null)} onSelectFirm={setSelectedFirm} />
 
-      <main className="flex-1 relative overflow-hidden">
+      <main className="flex-1 relative sm:overflow-hidden">
         {view === "firms" && (
           <Treemap
             firms={filteredFirms}

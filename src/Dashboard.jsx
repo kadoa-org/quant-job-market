@@ -185,7 +185,7 @@ export default function Dashboard({ jobs, firms }) {
   };
 
   return (
-    <div className="h-full overflow-auto p-3 sm:p-5">
+    <div className="sm:h-full sm:overflow-auto p-3 sm:p-5">
       {/* Stat cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-5">
         <StatCard title="Quant Jobs" value={jobs.length.toLocaleString()} subtitle="open positions" />

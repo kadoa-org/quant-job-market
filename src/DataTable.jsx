@@ -63,8 +63,8 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
   };
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 border-b border-gray-100">
+    <div className="sm:h-full flex flex-col">
+      <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 border-b border-gray-100 sticky top-11 sm:static z-20 bg-white">
         <input
           type="text"
           placeholder="Search jobs, firms, skills..."
@@ -78,7 +78,7 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
         </button>
       </div>
 
-      <div className="flex-1 overflow-auto">
+      <div className="sm:flex-1 sm:overflow-auto">
         <table className="w-full text-[13px]">
           <thead className="sticky top-0 bg-[#fcfcfc] z-10">
             <tr className="text-[#5c5c5f] border-b border-black/[0.06]">
