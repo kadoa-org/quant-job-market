@@ -102,8 +102,41 @@ export default function Treemap({ firms, colorLayer, onFirmClick, selectedFirm }
   const hoveredFirm = hovered ? firms.find((f) => f.firmName === hovered) : null;
 
   return (
-    <div ref={containerRef} className="w-full h-[calc(100vh-7rem)] sm:h-full relative">
-      <svg width={dims.w} height={dims.h} style={{ display: "block", maxWidth: "100%" }}>
+    <>
+      {/* Mobile: simple list. Treemap is unreadable at <50 firms in <600px width. */}
+      <div className="sm:hidden">
+        <ul className="divide-y divide-black/[0.06]">
+          {[...firms]
+            .sort((a, b) => b.totalJobs - a.totalJobs)
+            .map((f) => {
+              const color = getFirmColor(f, colorLayer);
+              const isSelected = selectedFirm === f.firmName;
+              return (
+                <li key={f.firmName}>
+                  <button
+                    type="button"
+                    onClick={() => onFirmClick(f.firmName)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 text-left active:bg-black/[0.04] ${isSelected ? "bg-black/[0.04]" : ""}`}
+                  >
+                    <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: color }} />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[14px] text-[#191919] truncate">{f.firmName}</div>
+                      <div className="text-[11px] text-[#9c9ca0] truncate">
+                        {FIRM_TYPE_LABELS[f.firmType] || f.firmType}
+                        {f.salaryStats?.median ? ` · $${(f.salaryStats.median / 1000).toFixed(0)}k median` : ""}
+                      </div>
+                    </div>
+                    <div className="text-[13px] text-[#5c5c5f] tabular-nums flex-shrink-0">{f.totalJobs}</div>
+                  </button>
+                </li>
+              );
+            })}
+        </ul>
+      </div>
+
+      {/* Desktop: treemap */}
+      <div ref={containerRef} className="hidden sm:block w-full h-full relative">
+        <svg width={dims.w} height={dims.h} style={{ display: "block", maxWidth: "100%" }}>
         {tiles.map((tile) => {
           const isSelected = selectedFirm === tile.data.firmName;
           const isHovered = hovered === tile.data.firmName;
@@ -233,6 +266,7 @@ export default function Treemap({ firms, colorLayer, onFirmClick, selectedFirm }
             ))}
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }
