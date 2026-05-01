@@ -1,5 +1,5 @@
 import { hierarchy, treemap, treemapSquarify } from "d3-hierarchy";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { FIRM_TYPE_COLORS, FIRM_TYPE_LABELS, pctToColor, salaryToColor } from "./constants";
 
 function getFirmColor(firm, colorLayer) {
@@ -62,16 +62,23 @@ export default function Treemap({ firms, colorLayer, onFirmClick, selectedFirm }
   const containerRef = useRef(null);
   const [hovered, setHovered] = useState(null);
   const [tooltip, setTooltip] = useState({ x: 0, y: 0 });
-  const [dims, setDims] = useState({ w: 800, h: 600 });
+  const [dims, setDims] = useState({ w: 0, h: 0 });
 
-  React.useEffect(() => {
+  useLayoutEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const ro = new ResizeObserver(([entry]) => {
-      setDims({ w: entry.contentRect.width, h: entry.contentRect.height });
-    });
+    const measure = () => {
+      const r = el.getBoundingClientRect();
+      if (r.width > 0 && r.height > 0) setDims({ w: r.width, h: r.height });
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
     ro.observe(el);
-    return () => ro.disconnect();
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, []);
 
   const tiles = useMemo(() => {
@@ -96,7 +103,7 @@ export default function Treemap({ firms, colorLayer, onFirmClick, selectedFirm }
 
   return (
     <div ref={containerRef} className="w-full h-full relative">
-      <svg width={dims.w} height={dims.h}>
+      <svg width={dims.w} height={dims.h} style={{ display: "block", maxWidth: "100%" }}>
         {tiles.map((tile) => {
           const isSelected = selectedFirm === tile.data.firmName;
           const isHovered = hovered === tile.data.firmName;

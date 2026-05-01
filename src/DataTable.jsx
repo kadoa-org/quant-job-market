@@ -64,17 +64,17 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
 
   return (
     <div className="h-full flex flex-col">
-      <div className="flex items-center gap-3 px-5 py-2.5 border-b border-gray-100">
+      <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 border-b border-gray-100">
         <input
           type="text"
           placeholder="Search jobs, firms, skills..."
           value={search}
           onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-          className="flex-1 bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-[13px] text-gray-900 placeholder:text-gray-400 outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-100"
+          className="flex-1 min-w-0 bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-[13px] text-gray-900 placeholder:text-gray-400 outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-100"
         />
-        <span className="text-[11px] text-gray-400">{filtered.length} results</span>
-        <button onClick={exportCsv} className="px-3 py-1.5 rounded-md text-[11px] text-gray-500 hover:text-gray-700 border border-gray-200 hover:border-gray-300">
-          Export CSV
+        <span className="text-[11px] text-gray-400 whitespace-nowrap hidden sm:inline">{filtered.length} results</span>
+        <button onClick={exportCsv} className="px-2 sm:px-3 py-1.5 rounded-md text-[11px] text-gray-500 hover:text-gray-700 border border-gray-200 hover:border-gray-300 whitespace-nowrap flex-shrink-0">
+          <span className="hidden sm:inline">Export </span>CSV
         </button>
       </div>
 

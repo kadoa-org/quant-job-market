@@ -185,9 +185,9 @@ export default function Dashboard({ jobs, firms }) {
   };
 
   return (
-    <div className="h-full overflow-auto p-5">
+    <div className="h-full overflow-auto p-3 sm:p-5">
       {/* Stat cards */}
-      <div className="grid grid-cols-5 gap-3 mb-5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-5">
         <StatCard title="Quant Jobs" value={jobs.length.toLocaleString()} subtitle="open positions" />
         <StatCard title="Firms" value={firms.length} subtitle="hiring now" />
         <StatCard
@@ -199,7 +199,7 @@ export default function Dashboard({ jobs, firms }) {
         <StatCard title="Top Location" value={locationData[0]?.name || "n/a"} subtitle={`${locationData[0]?.value || 0} jobs`} />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Tech stack by firm type - THE key chart for r/quant */}
         <ChartCard title="Tech Stack by Firm Type" subtitle="% of jobs mentioning each language, grouped by firm type">
           <ResponsiveContainer width="100%" height={350}>
