@@ -128,7 +128,7 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
         </table>
       </div>
 
-      <div className="flex items-center justify-between px-5 py-2 border-t border-gray-100 text-[12px] text-gray-400">
+      <div className="flex items-center justify-between px-5 py-2 border-t border-gray-100 text-[12px] text-gray-400 sm:pr-64">
         <span>Page {page} of {totalPages}</span>
         <div className="flex gap-1">
           <button disabled={page <= 1} onClick={() => setPage(page - 1)} className="px-2.5 py-1 rounded-md border border-gray-200 hover:bg-gray-50 disabled:opacity-30">Prev</button>
