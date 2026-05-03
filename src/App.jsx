@@ -207,16 +207,6 @@ export default function App() {
         {view === "table" && <DataTable jobs={filteredJobs} search={search} onSearchChange={setSearch} />}
         {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
       </main>
-
-      <a
-        href="https://kadoa.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-3 right-3 z-[2000] hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-gray-200 text-[11px] shadow-sm hover:border-violet-300 transition-colors"
-      >
-        <span className="text-gray-400">Powered by Kadoa</span>
-        <span className="text-violet-600">Need any web dataset? &rarr;</span>
-      </a>
     </div>
   );
 }
