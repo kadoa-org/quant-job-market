@@ -170,6 +170,12 @@ export default function App() {
               {label}
             </button>
           ))}
+          <a
+            href="/heatmap.html"
+            className="px-2 sm:px-2.5 h-7 rounded-full text-[13px] sm:text-[13.5px] font-medium text-[#5c5c5f] hover:text-[#191919] flex items-center"
+          >
+            Heatmap
+          </a>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
