@@ -49,7 +49,6 @@ const FIRM_TYPE_ORDER = ["proprietary", "market_maker", "hedge_fund"];
 const ALLOWED_TYPES = new Set(FIRM_TYPE_ORDER);
 
 const MIN_JOBS = 10;
-const MIN_COUNT_FOR_RANK = 3;
 const EXCLUDE_FIRMS = new Set(["TransMarket Group"]);
 
 function shortenFirm(f) {
@@ -85,11 +84,9 @@ function heatColor(t) {
   return `rgb(${r},${g},${b})`;
 }
 
-function rankToHeatT(rank) {
-  if (rank == null || rank <= 0) return -1;
-  const VISIBLE = 8;
-  const t = Math.max(0, 1 - (rank - 1) / VISIBLE);
-  return Math.pow(t, 1.4);
+function countToHeatT(count, globalMax) {
+  if (count <= 0 || globalMax <= 0) return -1;
+  return Math.sqrt(Math.min(1, count / globalMax));
 }
 
 function aggregate(jobs) {
@@ -117,20 +114,6 @@ function aggregate(jobs) {
     .filter((f) => TECHS.some((t) => f.counts[t] > 0));
 }
 
-function computeRanks(ordered) {
-  const ranks = {};
-  for (const t of TECHS) {
-    const ranked = ordered
-      .filter((f) => f.counts[t] >= MIN_COUNT_FOR_RANK)
-      .sort((a, b) => b.pcts[t] - a.pcts[t] || b.total - a.total);
-    ranked.forEach((f, idx) => {
-      if (!ranks[f.firm]) ranks[f.firm] = {};
-      ranks[f.firm][t] = idx + 1;
-    });
-  }
-  return ranks;
-}
-
 function escapeText(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
@@ -150,7 +133,13 @@ function buildSvg(jobs) {
     return b.total - a.total;
   });
 
-  const ranks = computeRanks(ordered);
+  // Cell colour = absolute count, sqrt-scaled across the whole matrix.
+  let globalMax = 0;
+  for (const f of ordered) for (const l of TECHS) if (f.counts[l] > globalMax) globalMax = f.counts[l];
+
+  // Column totals (sum of mentions per tech across all firms).
+  const colTotals = Object.fromEntries(TECHS.map((l) => [l, 0]));
+  for (const f of ordered) for (const l of TECHS) colTotals[l] += f.counts[l];
 
   // Layout
   const width = 1300;
@@ -196,16 +185,9 @@ function buildSvg(jobs) {
       const cells = TECHS.map((l, j) => {
         const cellX = plotStartX + j * cellW;
         const count = f.counts[l];
-        const rank = ranks[f.firm]?.[l];
         const hasValue = count > 0;
-        let fill = "#f4f4f3";
-        let fillT = -1;
-        if (rank) {
-          fillT = rankToHeatT(rank);
-          fill = heatColor(fillT);
-        } else if (hasValue) {
-          fill = "#ffffcc";
-        }
+        const fillT = countToHeatT(count, globalMax);
+        const fill = hasValue ? heatColor(fillT) : "#f4f4f3";
         const rect = `<rect x="${cellX + cellPad}" y="${y + cellPad}" width="${cellW - cellPad * 2}" height="${rowH - cellPad * 2}" rx="2" fill="${fill}" stroke="#ffffff" stroke-width="1"/>`;
         let label = "";
         if (hasValue) {
@@ -218,25 +200,42 @@ function buildSvg(jobs) {
     })
     .join("");
 
-  const legendY = totalH + 42;
+  // Bottom column-totals row
+  const totalsY = totalH + 4;
+  const totalsRowH = 22;
+  const bottomRule = `<line x1="${left}" y1="${totalsY - 2}" x2="${plotStartX + plotW}" y2="${totalsY - 2}" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>`;
+  const totalsLabel = `<text x="${nColX + nW - 4}" y="${totalsY + totalsRowH / 2 + 4}" text-anchor="end" font-size="11" font-weight="600" fill="#1a1a1a">Total</text>`;
+  const colTotalCells = TECHS.map((l, j) => {
+    const cellX = plotStartX + j * cellW;
+    const c = colTotals[l];
+    return `<text x="${cellX + cellW / 2}" y="${totalsY + totalsRowH / 2 + 4}" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1a1a" font-variant-numeric="tabular-nums">${c}</text>`;
+  }).join("");
+
+  const legendY = totalH + totalsRowH + 50;
   const barW = 320;
   const barH = 12;
   const stops = HEAT_PALETTE.map((color, i) => {
     const pos = (i / (HEAT_PALETTE.length - 1)) * 100;
     return `<stop offset="${pos.toFixed(1)}%" stop-color="${color}"/>`;
   }).join("");
-  const tickRanks = [8, 5, 3, 2, 1];
-  const tickLabels = tickRanks
-    .map((rk) => {
-      const t = rankToHeatT(rk);
+  const tickCounts = (() => {
+    const m = globalMax;
+    if (m <= 30) return [0, 5, 15, m];
+    if (m <= 80) return [0, 10, 30, 60, m];
+    if (m <= 150) return [0, 20, 60, 110, m];
+    return [0, 25, 70, 140, m];
+  })();
+  const tickLabels = tickCounts
+    .map((c) => {
+      const t = countToHeatT(Math.max(0.5, c), globalMax);
       const x = Math.max(0, t) * barW;
-      return `<g transform="translate(${x},0)"><line x1="0" y1="${barH}" x2="0" y2="${barH + 4}" stroke="#6b6b6b" stroke-width="1"/><text x="0" y="${barH + 16}" text-anchor="middle" font-size="10.5" fill="#6b6b6b" font-variant-numeric="tabular-nums">#${rk}</text></g>`;
+      return `<g transform="translate(${x},0)"><line x1="0" y1="${barH}" x2="0" y2="${barH + 4}" stroke="#6b6b6b" stroke-width="1"/><text x="0" y="${barH + 16}" text-anchor="middle" font-size="10.5" fill="#6b6b6b" font-variant-numeric="tabular-nums">${c}</text></g>`;
     })
     .join("");
   const legend = `<g transform="translate(${plotStartX},${legendY})"><defs><linearGradient id="heatbar" x1="0%" y1="0%" x2="100%" y2="0%">${stops}</linearGradient></defs><rect x="0" y="0" width="${barW}" height="${barH}" fill="url(#heatbar)" rx="1.5"/>${tickLabels}</g>`;
 
   return {
-    svg: `<svg width="${width}" height="${height + 30}" viewBox="0 0 ${width} ${height + 30}" xmlns="http://www.w3.org/2000/svg"><g>${colHeaders}</g>${nHeader}${topRule}<g>${rows}</g>${legend}</svg>`,
+    svg: `<svg width="${width}" height="${height + 30}" viewBox="0 0 ${width} ${height + 30}" xmlns="http://www.w3.org/2000/svg"><g>${colHeaders}</g>${nHeader}${topRule}<g>${rows}</g>${bottomRule}${totalsLabel}<g>${colTotalCells}</g>${legend}</svg>`,
     totalJobs,
     numFirms,
   };
@@ -252,7 +251,7 @@ export default function TechStackHeatmap({ jobs }) {
           Quant tech stack
         </h1>
         <p className="text-[13.5px] text-[#6b6b6b] leading-snug max-w-[1100px] mb-3">
-          Heatmap of {totalJobs.toLocaleString()} open postings across {numFirms} buy-side quant firms (≥{MIN_JOBS} listings). Number = postings at that firm that explicitly mention the tech. Cell shade = firm's rank within the column.
+          Heatmap of {totalJobs.toLocaleString()} open postings across {numFirms} buy-side quant firms (≥{MIN_JOBS} listings). Each cell counts that firm's open postings that explicitly mention the tech. Darker = more.
         </p>
         <div className="flex gap-4 text-[12px] text-[#6b6b6b] mb-4">
           {FIRM_TYPE_ORDER.map((t) => (
