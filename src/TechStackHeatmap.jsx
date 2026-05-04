@@ -211,31 +211,8 @@ function buildSvg(jobs) {
     return `<text x="${cellX + cellW / 2}" y="${totalsY + totalsRowH / 2 + 4}" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1a1a" font-variant-numeric="tabular-nums">${c}</text>`;
   }).join("");
 
-  const legendY = totalH + totalsRowH + 50;
-  const barW = 320;
-  const barH = 12;
-  const stops = HEAT_PALETTE.map((color, i) => {
-    const pos = (i / (HEAT_PALETTE.length - 1)) * 100;
-    return `<stop offset="${pos.toFixed(1)}%" stop-color="${color}"/>`;
-  }).join("");
-  const tickCounts = (() => {
-    const m = globalMax;
-    if (m <= 30) return [0, 5, 15, m];
-    if (m <= 80) return [0, 10, 30, 60, m];
-    if (m <= 150) return [0, 20, 60, 110, m];
-    return [0, 25, 70, 140, m];
-  })();
-  const tickLabels = tickCounts
-    .map((c) => {
-      const t = countToHeatT(Math.max(0.5, c), globalMax);
-      const x = Math.max(0, t) * barW;
-      return `<g transform="translate(${x},0)"><line x1="0" y1="${barH}" x2="0" y2="${barH + 4}" stroke="#6b6b6b" stroke-width="1"/><text x="0" y="${barH + 16}" text-anchor="middle" font-size="10.5" fill="#6b6b6b" font-variant-numeric="tabular-nums">${c}</text></g>`;
-    })
-    .join("");
-  const legend = `<g transform="translate(${plotStartX},${legendY})"><defs><linearGradient id="heatbar" x1="0%" y1="0%" x2="100%" y2="0%">${stops}</linearGradient></defs><rect x="0" y="0" width="${barW}" height="${barH}" fill="url(#heatbar)" rx="1.5"/>${tickLabels}</g>`;
-
   return {
-    svg: `<svg width="${width}" height="${height + 30}" viewBox="0 0 ${width} ${height + 30}" xmlns="http://www.w3.org/2000/svg"><g>${colHeaders}</g>${nHeader}${topRule}<g>${rows}</g>${bottomRule}${totalsLabel}<g>${colTotalCells}</g>${legend}</svg>`,
+    svg: `<svg width="${width}" height="${height + 30}" viewBox="0 0 ${width} ${height + 30}" xmlns="http://www.w3.org/2000/svg"><g>${colHeaders}</g>${nHeader}${topRule}<g>${rows}</g>${bottomRule}${totalsLabel}<g>${colTotalCells}</g></svg>`,
     totalJobs,
     numFirms,
   };
