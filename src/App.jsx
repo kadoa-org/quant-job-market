@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Dashboard from "./Dashboard";
 import DataTable from "./DataTable";
 import FilterBar from "./FilterBar";
+import TechStackHeatmap from "./TechStackHeatmap";
 import Treemap from "./Treemap";
 import { useDatabase, query as dbQuery } from "./useDatabase";
 
@@ -156,6 +157,7 @@ export default function App() {
             { key: "firms", label: "Firms" },
             { key: "table", label: "Jobs" },
             { key: "dashboard", label: "Insights" },
+            { key: "heatmap", label: "Heatmap" },
           ].map(({ key, label }) => (
             <button
               key={key}
@@ -163,19 +165,13 @@ export default function App() {
                 setView(key);
                 if (key === "firms") setSelectedFirm(null);
               }}
-              className={`px-2 sm:px-2.5 h-7 rounded-full text-[13px] sm:text-[13.5px] font-medium transition-colors ${
+              className={`px-2 sm:px-2.5 h-7 rounded-full text-[13px] sm:text-[13.5px] font-medium transition-colors whitespace-nowrap ${
                 view === key ? "bg-[#ededef] text-[#191919]" : "text-[#5c5c5f] hover:text-[#191919]"
               }`}
             >
               {label}
             </button>
           ))}
-          <a
-            href="/heatmap.html"
-            className="px-2 sm:px-2.5 h-7 rounded-full text-[13px] sm:text-[13.5px] font-medium text-[#5c5c5f] hover:text-[#191919] flex items-center"
-          >
-            Heatmap
-          </a>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
@@ -196,7 +192,9 @@ export default function App() {
         </div>
       </header>
 
-      <FilterBar filters={filters} setFilters={setFilters} jobs={filteredJobs} allJobs={jobs} selectedFirm={selectedFirm} onClearFirm={() => setSelectedFirm(null)} onSelectFirm={setSelectedFirm} />
+      {view !== "heatmap" && (
+        <FilterBar filters={filters} setFilters={setFilters} jobs={filteredJobs} allJobs={jobs} selectedFirm={selectedFirm} onClearFirm={() => setSelectedFirm(null)} onSelectFirm={setSelectedFirm} />
+      )}
 
       <main className="flex-1 relative sm:overflow-hidden">
         {view === "firms" && (
@@ -212,6 +210,7 @@ export default function App() {
         )}
         {view === "table" && <DataTable jobs={filteredJobs} search={search} onSearchChange={setSearch} />}
         {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
+        {view === "heatmap" && <TechStackHeatmap jobs={jobs} />}
       </main>
     </div>
   );
