@@ -9,7 +9,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, "index.html"),
-        heatmap: resolve(__dirname, "heatmap.html"),
+        techStack: resolve(__dirname, "tech-stack.html"),
       },
     },
   },

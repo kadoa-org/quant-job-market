@@ -1,4 +1,7 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/heatmap", "destination": "/tech-stack", "permanent": true }
+  ]
 }
