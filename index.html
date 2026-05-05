@@ -4,13 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quant Job Market</title>
-    <meta name="description" content="Jobs of all major quant firms: hedge funds, prop trading firms, market makers, and asset managers. Interactive visualization and open dataset." />
+
+    <title>Quant Job Market: Live Postings from 50+ Hedge Funds &amp; Prop Shops</title>
+    <meta name="description" content="Open dataset and interactive viz of 3,900+ live job postings from every major quant firm: hedge funds, prop trading firms, market makers, and asset managers. Filter by role, language, location, and seniority." />
+    <meta name="keywords" content="quant jobs, quantitative finance careers, hedge fund jobs, prop trading jobs, market maker jobs, quant developer, quant researcher, quant trader, hft jobs, citadel jobs, jane street careers" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Kadoa" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Quant Job Market" />
-    <meta property="og:title" content="Quant Job Market" />
-    <meta property="og:description" content="Jobs of all major quant firms: hedge funds, prop trading firms, market makers, and asset managers. Interactive visualization and open dataset." />
+    <meta property="og:title" content="Quant Job Market: Live Postings from Every Major Quant Firm" />
+    <meta property="og:description" content="3,900+ open postings from 50+ hedge funds, prop shops, and market makers. Interactive treemap, filters, and tech stack heatmap." />
     <meta property="og:url" content="https://quant.kadoa.com/" />
     <meta property="og:image" content="https://quant.kadoa.com/screenshot.png" />
     <meta property="og:image:width" content="1938" />
@@ -19,14 +23,41 @@
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Quant Job Market" />
-    <meta name="twitter:description" content="Jobs of all major quant firms: hedge funds, prop trading firms, market makers, and asset managers." />
+    <meta name="twitter:description" content="3,900+ open postings from every major hedge fund, prop shop, and market maker. Filter, search, explore." />
     <meta name="twitter:image" content="https://quant.kadoa.com/screenshot.png" />
-    <meta name="twitter:image:alt" content="Treemap of quant finance firms sized by job count, with filters and insights dashboard." />
+    <meta name="twitter:image:alt" content="Treemap of quant finance firms sized by job count." />
 
     <link rel="canonical" href="https://quant.kadoa.com/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "Quant Job Market",
+        "description": "Open dataset of live job postings from every major quantitative finance firm: hedge funds, proprietary trading firms, market makers, and asset managers. Updated daily.",
+        "url": "https://quant.kadoa.com/",
+        "isAccessibleForFree": true,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": { "@type": "Organization", "name": "Kadoa", "url": "https://kadoa.com" },
+        "image": "https://quant.kadoa.com/screenshot.png",
+        "keywords": ["quant jobs", "hedge fund jobs", "prop trading", "market maker", "quant developer"],
+        "distribution": [
+          { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://quant.kadoa.com/data/jobs.json" },
+          { "@type": "DataDownload", "encodingFormat": "application/x-sqlite3", "contentUrl": "https://quant.kadoa.com/data/jobs.db" }
+        ],
+        "hasPart": [
+          {
+            "@type": "Dataset",
+            "name": "Quant Tech Stack Heatmap",
+            "url": "https://quant.kadoa.com/heatmap",
+            "description": "Programming-language and accelerator usage across 42 buy-side quant firms."
+          }
+        ]
+      }
+    </script>
   </head>
   <body class="bg-[#f2f2f3] text-[#191919] font-['Inter',sans-serif] sm:overflow-hidden">
     <div id="root"></div>

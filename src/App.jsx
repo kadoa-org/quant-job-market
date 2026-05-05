@@ -21,10 +21,20 @@ const QUANT_ROLES = new Set([
   "risk_management", "portfolio_management",
 ]);
 
-// Read state from URL params
+// /heatmap is its own pre-rendered HTML page (custom OG/SEO). All other
+// views live under / and use ?view=... so a single HTML carries them.
+function viewFromPath() {
+  return window.location.pathname.replace(/\/$/, "") === "/heatmap" ? "heatmap" : null;
+}
+
+function pathForView(view) {
+  return view === "heatmap" ? "/heatmap" : "/";
+}
+
+// Read state from URL (path picks heatmap, then ?view=... for the rest)
 function parseUrl() {
   const params = new URLSearchParams(window.location.search);
-  const view = params.get("view") || "firms";
+  const view = viewFromPath() || params.get("view") || "firms";
   const firm = params.get("firm") || null;
   const filters = { ...EMPTY_FILTERS };
   for (const key of Object.keys(EMPTY_FILTERS)) {
@@ -38,14 +48,16 @@ function parseUrl() {
 // Write state to URL params (replace, no history spam)
 function syncUrl(view, filters, selectedFirm, search) {
   const params = new URLSearchParams();
-  if (view !== "firms") params.set("view", view);
+  // /heatmap carries the heatmap view; do not duplicate as ?view=
+  if (view !== "firms" && view !== "heatmap") params.set("view", view);
   if (selectedFirm) params.set("firm", selectedFirm);
   for (const [key, values] of Object.entries(filters)) {
     if (values.length > 0) params.set(key, values.join(","));
   }
   if (search) params.set("q", search);
   const qs = params.toString();
-  const url = qs ? `?${qs}` : window.location.pathname;
+  const path = pathForView(view);
+  const url = qs ? `${path}?${qs}` : path;
   window.history.replaceState(null, "", url);
 }
 
