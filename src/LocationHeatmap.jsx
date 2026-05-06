@@ -43,8 +43,8 @@ export default function LocationHeatmap({ jobs }) {
 
           {hybridLeaders.length > 0 && (
             <ChartCard
-              title="Hybrid-friendly firms"
-              subtitle="Quant defaults to in-office. The few firms that say hybrid in writing."
+              title="Flex-friendly firms"
+              subtitle="Quant defaults to in-office. The few firms that say hybrid or fully remote in writing."
             >
               <div className="overflow-x-auto -mx-4 sm:mx-0">
                 <div

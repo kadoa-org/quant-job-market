@@ -172,19 +172,28 @@ export function aggregateLocations(jobs) {
   }
   cities.sort((a, b) => b.total - a.total);
 
-  const hybridByFirm = new Map();
+  // Flex = hybrid + remote. Both are explicit "you don't have to be in
+  // the office five days a week" signals. Most firms use hybrid; a few
+  // (DRW, Voleon, Geneva Trading) advertise remote instead.
+  const flexByFirm = new Map();
   for (const j of validFirmJobs) {
-    let r = hybridByFirm.get(j.firmName);
+    let r = flexByFirm.get(j.firmName);
     if (!r) {
-      r = { firm: j.firmName, total: 0, hybrid: 0, pct: 0 };
-      hybridByFirm.set(j.firmName, r);
+      r = { firm: j.firmName, total: 0, hybrid: 0, remote: 0, flex: 0, pct: 0 };
+      flexByFirm.set(j.firmName, r);
     }
     r.total++;
-    if (j.workMode === "hybrid") r.hybrid++;
+    if (j.workMode === "hybrid") {
+      r.hybrid++;
+      r.flex++;
+    } else if (j.workMode === "remote") {
+      r.remote++;
+      r.flex++;
+    }
   }
-  const hybridLeaders = [...hybridByFirm.values()]
-    .filter((r) => r.hybrid >= 2)
-    .map((r) => ({ ...r, firm: shortenFirm(r.firm), pct: (r.hybrid / r.total) * 100 }))
+  const hybridLeaders = [...flexByFirm.values()]
+    .filter((r) => r.flex >= 2)
+    .map((r) => ({ ...r, firm: shortenFirm(r.firm), pct: (r.flex / r.total) * 100 }))
     .sort((a, b) => b.pct - a.pct)
     .slice(0, 10);
 
@@ -274,16 +283,17 @@ export function buildHybridLeaderboardSvg(hybridLeaders) {
 
   const headers =
     `<text x="${labelX}" y="${top - 9}" text-anchor="end" font-size="12.5" font-weight="500" fill="#7a7d80">Firm</text>` +
-    `<text x="${barX}" y="${top - 9}" font-size="12.5" font-weight="500" fill="#7a7d80">% of postings tagged hybrid</text>`;
+    `<text x="${barX}" y="${top - 9}" font-size="12.5" font-weight="500" fill="#7a7d80">% of postings tagged hybrid or remote</text>`;
 
   const rows = hybridLeaders
     .map((l, i) => {
       const y = top + i * rowH + rowH / 2;
       const barW = (l.pct / maxPct) * barMaxW;
+      const breakdown = l.remote > 0 ? `${l.flex}/${l.total} · ${l.remote} remote` : `${l.flex}/${l.total}`;
       return [
         `<text x="${labelX}" y="${y + 5}" text-anchor="end" font-size="14" font-weight="500" fill="#191919">${escapeText(l.firm)}</text>`,
         `<rect x="${barX}" y="${y - barH / 2}" width="${barW}" height="${barH}" rx="3" fill="${BAR_FILL}" fill-opacity="0.85"/>`,
-        `<text x="${barX + barW + 8}" y="${y + 5}" font-size="13" font-weight="500" fill="#191919" font-variant-numeric="tabular-nums">${l.pct.toFixed(0)}% <tspan fill="#9a9d9a" font-weight="400">${l.hybrid}/${l.total}</tspan></text>`,
+        `<text x="${barX + barW + 8}" y="${y + 5}" font-size="13" font-weight="500" fill="#191919" font-variant-numeric="tabular-nums">${l.pct.toFixed(0)}% <tspan fill="#9a9d9a" font-weight="400">${breakdown}</tspan></text>`,
       ].join("");
     })
     .join("");
