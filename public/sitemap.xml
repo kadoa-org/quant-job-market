@@ -19,4 +19,13 @@
       <image:title>Quant tech stack heatmap by firm</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://quant.kadoa.com/locations</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://quant.kadoa.com/og-locations.png</image:loc>
+      <image:title>Where quants hire heatmap by firm and city</image:title>
+    </image:image>
+  </url>
 </urlset>

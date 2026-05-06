@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Where Quants Hire: NYC vs London vs Singapore vs Hong Kong by Firm</title>
+    <meta name="description" content="Heatmap of 2,700+ open postings across 38 buy-side quant firms showing where each hedge fund, prop shop, and market maker actually hires. New York, London, Chicago, Singapore, Hong Kong, plus a hybrid-flex column for the rare firms that say so in writing." />
+    <meta name="keywords" content="quant jobs by city, hedge fund offices, prop trading locations, market maker offices, jane street offices, citadel offices, quant london, quant nyc, quant singapore, quant hong kong, quant hybrid jobs" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Kadoa" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Quant Job Market" />
+    <meta property="og:title" content="Where Quants Hire: 12 Cities, 38 Firms" />
+    <meta property="og:description" content="Heatmap of 2,700+ open postings across 38 buy-side quant firms. NYC, London, Chicago, Singapore, Hong Kong and 7 more. Plus a hybrid-flex column for the rare firms that advertise it." />
+    <meta property="og:url" content="https://quant.kadoa.com/locations" />
+    <meta property="og:image" content="https://quant.kadoa.com/og-locations.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Heatmap showing job posting counts per city for 38 quant firms across NYC, London, Chicago, Singapore, Hong Kong, Sydney, Boston, Philadelphia, Bangalore, Mumbai, Paris, Amsterdam, plus a hybrid column." />
+    <meta property="article:section" content="Data" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Where Quants Hire: 12 Cities, 38 Firms" />
+    <meta name="twitter:description" content="2,700+ open postings across 38 buy-side quant firms, mapped by city. NYC and London dominate; hybrid is the rare exception." />
+    <meta name="twitter:image" content="https://quant.kadoa.com/og-locations.png" />
+    <meta name="twitter:image:alt" content="Heatmap of quant job postings by firm and city." />
+
+    <link rel="canonical" href="https://quant.kadoa.com/locations" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "Quant Job Locations",
+        "description": "Geographic distribution of job postings across 38 buy-side quant firms (hedge funds, prop trading firms, and market makers), aggregated from 2,700+ live quant-relevant postings, plus a hybrid-flexibility column.",
+        "url": "https://quant.kadoa.com/locations",
+        "isAccessibleForFree": true,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": { "@type": "Organization", "name": "Kadoa", "url": "https://kadoa.com" },
+        "image": "https://quant.kadoa.com/og-locations.png",
+        "keywords": [
+          "quant jobs by city",
+          "hedge fund offices",
+          "prop trading locations",
+          "quant london",
+          "quant nyc",
+          "quant singapore",
+          "quant hong kong",
+          "hybrid quant jobs"
+        ],
+        "variableMeasured": [
+          "city",
+          "firm",
+          "open posting count",
+          "firm type",
+          "hybrid count"
+        ],
+        "distribution": [
+          { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://quant.kadoa.com/data/jobs.json" }
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-[#f2f2f3] text-[#191919] font-['Inter',sans-serif] sm:overflow-hidden">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

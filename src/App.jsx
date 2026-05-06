@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Dashboard from "./Dashboard";
 import DataTable from "./DataTable";
 import FilterBar from "./FilterBar";
+import LocationHeatmap from "./LocationHeatmap";
 import TechStackHeatmap from "./TechStackHeatmap";
 import Treemap from "./Treemap";
 import { useDatabase, query as dbQuery } from "./useDatabase";
@@ -21,20 +22,23 @@ const QUANT_ROLES = new Set([
   "risk_management", "portfolio_management",
 ]);
 
-// /tech-stack is its own pre-rendered HTML page (custom OG/SEO). All other
-// views live under / and use ?view=... so a single HTML carries them.
+// /tech-stack and /locations are pre-rendered HTML pages with custom OG/SEO.
+// All other views live under / and use ?view=... so a single HTML carries them.
 // /heatmap is kept as a legacy alias for already-shared links.
 function viewFromPath() {
   const p = window.location.pathname.replace(/\/$/, "");
   if (p === "/tech-stack" || p === "/heatmap") return "techstack";
+  if (p === "/locations") return "locations";
   return null;
 }
 
 function pathForView(view) {
-  return view === "techstack" ? "/tech-stack" : "/";
+  if (view === "techstack") return "/tech-stack";
+  if (view === "locations") return "/locations";
+  return "/";
 }
 
-// Read state from URL (path picks tech-stack, then ?view=... for the rest)
+// Read state from URL (path picks tech-stack/locations, then ?view=... for the rest)
 function parseUrl() {
   const params = new URLSearchParams(window.location.search);
   // Accept legacy "heatmap" view name from old shared URLs
@@ -53,8 +57,8 @@ function parseUrl() {
 // Write state to URL params (replace, no history spam)
 function syncUrl(view, filters, selectedFirm, search) {
   const params = new URLSearchParams();
-  // /tech-stack carries the tech-stack view; do not duplicate as ?view=
-  if (view !== "firms" && view !== "techstack") params.set("view", view);
+  // /tech-stack and /locations carry their own view; do not duplicate as ?view=
+  if (view !== "firms" && view !== "techstack" && view !== "locations") params.set("view", view);
   if (selectedFirm) params.set("firm", selectedFirm);
   for (const [key, values] of Object.entries(filters)) {
     if (values.length > 0) params.set(key, values.join(","));
@@ -175,6 +179,7 @@ export default function App() {
             { key: "table", label: "Jobs" },
             { key: "dashboard", label: "Insights" },
             { key: "techstack", label: "Tech stack" },
+            { key: "locations", label: "Locations" },
           ].map(({ key, label }) => (
             <button
               key={key}
@@ -209,7 +214,7 @@ export default function App() {
         </div>
       </header>
 
-      {view !== "techstack" && (
+      {view !== "techstack" && view !== "locations" && (
         <FilterBar filters={filters} setFilters={setFilters} jobs={filteredJobs} allJobs={jobs} selectedFirm={selectedFirm} onClearFirm={() => setSelectedFirm(null)} onSelectFirm={setSelectedFirm} />
       )}
 
@@ -228,6 +233,7 @@ export default function App() {
         {view === "table" && <DataTable jobs={filteredJobs} search={search} onSearchChange={setSearch} />}
         {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
         {view === "techstack" && <TechStackHeatmap jobs={jobs} />}
+        {view === "locations" && <LocationHeatmap jobs={jobs} />}
       </main>
     </div>
   );

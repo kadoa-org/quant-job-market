@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         techStack: resolve(__dirname, "tech-stack.html"),
+        locations: resolve(__dirname, "locations.html"),
       },
     },
   },
