@@ -47,26 +47,9 @@ const tooltipStyle = {
   boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)",
 };
 
-function StatCard({ title, value, subtitle }) {
-  return (
-    <div className="bg-white rounded-lg p-4 border border-black/[0.08] shadow-sm">
-      <div className="text-[10px] text-gray-400 uppercase tracking-wider mb-1">{title}</div>
-      <div className="text-2xl font-bold">{value}</div>
-      {subtitle && <div className="text-[10px] text-gray-400 mt-1">{subtitle}</div>}
-    </div>
-  );
-}
-
-function ChartCard({ title, subtitle, children }) {
-  return (
-    <div className="bg-white rounded-lg p-4 border border-black/[0.08] shadow-sm">
-      <div className="text-xs text-gray-500 font-medium mb-0.5">{title}</div>
-      {subtitle && <div className="text-[9px] text-gray-400 mb-3">{subtitle}</div>}
-      {!subtitle && <div className="mb-3" />}
-      {children}
-    </div>
-  );
-}
+// StatCard / ChartCard live in lib/ChartCard.jsx — shared with /locations
+// so both views have identical card chrome. Edit there to update both.
+import { ChartCard, StatCard } from "./lib/ChartCard";
 
 export default function Dashboard({ jobs, firms }) {
   // --- Tech stack by firm type ---
@@ -132,7 +115,14 @@ export default function Dashboard({ jobs, firms }) {
   );
 
   // --- Technologies ---
-  const techData = useMemo(() => toSorted(countArrayItems(jobs, (j) => j.technologies), 12), [jobs]);
+  const techData = useMemo(
+    () =>
+      toSorted(
+        countArrayItems(jobs, (j) => j.technologies),
+        12,
+      ),
+    [jobs],
+  );
 
   // --- Education ---
   const educationData = useMemo(() => {
@@ -195,8 +185,16 @@ export default function Dashboard({ jobs, firms }) {
           value={medianSalary ? `$${(medianSalary / 1000).toFixed(0)}k` : "n/a"}
           subtitle={`${salaries.length} disclosed`}
         />
-        <StatCard title="Top Language" value={languageData[0]?.name || "n/a"} subtitle={`${languageData[0]?.value || 0} jobs`} />
-        <StatCard title="Top Location" value={locationData[0]?.name || "n/a"} subtitle={`${locationData[0]?.value || 0} jobs`} />
+        <StatCard
+          title="Top Language"
+          value={languageData[0]?.name || "n/a"}
+          subtitle={`${languageData[0]?.value || 0} jobs`}
+        />
+        <StatCard
+          title="Top Location"
+          value={locationData[0]?.name || "n/a"}
+          subtitle={`${locationData[0]?.value || 0} jobs`}
+        />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -302,7 +300,6 @@ export default function Dashboard({ jobs, firms }) {
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
-
       </div>
     </div>
   );
