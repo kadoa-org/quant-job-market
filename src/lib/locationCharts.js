@@ -201,16 +201,16 @@ export function buildLocationsLollipopSvg(cities) {
   const W = 1300;
   const left = 24;
   const panelW = W - left * 2;
-  const top = 24;
-  const rowH = 28;
+  const top = 28;
+  const rowH = 32;
   const barH = 12;
   const BAR_FILL = "#0f766e";
 
-  const flagW = 22;
+  const flagW = 26;
   const cityLabelW = 110;
-  const totalW = 44;
+  const totalW = 50;
   const barXStart = left + flagW + cityLabelW + 16;
-  const annotationW = 540;
+  const annotationW = 560;
   const barXEnd = left + panelW - totalW - 12 - annotationW;
   const barMaxW = barXEnd - barXStart;
   const annotationX = barXEnd + 20;
@@ -219,8 +219,6 @@ export function buildLocationsLollipopSvg(cities) {
   const maxCityTotal = Math.max(...cities.map((c) => c.total), 1);
   const xFor = (n) => (n / maxCityTotal) * barMaxW;
 
-  // Linear uses near-invisible gridlines: just two extreme ticks (0 + max),
-  // no intermediate values. Reader sees the bar lengths comparatively.
   const axisTicks = [];
   for (const v of [0, maxCityTotal]) {
     const tx = barXStart + xFor(v);
@@ -229,11 +227,11 @@ export function buildLocationsLollipopSvg(cities) {
     );
   }
 
-  // Headers — Linear-style: 11px medium, very low contrast grey, no rule.
+  // Column headers calibrated to Linear's 13.5px/500 secondary scale.
   const headers =
-    `<text x="${left + flagW + cityLabelW}" y="${top - 8}" text-anchor="end" font-size="11" font-weight="500" fill="#9a9d9a" letter-spacing="0.01em">City</text>` +
-    `<text x="${annotationX}" y="${top - 8}" font-size="11" font-weight="500" fill="#9a9d9a" letter-spacing="0.01em">Top firms</text>` +
-    `<text x="${totalX + totalW - 4}" y="${top - 8}" text-anchor="end" font-size="11" font-weight="500" fill="#9a9d9a" letter-spacing="0.01em">Postings</text>`;
+    `<text x="${left + flagW + cityLabelW}" y="${top - 9}" text-anchor="end" font-size="12.5" font-weight="500" fill="#7a7d80">City</text>` +
+    `<text x="${annotationX}" y="${top - 9}" font-size="12.5" font-weight="500" fill="#7a7d80">Top firms</text>` +
+    `<text x="${totalX + totalW - 4}" y="${top - 9}" text-anchor="end" font-size="12.5" font-weight="500" fill="#7a7d80">Postings</text>`;
 
   const rows = cities
     .map((c, i) => {
@@ -242,11 +240,11 @@ export function buildLocationsLollipopSvg(cities) {
       const ann = annotationFor(c);
       const barW = xFor(c.total);
       return [
-        `<text x="${left + flagW - 4}" y="${y + 5}" text-anchor="end" font-size="16">${flag}</text>`,
-        `<text x="${left + flagW + cityLabelW}" y="${y + 4}" text-anchor="end" font-size="13" font-weight="500" fill="#191919">${escapeText(c.name)}</text>`,
+        `<text x="${left + flagW - 4}" y="${y + 6}" text-anchor="end" font-size="18">${flag}</text>`,
+        `<text x="${left + flagW + cityLabelW}" y="${y + 5}" text-anchor="end" font-size="14" font-weight="500" fill="#191919">${escapeText(c.name)}</text>`,
         `<rect x="${barXStart}" y="${y - barH / 2}" width="${barW}" height="${barH}" rx="3" fill="${BAR_FILL}" fill-opacity="0.85"/>`,
-        `<text x="${annotationX}" y="${y + 4}" font-size="12" fill="#5c5c5f">${escapeText(ann.text)}</text>`,
-        `<text x="${totalX + totalW - 4}" y="${y + 4}" text-anchor="end" font-size="13" font-weight="500" fill="#191919" font-variant-numeric="tabular-nums">${c.total}</text>`,
+        `<text x="${annotationX}" y="${y + 5}" font-size="13" fill="#5c5c5f">${escapeText(ann.text)}</text>`,
+        `<text x="${totalX + totalW - 4}" y="${y + 5}" text-anchor="end" font-size="14" font-weight="500" fill="#191919" font-variant-numeric="tabular-nums">${c.total}</text>`,
       ].join("");
     })
     .join("");
@@ -261,12 +259,12 @@ export function buildHybridLeaderboardSvg(hybridLeaders) {
   if (hybridLeaders.length === 0) return { svg: "", width: 0, height: 0 };
   const W = 1300;
   const left = 24;
-  const top = 24;
-  const rowH = 28;
+  const top = 28;
+  const rowH = 32;
   const barH = 12;
   const BAR_FILL = "#0f766e";
 
-  const flagW = 22;
+  const flagW = 26;
   const cityLabelW = 110;
   const labelX = left + flagW + cityLabelW;
   const barX = labelX + 16;
@@ -275,17 +273,17 @@ export function buildHybridLeaderboardSvg(hybridLeaders) {
   const maxPct = Math.max(...hybridLeaders.map((l) => l.pct), 60);
 
   const headers =
-    `<text x="${labelX}" y="${top - 8}" text-anchor="end" font-size="11" font-weight="500" fill="#9a9d9a" letter-spacing="0.01em">Firm</text>` +
-    `<text x="${barX}" y="${top - 8}" font-size="11" font-weight="500" fill="#9a9d9a" letter-spacing="0.01em">% of postings tagged hybrid</text>`;
+    `<text x="${labelX}" y="${top - 9}" text-anchor="end" font-size="12.5" font-weight="500" fill="#7a7d80">Firm</text>` +
+    `<text x="${barX}" y="${top - 9}" font-size="12.5" font-weight="500" fill="#7a7d80">% of postings tagged hybrid</text>`;
 
   const rows = hybridLeaders
     .map((l, i) => {
       const y = top + i * rowH + rowH / 2;
       const barW = (l.pct / maxPct) * barMaxW;
       return [
-        `<text x="${labelX}" y="${y + 4}" text-anchor="end" font-size="13" font-weight="500" fill="#191919">${escapeText(l.firm)}</text>`,
+        `<text x="${labelX}" y="${y + 5}" text-anchor="end" font-size="14" font-weight="500" fill="#191919">${escapeText(l.firm)}</text>`,
         `<rect x="${barX}" y="${y - barH / 2}" width="${barW}" height="${barH}" rx="3" fill="${BAR_FILL}" fill-opacity="0.85"/>`,
-        `<text x="${barX + barW + 8}" y="${y + 4}" font-size="12" font-weight="500" fill="#191919" font-variant-numeric="tabular-nums">${l.pct.toFixed(0)}% <tspan fill="#9a9d9a" font-weight="400">${l.hybrid}/${l.total}</tspan></text>`,
+        `<text x="${barX + barW + 8}" y="${y + 5}" font-size="13" font-weight="500" fill="#191919" font-variant-numeric="tabular-nums">${l.pct.toFixed(0)}% <tspan fill="#9a9d9a" font-weight="400">${l.hybrid}/${l.total}</tspan></text>`,
       ].join("");
     })
     .join("");

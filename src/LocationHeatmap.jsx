@@ -17,10 +17,10 @@ export default function LocationHeatmap({ jobs }) {
   return (
     <div className="sm:h-full sm:overflow-auto p-3 sm:p-5 bg-[#fbfbfa]">
       <div className="max-w-[1380px] mx-auto">
-        <h1 className="text-[22px] sm:text-[24px] font-bold leading-tight tracking-tight text-[#191919] mb-1">
+        <h1 className="text-[24px] sm:text-[26px] font-semibold leading-tight tracking-tight text-[#191919] mb-1">
           Where quants hire
         </h1>
-        <p className="text-[12px] text-gray-500 leading-snug max-w-[1100px] mb-5">
+        <p className="text-[14px] text-gray-600 leading-snug max-w-[1100px] mb-5">
           {totalJobs.toLocaleString()} quant-relevant postings across {numCities} cities at buy-side firms (≥10
           listings, hedge funds, prop trading, market makers).
         </p>
