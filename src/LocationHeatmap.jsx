@@ -1,14 +1,27 @@
 import React, { useMemo } from "react";
 import { ChartCard } from "./lib/ChartCard";
-import { aggregateLocations, buildHybridLeaderboardSvg, buildLocationsLollipopSvg } from "./lib/locationCharts";
+import {
+  aggregateLocations,
+  buildHybridLeaderboardSvg,
+  buildHybridLeaderboardSvgMobile,
+  buildLocationsLollipopSvg,
+  buildLocationsLollipopSvgMobile,
+} from "./lib/locationCharts";
+
+function svgString(s) {
+  if (!s || !s.svg) return "";
+  return `<svg width="${s.width}" height="${s.height}" viewBox="0 0 ${s.width} ${s.height}" xmlns="http://www.w3.org/2000/svg">${s.svg}</svg>`;
+}
 
 export default function LocationHeatmap({ jobs }) {
-  const { agg, lollipop, hybrid } = useMemo(() => {
+  const { agg, lollipop, lollipopMobile, hybrid, hybridMobile } = useMemo(() => {
     const a = aggregateLocations(jobs || []);
     return {
       agg: a,
       lollipop: buildLocationsLollipopSvg(a.cities),
+      lollipopMobile: buildLocationsLollipopSvgMobile(a.cities),
       hybrid: buildHybridLeaderboardSvg(a.hybridLeaders),
+      hybridMobile: buildHybridLeaderboardSvgMobile(a.hybridLeaders),
     };
   }, [jobs]);
   const { cities, hybridLeaders, totalJobs } = agg;
@@ -17,10 +30,10 @@ export default function LocationHeatmap({ jobs }) {
   return (
     <div className="sm:h-full sm:overflow-auto p-3 sm:p-5 bg-[#fbfbfa]">
       <div className="max-w-[1380px] mx-auto">
-        <h1 className="text-[24px] sm:text-[26px] font-semibold leading-tight tracking-tight text-[#191919] mb-1">
+        <h1 className="text-[22px] sm:text-[26px] font-semibold leading-tight tracking-tight text-[#191919] mb-1">
           Where quants hire
         </h1>
-        <p className="text-[14px] text-gray-600 leading-snug max-w-[1100px] mb-5">
+        <p className="text-[13px] sm:text-[14px] text-gray-600 leading-snug max-w-[1100px] mb-5">
           {totalJobs.toLocaleString()} quant-relevant postings across {numCities} cities at buy-side firms (≥10
           listings, hedge funds, prop trading, market makers).
         </p>
@@ -28,15 +41,20 @@ export default function LocationHeatmap({ jobs }) {
         <div className="grid grid-cols-1 gap-4">
           <ChartCard
             title="Top quant cities"
-            subtitle="Bar length is total quant postings; right column lists the four firms hiring most in each city."
+            subtitle="Bar length is total quant postings; the right column (desktop) lists the four firms hiring most in each city."
           >
-            <div className="overflow-x-auto -mx-4 sm:mx-0">
+            {/* Mobile: compact 360px chart, no horizontal scroll */}
+            <div
+              className="sm:hidden"
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: SVG generated locally from trusted aggregation
+              dangerouslySetInnerHTML={{ __html: svgString(lollipopMobile) }}
+            />
+            {/* Desktop: full chart with top firms list */}
+            <div className="hidden sm:block overflow-x-auto -mx-4 sm:mx-0">
               <div
                 className="px-4 sm:px-0 min-w-[1300px]"
                 // biome-ignore lint/security/noDangerouslySetInnerHtml: SVG generated locally from trusted aggregation
-                dangerouslySetInnerHTML={{
-                  __html: `<svg width="${lollipop.width}" height="${lollipop.height}" viewBox="0 0 ${lollipop.width} ${lollipop.height}" xmlns="http://www.w3.org/2000/svg">${lollipop.svg}</svg>`,
-                }}
+                dangerouslySetInnerHTML={{ __html: svgString(lollipop) }}
               />
             </div>
           </ChartCard>
@@ -46,13 +64,16 @@ export default function LocationHeatmap({ jobs }) {
               title="Flex-friendly firms"
               subtitle="Quant defaults to in-office. The few firms that say hybrid or fully remote in writing."
             >
-              <div className="overflow-x-auto -mx-4 sm:mx-0">
+              <div
+                className="sm:hidden"
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: SVG generated locally from trusted aggregation
+                dangerouslySetInnerHTML={{ __html: svgString(hybridMobile) }}
+              />
+              <div className="hidden sm:block overflow-x-auto -mx-4 sm:mx-0">
                 <div
                   className="px-4 sm:px-0 min-w-[1300px]"
                   // biome-ignore lint/security/noDangerouslySetInnerHtml: SVG generated locally from trusted aggregation
-                  dangerouslySetInnerHTML={{
-                    __html: `<svg width="${hybrid.width}" height="${hybrid.height}" viewBox="0 0 ${hybrid.width} ${hybrid.height}" xmlns="http://www.w3.org/2000/svg">${hybrid.svg}</svg>`,
-                  }}
+                  dangerouslySetInnerHTML={{ __html: svgString(hybrid) }}
                 />
               </div>
             </ChartCard>

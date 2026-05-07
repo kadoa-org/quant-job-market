@@ -5,7 +5,7 @@ import FilterBar from "./FilterBar";
 import LocationHeatmap from "./LocationHeatmap";
 import TechStackHeatmap from "./TechStackHeatmap";
 import Treemap from "./Treemap";
-import { useDatabase, query as dbQuery } from "./useDatabase";
+import { query as dbQuery, useDatabase } from "./useDatabase";
 
 const EMPTY_FILTERS = {
   firmTypes: [],
@@ -17,9 +17,15 @@ const EMPTY_FILTERS = {
 };
 
 const QUANT_ROLES = new Set([
-  "quantitative_research", "quantitative_trading", "quantitative_development",
-  "hft_systems", "machine_learning", "data_science", "software_engineering",
-  "risk_management", "portfolio_management",
+  "quantitative_research",
+  "quantitative_trading",
+  "quantitative_development",
+  "hft_systems",
+  "machine_learning",
+  "data_science",
+  "software_engineering",
+  "risk_management",
+  "portfolio_management",
 ]);
 
 // /tech-stack and /locations are pre-rendered HTML pages with custom OG/SEO.
@@ -84,7 +90,9 @@ export default function App() {
   const [search, setSearch] = useState(initial.search);
 
   // Sync state to URL on change
-  useEffect(() => { syncUrl(view, filters, selectedFirm, search); }, [view, filters, selectedFirm, search]);
+  useEffect(() => {
+    syncUrl(view, filters, selectedFirm, search);
+  }, [view, filters, selectedFirm, search]);
 
   // Load data from SQLite
   useEffect(() => {
@@ -139,7 +147,8 @@ export default function App() {
       if (filters.seniorityLevels.length > 0 && !filters.seniorityLevels.includes(j.seniorityLevel)) return false;
       if (filters.workModes.length > 0 && !filters.workModes.includes(j.workMode)) return false;
       if (filters.locations.length > 0 && !j.locations.some((l) => filters.locations.includes(l))) return false;
-      if (filters.assetClasses.length > 0 && !j.assetClasses.some((a) => filters.assetClasses.includes(a))) return false;
+      if (filters.assetClasses.length > 0 && !j.assetClasses.some((a) => filters.assetClasses.includes(a)))
+        return false;
       if (selectedFirm && j.firmName !== selectedFirm) return false;
       return true;
     });
@@ -163,17 +172,35 @@ export default function App() {
 
   return (
     <div className="min-h-screen sm:h-screen w-screen flex flex-col">
-      <header className="h-11 flex items-center justify-between px-3 sm:px-5 border-b border-black/[0.06] bg-[#fcfcfc] flex-shrink-0 sticky top-0 z-30 sm:static">
-        <div className="flex items-center gap-2 min-w-0">
-          <span className="text-[15px]">📊</span>
-          <span className="text-[14px] sm:text-[14.5px] font-medium text-[#191919]">Quant Job Market</span>
-          <span className="hidden sm:inline-flex items-center gap-1 text-[11px] text-[#10b981] ml-1.5">
-            <span className="relative flex h-1.5 w-1.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10b981] opacity-75"></span><span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#10b981]"></span></span>
-            updated daily
-          </span>
+      <header className="flex flex-col sm:flex-row sm:h-11 sm:items-center sm:justify-between px-3 sm:px-5 border-b border-black/[0.06] bg-[#fcfcfc] flex-shrink-0 sticky top-0 z-30 sm:static">
+        <div className="h-10 sm:h-auto flex items-center justify-between sm:justify-start gap-2 min-w-0">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="text-[15px]">📊</span>
+            <span className="text-[14px] sm:text-[14.5px] font-medium text-[#191919] truncate">
+              <span className="sm:hidden">Quant Jobs</span>
+              <span className="hidden sm:inline">Quant Job Market</span>
+            </span>
+            <span className="hidden sm:inline-flex items-center gap-1 text-[11px] text-[#10b981] ml-1.5">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10b981] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#10b981]"></span>
+              </span>
+              updated daily
+            </span>
+          </div>
+          <a
+            href="https://github.com/kadoa-org/quant-job-market"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sm:hidden flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#191919] text-white text-[11px] font-medium hover:bg-[#333] transition-colors flex-shrink-0"
+          >
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+          </a>
         </div>
 
-        <div className="flex items-center gap-0.5 flex-shrink-0">
+        <div className="flex items-center gap-0.5 flex-shrink-0 -mx-3 sm:mx-0 px-3 sm:px-0 pb-1.5 sm:pb-0 overflow-x-auto sm:overflow-visible">
           {[
             { key: "firms", label: "Firms" },
             { key: "table", label: "Jobs" },
@@ -187,7 +214,7 @@ export default function App() {
                 setView(key);
                 if (key === "firms") setSelectedFirm(null);
               }}
-              className={`px-2 sm:px-2.5 h-7 rounded-full text-[13px] sm:text-[13.5px] font-medium transition-colors whitespace-nowrap ${
+              className={`px-2.5 h-7 rounded-full text-[13px] sm:text-[13.5px] font-medium transition-colors whitespace-nowrap ${
                 view === key ? "bg-[#ededef] text-[#191919]" : "text-[#5c5c5f] hover:text-[#191919]"
               }`}
             >
@@ -196,7 +223,7 @@ export default function App() {
           ))}
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
           <div className="hidden sm:flex items-center gap-3 text-xs text-gray-400">
             <span>{totalJobs.toLocaleString()} jobs</span>
             <span className="w-px h-3 bg-gray-200" />
@@ -206,16 +233,26 @@ export default function App() {
             href="https://github.com/kadoa-org/quant-job-market"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-[#191919] text-white text-[11px] sm:text-[12px] font-medium hover:bg-[#333] transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#191919] text-white text-[12px] font-medium hover:bg-[#333] transition-colors"
           >
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-            <span className="hidden sm:inline">Star on GitHub</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+            <span>Star on GitHub</span>
           </a>
         </div>
       </header>
 
       {view !== "techstack" && view !== "locations" && (
-        <FilterBar filters={filters} setFilters={setFilters} jobs={filteredJobs} allJobs={jobs} selectedFirm={selectedFirm} onClearFirm={() => setSelectedFirm(null)} onSelectFirm={setSelectedFirm} />
+        <FilterBar
+          filters={filters}
+          setFilters={setFilters}
+          jobs={filteredJobs}
+          allJobs={jobs}
+          selectedFirm={selectedFirm}
+          onClearFirm={() => setSelectedFirm(null)}
+          onSelectFirm={setSelectedFirm}
+        />
       )}
 
       <main className="flex-1 relative sm:overflow-hidden">

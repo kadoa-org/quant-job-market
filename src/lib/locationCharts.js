@@ -262,6 +262,50 @@ export function buildLocationsLollipopSvg(cities) {
   return { svg: axisTicks.join("") + headers + rows, width: W, height };
 }
 
+// Compact mobile variant of the cities chart. Drops the "Top firms"
+// inline text (keep it for desktop) so flag + city + bar + total all
+// fit in a phone viewport without horizontal scroll.
+export function buildLocationsLollipopSvgMobile(cities) {
+  const W = 360;
+  const left = 8;
+  const top = 28;
+  const rowH = 30;
+  const barH = 11;
+  const BAR_FILL = "#0f766e";
+
+  const flagW = 22;
+  const cityLabelW = 78;
+  const totalW = 36;
+  const barXStart = left + flagW + cityLabelW + 10;
+  const totalX = W - totalW - 4;
+  const barXEnd = totalX - 8;
+  const barMaxW = barXEnd - barXStart;
+
+  const maxCityTotal = Math.max(...cities.map((c) => c.total), 1);
+  const xFor = (n) => (n / maxCityTotal) * barMaxW;
+
+  const headers =
+    `<text x="${left + flagW + cityLabelW}" y="${top - 9}" text-anchor="end" font-size="11" font-weight="500" fill="#7a7d80">City</text>` +
+    `<text x="${totalX + totalW - 4}" y="${top - 9}" text-anchor="end" font-size="11" font-weight="500" fill="#7a7d80">Total</text>`;
+
+  const rows = cities
+    .map((c, i) => {
+      const y = top + i * rowH + rowH / 2;
+      const flag = flagEmoji(CITY_ISO[c.name]);
+      const barW = xFor(c.total);
+      return [
+        `<text x="${left + flagW - 4}" y="${y + 5}" text-anchor="end" font-size="15">${flag}</text>`,
+        `<text x="${left + flagW + cityLabelW}" y="${y + 4}" text-anchor="end" font-size="12" font-weight="500" fill="#191919">${escapeText(c.name)}</text>`,
+        `<rect x="${barXStart}" y="${y - barH / 2}" width="${barW}" height="${barH}" rx="2" fill="${BAR_FILL}" fill-opacity="0.85"/>`,
+        `<text x="${totalX + totalW - 4}" y="${y + 4}" text-anchor="end" font-size="12" font-weight="500" fill="#191919" font-variant-numeric="tabular-nums">${c.total}</text>`,
+      ].join("");
+    })
+    .join("");
+
+  const height = top + cities.length * rowH + 8;
+  return { svg: headers + rows, width: W, height };
+}
+
 export function buildHybridLeaderboardSvg(hybridLeaders) {
   // Aligned to the locations chart above: same column geometry, same bar
   // height, same Linear-style minimal chrome.
@@ -294,6 +338,44 @@ export function buildHybridLeaderboardSvg(hybridLeaders) {
         `<text x="${labelX}" y="${y + 5}" text-anchor="end" font-size="14" font-weight="500" fill="#191919">${escapeText(l.firm)}</text>`,
         `<rect x="${barX}" y="${y - barH / 2}" width="${barW}" height="${barH}" rx="3" fill="${BAR_FILL}" fill-opacity="0.85"/>`,
         `<text x="${barX + barW + 8}" y="${y + 5}" font-size="13" font-weight="500" fill="#191919" font-variant-numeric="tabular-nums">${l.pct.toFixed(0)}% <tspan fill="#9a9d9a" font-weight="400">${breakdown}</tspan></text>`,
+      ].join("");
+    })
+    .join("");
+
+  const height = top + hybridLeaders.length * rowH + 8;
+  return { svg: headers + rows, width: W, height };
+}
+
+// Compact mobile variant of the hybrid leaderboard.
+export function buildHybridLeaderboardSvgMobile(hybridLeaders) {
+  if (hybridLeaders.length === 0) return { svg: "", width: 0, height: 0 };
+  const W = 360;
+  const left = 8;
+  const top = 28;
+  const rowH = 30;
+  const barH = 11;
+  const BAR_FILL = "#0f766e";
+
+  const firmW = 96;
+  const labelX = left + firmW;
+  const barX = labelX + 10;
+  const numW = 86;
+  const barMaxW = W - firmW - 10 - numW - left * 2;
+
+  const maxPct = Math.max(...hybridLeaders.map((l) => l.pct), 60);
+
+  const headers =
+    `<text x="${labelX}" y="${top - 9}" text-anchor="end" font-size="11" font-weight="500" fill="#7a7d80">Firm</text>` +
+    `<text x="${barX}" y="${top - 9}" font-size="11" font-weight="500" fill="#7a7d80">% hybrid or remote</text>`;
+
+  const rows = hybridLeaders
+    .map((l, i) => {
+      const y = top + i * rowH + rowH / 2;
+      const barW = (l.pct / maxPct) * barMaxW;
+      return [
+        `<text x="${labelX}" y="${y + 4}" text-anchor="end" font-size="12" font-weight="500" fill="#191919">${escapeText(l.firm)}</text>`,
+        `<rect x="${barX}" y="${y - barH / 2}" width="${barW}" height="${barH}" rx="2" fill="${BAR_FILL}" fill-opacity="0.85"/>`,
+        `<text x="${barX + barW + 6}" y="${y + 4}" font-size="12" font-weight="500" fill="#191919" font-variant-numeric="tabular-nums">${l.pct.toFixed(0)}% <tspan fill="#9a9d9a" font-weight="400">${l.flex ?? l.hybrid}/${l.total}</tspan></text>`,
       ].join("");
     })
     .join("");
