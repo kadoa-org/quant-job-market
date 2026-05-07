@@ -8,9 +8,12 @@ import {
   buildLocationsLollipopSvgMobile,
 } from "./lib/locationCharts";
 
-function svgString(s) {
+function svgString(s, { fluid = false } = {}) {
   if (!s || !s.svg) return "";
-  return `<svg width="${s.width}" height="${s.height}" viewBox="0 0 ${s.width} ${s.height}" xmlns="http://www.w3.org/2000/svg">${s.svg}</svg>`;
+  const sizeAttrs = fluid
+    ? `viewBox="0 0 ${s.width} ${s.height}" style="width:100%;height:auto;display:block"`
+    : `width="${s.width}" height="${s.height}" viewBox="0 0 ${s.width} ${s.height}"`;
+  return `<svg ${sizeAttrs} xmlns="http://www.w3.org/2000/svg">${s.svg}</svg>`;
 }
 
 export default function LocationHeatmap({ jobs }) {
@@ -43,11 +46,11 @@ export default function LocationHeatmap({ jobs }) {
             title="Top quant cities"
             subtitle="Bar length is total quant postings; the right column (desktop) lists the four firms hiring most in each city."
           >
-            {/* Mobile: compact 360px chart, no horizontal scroll */}
+            {/* Mobile: compact chart that scales down to viewport */}
             <div
               className="sm:hidden"
               // biome-ignore lint/security/noDangerouslySetInnerHtml: SVG generated locally from trusted aggregation
-              dangerouslySetInnerHTML={{ __html: svgString(lollipopMobile) }}
+              dangerouslySetInnerHTML={{ __html: svgString(lollipopMobile, { fluid: true }) }}
             />
             {/* Desktop: full chart with top firms list */}
             <div className="hidden sm:block overflow-x-auto -mx-4 sm:mx-0">
@@ -67,7 +70,7 @@ export default function LocationHeatmap({ jobs }) {
               <div
                 className="sm:hidden"
                 // biome-ignore lint/security/noDangerouslySetInnerHtml: SVG generated locally from trusted aggregation
-                dangerouslySetInnerHTML={{ __html: svgString(hybridMobile) }}
+                dangerouslySetInnerHTML={{ __html: svgString(hybridMobile, { fluid: true }) }}
               />
               <div className="hidden sm:block overflow-x-auto -mx-4 sm:mx-0">
                 <div
