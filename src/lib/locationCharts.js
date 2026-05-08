@@ -79,6 +79,7 @@ const CITY_ISO = {
   Zurich: "CH",
   Houston: "US",
   Austin: "US",
+  Berkeley: "US",
 };
 
 const ALLOWED_TYPES = new Set(["proprietary", "market_maker", "hedge_fund"]);
