@@ -223,7 +223,7 @@ export default function TechStackHeatmap({ jobs }) {
 
   return (
     <div className="h-full overflow-auto bg-[#fbfbfa]">
-      <div className="px-6 py-6 sm:px-10 sm:py-8 max-w-[1380px] mx-auto">
+      <div className="px-3 py-6 sm:px-3 sm:py-8 max-w-[1380px] mx-auto">
         <h1 className="text-[26px] sm:text-[30px] font-bold leading-tight tracking-tight text-[#1a1a1a] mb-1">
           Quant tech stack
         </h1>
