@@ -27,9 +27,17 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
     return [...filtered].sort((a, b) => {
       let va, vb;
       switch (sortBy) {
-        case "salary": va = a.salary || 0; vb = b.salary || 0; break;
-        case "datePosted": va = a.datePosted || ""; vb = b.datePosted || ""; break;
-        default: va = a[sortBy] || ""; vb = b[sortBy] || "";
+        case "salary":
+          va = a.salary || 0;
+          vb = b.salary || 0;
+          break;
+        case "datePosted":
+          va = a.datePosted || "";
+          vb = b.datePosted || "";
+          break;
+        default:
+          va = a[sortBy] || "";
+          vb = b[sortBy] || "";
       }
       if (va < vb) return sortOrder === "asc" ? -1 : 1;
       if (va > vb) return sortOrder === "asc" ? 1 : -1;
@@ -42,23 +50,34 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
 
   const toggleSort = (col) => {
     if (sortBy === col) setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-    else { setSortBy(col); setSortOrder("asc"); }
+    else {
+      setSortBy(col);
+      setSortOrder("asc");
+    }
     setPage(1);
   };
 
-  const sortIcon = (col) => sortBy !== col ? "" : sortOrder === "asc" ? " ^" : " v";
+  const sortIcon = (col) => (sortBy !== col ? "" : sortOrder === "asc" ? " ^" : " v");
 
   const exportCsv = () => {
     const headers = ["Firm", "Title", "Role", "Location", "Seniority", "Salary", "Languages", "Date Posted"];
     const rows = sorted.map((j) => [
-      j.firmName, j.jobTitle, ROLE_LABELS[j.roleCategory] || j.roleCategory,
-      j.locations.join("; "), SENIORITY_LABELS[j.seniorityLevel] || j.seniorityLevel,
-      j.salary || "", j.programmingLanguages.join(", "), j.datePosted || "",
+      j.firmName,
+      j.jobTitle,
+      ROLE_LABELS[j.roleCategory] || j.roleCategory,
+      j.locations.join("; "),
+      SENIORITY_LABELS[j.seniorityLevel] || j.seniorityLevel,
+      j.salary || "",
+      j.programmingLanguages.join(", "),
+      j.datePosted || "",
     ]);
     const csv = [headers, ...rows].map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a"); a.href = url; a.download = "quant-jobs.csv"; a.click();
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "quant-jobs.csv";
+    a.click();
     URL.revokeObjectURL(url);
   };
 
@@ -69,11 +88,17 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
           type="text"
           placeholder="Search jobs, firms, skills..."
           value={search}
-          onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
           className="flex-1 min-w-0 bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-[13px] text-gray-900 placeholder:text-gray-400 outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-100"
         />
         <span className="text-[11px] text-gray-400 whitespace-nowrap hidden sm:inline">{filtered.length} results</span>
-        <button onClick={exportCsv} className="px-2 sm:px-3 py-1.5 rounded-md text-[11px] text-gray-500 hover:text-gray-700 border border-gray-200 hover:border-gray-300 whitespace-nowrap flex-shrink-0">
+        <button
+          onClick={exportCsv}
+          className="px-2 sm:px-3 py-1.5 rounded-md text-[11px] text-gray-500 hover:text-gray-700 border border-gray-200 hover:border-gray-300 whitespace-nowrap flex-shrink-0"
+        >
           <span className="hidden sm:inline">Export </span>CSV
         </button>
       </div>
@@ -92,9 +117,13 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
                 { key: "programmingLanguages", label: "Languages", w: "w-32", hide: "hidden lg:table-cell" },
                 { key: "datePosted", label: "Posted", w: "w-20", hide: "hidden lg:table-cell" },
               ].map(({ key, label, w, hide }) => (
-                <th key={key} onClick={() => toggleSort(key)}
-                  className={`${w} ${hide || ""} px-3 sm:px-4 py-2 text-left text-[11px] font-medium uppercase tracking-wider cursor-pointer hover:text-gray-600 select-none`}>
-                  {label}{sortIcon(key)}
+                <th
+                  key={key}
+                  onClick={() => toggleSort(key)}
+                  className={`${w} ${hide || ""} px-3 sm:px-4 py-2 text-left text-[11px] font-medium uppercase tracking-wider cursor-pointer hover:text-gray-600 select-none`}
+                >
+                  {label}
+                  {sortIcon(key)}
                 </th>
               ))}
             </tr>
@@ -104,21 +133,37 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
               <tr key={j.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
                 <td className="px-3 sm:px-4 py-2.5 text-gray-900 font-medium">{j.firmName}</td>
                 <td className="px-3 sm:px-4 py-2.5">
-                  {(j.url || j.applyUrl) ? (
-                    <a href={j.url || j.applyUrl} target="_blank" rel="noreferrer" className="text-violet-600 hover:text-violet-700 hover:underline underline-offset-2">
+                  {j.url || j.applyUrl ? (
+                    <a
+                      href={j.url || j.applyUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-violet-600 hover:text-violet-700 hover:underline underline-offset-2"
+                    >
                       {j.jobTitle || "View posting"}
                     </a>
                   ) : (
                     <span className="text-gray-500">{j.jobTitle || "-"}</span>
                   )}
                 </td>
-                <td className="hidden sm:table-cell px-3 sm:px-4 py-2.5 text-gray-500">{ROLE_LABELS[j.roleCategory] || j.roleCategory}</td>
+                <td className="hidden sm:table-cell px-3 sm:px-4 py-2.5 text-gray-500">
+                  {ROLE_LABELS[j.roleCategory] || j.roleCategory}
+                </td>
                 <td className="px-3 sm:px-4 py-2.5 text-gray-500">{j.locations.slice(0, 2).join(", ")}</td>
-                <td className="hidden md:table-cell px-3 sm:px-4 py-2.5 text-gray-500">{SENIORITY_LABELS[j.seniorityLevel] || j.seniorityLevel}</td>
-                <td className="hidden md:table-cell px-3 sm:px-4 py-2.5 text-gray-500">{j.salary ? `$${(j.salary / 1000).toFixed(0)}k` : "-"}</td>
+                <td className="hidden md:table-cell px-3 sm:px-4 py-2.5 text-gray-500">
+                  {SENIORITY_LABELS[j.seniorityLevel] || j.seniorityLevel}
+                </td>
+                <td className="hidden md:table-cell px-3 sm:px-4 py-2.5 text-gray-500">
+                  {j.salary ? `$${(j.salary / 1000).toFixed(0)}k` : "-"}
+                </td>
                 <td className="hidden lg:table-cell px-3 sm:px-4 py-2.5">
                   {j.programmingLanguages.slice(0, 3).map((l) => (
-                    <span key={l} className="inline-block bg-gray-100 text-gray-600 rounded px-1.5 py-0.5 mr-1 mb-0.5 text-[10px]">{l}</span>
+                    <span
+                      key={l}
+                      className="inline-block bg-gray-100 text-gray-600 rounded px-1.5 py-0.5 mr-1 mb-0.5 text-[10px]"
+                    >
+                      {l}
+                    </span>
                   ))}
                 </td>
                 <td className="hidden lg:table-cell px-3 sm:px-4 py-2.5 text-gray-400">{j.datePosted || "-"}</td>
@@ -128,11 +173,25 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
         </table>
       </div>
 
-      <div className="flex items-center justify-between px-5 py-2 border-t border-gray-100 text-[12px] text-gray-400">
-        <span>Page {page} of {totalPages}</span>
-        <div className="flex gap-1">
-          <button disabled={page <= 1} onClick={() => setPage(page - 1)} className="px-2.5 py-1 rounded-md border border-gray-200 hover:bg-gray-50 disabled:opacity-30">Prev</button>
-          <button disabled={page >= totalPages} onClick={() => setPage(page + 1)} className="px-2.5 py-1 rounded-md border border-gray-200 hover:bg-gray-50 disabled:opacity-30">Next</button>
+      <div className="flex items-center justify-between px-5 py-2 border-t border-gray-100 text-[12px] text-gray-500">
+        <span>
+          Page {page} of {totalPages}
+        </span>
+        <div className="flex gap-1.5">
+          <button
+            disabled={page <= 1}
+            onClick={() => setPage(page - 1)}
+            className="px-3 py-1 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            Prev
+          </button>
+          <button
+            disabled={page >= totalPages}
+            onClick={() => setPage(page + 1)}
+            className="px-3 py-1 rounded-md bg-[#191919] text-white border border-[#191919] hover:bg-[#333] disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
