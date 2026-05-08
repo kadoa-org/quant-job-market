@@ -42,10 +42,7 @@ export default function LocationHeatmap({ jobs }) {
         </p>
 
         <div className="grid grid-cols-1 gap-4">
-          <ChartCard
-            title="Top quant cities"
-            subtitle="Bar length is total quant postings; the right column (desktop) lists the four firms hiring most in each city."
-          >
+          <ChartCard title="Top quant cities">
             {/* Mobile: compact chart that scales down to viewport */}
             <div
               className="sm:hidden"
@@ -63,10 +60,7 @@ export default function LocationHeatmap({ jobs }) {
           </ChartCard>
 
           {hybridLeaders.length > 0 && (
-            <ChartCard
-              title="Hybrid or remote"
-              subtitle="Quant defaults to in-office. The few firms that say hybrid or fully remote in writing."
-            >
+            <ChartCard title="Hybrid or remote">
               <div
                 className="sm:hidden"
                 // biome-ignore lint/security/noDangerouslySetInnerHtml: SVG generated locally from trusted aggregation
