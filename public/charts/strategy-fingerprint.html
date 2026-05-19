@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Strategy DNA of 25 quant firms — quant.kadoa.com</title>
+<title>Hiring mix at top quant firms — quant.kadoa.com</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
@@ -15,16 +15,18 @@
     --ink-4:#9aa0a8;
     --rule:#ececee;
     --track:#eef0f2;
-    /* Categorical 5-hue palette — well-separated on color wheel:
-       red (HFT) → purple (Research) → green (Algo) → blue (PM) → gray (Eng). */
+    /* Categorical 6-hue palette — well-separated on color wheel:
+       red (HFT) → purple (Research) → green (Algo) → amber (Risk/PC) → blue (PM) → gray (Eng). */
     --hft:#dc5648;     /* warm red */
     --res:#a455d2;     /* purple */
     --algo:#1fab74;    /* vibrant green */
+    --riskpc:#d99526;  /* amber/ochre */
     --pm:#2f78de;      /* clear blue */
     --eng:#c8cdd2;     /* light neutral — recedes */
     --hft-tint:#fbe8e5;
     --res-tint:#f3e8f9;
     --algo-tint:#dcf2e8;
+    --riskpc-tint:#fbeede;
     --pm-tint:#e1edfa;
   }
   * { box-sizing:border-box; }
@@ -43,223 +45,208 @@
   .legend .item { display:flex; align-items:center; gap:8px; }
   .legend .swatch { width:9px; height:9px; border-radius:2px; }
 
-  .row { display:grid; grid-template-columns:188px 122px 1fr 44px;
+  .row { display:grid; grid-template-columns:200px 1fr 44px;
     align-items:center; gap:18px; padding:5px 0; font-size:13.5px; }
   .row + .row { border-top:1px solid #f4f5f6; }
   .firm { color:var(--ink); font-weight:500; white-space:nowrap;
     overflow:hidden; text-overflow:ellipsis; letter-spacing:-0.008em; }
 
-  /* Inline "47% Research" accent next to firm name — pre-attentive anchor */
-  .accent-cell { font-size:11.5px; font-weight:500; font-variant-numeric:tabular-nums;
-    letter-spacing:-0.003em; text-align:right; white-space:nowrap; padding-right:4px; }
-  .accent { padding:2px 7px; border-radius:3px; display:inline-block; line-height:1.4; }
-  .accent-hft  { color:var(--hft);  background:var(--hft-tint); }
-  .accent-res  { color:var(--res);  background:var(--res-tint); }
-  .accent-algo { color:var(--algo); background:var(--algo-tint); }
-  .accent-pm   { color:var(--pm);   background:var(--pm-tint); }
-
   .bar-track { display:flex; height:22px; border-radius:3px; overflow:hidden;
     background:var(--track); }
   .seg { height:100%; }
-  .seg.hft  { background:var(--hft); }
-  .seg.res  { background:var(--res); }
-  .seg.algo { background:var(--algo); }
-  .seg.pm   { background:var(--pm); }
-  .seg.eng  { background:var(--eng); }
+  .seg.hft    { background:var(--hft); }
+  .seg.res    { background:var(--res); }
+  .seg.algo   { background:var(--algo); }
+  .seg.riskpc { background:var(--riskpc); }
+  .seg.pm     { background:var(--pm); }
+  .seg.eng    { background:var(--eng); }
 
   .total { color:var(--ink-2); font-weight:500; font-size:12.5px;
     font-variant-numeric:tabular-nums; text-align:right; letter-spacing:-0.003em; }
 
-  /* Column header row above the data — quiet, instructional */
-  .col-head { display:grid; grid-template-columns:188px 122px 1fr 44px;
+  /* Quiet axis ticks under the bars */
+  .col-head { display:grid; grid-template-columns:200px 1fr 44px;
     align-items:end; gap:18px; padding:0 0 10px 0;
     border-bottom:1px solid var(--rule); margin-bottom:8px;
     font-size:11px; font-weight:500; color:var(--ink-3);
     letter-spacing:0.04em; text-transform:uppercase; }
   .col-head .right { text-align:right; }
-  .col-head .axis { text-align:left; padding-left:1px; letter-spacing:0; text-transform:none;
+  .col-head .axis { padding-left:1px; letter-spacing:0; text-transform:none;
     font-size:10.5px; color:var(--ink-4); display:flex; justify-content:space-between; }
 
-  .footer { display:flex; justify-content:space-between; align-items:baseline;
-    margin-top:32px; font-size:11.5px; color:var(--ink-3); font-weight:450;
-    padding-top:18px; border-top:1px solid var(--rule); gap:24px; }
-  .footer .source { color:var(--ink); font-weight:500; white-space:nowrap;
+  .footer { display:flex; justify-content:flex-end; align-items:baseline;
+    margin-top:24px; font-size:11.5px; color:var(--ink-3); font-weight:450; }
+  .footer .source { color:var(--ink-3); font-weight:500; white-space:nowrap;
     letter-spacing:-0.008em; }
 </style>
 </head>
 <body>
   <div class="frame">
-    <h1 class="title">Strategy DNA of 25 quant firms</h1>
+    <h1 class="title">Hiring mix at top quant firms</h1>
 
     <div class="legend">
       <div class="item"><span class="swatch" style="background:var(--hft)"></span>HFT / Latency</div>
-      <div class="item"><span class="swatch" style="background:var(--res)"></span>Systematic Research</div>
-      <div class="item"><span class="swatch" style="background:var(--algo)"></span>Algo / Quant Trading</div>
-      <div class="item"><span class="swatch" style="background:var(--pm)"></span>PM / Pod seat</div>
-      <div class="item"><span class="swatch" style="background:var(--eng)"></span>Engineering Core</div>
+      <div class="item"><span class="swatch" style="background:var(--res)"></span>Quant Research</div>
+      <div class="item"><span class="swatch" style="background:var(--algo)"></span>Strats / Algo</div>
+      <div class="item"><span class="swatch" style="background:var(--riskpc)"></span>Risk &amp; Portfolio Construction</div>
+      <div class="item"><span class="swatch" style="background:var(--pm)"></span>PM</div>
+      <div class="item"><span class="swatch" style="background:var(--eng)"></span>Engineering &amp; Platform</div>
     </div>
 
     <div class="col-head">
       <div>Firm</div>
-      <div class="right">Lean</div>
       <div class="axis"><span>0%</span><span>25</span><span>50</span><span>75</span><span>100%</span></div>
       <div class="right">Jobs</div>
     </div>
 
     <div class="row">
-      <div class="firm">Optiver</div>
-      <div class="accent-cell"><span class="accent accent-hft">32%&nbsp;HFT</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:32%"></div><div class="seg res" style="width:10%"></div><div class="seg algo" style="width:12%"></div><div class="seg pm" style="width:1%"></div><div class="seg eng" style="width:45%"></div></div>
-      <div class="total">85</div>
+      <div class="firm">Akuna Capital</div>
+      <div class="bar-track"><div class="seg hft" style="width:58%"></div><div class="seg res" style="width:17%"></div><div class="seg algo" style="width:4%"></div><div class="seg eng" style="width:21%"></div></div>
+      <div class="total">24</div>
     </div>
     <div class="row">
-      <div class="firm">Maven Securities</div>
-      <div class="accent-cell"><span class="accent accent-hft">28%&nbsp;HFT</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:28%"></div><div class="seg res" style="width:3%"></div><div class="seg algo" style="width:19%"></div><div class="seg pm" style="width:28%"></div><div class="seg eng" style="width:22%"></div></div>
-      <div class="total">32</div>
-    </div>
-    <div class="row">
-      <div class="firm">Virtu</div>
-      <div class="accent-cell"><span class="accent accent-hft">27%&nbsp;HFT</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:27%"></div><div class="seg res" style="width:23%"></div><div class="seg algo" style="width:23%"></div><div class="seg pm" style="width:4%"></div><div class="seg eng" style="width:23%"></div></div>
-      <div class="total">30</div>
-    </div>
-    <div class="row">
-      <div class="firm">Hudson River Trading</div>
-      <div class="accent-cell"><span class="accent accent-hft">25%&nbsp;HFT</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:25%"></div><div class="seg res" style="width:10%"></div><div class="seg algo" style="width:9%"></div><div class="seg pm" style="width:2%"></div><div class="seg eng" style="width:54%"></div></div>
-      <div class="total">52</div>
-    </div>
-    <div class="row">
-      <div class="firm">Tower Research</div>
-      <div class="accent-cell"><span class="accent accent-hft">24%&nbsp;HFT</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:24%"></div><div class="seg res" style="width:22%"></div><div class="seg algo" style="width:9%"></div><div class="seg pm" style="width:3%"></div><div class="seg eng" style="width:42%"></div></div>
-      <div class="total">59</div>
-    </div>
-    <div class="row">
-      <div class="firm">IMC</div>
-      <div class="accent-cell"><span class="accent accent-res">20%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:18%"></div><div class="seg res" style="width:20%"></div><div class="seg algo" style="width:18%"></div><div class="seg pm" style="width:11%"></div><div class="seg eng" style="width:33%"></div></div>
-      <div class="total">55</div>
-    </div>
-    <div class="row">
-      <div class="firm">Qube RT (QRT)</div>
-      <div class="accent-cell"><span class="accent accent-hft">17%&nbsp;HFT</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:17%"></div><div class="seg res" style="width:16%"></div><div class="seg algo" style="width:11%"></div><div class="seg pm" style="width:1%"></div><div class="seg eng" style="width:55%"></div></div>
-      <div class="total">215</div>
-    </div>
-    <div class="row">
-      <div class="firm">DRW</div>
-      <div class="accent-cell"><span class="accent accent-algo">19%&nbsp;Algo</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:15%"></div><div class="seg res" style="width:8%"></div><div class="seg algo" style="width:19%"></div><div class="seg pm" style="width:4%"></div><div class="seg eng" style="width:54%"></div></div>
-      <div class="total">165</div>
-    </div>
-    <div class="row">
-      <div class="firm">Susquehanna (SIG)</div>
-      <div class="accent-cell"><span class="accent accent-res">22%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:14%"></div><div class="seg res" style="width:22%"></div><div class="seg algo" style="width:21%"></div><div class="seg pm" style="width:14%"></div><div class="seg eng" style="width:29%"></div></div>
-      <div class="total">153</div>
+      <div class="firm">Flow Traders</div>
+      <div class="bar-track"><div class="seg hft" style="width:57%"></div><div class="seg res" style="width:22%"></div><div class="seg algo" style="width:14%"></div><div class="seg eng" style="width:7%"></div></div>
+      <div class="total">14</div>
     </div>
     <div class="row">
       <div class="firm">DV Trading</div>
-      <div class="accent-cell"><span class="accent accent-pm">23%&nbsp;PM</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:14%"></div><div class="seg res" style="width:11%"></div><div class="seg algo" style="width:20%"></div><div class="seg pm" style="width:23%"></div><div class="seg eng" style="width:32%"></div></div>
-      <div class="total">44</div>
+      <div class="bar-track"><div class="seg hft" style="width:47%"></div><div class="seg res" style="width:2%"></div><div class="seg algo" style="width:7%"></div><div class="seg riskpc" style="width:2%"></div><div class="seg pm" style="width:13%"></div><div class="seg eng" style="width:29%"></div></div>
+      <div class="total">45</div>
     </div>
     <div class="row">
-      <div class="firm">Two Sigma</div>
-      <div class="accent-cell"><span class="accent accent-res">25%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:13%"></div><div class="seg res" style="width:25%"></div><div class="seg algo" style="width:3%"></div><div class="seg eng" style="width:59%"></div></div>
+      <div class="firm">Virtu</div>
+      <div class="bar-track"><div class="seg hft" style="width:44%"></div><div class="seg res" style="width:16%"></div><div class="seg algo" style="width:15%"></div><div class="seg eng" style="width:25%"></div></div>
       <div class="total">32</div>
     </div>
     <div class="row">
-      <div class="firm">Citadel Securities</div>
-      <div class="accent-cell"><span class="accent accent-res">40%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:12%"></div><div class="seg res" style="width:40%"></div><div class="seg algo" style="width:23%"></div><div class="seg eng" style="width:25%"></div></div>
+      <div class="firm">Maven Securities</div>
+      <div class="bar-track"><div class="seg hft" style="width:40%"></div><div class="seg res" style="width:3%"></div><div class="seg algo" style="width:7%"></div><div class="seg pm" style="width:27%"></div><div class="seg eng" style="width:23%"></div></div>
+      <div class="total">30</div>
+    </div>
+    <div class="row">
+      <div class="firm">Optiver</div>
+      <div class="bar-track"><div class="seg hft" style="width:35%"></div><div class="seg res" style="width:17%"></div><div class="seg algo" style="width:8%"></div><div class="seg eng" style="width:40%"></div></div>
+      <div class="total">83</div>
+    </div>
+    <div class="row">
+      <div class="firm">IMC</div>
+      <div class="bar-track"><div class="seg hft" style="width:33%"></div><div class="seg res" style="width:18%"></div><div class="seg algo" style="width:16%"></div><div class="seg pm" style="width:3%"></div><div class="seg eng" style="width:30%"></div></div>
       <div class="total">57</div>
     </div>
     <div class="row">
+      <div class="firm">Tower Research</div>
+      <div class="bar-track"><div class="seg hft" style="width:28%"></div><div class="seg res" style="width:13%"></div><div class="seg algo" style="width:5%"></div><div class="seg riskpc" style="width:7%"></div><div class="seg pm" style="width:2%"></div><div class="seg eng" style="width:45%"></div></div>
+      <div class="total">60</div>
+    </div>
+    <div class="row">
+      <div class="firm">Citadel Securities</div>
+      <div class="bar-track"><div class="seg hft" style="width:25%"></div><div class="seg res" style="width:42%"></div><div class="seg algo" style="width:10%"></div><div class="seg eng" style="width:23%"></div></div>
+      <div class="total">57</div>
+    </div>
+    <div class="row">
+      <div class="firm">Hudson River Trading</div>
+      <div class="bar-track"><div class="seg hft" style="width:22%"></div><div class="seg res" style="width:6%"></div><div class="seg algo" style="width:11%"></div><div class="seg riskpc" style="width:4%"></div><div class="seg eng" style="width:57%"></div></div>
+      <div class="total">54</div>
+    </div>
+    <div class="row">
+      <div class="firm">Qube RT (QRT)</div>
+      <div class="bar-track"><div class="seg hft" style="width:19%"></div><div class="seg res" style="width:12%"></div><div class="seg algo" style="width:11%"></div><div class="seg riskpc" style="width:5%"></div><div class="seg eng" style="width:53%"></div></div>
+      <div class="total">219</div>
+    </div>
+    <div class="row">
       <div class="firm">Jump Trading</div>
-      <div class="accent-cell"><span class="accent accent-res">35%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:12%"></div><div class="seg res" style="width:35%"></div><div class="seg algo" style="width:17%"></div><div class="seg eng" style="width:36%"></div></div>
-      <div class="total">52</div>
+      <div class="bar-track"><div class="seg hft" style="width:18%"></div><div class="seg res" style="width:33%"></div><div class="seg algo" style="width:13%"></div><div class="seg riskpc" style="width:6%"></div><div class="seg eng" style="width:30%"></div></div>
+      <div class="total">54</div>
+    </div>
+    <div class="row">
+      <div class="firm">Susquehanna (SIG)</div>
+      <div class="bar-track"><div class="seg hft" style="width:17%"></div><div class="seg res" style="width:24%"></div><div class="seg algo" style="width:21%"></div><div class="seg eng" style="width:38%"></div></div>
+      <div class="total">136</div>
+    </div>
+    <div class="row">
+      <div class="firm">DRW</div>
+      <div class="bar-track"><div class="seg hft" style="width:11%"></div><div class="seg res" style="width:10%"></div><div class="seg algo" style="width:25%"></div><div class="seg eng" style="width:54%"></div></div>
+      <div class="total">166</div>
+    </div>
+    <div class="row">
+      <div class="firm">Two Sigma</div>
+      <div class="bar-track"><div class="seg hft" style="width:10%"></div><div class="seg res" style="width:32%"></div><div class="seg algo" style="width:23%"></div><div class="seg riskpc" style="width:6%"></div><div class="seg eng" style="width:29%"></div></div>
+      <div class="total">31</div>
+    </div>
+    <div class="row">
+      <div class="firm">Millennium</div>
+      <div class="bar-track"><div class="seg hft" style="width:6%"></div><div class="seg res" style="width:6%"></div><div class="seg algo" style="width:25%"></div><div class="seg riskpc" style="width:5%"></div><div class="seg pm" style="width:5%"></div><div class="seg eng" style="width:53%"></div></div>
+      <div class="total">104</div>
+    </div>
+    <div class="row">
+      <div class="firm">Man Group</div>
+      <div class="bar-track"><div class="seg hft" style="width:6%"></div><div class="seg res" style="width:29%"></div><div class="seg algo" style="width:14%"></div><div class="seg riskpc" style="width:20%"></div><div class="seg eng" style="width:31%"></div></div>
+      <div class="total">35</div>
     </div>
     <div class="row">
       <div class="firm">Squarepoint</div>
-      <div class="accent-cell"><span class="accent accent-res">16%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:9%"></div><div class="seg res" style="width:16%"></div><div class="seg algo" style="width:7%"></div><div class="seg pm" style="width:6%"></div><div class="seg eng" style="width:62%"></div></div>
+      <div class="bar-track"><div class="seg hft" style="width:4%"></div><div class="seg res" style="width:13%"></div><div class="seg algo" style="width:17%"></div><div class="seg riskpc" style="width:3%"></div><div class="seg pm" style="width:6%"></div><div class="seg eng" style="width:57%"></div></div>
       <div class="total">69</div>
     </div>
     <div class="row">
       <div class="firm">Jane Street</div>
-      <div class="accent-cell"><span class="accent accent-res">14%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:7%"></div><div class="seg res" style="width:14%"></div><div class="seg algo" style="width:9%"></div><div class="seg pm" style="width:9%"></div><div class="seg eng" style="width:61%"></div></div>
-      <div class="total">161</div>
-    </div>
-    <div class="row">
-      <div class="firm">Millennium</div>
-      <div class="accent-cell"><span class="accent accent-algo">23%&nbsp;Algo</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:8%"></div><div class="seg res" style="width:8%"></div><div class="seg algo" style="width:23%"></div><div class="seg pm" style="width:13%"></div><div class="seg eng" style="width:48%"></div></div>
-      <div class="total">108</div>
-    </div>
-    <div class="row">
-      <div class="firm">Man Group</div>
-      <div class="accent-cell"><span class="accent accent-res">27%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:5%"></div><div class="seg res" style="width:27%"></div><div class="seg algo" style="width:14%"></div><div class="seg pm" style="width:16%"></div><div class="seg eng" style="width:38%"></div></div>
-      <div class="total">37</div>
-    </div>
-    <div class="row">
-      <div class="firm">WorldQuant</div>
-      <div class="accent-cell"><span class="accent accent-res">25%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:4%"></div><div class="seg res" style="width:25%"></div><div class="seg algo" style="width:5%"></div><div class="seg pm" style="width:10%"></div><div class="seg eng" style="width:56%"></div></div>
-      <div class="total">92</div>
+      <div class="bar-track"><div class="seg hft" style="width:4%"></div><div class="seg res" style="width:16%"></div><div class="seg algo" style="width:10%"></div><div class="seg pm" style="width:9%"></div><div class="seg eng" style="width:61%"></div></div>
+      <div class="total">163</div>
     </div>
     <div class="row">
       <div class="firm">G-Research</div>
-      <div class="accent-cell"><span class="accent accent-res">13%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:4%"></div><div class="seg res" style="width:13%"></div><div class="seg algo" style="width:6%"></div><div class="seg eng" style="width:77%"></div></div>
-      <div class="total">47</div>
-    </div>
-    <div class="row">
-      <div class="firm">Balyasny</div>
-      <div class="accent-cell"><span class="accent accent-res">37%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:3%"></div><div class="seg res" style="width:37%"></div><div class="seg algo" style="width:15%"></div><div class="seg pm" style="width:11%"></div><div class="seg eng" style="width:34%"></div></div>
-      <div class="total">98</div>
+      <div class="bar-track"><div class="seg hft" style="width:2%"></div><div class="seg res" style="width:12%"></div><div class="seg algo" style="width:4%"></div><div class="seg eng" style="width:82%"></div></div>
+      <div class="total">50</div>
     </div>
     <div class="row">
       <div class="firm">Point72</div>
-      <div class="accent-cell"><span class="accent accent-res">25%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg hft" style="width:1%"></div><div class="seg res" style="width:25%"></div><div class="seg algo" style="width:8%"></div><div class="seg pm" style="width:15%"></div><div class="seg eng" style="width:51%"></div></div>
-      <div class="total">223</div>
+      <div class="bar-track"><div class="seg res" style="width:25%"></div><div class="seg algo" style="width:11%"></div><div class="seg riskpc" style="width:3%"></div><div class="seg pm" style="width:3%"></div><div class="seg eng" style="width:58%"></div></div>
+      <div class="total">201</div>
+    </div>
+    <div class="row">
+      <div class="firm">WorldQuant</div>
+      <div class="bar-track"><div class="seg res" style="width:25%"></div><div class="seg algo" style="width:10%"></div><div class="seg pm" style="width:9%"></div><div class="seg eng" style="width:56%"></div></div>
+      <div class="total">93</div>
+    </div>
+    <div class="row">
+      <div class="firm">Balyasny</div>
+      <div class="bar-track"><div class="seg res" style="width:26%"></div><div class="seg algo" style="width:17%"></div><div class="seg riskpc" style="width:14%"></div><div class="seg eng" style="width:43%"></div></div>
+      <div class="total">85</div>
     </div>
     <div class="row">
       <div class="firm">D. E. Shaw</div>
-      <div class="accent-cell"><span class="accent accent-res">22%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg res" style="width:22%"></div><div class="seg algo" style="width:3%"></div><div class="seg pm" style="width:13%"></div><div class="seg eng" style="width:62%"></div></div>
-      <div class="total">60</div>
+      <div class="bar-track"><div class="seg res" style="width:20%"></div><div class="seg algo" style="width:4%"></div><div class="seg pm" style="width:6%"></div><div class="seg eng" style="width:70%"></div></div>
+      <div class="total">54</div>
     </div>
     <div class="row">
       <div class="firm">Voleon</div>
-      <div class="accent-cell"><span class="accent accent-res">43%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg res" style="width:43%"></div><div class="seg algo" style="width:7%"></div><div class="seg eng" style="width:50%"></div></div>
-      <div class="total">42</div>
-    </div>
-    <div class="row">
-      <div class="firm">Citadel</div>
-      <div class="accent-cell"><span class="accent accent-res">54%&nbsp;Research</span></div>
-      <div class="bar-track"><div class="seg res" style="width:54%"></div><div class="seg algo" style="width:3%"></div><div class="seg pm" style="width:17%"></div><div class="seg eng" style="width:26%"></div></div>
-      <div class="total">35</div>
+      <div class="bar-track"><div class="seg res" style="width:41%"></div><div class="seg algo" style="width:5%"></div><div class="seg riskpc" style="width:2%"></div><div class="seg pm" style="width:2%"></div><div class="seg eng" style="width:50%"></div></div>
+      <div class="total">44</div>
     </div>
     <div class="row">
       <div class="firm">Schonfeld</div>
-      <div class="accent-cell"><span class="accent accent-algo">32%&nbsp;Algo</span></div>
-      <div class="bar-track"><div class="seg res" style="width:26%"></div><div class="seg algo" style="width:32%"></div><div class="seg pm" style="width:3%"></div><div class="seg eng" style="width:39%"></div></div>
-      <div class="total">31</div>
+      <div class="bar-track"><div class="seg res" style="width:12%"></div><div class="seg algo" style="width:24%"></div><div class="seg riskpc" style="width:27%"></div><div class="seg pm" style="width:3%"></div><div class="seg eng" style="width:34%"></div></div>
+      <div class="total">33</div>
+    </div>
+    <div class="row">
+      <div class="firm">Citadel</div>
+      <div class="bar-track"><div class="seg res" style="width:60%"></div><div class="seg pm" style="width:9%"></div><div class="seg eng" style="width:31%"></div></div>
+      <div class="total">32</div>
+    </div>
+    <div class="row">
+      <div class="firm">AQR</div>
+      <div class="bar-track"><div class="seg res" style="width:18%"></div><div class="seg algo" style="width:17%"></div><div class="seg pm" style="width:6%"></div><div class="seg eng" style="width:59%"></div></div>
+      <div class="total">17</div>
+    </div>
+    <div class="row">
+      <div class="firm">Renaissance Technologies</div>
+      <div class="bar-track"><div class="seg res" style="width:25%"></div><div class="seg algo" style="width:13%"></div><div class="seg eng" style="width:62%"></div></div>
+      <div class="total">8</div>
     </div>
 
     <div class="footer">
-      <div>Each bar is 100% of a firm's quant-track postings. "Lean" is the largest non-engineering category. Sort: HFT share, descending. Long-only fundamental asset managers excluded.</div>
-      <div class="source">quant.kadoa.com · May 2026</div>
+      <div class="source">quant.kadoa.com · 2026-05-19</div>
     </div>
   </div>
 </body>
