@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Quant tech stack by firm — quant.kadoa.com</title>
+<style>
+  :root { --bg:#fbfbfa; --ink:#1a1a1a; --ink-muted:#6b6b6b; --rule:rgba(0,0,0,0.06); --accent:#0f766e; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; padding:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,Inter,"Segoe UI",sans-serif;
+    font-feature-settings:"tnum" 1, "ss01" 1; -webkit-font-smoothing:antialiased; }
+  .frame { width:1200px; padding:36px 48px 28px 48px; }
+  .eyebrow { font-size:12.5px; font-weight:600; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+  .title { font-size:30px; font-weight:700; line-height:1.15;
+    letter-spacing:-0.01em; margin:0 0 6px 0; }
+  .subtitle { font-size:14.5px; color:var(--ink-muted); margin:0 0 22px 0;
+    line-height:1.45; max-width:920px; }
+  .panels { display:grid; grid-template-columns:1fr 1fr; gap:24px 32px; }
+  .panel { padding:0; }
+  .panel header { display:flex; align-items:baseline; gap:10px; margin-bottom:12px;
+    border-bottom:1px solid var(--rule); padding-bottom:8px; }
+  .panel .label { display:inline-block; padding:3px 9px; border-radius:4px;
+    color:#fff; font-weight:600; font-size:13px; letter-spacing:0.01em; }
+  .panel .hint { font-size:12.5px; color:var(--ink-muted); }
+  .row { display:grid; grid-template-columns:160px 1fr 110px;
+    align-items:center; gap:10px; padding:5px 0;
+    font-size:13px; }
+  .firm { color:var(--ink); font-weight:500; white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis; }
+  .track { height:14px; border-radius:3px; background:rgba(0,0,0,0.04); position:relative; }
+  .bar { height:100%; border-radius:3px; }
+  .value { color:var(--ink); font-weight:600; font-size:13px;
+    font-variant-numeric:tabular-nums; }
+  .value .cnt { color:var(--ink-muted); font-weight:500; font-size:11.5px; }
+  .empty { color:var(--ink-muted); font-style:italic; padding:6px 0; }
+  .footer { display:flex; justify-content:space-between; align-items:baseline;
+    margin-top:24px; font-size:12.5px; color:var(--ink-muted); padding-top:14px;
+    border-top:1px solid var(--rule); }
+  .source { color:var(--ink); font-weight:600; }
+  .axis { display:flex; align-items:center; gap:8px; font-size:11.5px;
+    color:var(--ink-muted); margin-bottom:6px; }
+  .legend-row { display:grid; grid-template-columns:160px 1fr 110px; gap:10px; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="eyebrow">Quant Job Market · quant.kadoa.com</div>
+    <h1 class="title">Where each tech stack actually lives</h1>
+    <p class="subtitle">Top firms for each technology, by share of currently-open quant postings that explicitly require it. Among 30 firms with ≥30 listings (3,863 total). Each row shows the firm, the share, and the absolute count of postings (n/total).</p>
+    <div class="panels"><section class="panel">
+    <header><span class="label" style="background:#3b82f6">Python</span><span class="hint">the lingua franca</span></header>
+    <div class="rows"><div class="row">
+        <div class="firm">Citadel</div>
+        <div class="track"><div class="bar" style="width:100.00%;background:#3b82f6"></div></div>
+        <div class="value">68% <span class="cnt">· 26/38</span></div>
+      </div><div class="row">
+        <div class="firm">Two Sigma</div>
+        <div class="track"><div class="bar" style="width:96.25%;background:#3b82f6"></div></div>
+        <div class="value">66% <span class="cnt">· 27/41</span></div>
+      </div><div class="row">
+        <div class="firm">IMC</div>
+        <div class="track"><div class="bar" style="width:95.56%;background:#3b82f6"></div></div>
+        <div class="value">65% <span class="cnt">· 51/78</span></div>
+      </div><div class="row">
+        <div class="firm">Schonfeld</div>
+        <div class="track"><div class="bar" style="width:95.45%;background:#3b82f6"></div></div>
+        <div class="value">65% <span class="cnt">· 32/49</span></div>
+      </div><div class="row">
+        <div class="firm">Qube RT (QRT)</div>
+        <div class="track"><div class="bar" style="width:92.43%;background:#3b82f6"></div></div>
+        <div class="value">63% <span class="cnt">· 160/253</span></div>
+      </div><div class="row">
+        <div class="firm">WorldQuant</div>
+        <div class="track"><div class="bar" style="width:91.53%;background:#3b82f6"></div></div>
+        <div class="value">63% <span class="cnt">· 62/99</span></div>
+      </div><div class="row">
+        <div class="firm">Virtu</div>
+        <div class="track"><div class="bar" style="width:90.85%;background:#3b82f6"></div></div>
+        <div class="value">62% <span class="cnt">· 23/37</span></div>
+      </div><div class="row">
+        <div class="firm">Hudson River Trading</div>
+        <div class="track"><div class="bar" style="width:89.64%;background:#3b82f6"></div></div>
+        <div class="value">61% <span class="cnt">· 46/75</span></div>
+      </div></div>
+  </section><section class="panel">
+    <header><span class="label" style="background:#0f766e">C++</span><span class="hint">low-latency core, modeling libs</span></header>
+    <div class="rows"><div class="row">
+        <div class="firm">Citadel</div>
+        <div class="track"><div class="bar" style="width:88.46%;background:#0f766e"></div></div>
+        <div class="value">61% <span class="cnt">· 23/38</span></div>
+      </div><div class="row">
+        <div class="firm">WorldQuant</div>
+        <div class="track"><div class="bar" style="width:59.05%;background:#0f766e"></div></div>
+        <div class="value">40% <span class="cnt">· 40/99</span></div>
+      </div><div class="row">
+        <div class="firm">Virtu</div>
+        <div class="track"><div class="bar" style="width:55.30%;background:#0f766e"></div></div>
+        <div class="value">38% <span class="cnt">· 14/37</span></div>
+      </div><div class="row">
+        <div class="firm">Two Sigma</div>
+        <div class="track"><div class="bar" style="width:53.47%;background:#0f766e"></div></div>
+        <div class="value">37% <span class="cnt">· 15/41</span></div>
+      </div><div class="row">
+        <div class="firm">DRW</div>
+        <div class="track"><div class="bar" style="width:47.56%;background:#0f766e"></div></div>
+        <div class="value">33% <span class="cnt">· 55/169</span></div>
+      </div><div class="row">
+        <div class="firm">Squarepoint Capital</div>
+        <div class="track"><div class="bar" style="width:46.91%;background:#0f766e"></div></div>
+        <div class="value">32% <span class="cnt">· 26/81</span></div>
+      </div><div class="row">
+        <div class="firm">DV Trading</div>
+        <div class="track"><div class="bar" style="width:46.77%;background:#0f766e"></div></div>
+        <div class="value">32% <span class="cnt">· 16/50</span></div>
+      </div><div class="row">
+        <div class="firm">Qube RT (QRT)</div>
+        <div class="track"><div class="bar" style="width:42.17%;background:#0f766e"></div></div>
+        <div class="value">29% <span class="cnt">· 73/253</span></div>
+      </div></div>
+  </section><section class="panel">
+    <header><span class="label" style="background:#dc2626">Rust</span><span class="hint">newer systems work; mostly HFT/prop</span></header>
+    <div class="rows"><div class="row">
+        <div class="firm">Squarepoint Capital</div>
+        <div class="track"><div class="bar" style="width:21.65%;background:#dc2626"></div></div>
+        <div class="value">15% <span class="cnt">· 12/81</span></div>
+      </div><div class="row">
+        <div class="firm">Two Sigma</div>
+        <div class="track"><div class="bar" style="width:14.26%;background:#dc2626"></div></div>
+        <div class="value">10% <span class="cnt">· 4/41</span></div>
+      </div><div class="row">
+        <div class="firm">Tower Research</div>
+        <div class="track"><div class="bar" style="width:8.73%;background:#dc2626"></div></div>
+        <div class="value">6.0% <span class="cnt">· 4/67</span></div>
+      </div><div class="row">
+        <div class="firm">Qube RT (QRT)</div>
+        <div class="track"><div class="bar" style="width:8.67%;background:#dc2626"></div></div>
+        <div class="value">5.9% <span class="cnt">· 15/253</span></div>
+      </div><div class="row">
+        <div class="firm">DRW</div>
+        <div class="track"><div class="bar" style="width:6.92%;background:#dc2626"></div></div>
+        <div class="value">4.7% <span class="cnt">· 8/169</span></div>
+      </div><div class="row">
+        <div class="firm">G-Research</div>
+        <div class="track"><div class="bar" style="width:5.41%;background:#dc2626"></div></div>
+        <div class="value">3.7% <span class="cnt">· 2/54</span></div>
+      </div><div class="row">
+        <div class="firm">Optiver</div>
+        <div class="track"><div class="bar" style="width:4.95%;background:#dc2626"></div></div>
+        <div class="value">3.4% <span class="cnt">· 4/118</span></div>
+      </div><div class="row">
+        <div class="firm">Balyasny Asset Management</div>
+        <div class="track"><div class="bar" style="width:3.51%;background:#dc2626"></div></div>
+        <div class="value">2.4% <span class="cnt">· 3/125</span></div>
+      </div></div>
+  </section><section class="panel">
+    <header><span class="label" style="background:#9333ea">FPGA</span><span class="hint">hardware execution, sub-µs hot path</span></header>
+    <div class="rows"><div class="row">
+        <div class="firm">Maven Securities</div>
+        <div class="track"><div class="bar" style="width:14.26%;background:#9333ea"></div></div>
+        <div class="value">10% <span class="cnt">· 4/41</span></div>
+      </div><div class="row">
+        <div class="firm">Tower Research</div>
+        <div class="track"><div class="bar" style="width:8.73%;background:#9333ea"></div></div>
+        <div class="value">6.0% <span class="cnt">· 4/67</span></div>
+      </div><div class="row">
+        <div class="firm">Optiver</div>
+        <div class="track"><div class="bar" style="width:8.67%;background:#9333ea"></div></div>
+        <div class="value">5.9% <span class="cnt">· 7/118</span></div>
+      </div><div class="row">
+        <div class="firm">Qube RT (QRT)</div>
+        <div class="track"><div class="bar" style="width:8.67%;background:#9333ea"></div></div>
+        <div class="value">5.9% <span class="cnt">· 15/253</span></div>
+      </div><div class="row">
+        <div class="firm">Hudson River Trading</div>
+        <div class="track"><div class="bar" style="width:7.79%;background:#9333ea"></div></div>
+        <div class="value">5.3% <span class="cnt">· 4/75</span></div>
+      </div><div class="row">
+        <div class="firm">Jump Trading</div>
+        <div class="track"><div class="bar" style="width:5.04%;background:#9333ea"></div></div>
+        <div class="value">3.4% <span class="cnt">· 2/58</span></div>
+      </div><div class="row">
+        <div class="firm">Jane Street</div>
+        <div class="track"><div class="bar" style="width:4.76%;background:#9333ea"></div></div>
+        <div class="value">3.3% <span class="cnt">· 7/215</span></div>
+      </div><div class="row">
+        <div class="firm">DRW</div>
+        <div class="track"><div class="bar" style="width:4.32%;background:#9333ea"></div></div>
+        <div class="value">3.0% <span class="cnt">· 5/169</span></div>
+      </div></div>
+  </section><section class="panel">
+    <header><span class="label" style="background:#65a30d">CUDA</span><span class="hint">NVIDIA-GPU-specific ML/research</span></header>
+    <div class="rows"><div class="row">
+        <div class="firm">Optiver</div>
+        <div class="track"><div class="bar" style="width:4.95%;background:#65a30d"></div></div>
+        <div class="value">3.4% <span class="cnt">· 4/118</span></div>
+      </div><div class="row">
+        <div class="firm">Jane Street</div>
+        <div class="track"><div class="bar" style="width:4.08%;background:#65a30d"></div></div>
+        <div class="value">2.8% <span class="cnt">· 6/215</span></div>
+      </div><div class="row">
+        <div class="firm">Hudson River Trading</div>
+        <div class="track"><div class="bar" style="width:3.90%;background:#65a30d"></div></div>
+        <div class="value">2.7% <span class="cnt">· 2/75</span></div>
+      </div><div class="row">
+        <div class="firm">IMC</div>
+        <div class="track"><div class="bar" style="width:3.75%;background:#65a30d"></div></div>
+        <div class="value">2.6% <span class="cnt">· 2/78</span></div>
+      </div><div class="row">
+        <div class="firm">Susquehanna (SIG)</div>
+        <div class="track"><div class="bar" style="width:2.76%;background:#65a30d"></div></div>
+        <div class="value">1.9% <span class="cnt">· 4/212</span></div>
+      </div><div class="row">
+        <div class="firm">G-Research</div>
+        <div class="track"><div class="bar" style="width:2.71%;background:#65a30d"></div></div>
+        <div class="value">1.9% <span class="cnt">· 1/54</span></div>
+      </div><div class="row">
+        <div class="firm">D. E. Shaw</div>
+        <div class="track"><div class="bar" style="width:1.03%;background:#65a30d"></div></div>
+        <div class="value">0.7% <span class="cnt">· 1/142</span></div>
+      </div><div class="row">
+        <div class="firm">Millennium</div>
+        <div class="track"><div class="bar" style="width:0.84%;background:#65a30d"></div></div>
+        <div class="value">0.6% <span class="cnt">· 1/173</span></div>
+      </div></div>
+  </section></div>
+    <div class="footer">
+      <div>Bars share a common 0&ndash;68% scale. % only counts postings that name the tech in their description -- so figures are a lower bound.</div>
+      <div><span class="source">quant.kadoa.com</span> · open dataset · May 2026</div>
+    </div>
+  </div>
+</body>
+</html>
