@@ -47,17 +47,17 @@ function FilterDropdown({ options, selected, onChange, onClose, singleSelect }) 
               }}
               className="w-full flex items-center justify-between px-3 h-[30px] text-[13px] transition-colors hover:bg-[#f5f5f5]"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 min-w-0 flex-1">
                 {!singleSelect && (
-                  <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center ${
+                  <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center flex-shrink-0 ${
                     isSelected ? "bg-[#5e6ad2] border-[#5e6ad2]" : "border-[#d4d4d4]"
                   }`}>
                     {isSelected && <svg width="8" height="8" viewBox="0 0 8 8" fill="none" stroke="white" strokeWidth="1.5"><path d="M1.5 4L3 5.5L6.5 2"/></svg>}
                   </div>
                 )}
-                <span className={isSelected ? "text-[#191919] font-medium" : "text-[#191919]"}>{label}</span>
+                <span className={`truncate ${isSelected ? "text-[#191919] font-medium" : "text-[#191919]"}`} title={label}>{label}</span>
               </div>
-              <span className="text-[12px] text-[#b0b0b0] ml-4">{count}</span>
+              <span className="text-[12px] text-[#b0b0b0] ml-4 flex-shrink-0">{count}</span>
             </button>
           );
         })}
