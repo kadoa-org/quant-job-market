@@ -193,10 +193,9 @@ export function aggregateLocations(jobs) {
     }
   }
   const hybridLeaders = [...flexByFirm.values()]
-    .filter((r) => r.flex >= 2)
+    .filter((r) => r.flex >= 1)
     .map((r) => ({ ...r, firm: shortenFirm(r.firm), pct: (r.flex / r.total) * 100 }))
-    .sort((a, b) => b.pct - a.pct)
-    .slice(0, 10);
+    .sort((a, b) => b.flex - a.flex || b.pct - a.pct);
 
   return { cities: cities.slice(0, MAX_CITIES), hybridLeaders, totalJobs: validFirmJobs.length };
 }
@@ -307,80 +306,118 @@ export function buildLocationsLollipopSvgMobile(cities) {
   return { svg: headers + rows, width: W, height };
 }
 
+// One leaderboard row per (firm, mode) combination. Firms with both hybrid
+// and remote postings (e.g. Voleon, Geneva) get two rows. Sorted by
+// absolute count desc so the biggest employers float to the top.
+function expandModeRows(hybridLeaders, max = Infinity) {
+  const out = [];
+  for (const l of hybridLeaders) {
+    if (l.hybrid > 0) out.push({ firm: l.firm, mode: "hybrid", count: l.hybrid, total: l.total });
+    if (l.remote > 0) out.push({ firm: l.firm, mode: "remote", count: l.remote, total: l.total });
+  }
+  out.sort((a, b) => b.count - a.count || (a.mode === "hybrid" ? -1 : 1));
+  return out.slice(0, max);
+}
+
+const TEAL = "#0f766e";
+const ORANGE = "#d97757";
+
 export function buildHybridLeaderboardSvg(hybridLeaders) {
-  // Aligned to the locations chart above: same column geometry, same bar
-  // height, same Linear-style minimal chrome.
-  if (hybridLeaders.length === 0) return { svg: "", width: 0, height: 0 };
+  // Single panel mirroring the standalone work-mode chart: absolute counts,
+  // bar color by mode (teal = hybrid, orange = remote), tag pill on each
+  // row so the rare remote employers stand out at a glance.
+  const rows = expandModeRows(hybridLeaders, 15);
+  if (rows.length === 0) return { svg: "", width: 0, height: 0 };
+
   const W = 1300;
   const left = 24;
   const top = 28;
   const rowH = 32;
   const barH = 12;
-  const BAR_FILL = "#0f766e";
 
-  const flagW = 26;
-  const cityLabelW = 110;
-  const labelX = left + flagW + cityLabelW;
+  const labelW = 160;
+  const labelX = left + labelW;
   const barX = labelX + 16;
   const barMaxW = 360;
 
-  const maxPct = Math.max(...hybridLeaders.map((l) => l.pct), 60);
+  const maxCount = Math.max(...rows.map((r) => r.count), 1);
+
+  // Legend in the top-right of the chart area
+  const legendX = barX + barMaxW + 80;
+  const legend =
+    `<rect x="${legendX}" y="${top - 18}" width="10" height="10" rx="2" fill="${TEAL}"/>` +
+    `<text x="${legendX + 16}" y="${top - 9}" font-size="12" font-weight="500" fill="#191919">Hybrid</text>` +
+    `<rect x="${legendX + 78}" y="${top - 18}" width="10" height="10" rx="2" fill="${ORANGE}"/>` +
+    `<text x="${legendX + 94}" y="${top - 9}" font-size="12" font-weight="500" fill="#191919">Remote</text>`;
 
   const headers =
     `<text x="${labelX}" y="${top - 9}" text-anchor="end" font-size="12.5" font-weight="500" fill="#7a7d80">Firm</text>` +
-    `<text x="${barX}" y="${top - 9}" font-size="12.5" font-weight="500" fill="#7a7d80">% of postings tagged hybrid or remote</text>`;
+    `<text x="${barX}" y="${top - 9}" font-size="12.5" font-weight="500" fill="#7a7d80">Hybrid &amp; remote postings</text>` +
+    legend;
 
-  const rows = hybridLeaders
-    .map((l, i) => {
+  const rowsHtml = rows
+    .map((r, i) => {
       const y = top + i * rowH + rowH / 2;
-      const barW = (l.pct / maxPct) * barMaxW;
-      const breakdown = l.remote > 0 ? `${l.flex}/${l.total} · ${l.remote} remote` : `${l.flex}/${l.total}`;
+      const barW = (r.count / maxCount) * barMaxW;
+      const color = r.mode === "remote" ? ORANGE : TEAL;
+      const valX = barX + barW + 8;
       return [
-        `<text x="${labelX}" y="${y + 5}" text-anchor="end" font-size="14" font-weight="500" fill="#191919">${escapeText(l.firm)}</text>`,
-        `<rect x="${barX}" y="${y - barH / 2}" width="${barW}" height="${barH}" rx="3" fill="${BAR_FILL}" fill-opacity="0.85"/>`,
-        `<text x="${barX + barW + 8}" y="${y + 5}" font-size="13" font-weight="500" fill="#191919" font-variant-numeric="tabular-nums">${l.pct.toFixed(0)}% <tspan fill="#9a9d9a" font-weight="400">${breakdown}</tspan></text>`,
+        `<text x="${labelX}" y="${y + 5}" text-anchor="end" font-size="14" font-weight="600" fill="#191919">${escapeText(r.firm)}</text>`,
+        `<rect x="${barX}" y="${y - barH / 2}" width="${barW}" height="${barH}" rx="3" fill="${color}" fill-opacity="0.88"/>`,
+        `<text x="${valX}" y="${y + 5}" font-size="13.5" font-weight="700" fill="${color}" font-variant-numeric="tabular-nums">${r.count}</text>`,
       ].join("");
     })
     .join("");
 
-  const height = top + hybridLeaders.length * rowH + 8;
-  return { svg: headers + rows, width: W, height };
+  const height = top + rows.length * rowH + 8;
+  return { svg: headers + rowsHtml, width: W, height };
 }
 
 // Compact mobile variant of the hybrid leaderboard.
 export function buildHybridLeaderboardSvgMobile(hybridLeaders) {
-  if (hybridLeaders.length === 0) return { svg: "", width: 0, height: 0 };
+  const rows = expandModeRows(hybridLeaders, 15);
+  if (rows.length === 0) return { svg: "", width: 0, height: 0 };
   const W = 360;
   const left = 8;
   const top = 28;
   const rowH = 30;
   const barH = 11;
-  const BAR_FILL = "#0f766e";
 
-  const firmW = 96;
+  const firmW = 88;
   const labelX = left + firmW;
-  const barX = labelX + 10;
-  const numW = 86;
-  const barMaxW = W - firmW - 10 - numW - left * 2;
+  const barX = labelX + 8;
+  const numW = 24;
+  const barMaxW = W - firmW - 8 - numW - left * 2;
 
-  const maxPct = Math.max(...hybridLeaders.map((l) => l.pct), 60);
+  const maxCount = Math.max(...rows.map((r) => r.count), 1);
+
+  // Compact legend at the top-right
+  const legendY = top - 14;
+  const legend =
+    `<rect x="${W - left - 116}" y="${legendY - 7}" width="8" height="8" rx="1.5" fill="${TEAL}"/>` +
+    `<text x="${W - left - 104}" y="${legendY}" font-size="10" font-weight="500" fill="#191919">Hybrid</text>` +
+    `<rect x="${W - left - 64}" y="${legendY - 7}" width="8" height="8" rx="1.5" fill="${ORANGE}"/>` +
+    `<text x="${W - left - 52}" y="${legendY}" font-size="10" font-weight="500" fill="#191919">Remote</text>`;
 
   const headers =
     `<text x="${labelX}" y="${top - 9}" text-anchor="end" font-size="11" font-weight="500" fill="#7a7d80">Firm</text>` +
-    `<text x="${barX}" y="${top - 9}" font-size="11" font-weight="500" fill="#7a7d80">% hybrid or remote</text>`;
+    `<text x="${barX}" y="${top - 9}" font-size="11" font-weight="500" fill="#7a7d80">Postings</text>` +
+    legend;
 
-  const rows = hybridLeaders
-    .map((l, i) => {
+  const rowsHtml = rows
+    .map((r, i) => {
       const y = top + i * rowH + rowH / 2;
-      const barW = (l.pct / maxPct) * barMaxW;
+      const barW = (r.count / maxCount) * barMaxW;
+      const color = r.mode === "remote" ? ORANGE : TEAL;
+      const valX = barX + barW + 4;
       return [
-        `<text x="${labelX}" y="${y + 4}" text-anchor="end" font-size="12" font-weight="500" fill="#191919">${escapeText(l.firm)}</text>`,
-        `<rect x="${barX}" y="${y - barH / 2}" width="${barW}" height="${barH}" rx="2" fill="${BAR_FILL}" fill-opacity="0.85"/>`,
-        `<text x="${barX + barW + 6}" y="${y + 4}" font-size="12" font-weight="500" fill="#191919" font-variant-numeric="tabular-nums">${l.pct.toFixed(0)}% <tspan fill="#9a9d9a" font-weight="400">${l.flex ?? l.hybrid}/${l.total}</tspan></text>`,
+        `<text x="${labelX}" y="${y + 4}" text-anchor="end" font-size="11.5" font-weight="600" fill="#191919">${escapeText(r.firm)}</text>`,
+        `<rect x="${barX}" y="${y - barH / 2}" width="${barW}" height="${barH}" rx="2" fill="${color}" fill-opacity="0.88"/>`,
+        `<text x="${valX}" y="${y + 4}" font-size="11.5" font-weight="700" fill="${color}" font-variant-numeric="tabular-nums">${r.count}</text>`,
       ].join("");
     })
     .join("");
 
-  const height = top + hybridLeaders.length * rowH + 8;
-  return { svg: headers + rows, width: W, height };
+  const height = top + rows.length * rowH + 8;
+  return { svg: headers + rowsHtml, width: W, height };
 }
