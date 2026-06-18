@@ -7,7 +7,7 @@
   "description": "Interactive visualization of job postings from 45+ quant finance firms",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerenderSeo.mjs",
     "preview": "vite preview",
     "build-db": "node scripts/build-db.js"
   },
