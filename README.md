@@ -1,6 +1,6 @@
 # Quant Job Market
 
-**Live demo: [quant.kadoa.com](https://quant.kadoa.com/)**
+**Live demo: [kadoa.com/quant](https://www.kadoa.com/quant/)**
 
 ![Quant Job Market](public/screenshot.png)
 

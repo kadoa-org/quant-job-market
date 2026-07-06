@@ -78,7 +78,7 @@ export default function LocationHeatmap({ jobs }) {
         </div>
 
         <div className="mt-4 text-[11px] text-gray-400 flex justify-end">
-          <span className="text-gray-700 font-semibold">quant.kadoa.com</span>
+          <span className="text-gray-700 font-semibold">kadoa.com/quant</span>
           <span className="mx-2">·</span>
           <a
             href="https://github.com/kadoa-org/quant-job-market"

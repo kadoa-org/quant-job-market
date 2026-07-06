@@ -8,7 +8,7 @@ function getDb() {
   if (!dbPromise) {
     dbPromise = (async () => {
       const SQL = await initSqlJs({ locateFile: () => SQL_WASM_URL });
-      const response = await fetch("/data/jobs.db");
+      const response = await fetch(`${import.meta.env.BASE_URL}data/jobs.db`);
       const buffer = await response.arrayBuffer();
       return new SQL.Database(new Uint8Array(buffer));
     })();
@@ -23,8 +23,14 @@ export function useDatabase() {
 
   useEffect(() => {
     getDb()
-      .then((d) => { setDb(d); setLoading(false); })
-      .catch((e) => { setError(e); setLoading(false); });
+      .then((d) => {
+        setDb(d);
+        setLoading(false);
+      })
+      .catch((e) => {
+        setError(e);
+        setLoading(false);
+      });
   }, []);
 
   return { db, loading, error };

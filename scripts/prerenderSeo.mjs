@@ -24,8 +24,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const DIST = path.join(ROOT, "dist");
-const BASE = "https://quant.kadoa.com";
+const DIST = path.join(ROOT, "dist", "quant"); // vite outDir (site lives under /quant/)
+const PREFIX = "/quant"; // public path prefix behind the www.kadoa.com reverse proxy
+const BASE = `https://www.kadoa.com${PREFIX}`;
 
 const esc = (s) =>
   String(s ?? "")
@@ -37,7 +38,7 @@ const esc = (s) =>
 // Pull the built CSS bundle so pages inherit the site's Inter/Tailwind styling.
 const cssHref = (() => {
   const m = fs.readFileSync(path.join(DIST, "index.html"), "utf8").match(/assets\/[^"]*\.css/);
-  return m ? `/${m[0]}` : null;
+  return m ? `${PREFIX}/${m[0]}` : null;
 })();
 
 const jobs = JSON.parse(fs.readFileSync(path.join(DIST, "data", "jobs.json"), "utf8"));
@@ -78,7 +79,7 @@ function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml }) {
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href="${PREFIX}/favicon.svg" />
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -116,11 +117,11 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
 </head>
 <body>
 <div class="wrap">
-<nav><a href="/">Quant Job Market</a> › ${esc(h1)}</nav>
+<nav><a href="${PREFIX}/">Quant Job Market</a> › ${esc(h1)}</nav>
 <h1>${esc(h1)}</h1>
 <p class="lede">${intro}</p>
 ${bodyHtml}
-<p class="meta">Aggregated from ${jobs.length.toLocaleString()} live job postings across ${firms.size} quant firms. Updated daily. <a href="/data/jobs.json">Open dataset (JSON)</a>.</p>
+<p class="meta">Aggregated from ${jobs.length.toLocaleString()} live job postings across ${firms.size} quant firms. Updated daily. <a href="${PREFIX}/data/jobs.json">Open dataset (JSON)</a>.</p>
 </div>
 </body>
 </html>`;
@@ -168,9 +169,9 @@ write(
       `${BASE}/hiring`,
     ),
     h1: "Which Quant Firms Are Hiring Right Now",
-    intro: `A live, ranked snapshot of where the quant industry is hiring: ${jobs.length.toLocaleString()} open roles across ${firms.size} hedge funds, prop trading firms, and market makers, updated daily. Unlike static "top firms" lists, these counts reflect what's actually open today. <a href="/">Explore the interactive job board →</a>`,
+    intro: `A live, ranked snapshot of where the quant industry is hiring: ${jobs.length.toLocaleString()} open roles across ${firms.size} hedge funds, prop trading firms, and market makers, updated daily. Unlike static "top firms" lists, these counts reflect what's actually open today. <a href="${PREFIX}/">Explore the interactive job board →</a>`,
     bodyHtml: `<table><thead><tr><th class="n">#</th><th>Firm</th><th>Type</th><th class="n">Open roles</th><th>Top locations</th></tr></thead><tbody>${hiringRows}</tbody></table>
-<a class="cta" href="/">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
+<a class="cta" href="${PREFIX}/">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
   }),
 );
 
@@ -214,9 +215,9 @@ for (const tech of TECHS) {
         `${BASE}/tech/${tech.slug}`,
       ),
       h1: `Quant Firms Hiring ${tech.name} Developers`,
-      intro: `${matched.length} hedge funds, prop trading firms, and market makers currently have open roles mentioning <strong>${esc(tech.name)}</strong>: ${totalPostings} postings in all. Ranked by how many ${esc(tech.name)} roles each firm has open right now. <a href="/tech-stack">See the full language heatmap →</a>`,
+      intro: `${matched.length} hedge funds, prop trading firms, and market makers currently have open roles mentioning <strong>${esc(tech.name)}</strong>: ${totalPostings} postings in all. Ranked by how many ${esc(tech.name)} roles each firm has open right now. <a href="${PREFIX}/tech-stack">See the full language heatmap →</a>`,
       bodyHtml: `<table><thead><tr><th class="n">#</th><th>Firm</th><th>Type</th><th class="n">${esc(tech.name)} roles</th><th>Top locations</th></tr></thead><tbody>${rows}</tbody></table>
-<a class="cta" href="/tech-stack">Explore the interactive tech-stack heatmap →</a>`,
+<a class="cta" href="${PREFIX}/tech-stack">Explore the interactive tech-stack heatmap →</a>`,
     }),
   );
 }
@@ -225,11 +226,11 @@ for (const tech of TECHS) {
 // React only owns #root, so a <footer> placed AFTER it survives hydration and
 // gives crawlers real anchor links into every generated page from the SPA shells.
 const techLinks = TECHS.filter((t) => written.includes(`/tech/${t.slug}`))
-  .map((t) => `<a href="/tech/${t.slug}/">${esc(t.name)} firms</a>`)
+  .map((t) => `<a href="${PREFIX}/tech/${t.slug}/">${esc(t.name)} firms</a>`)
   .join("\n      ");
 const footer = `    <footer style="max-width:880px;margin:0 auto;padding:24px 20px;font-family:Inter,system-ui,sans-serif;font-size:.82rem;color:#888;border-top:1px solid #e3e3e6">
       <strong style="color:#555">Explore the data:</strong>
-      <a href="/hiring/">Which firms are hiring</a>
+      <a href="${PREFIX}/hiring/">Which firms are hiring</a>
       ${techLinks}
     </footer>`;
 for (const shell of ["index.html", "tech-stack.html", "locations.html"]) {

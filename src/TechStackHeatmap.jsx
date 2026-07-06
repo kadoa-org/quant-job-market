@@ -246,7 +246,7 @@ export default function TechStackHeatmap({ jobs }) {
           />
         </div>
         <div className="mt-3 text-[11.5px] text-[#6b6b6b] flex justify-end">
-          <span className="text-[#1a1a1a] font-semibold">quant.kadoa.com</span>
+          <span className="text-[#1a1a1a] font-semibold">kadoa.com/quant</span>
           <span className="mx-2">·</span>
           <a
             href="https://github.com/kadoa-org/quant-job-market"

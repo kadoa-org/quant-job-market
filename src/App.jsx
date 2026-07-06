@@ -1,8 +1,8 @@
-import { Button, LiveBadge, NavBar, SiteHeader } from "./kit";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Dashboard from "./Dashboard";
 import DataTable from "./DataTable";
 import FilterBar from "./FilterBar";
+import { Button, LiveBadge, NavBar, SiteHeader } from "./kit";
 import LocationHeatmap from "./LocationHeatmap";
 import TechStackHeatmap from "./TechStackHeatmap";
 import Treemap from "./Treemap";
@@ -32,17 +32,21 @@ const QUANT_ROLES = new Set([
 // /tech-stack and /locations are pre-rendered HTML pages with custom OG/SEO.
 // All other views live under / and use ?view=... so a single HTML carries them.
 // /heatmap is kept as a legacy alias for already-shared links.
+// All paths are relative to the deploy prefix (import.meta.env.BASE_URL,
+// "/quant/" in production, "/" in dev).
+const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, "");
+
 function viewFromPath() {
   const p = window.location.pathname.replace(/\/$/, "");
-  if (p === "/tech-stack" || p === "/heatmap") return "techstack";
-  if (p === "/locations") return "locations";
+  if (p === `${BASE_PATH}/tech-stack` || p === `${BASE_PATH}/heatmap`) return "techstack";
+  if (p === `${BASE_PATH}/locations`) return "locations";
   return null;
 }
 
 function pathForView(view) {
-  if (view === "techstack") return "/tech-stack";
-  if (view === "locations") return "/locations";
-  return "/";
+  if (view === "techstack") return `${BASE_PATH}/tech-stack`;
+  if (view === "locations") return `${BASE_PATH}/locations`;
+  return `${BASE_PATH}/`;
 }
 
 // Read state from URL (path picks tech-stack/locations, then ?view=... for the rest)
