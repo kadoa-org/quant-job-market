@@ -69,7 +69,7 @@ export default function FirmChart({ firms, colorLayer, onFirmClick, selectedFirm
           return (
             <div
               key={firm.firmName}
-              className={`group flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-all ${
+              className={`group flex items-center gap-3 px-3 py-2  cursor-pointer transition-all ${
                 isSelected
                   ? "bg-violet-500/10 ring-1 ring-violet-500/30"
                   : isHovered

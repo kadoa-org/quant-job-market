@@ -19,7 +19,7 @@ function FilterDropdown({ options, selected, onChange, onClose, singleSelect }) 
     : options;
 
   return (
-    <div ref={ref} className="absolute top-full left-0 mt-1 z-[200] bg-white border border-[#e0e0e0] rounded-lg shadow-lg min-w-[180px] sm:min-w-[220px] max-h-[60vh] sm:max-h-[340px] flex flex-col overflow-hidden">
+    <div ref={ref} className="absolute top-full left-0 mt-1 z-[200] bg-white border border-[#e0e0e0]  shadow-lg min-w-[180px] sm:min-w-[220px] max-h-[60vh] sm:max-h-[340px] flex flex-col overflow-hidden">
       {options.length > 6 && (
         <div className="px-2 py-1.5 border-b border-[#f0f0f0]">
           <input
@@ -136,7 +136,7 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
     { key: "assetClasses", label: "Asset Class", options: assetClassOptions },
   ];
 
-  const chipClass = (active) => `flex items-center gap-1 h-[22px] rounded-[7.5px] text-[12px] sm:text-[13.5px] font-normal bg-white border transition-colors whitespace-nowrap ${
+  const chipClass = (active) => `flex items-center gap-1 h-[22px]  text-[12px] sm:text-[13.5px] font-normal bg-white border transition-colors whitespace-nowrap ${
     active ? "border-[#d4d4d4] text-[#191919]" : "border-[#d4d4d4] text-[#5c5c5f] hover:text-[#191919] hover:border-[#b0b0b0]"
   }`;
 

@@ -92,12 +92,12 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
             setSearch(e.target.value);
             setPage(1);
           }}
-          className="flex-1 min-w-0 bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-[13px] text-gray-900 placeholder:text-gray-400 outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-100"
+          className="flex-1 min-w-0 bg-gray-50 border border-gray-200  px-3 py-1.5 text-[13px] text-gray-900 placeholder:text-gray-400 outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-100"
         />
         <span className="text-[11px] text-gray-400 whitespace-nowrap hidden sm:inline">{filtered.length} results</span>
         <button
           onClick={exportCsv}
-          className="px-2 sm:px-3 py-1.5 rounded-md text-[11px] text-gray-500 hover:text-gray-700 border border-gray-200 hover:border-gray-300 whitespace-nowrap flex-shrink-0"
+          className="px-2 sm:px-3 py-1.5  text-[11px] text-gray-500 hover:text-gray-700 border border-gray-200 hover:border-gray-300 whitespace-nowrap flex-shrink-0"
         >
           <span className="hidden sm:inline">Export </span>CSV
         </button>
@@ -106,7 +106,7 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
       <div className="sm:flex-1 sm:overflow-auto">
         <table className="w-full text-[13px]">
           <thead className="sticky top-0 bg-[#fcfcfc] z-10">
-            <tr className="text-[#5c5c5f] border-b border-black/[0.06]">
+            <tr className="text-[#5c5c5f] border-b border-[#b1b4b6]">
               {[
                 { key: "firmName", label: "Firm", w: "w-28 sm:w-36" },
                 { key: "jobTitle", label: "Title", w: "w-48 sm:w-64" },
@@ -181,14 +181,14 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
           <button
             disabled={page <= 1}
             onClick={() => setPage(page - 1)}
-            className="px-3 py-1 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="px-3 py-1  border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed"
           >
             Prev
           </button>
           <button
             disabled={page >= totalPages}
             onClick={() => setPage(page + 1)}
-            className="px-3 py-1 rounded-md bg-[#191919] text-white border border-[#191919] hover:bg-[#333] disabled:opacity-30 disabled:cursor-not-allowed"
+            className="px-3 py-1  bg-[#191919] text-white border border-[#191919] hover:bg-[#333] disabled:opacity-30 disabled:cursor-not-allowed"
           >
             Next
           </button>

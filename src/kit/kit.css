@@ -1,0 +1,160 @@
+/* ── Kadoa data-kit tokens ────────────────────────────────────────────────
+   Single source of truth for the dataset micropages. GOV.UK-derived palette
+   and idioms (square, 1px rules, yellow focus) at data-app density.
+   Everything in the kit derives from these variables — components never
+   hard-code sizes or colours. */
+:root {
+  --dk-font: "Inter", arial, sans-serif;
+  /* type scale */
+  --dk-fs-xs: 12px;    /* 12 — table headers, hints-in-cells */
+  --dk-fs-s: 13px;   /* 13 — secondary text, breadcrumbs */
+  --dk-fs-m: 15px;   /* 15 — body, cells */
+  --dk-fs-l: 17px;   /* 17 — section headings */
+  --dk-fs-xl: 22px;   /* 22 — page titles */
+  --dk-fs-xxl: 28px;   /* 28 — hero */
+  /* palette (GOV.UK) */
+  --dk-ink: #0b0c0c;
+  --dk-muted: #505a5f;
+  --dk-faint: #b1b4b6;
+  --dk-rule: #b1b4b6;
+  --dk-rule-soft: #e5e6e7;
+  --dk-bg: #ffffff;
+  --dk-bg-hover: #f3f2f1;
+  --dk-link: #1d70b8;
+  --dk-green: #0f7a52;
+  --dk-red: #ca3535;
+  --dk-focus: #ffdd00;
+  /* spacing */
+  --dk-cell-y: 7px;
+  --dk-cell-x: 10px;
+}
+
+/* ── DataTable ── one table look, everywhere ── */
+.dk-table-wrap { overflow-x: auto; border: 1px solid var(--dk-rule); background: var(--dk-bg); }
+.dk-table-wrap--plain { border: none; }
+.dk-table { width: 100%; border-collapse: collapse; font: 400 var(--dk-fs-m)/1.45 var(--dk-font); color: var(--dk-ink); }
+.dk-table th {
+  font-size: var(--dk-fs-xs); font-weight: 600; color: var(--dk-muted);
+  text-align: left; padding: var(--dk-cell-y) var(--dk-cell-x);
+  border-bottom: 1px solid var(--dk-rule); white-space: nowrap;
+}
+.dk-table td { padding: var(--dk-cell-y) var(--dk-cell-x); border-bottom: 1px solid var(--dk-rule-soft); vertical-align: middle; }
+.dk-table tbody tr:last-child td { border-bottom: none; }
+.dk-table tbody tr:hover { background: var(--dk-bg-hover); }
+.dk-table .dk-num { text-align: right; font-variant-numeric: tabular-nums; }
+.dk-table a { color: var(--dk-link); }
+.dk-th-btn { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; display: inline-flex; gap: 4px; align-items: center; }
+.dk-th-btn:focus-visible, .dk-table a:focus-visible { outline: 3px solid var(--dk-focus); outline-offset: 0; }
+.dk-empty { padding: 28px 12px; text-align: center; color: var(--dk-muted); font-size: var(--dk-fs-s); }
+.dk-pos { color: var(--dk-green); } .dk-neg { color: var(--dk-red); }
+
+/* ── Tag ── */
+.dk-tag {
+  display: inline-block; font: 600 11px/1 var(--dk-font); letter-spacing: 0.02em;
+  padding: 3px 6px 2px; white-space: nowrap;
+}
+.dk-tag--grey { background: #eeefef; color: #383f43; }
+.dk-tag--green { background: #d7f5e8; color: #0d5c3f; }
+.dk-tag--red { background: #f9dfdf; color: #942222; }
+.dk-tag--blue { background: #d2e2f1; color: #144e81; }
+.dk-tag--purple { background: #e6e0f2; color: #3d2b6b; }
+.dk-tag--orange { background: #fce3d0; color: #6e3619; }
+.dk-tag--yellow { background: #fff3bf; color: #594d00; }
+
+/* ── Section ── */
+.dk-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 0 0 10px; }
+.dk-section-head h2 { font: 700 var(--dk-fs-l)/1.3 var(--dk-font); color: var(--dk-ink); margin: 0; }
+.dk-section-head .dk-hint { margin: 2px 0 0; }
+.dk-hint { font-size: var(--dk-fs-s); color: var(--dk-muted); }
+
+/* ── StatPanel ── */
+.dk-stats { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.dk-stat { border: 1px solid var(--dk-rule); background: var(--dk-bg); padding: 10px 12px; }
+.dk-stat .dk-stat-label { font-size: var(--dk-fs-xs); font-weight: 600; color: var(--dk-muted); margin-bottom: 4px; }
+.dk-stat .dk-stat-value { font: 700 var(--dk-fs-l)/1.2 var(--dk-font); color: var(--dk-ink); }
+.dk-stat .dk-stat-sub { font-size: var(--dk-fs-xs); color: var(--dk-muted); margin-top: 2px; }
+
+/* ── SiteHeader + NavBar ── */
+.dk-container { max-width: 960px; margin: 0 auto; padding: 0 15px; }
+@media (min-width: 40.0625em) { .dk-container { padding: 0 30px; } }
+.dk-header { background: var(--dk-link); color: #fff; }
+.dk-header-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 10px; padding-bottom: 10px; }
+.dk-header-brand { color: #fff; font: 700 17px/1.2 var(--dk-font); text-decoration: none; white-space: nowrap; }
+.dk-header-brand:focus-visible { outline: 3px solid var(--dk-focus); outline-offset: 2px; }
+.dk-btn--inverse { background: none; border: 1px solid rgba(255,255,255,0.55); color: #fff; }
+.dk-btn--inverse:hover { background: rgba(255,255,255,0.12); }
+.dk-nav { background: #fff; border-bottom: 1px solid var(--dk-rule-soft); }
+.dk-nav-list { display: flex; gap: 24px; margin: 0; padding: 0; list-style: none; overflow-x: auto; }
+.dk-nav a {
+  display: inline-block; padding: 11px 0 8px; color: var(--dk-ink); text-decoration: none;
+  font-size: var(--dk-fs-m); border-bottom: 3px solid transparent; white-space: nowrap;
+}
+.dk-nav a:hover { border-bottom-color: var(--dk-faint); }
+.dk-nav a[aria-current="true"] { border-bottom-color: var(--dk-link); font-weight: 600; }
+.dk-nav a:focus-visible { outline: 3px solid var(--dk-focus); outline-offset: -1px; }
+
+/* ── Toolbar, inputs, buttons ── */
+.dk-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 14px; }
+.dk-input {
+  height: 32px; border: 1px solid var(--dk-ink); background: #fff; padding: 0 8px;
+  font: 400 var(--dk-fs-m)/1 var(--dk-font); color: var(--dk-ink);
+}
+.dk-input:focus { outline: 3px solid var(--dk-focus); outline-offset: 0; }
+.dk-btn {
+  display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px;
+  border: 1px solid var(--dk-ink); background: #fff; color: var(--dk-ink);
+  font: 500 var(--dk-fs-m)/1 var(--dk-font); cursor: pointer; white-space: nowrap;
+}
+.dk-btn:hover { background: var(--dk-bg-hover); }
+.dk-btn:focus-visible { outline: 3px solid var(--dk-focus); outline-offset: 0; }
+
+/* Hard overrides: host apps often route through a Link component that carries
+   legacy link styling (govuk-link et al). Kit chrome owns its own look, and
+   focus feedback is :focus-visible only — no sticky highlight after click. */
+.dk-nav a, .dk-nav a:visited { color: var(--dk-ink) !important; text-decoration: none !important; }
+.dk-nav a:focus { background: none !important; box-shadow: none !important; outline: none !important; color: var(--dk-ink) !important; }
+.dk-nav a:focus-visible { outline: 3px solid var(--dk-focus) !important; outline-offset: -1px; }
+.dk-header-brand, .dk-header-brand:visited { color: #fff !important; text-decoration: none !important; }
+.dk-header-brand:focus { background: none !important; box-shadow: none !important; outline: none !important; color: #fff !important; }
+.dk-header-brand:focus-visible { outline: 3px solid var(--dk-focus) !important; outline-offset: 2px; }
+
+/* ── TickerTag ── square tint chip, mono glyphs, non-semantic hues only
+   (green/red are reserved for buy/sell meaning in adjacent cells) */
+.dk-ticker {
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 600; letter-spacing: 0.02em; line-height: 1; white-space: nowrap;
+}
+.dk-ticker--sm { height: 18px; padding: 0 5px; font-size: 10.5px; }
+.dk-ticker--md { height: 22px; padding: 0 7px; font-size: 11.5px; }
+.dk-ticker--lg { height: 28px; padding: 0 10px; font-size: 14px; }
+.dk-tag--teal { background: #d1ecec; color: #10504f; }
+.dk-tag--slate { background: #e4e8ec; color: #33414c; }
+
+/* ── LiveBadge ── freshness indicator for the header ── */
+.dk-live { display: inline-flex; align-items: center; gap: 6px; font-size: var(--dk-fs-s); color: rgba(255,255,255,0.85); white-space: nowrap; }
+.dk-live-dot { width: 7px; height: 7px; border-radius: 50%; background: #00e58c; position: relative; flex-shrink: 0; }
+.dk-live-dot::after {
+  content: ""; position: absolute; inset: -3px; border-radius: 50%;
+  border: 1px solid #00e58c; opacity: 0; animation: dk-pulse 2.4s ease-out infinite;
+}
+@keyframes dk-pulse { 0% { transform: scale(0.6); opacity: 0.8; } 70% { transform: scale(1.4); opacity: 0; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .dk-live-dot::after { animation: none; } }
+@media (max-width: 640px) { .dk-live { display: none; } }
+
+/* ── Responsive column priority ── columns declare hideBelow:"sm"|"md";
+   on small screens they disappear instead of forcing horizontal scroll. */
+@media (max-width: 640px) { .dk-hide-sm { display: none !important; } }
+@media (max-width: 900px) { .dk-hide-md { display: none !important; } }
+
+/* ── Column clamp ── the flexible text column in a full-width table truncates
+   with ellipsis instead of forcing horizontal overflow (max-width:0 trick). */
+.dk-table td.dk-clamp { max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dk-table td.dk-clamp * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── Page-level typography helpers ── */
+.dk-h1 { font: 700 var(--dk-fs-xl)/1.2 var(--dk-font); color: var(--dk-ink); margin: 0 0 10px; }
+.dk-lede { font: 400 var(--dk-fs-l)/1.5 var(--dk-font); color: var(--dk-muted); margin: 0 0 16px; max-width: 72ch; }
+.dk-link { color: var(--dk-link); text-decoration: underline; text-underline-offset: 2px; }
+.dk-link:hover { text-decoration-thickness: 2px; }
+.dk-link:focus-visible { outline: 3px solid var(--dk-focus); outline-offset: 0; }

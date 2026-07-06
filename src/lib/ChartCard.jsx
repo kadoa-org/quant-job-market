@@ -19,19 +19,19 @@ import React from "react";
 
 export function StatCard({ title, value, subtitle }) {
   return (
-    <div className="bg-white rounded-lg p-4 border border-black/[0.08] shadow-sm">
-      <div className="text-[11px] text-gray-500 uppercase tracking-wider font-medium mb-1">{title}</div>
-      <div className="text-2xl font-bold">{value}</div>
-      {subtitle && <div className="text-[12px] text-gray-400 mt-1">{subtitle}</div>}
+    <div className="bg-white  p-4 border border-[#b1b4b6] ">
+      <div className="dk-stat-label">{title}</div>
+      <div className="dk-stat-value">{value}</div>
+      {subtitle && <div className="dk-stat-sub">{subtitle}</div>}
     </div>
   );
 }
 
 export function ChartCard({ title, subtitle, children }) {
   return (
-    <div className="bg-white rounded-lg p-4 border border-black/[0.08] shadow-sm">
-      <div className="text-[14px] text-gray-800 font-medium mb-1">{title}</div>
-      {subtitle && <div className="text-[12.5px] text-gray-500 mb-3">{subtitle}</div>}
+    <div className="bg-white  p-4 border border-[#b1b4b6] ">
+      <div style={{ font: "700 17px/1.3 Inter, sans-serif", color: "#0b0c0c", marginBottom: 2 }}>{title}</div>
+      {subtitle && <div className="dk-hint" style={{ marginBottom: 10 }}>{subtitle}</div>}
       {!subtitle && <div className="mb-3" />}
       {children}
     </div>

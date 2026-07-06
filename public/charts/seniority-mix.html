@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Seniority mix at top quant firms — quant.kadoa.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#fafafa;
+    --ink:#0b0b0c;
+    --ink-2:#3d4148;
+    --ink-3:#6c727d;
+    --ink-4:#9aa0a8;
+    --rule:#ececee;
+    --track:#eef0f2;
+    /* Sequential ramp: light intern → dark lead+. */
+    --intern:#d6e7f5;
+    --junior:#93b8e0;
+    --mid:#4585c4;
+    --senior:#1f5594;
+    --lead-plus:#0a2c5c;
+  }
+  * { box-sizing:border-box; }
+  html, body { margin:0; padding:0; background:var(--bg); color:var(--ink);
+    font-family:"Inter","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-feature-settings:"tnum" 1, "cv11" 1, "ss01" 1;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    font-weight:450; }
+  .frame { width:1200px; padding:52px 60px 40px 60px; }
+
+  .title { font-size:32px; font-weight:600; line-height:1.15;
+    letter-spacing:-0.018em; color:var(--ink); margin:0 0 30px 0; }
+
+  .legend { display:flex; flex-wrap:wrap; gap:22px; align-items:center;
+    margin:0 0 28px 0; font-size:12.5px; color:var(--ink-2); font-weight:450; }
+  .legend .item { display:flex; align-items:center; gap:8px; }
+  .legend .swatch { width:9px; height:9px; border-radius:2px; }
+
+  .row { display:grid; grid-template-columns:200px 1fr 44px;
+    align-items:center; gap:18px; padding:5px 0; font-size:13.5px; }
+  .row + .row { border-top:1px solid #f4f5f6; }
+  .firm { color:var(--ink); font-weight:500; white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis; letter-spacing:-0.008em; }
+
+  .bar-track { display:flex; height:22px; border-radius:3px; overflow:hidden;
+    background:var(--track); }
+  .seg { height:100%; }
+  .seg.intern    { background:var(--intern); }
+  .seg.junior    { background:var(--junior); }
+  .seg.mid       { background:var(--mid); }
+  .seg.senior    { background:var(--senior); }
+  .seg.lead-plus { background:var(--lead-plus); }
+
+  .total { color:var(--ink-2); font-weight:500; font-size:12.5px;
+    font-variant-numeric:tabular-nums; text-align:right; letter-spacing:-0.003em; }
+
+  .col-head { display:grid; grid-template-columns:200px 1fr 44px;
+    align-items:end; gap:18px; padding:0 0 10px 0;
+    border-bottom:1px solid var(--rule); margin-bottom:8px;
+    font-size:11px; font-weight:500; color:var(--ink-3);
+    letter-spacing:0.04em; text-transform:uppercase; }
+  .col-head .right { text-align:right; }
+  .col-head .axis { padding-left:1px; letter-spacing:0; text-transform:none;
+    font-size:10.5px; color:var(--ink-4); display:flex; justify-content:space-between; }
+
+  .footer { display:flex; justify-content:flex-end; align-items:baseline;
+    margin-top:24px; font-size:11.5px; color:var(--ink-3); font-weight:450; }
+  .footer .source { color:var(--ink-3); font-weight:500; white-space:nowrap;
+    letter-spacing:-0.008em; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <h1 class="title">Seniority mix at top quant firms</h1>
+
+    <div class="legend">
+      <div class="item"><span class="swatch" style="background:var(--intern)"></span>Intern</div>
+      <div class="item"><span class="swatch" style="background:var(--junior)"></span>Junior</div>
+      <div class="item"><span class="swatch" style="background:var(--mid)"></span>Mid</div>
+      <div class="item"><span class="swatch" style="background:var(--senior)"></span>Senior</div>
+      <div class="item"><span class="swatch" style="background:var(--lead-plus)"></span>Lead / VP+</div>
+    </div>
+
+    <div class="col-head">
+      <div>Firm</div>
+      <div class="axis"><span>0%</span><span>25</span><span>50</span><span>75</span><span>100%</span></div>
+      <div class="right">Jobs</div>
+    </div>
+
+    <div class="row">
+      <div class="firm">Citadel</div>
+      <div class="bar-track"><div class="seg intern" style="width:34%"></div><div class="seg junior" style="width:38%"></div><div class="seg mid" style="width:22%"></div><div class="seg senior" style="width:6%"></div></div>
+      <div class="total">32</div>
+    </div>
+    <div class="row">
+      <div class="firm">Citadel Securities</div>
+      <div class="bar-track"><div class="seg intern" style="width:26%"></div><div class="seg junior" style="width:23%"></div><div class="seg mid" style="width:40%"></div><div class="seg senior" style="width:11%"></div></div>
+      <div class="total">57</div>
+    </div>
+    <div class="row">
+      <div class="firm">Susquehanna (SIG)</div>
+      <div class="bar-track"><div class="seg intern" style="width:16%"></div><div class="seg junior" style="width:20%"></div><div class="seg mid" style="width:37%"></div><div class="seg senior" style="width:27%"></div></div>
+      <div class="total">144</div>
+    </div>
+    <div class="row">
+      <div class="firm">Squarepoint</div>
+      <div class="bar-track"><div class="seg intern" style="width:3%"></div><div class="seg junior" style="width:17%"></div><div class="seg mid" style="width:48%"></div><div class="seg senior" style="width:30%"></div><div class="seg lead-plus" style="width:2%"></div></div>
+      <div class="total">69</div>
+    </div>
+    <div class="row">
+      <div class="firm">Man Group</div>
+      <div class="bar-track"><div class="seg intern" style="width:11%"></div><div class="seg junior" style="width:6%"></div><div class="seg mid" style="width:40%"></div><div class="seg senior" style="width:34%"></div><div class="seg lead-plus" style="width:9%"></div></div>
+      <div class="total">35</div>
+    </div>
+    <div class="row">
+      <div class="firm">Jump Trading</div>
+      <div class="bar-track"><div class="seg intern" style="width:13%"></div><div class="seg junior" style="width:4%"></div><div class="seg mid" style="width:65%"></div><div class="seg senior" style="width:15%"></div><div class="seg lead-plus" style="width:3%"></div></div>
+      <div class="total">54</div>
+    </div>
+    <div class="row">
+      <div class="firm">Akuna Capital</div>
+      <div class="bar-track"><div class="seg intern" style="width:4%"></div><div class="seg junior" style="width:13%"></div><div class="seg mid" style="width:42%"></div><div class="seg senior" style="width:37%"></div><div class="seg lead-plus" style="width:4%"></div></div>
+      <div class="total">24</div>
+    </div>
+    <div class="row">
+      <div class="firm">DV Trading</div>
+      <div class="bar-track"><div class="seg intern" style="width:7%"></div><div class="seg junior" style="width:9%"></div><div class="seg mid" style="width:42%"></div><div class="seg senior" style="width:40%"></div><div class="seg lead-plus" style="width:2%"></div></div>
+      <div class="total">45</div>
+    </div>
+    <div class="row">
+      <div class="firm">Flow Traders</div>
+      <div class="bar-track"><div class="seg intern" style="width:7%"></div><div class="seg junior" style="width:7%"></div><div class="seg mid" style="width:7%"></div><div class="seg senior" style="width:79%"></div></div>
+      <div class="total">14</div>
+    </div>
+    <div class="row">
+      <div class="firm">Point72</div>
+      <div class="bar-track"><div class="seg intern" style="width:8%"></div><div class="seg junior" style="width:5%"></div><div class="seg mid" style="width:47%"></div><div class="seg senior" style="width:37%"></div><div class="seg lead-plus" style="width:3%"></div></div>
+      <div class="total">201</div>
+    </div>
+    <div class="row">
+      <div class="firm">Two Sigma</div>
+      <div class="bar-track"><div class="seg junior" style="width:13%"></div><div class="seg mid" style="width:65%"></div><div class="seg senior" style="width:16%"></div><div class="seg lead-plus" style="width:6%"></div></div>
+      <div class="total">31</div>
+    </div>
+    <div class="row">
+      <div class="firm">IMC</div>
+      <div class="bar-track"><div class="seg intern" style="width:4%"></div><div class="seg junior" style="width:9%"></div><div class="seg mid" style="width:52%"></div><div class="seg senior" style="width:32%"></div><div class="seg lead-plus" style="width:3%"></div></div>
+      <div class="total">56</div>
+    </div>
+    <div class="row">
+      <div class="firm">Virtu</div>
+      <div class="bar-track"><div class="seg junior" style="width:12%"></div><div class="seg mid" style="width:66%"></div><div class="seg senior" style="width:22%"></div></div>
+      <div class="total">32</div>
+    </div>
+    <div class="row">
+      <div class="firm">WorldQuant</div>
+      <div class="bar-track"><div class="seg intern" style="width:9%"></div><div class="seg junior" style="width:3%"></div><div class="seg mid" style="width:49%"></div><div class="seg senior" style="width:31%"></div><div class="seg lead-plus" style="width:8%"></div></div>
+      <div class="total">93</div>
+    </div>
+    <div class="row">
+      <div class="firm">Tower Research</div>
+      <div class="bar-track"><div class="seg intern" style="width:8%"></div><div class="seg junior" style="width:4%"></div><div class="seg mid" style="width:60%"></div><div class="seg senior" style="width:28%"></div></div>
+      <div class="total">60</div>
+    </div>
+    <div class="row">
+      <div class="firm">Hudson River Trading</div>
+      <div class="bar-track"><div class="seg junior" style="width:11%"></div><div class="seg mid" style="width:52%"></div><div class="seg senior" style="width:28%"></div><div class="seg lead-plus" style="width:9%"></div></div>
+      <div class="total">54</div>
+    </div>
+    <div class="row">
+      <div class="firm">Optiver</div>
+      <div class="bar-track"><div class="seg intern" style="width:6%"></div><div class="seg junior" style="width:5%"></div><div class="seg mid" style="width:51%"></div><div class="seg senior" style="width:31%"></div><div class="seg lead-plus" style="width:7%"></div></div>
+      <div class="total">83</div>
+    </div>
+    <div class="row">
+      <div class="firm">Maven Securities</div>
+      <div class="bar-track"><div class="seg intern" style="width:4%"></div><div class="seg junior" style="width:7%"></div><div class="seg mid" style="width:63%"></div><div class="seg senior" style="width:23%"></div><div class="seg lead-plus" style="width:3%"></div></div>
+      <div class="total">30</div>
+    </div>
+    <div class="row">
+      <div class="firm">Jane Street</div>
+      <div class="bar-track"><div class="seg intern" style="width:6%"></div><div class="seg junior" style="width:2%"></div><div class="seg mid" style="width:63%"></div><div class="seg senior" style="width:27%"></div><div class="seg lead-plus" style="width:2%"></div></div>
+      <div class="total">165</div>
+    </div>
+    <div class="row">
+      <div class="firm">D. E. Shaw</div>
+      <div class="bar-track"><div class="seg intern" style="width:4%"></div><div class="seg junior" style="width:4%"></div><div class="seg mid" style="width:63%"></div><div class="seg senior" style="width:26%"></div><div class="seg lead-plus" style="width:3%"></div></div>
+      <div class="total">54</div>
+    </div>
+    <div class="row">
+      <div class="firm">Qube RT (QRT)</div>
+      <div class="bar-track"><div class="seg intern" style="width:4%"></div><div class="seg junior" style="width:3%"></div><div class="seg mid" style="width:57%"></div><div class="seg senior" style="width:33%"></div><div class="seg lead-plus" style="width:3%"></div></div>
+      <div class="total">219</div>
+    </div>
+    <div class="row">
+      <div class="firm">Schonfeld</div>
+      <div class="bar-track"><div class="seg intern" style="width:6%"></div><div class="seg mid" style="width:52%"></div><div class="seg senior" style="width:39%"></div><div class="seg lead-plus" style="width:3%"></div></div>
+      <div class="total">33</div>
+    </div>
+    <div class="row">
+      <div class="firm">AQR</div>
+      <div class="bar-track"><div class="seg junior" style="width:6%"></div><div class="seg mid" style="width:53%"></div><div class="seg senior" style="width:6%"></div><div class="seg lead-plus" style="width:35%"></div></div>
+      <div class="total">17</div>
+    </div>
+    <div class="row">
+      <div class="firm">DRW</div>
+      <div class="bar-track"><div class="seg junior" style="width:5%"></div><div class="seg mid" style="width:54%"></div><div class="seg senior" style="width:39%"></div><div class="seg lead-plus" style="width:2%"></div></div>
+      <div class="total">166</div>
+    </div>
+    <div class="row">
+      <div class="firm">Balyasny</div>
+      <div class="bar-track"><div class="seg intern" style="width:2%"></div><div class="seg junior" style="width:2%"></div><div class="seg mid" style="width:39%"></div><div class="seg senior" style="width:51%"></div><div class="seg lead-plus" style="width:6%"></div></div>
+      <div class="total">85</div>
+    </div>
+    <div class="row">
+      <div class="firm">Voleon</div>
+      <div class="bar-track"><div class="seg intern" style="width:2%"></div><div class="seg junior" style="width:2%"></div><div class="seg mid" style="width:30%"></div><div class="seg senior" style="width:48%"></div><div class="seg lead-plus" style="width:18%"></div></div>
+      <div class="total">44</div>
+    </div>
+    <div class="row">
+      <div class="firm">G-Research</div>
+      <div class="bar-track"><div class="seg junior" style="width:2%"></div><div class="seg mid" style="width:58%"></div><div class="seg senior" style="width:30%"></div><div class="seg lead-plus" style="width:10%"></div></div>
+      <div class="total">50</div>
+    </div>
+    <div class="row">
+      <div class="firm">Millennium</div>
+      <div class="bar-track"><div class="seg mid" style="width:43%"></div><div class="seg senior" style="width:50%"></div><div class="seg lead-plus" style="width:7%"></div></div>
+      <div class="total">104</div>
+    </div>
+    <div class="row">
+      <div class="firm">Renaissance Technologies</div>
+      <div class="bar-track"><div class="seg mid" style="width:100%"></div></div>
+      <div class="total">8</div>
+    </div>
+
+    <div class="footer">
+      <div class="source">quant.kadoa.com · 2026-05-21</div>
+    </div>
+  </div>
+</body>
+</html>

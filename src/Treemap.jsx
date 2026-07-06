@@ -118,7 +118,7 @@ export default function Treemap({ firms, colorLayer, onFirmClick, selectedFirm }
                     onClick={() => onFirmClick(f.firmName)}
                     className={`w-full flex items-center gap-3 px-4 py-3 text-left active:bg-black/[0.04] ${isSelected ? "bg-black/[0.04]" : ""}`}
                   >
-                    <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: color }} />
+                    <span className="w-2.5 h-2.5  flex-shrink-0" style={{ backgroundColor: color }} />
                     <div className="flex-1 min-w-0">
                       <div className="text-[14px] text-[#191919] truncate">{f.firmName}</div>
                       <div className="text-[11px] text-[#9c9ca0] truncate">
@@ -221,7 +221,7 @@ export default function Treemap({ firms, colorLayer, onFirmClick, selectedFirm }
       {/* Tooltip */}
       {hoveredFirm && (
         <div
-          className="fixed z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-3 pointer-events-none"
+          className="fixed z-50 bg-white border border-gray-200  shadow-lg p-3 pointer-events-none"
           style={{
             left: tooltip.x + 12,
             top: tooltip.y + 12,
@@ -255,12 +255,12 @@ export default function Treemap({ firms, colorLayer, onFirmClick, selectedFirm }
 
       {/* Firm type legend at bottom */}
       {colorLayer === "firmType" && (
-        <div className="absolute bottom-3 left-3 hidden sm:flex flex-wrap gap-x-3 gap-y-1 bg-white/80 rounded-lg px-3 py-2 backdrop-blur-sm border border-gray-200 shadow-sm">
+        <div className="absolute bottom-3 left-3 hidden sm:flex flex-wrap gap-x-3 gap-y-1 bg-white/80  px-3 py-2 backdrop-blur-sm border border-gray-200 ">
           {Object.entries(FIRM_TYPE_COLORS)
             .filter(([type]) => type !== "other" && type !== "consulting" && type !== "exchange" && type !== "sovereign_fund" && type !== "bank")
             .map(([type, color]) => (
               <div key={type} className="flex items-center gap-1.5">
-                <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: color }} />
+                <div className="w-2 h-2 " style={{ backgroundColor: color }} />
                 <span className="text-[9px] text-gray-500">{FIRM_TYPE_LABELS[type]}</span>
               </div>
             ))}
