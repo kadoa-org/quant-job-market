@@ -3,11 +3,31 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "quant.kadoa.com"
+        }
+      ],
+      "destination": "https://www.kadoa.com/quant/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "quant.kadoa.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "quant.kadoa.com"
+        }
+      ],
       "destination": "https://www.kadoa.com/quant/:path*",
       "permanent": true
     },
-    { "source": "/quant/heatmap", "destination": "/quant/tech-stack", "permanent": true }
+    {
+      "source": "/quant/heatmap",
+      "destination": "/quant/tech-stack",
+      "permanent": true
+    }
   ]
 }
