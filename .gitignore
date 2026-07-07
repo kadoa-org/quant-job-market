@@ -3,3 +3,6 @@ dist/
 .vite/
 .idea/
 .DS_Store
+
+# stray build-db artifact (real DB is public/data/jobs.db)
+/jobs.db
