@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Dashboard from "./Dashboard";
 import DataTable from "./DataTable";
 import FilterBar from "./FilterBar";
-import { GitHubButton, Button, LiveBadge, NavBar, SiteHeader } from "./kit";
+import { Button, GitHubButton, LiveBadge, NavBar, SiteHeader } from "./kit";
 import LocationHeatmap from "./LocationHeatmap";
 import TechStackHeatmap from "./TechStackHeatmap";
 import Treemap from "./Treemap";
@@ -180,6 +180,11 @@ export default function App() {
       <SiteHeader
         brand="📊 Quant Job Market"
         LinkComponent={(p) => <a {...p} />}
+        brandSuffix={
+          <a href="https://www.kadoa.com" target="_blank" rel="noreferrer" className="dk-header-link">
+            by Kadoa
+          </a>
+        }
         right={
           <span style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <LiveBadge>Updated daily</LiveBadge>
