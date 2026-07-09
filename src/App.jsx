@@ -178,7 +178,12 @@ export default function App() {
   return (
     <div className="min-h-screen sm:h-screen w-screen flex flex-col">
       <SiteHeader
-        brand="📊 Quant Job Market"
+        brand={
+          <span className="dk-brand-lockup">
+            <img src={`${import.meta.env.BASE_URL}kadoa-icon.svg`} alt="Kadoa" width="18" height="18" />
+            Quant Job Market
+          </span>
+        }
         LinkComponent={(p) => <a {...p} />}
         brandSuffix={
           <a href="https://www.kadoa.com" target="_blank" rel="noreferrer" className="dk-header-link">
@@ -189,6 +194,15 @@ export default function App() {
           <span style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <LiveBadge>Updated daily</LiveBadge>
             <GitHubButton repo="kadoa-org/quant-job-market" />
+            <a
+              className="dk-btn dk-btn--brand"
+              href="https://www.kadoa.com/contact"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
+            >
+              Book a demo
+            </a>
           </span>
         }
       />
