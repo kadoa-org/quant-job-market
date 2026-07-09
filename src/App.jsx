@@ -194,15 +194,6 @@ export default function App() {
           <span style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <LiveBadge>Updated daily</LiveBadge>
             <GitHubButton repo="kadoa-org/quant-job-market" />
-            <a
-              className="dk-btn dk-btn--brand"
-              href="https://www.kadoa.com/contact"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: "none" }}
-            >
-              Book a demo
-            </a>
           </span>
         }
       />
