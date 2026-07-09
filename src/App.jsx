@@ -178,12 +178,7 @@ export default function App() {
   return (
     <div className="min-h-screen sm:h-screen w-screen flex flex-col">
       <SiteHeader
-        brand={
-          <span className="dk-brand-lockup">
-            <img src={`${import.meta.env.BASE_URL}kadoa-icon.svg`} alt="Kadoa" width="18" height="18" />
-            Quant Job Market
-          </span>
-        }
+        brand="📊 Quant Job Market"
         LinkComponent={(p) => <a {...p} />}
         brandSuffix={
           <a href="https://www.kadoa.com" target="_blank" rel="noreferrer" className="dk-header-link">
