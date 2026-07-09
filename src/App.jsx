@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Dashboard from "./Dashboard";
 import DataTable from "./DataTable";
 import FilterBar from "./FilterBar";
-import { Button, GitHubButton, LiveBadge, NavBar, SiteHeader } from "./kit";
+import { Button, GitHubButton, LiveBadge, NavBar, SiteFooter, SiteHeader } from "./kit";
 import LocationHeatmap from "./LocationHeatmap";
 import TechStackHeatmap from "./TechStackHeatmap";
 import Treemap from "./Treemap";
@@ -260,6 +260,7 @@ export default function App() {
         {view === "techstack" && <TechStackHeatmap jobs={jobs} />}
         {view === "locations" && <LocationHeatmap jobs={jobs} />}
       </main>
+      <SiteFooter current="quant" />
     </div>
   );
 }
