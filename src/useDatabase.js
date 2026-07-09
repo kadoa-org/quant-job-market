@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import initSqlJs from "sql.js";
 
-const SQL_WASM_URL = "https://sql.js.org/dist/sql-wasm.wasm";
+// Self-hosted from public/ (copied from node_modules/sql.js/dist) so it loads
+// same-origin — required by the strict CSP (connect-src 'self') on
+// www.kadoa.com/quant. See kadoa-backend next.config.mjs.
+const SQL_WASM_URL = `${import.meta.env.BASE_URL}sql-wasm.wasm`;
 let dbPromise = null;
 
 function getDb() {
