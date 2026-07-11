@@ -72,6 +72,33 @@ const topLocs = (m, n = 3) =>
 
 // ── page chrome ──────────────────────────────────────────────────────────────
 
+// Static replica of the shared data-kit chrome (SiteHeader/GitHubButton/
+// SiteFooter markup mirrors src/kit/index.jsx). All .dk-* classes come from
+// the built CSS bundle linked below — the app imports kit.css, so these pages
+// inherit the exact site design (and self-hosted Inter) for free.
+const GH_ICON = `<svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>`;
+
+const siteHeader = `<header class="dk-header">
+  <div class="dk-container dk-header-inner">
+    <span class="dk-header-brand-group">
+      <a href="${PREFIX}/" class="dk-header-brand">📊 Quant Job Market</a>
+      <a href="https://www.kadoa.com" target="_blank" rel="noreferrer" class="dk-header-link">by Kadoa</a>
+    </span>
+    <a class="dk-btn dk-btn--inverse" href="https://github.com/kadoa-org/quant-job-market" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub" style="text-decoration:none">${GH_ICON}<span class="dk-btn-label">Star on GitHub</span></a>
+  </div>
+</header>`;
+
+const siteFooter = `<footer class="dk-footer">
+  <div class="dk-container dk-footer-inner">
+    <nav class="dk-footer-nav" aria-label="Kadoa open datasets">
+      <span class="dk-footer-label">Open data by Kadoa</span>
+      <span class="dk-footer-here" aria-current="page">Quant Jobs</span>
+      <a href="https://www.kadoa.com/layoffs/">Layoffs Tracker</a>
+      <a href="https://www.kadoa.com/congress/">Congress Trades</a>
+    </nav>
+  </div>
+</footer>`;
+
 function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml }) {
   const url = `${BASE}${pathname}`;
   return `<!doctype html>
@@ -94,35 +121,31 @@ function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml }) {
 <meta name="twitter:title" content="${esc(title)}" />
 <meta name="twitter:description" content="${esc(description)}" />
 <meta name="twitter:image" content="${BASE}/screenshot.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
 <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 <style>
-  body{font-family:Inter,system-ui,sans-serif;background:#f2f2f3;color:#191919;margin:0}
-  .wrap{max-width:880px;margin:0 auto;padding:40px 20px 80px}
-  a{color:#2f5fe0;text-decoration:none}a:hover{text-decoration:underline}
-  h1{font-size:1.9rem;font-weight:700;letter-spacing:-.02em;margin:0 0 12px}
-  .lede{font-size:1.05rem;color:#444;line-height:1.5;margin:0 0 28px}
-  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e3e3e6;border-radius:10px;overflow:hidden}
-  th,td{text-align:left;padding:10px 14px;font-size:.92rem;border-bottom:1px solid #eee}
-  th{font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:#777;font-weight:600}
-  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
-  tr:last-child td{border-bottom:none}
-  .meta{font-size:.8rem;color:#888;margin-top:24px}
-  .cta{display:inline-block;margin:24px 0;padding:10px 18px;background:#191919;color:#fff;border-radius:8px;font-weight:600}
-  .cta:hover{text-decoration:none;opacity:.9}
-  nav{font-size:.85rem;color:#888;margin-bottom:24px}
+  /* Page-only styles; the look comes from the kit's .dk-* classes in the bundle CSS. */
+  body{margin:0;background:var(--dk-bg);color:var(--dk-ink);font-family:var(--dk-font)}
+  .seo-main{padding:28px 0 64px}
+  .seo-crumbs{font-size:var(--dk-fs-s);color:var(--dk-muted);margin:0 0 20px}
+  .seo-crumbs a{color:var(--dk-link)}
+  h1{font:700 var(--dk-fs-xxl)/1.15 var(--dk-font);letter-spacing:-0.02em;margin:0 0 10px}
+  .seo-lede{font:400 var(--dk-fs-l)/1.5 var(--dk-font);color:var(--dk-muted);max-width:70ch;margin:0 0 24px}
+  .seo-lede a,.dk-hint a{color:var(--dk-link)}
+  .seo-cta{display:inline-block;margin-top:20px}
+  .seo-meta{margin-top:20px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<nav><a href="${PREFIX}/">Quant Job Market</a> › ${esc(h1)}</nav>
+${siteHeader}
+<main class="dk-container seo-main">
+<nav class="seo-crumbs"><a href="${PREFIX}/">Quant Job Market</a> › ${esc(h1)}</nav>
 <h1>${esc(h1)}</h1>
-<p class="lede">${intro}</p>
+<p class="seo-lede">${intro}</p>
 ${bodyHtml}
-<p class="meta">Aggregated from ${jobs.length.toLocaleString()} live job postings across ${firms.size} quant firms. Updated daily. <a href="${PREFIX}/data/jobs.json">Open dataset (JSON)</a>.</p>
-</div>
+<p class="dk-hint seo-meta">Aggregated from ${jobs.length.toLocaleString()} live job postings across ${firms.size} quant firms. Updated daily. <a href="${PREFIX}/data/jobs.json">Open dataset (JSON)</a>.</p>
+</main>
+${siteFooter}
 </body>
 </html>`;
 }
@@ -150,11 +173,15 @@ function write(pathname, html) {
 
 // ── /hiring ──────────────────────────────────────────────────────────────────
 
+// Kit-styled table (classes from the bundle CSS; dk-num = right-aligned numeric)
+const kitTable = (headHtml, rowsHtml) =>
+  `<div class="dk-table-wrap"><table class="dk-table"><thead><tr>${headHtml}</tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
+
 const ranked = [...firms.values()].sort((a, b) => b.count - a.count);
 const hiringRows = ranked
   .map(
     (f, i) =>
-      `<tr><td class="n">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="n">${f.count}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
+      `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.count}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
   )
   .join("\n");
 write(
@@ -170,8 +197,11 @@ write(
     ),
     h1: "Which Quant Firms Are Hiring Right Now",
     intro: `A live, ranked snapshot of where the quant industry is hiring: ${jobs.length.toLocaleString()} open roles across ${firms.size} hedge funds, prop trading firms, and market makers, updated daily. Unlike static "top firms" lists, these counts reflect what's actually open today. <a href="${PREFIX}/">Explore the interactive job board →</a>`,
-    bodyHtml: `<table><thead><tr><th class="n">#</th><th>Firm</th><th>Type</th><th class="n">Open roles</th><th>Top locations</th></tr></thead><tbody>${hiringRows}</tbody></table>
-<a class="cta" href="${PREFIX}/">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
+    bodyHtml: `${kitTable(
+      `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Open roles</th><th>Top locations</th>`,
+      hiringRows,
+    )}
+<a class="dk-btn seo-cta" href="${PREFIX}/">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
   }),
 );
 
@@ -200,7 +230,7 @@ for (const tech of TECHS) {
   const rows = matched
     .map(
       (f, i) =>
-        `<tr><td class="n">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="n">${f.n}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
+        `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
     )
     .join("\n");
   write(
@@ -216,8 +246,74 @@ for (const tech of TECHS) {
       ),
       h1: `Quant Firms Hiring ${tech.name} Developers`,
       intro: `${matched.length} hedge funds, prop trading firms, and market makers currently have open roles mentioning <strong>${esc(tech.name)}</strong>: ${totalPostings} postings in all. Ranked by how many ${esc(tech.name)} roles each firm has open right now. <a href="${PREFIX}/tech-stack">See the full language heatmap →</a>`,
-      bodyHtml: `<table><thead><tr><th class="n">#</th><th>Firm</th><th>Type</th><th class="n">${esc(tech.name)} roles</th><th>Top locations</th></tr></thead><tbody>${rows}</tbody></table>
-<a class="cta" href="${PREFIX}/tech-stack">Explore the interactive tech-stack heatmap →</a>`,
+      bodyHtml: `${kitTable(
+        `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">${esc(tech.name)} roles</th><th>Top locations</th>`,
+        rows,
+      )}
+<a class="dk-btn seo-cta" href="${PREFIX}/tech-stack">Explore the interactive tech-stack heatmap →</a>`,
+    }),
+  );
+}
+
+// ── /location/<slug> ──────────────────────────────────────────────────────────
+
+// Same winnable pattern as /hiring and /tech: "quant jobs [city]" SERPs are
+// owned by LinkedIn/Indeed and unwinnable, but "which quant firms are hiring in
+// [city]" has no live data-backed page — a firm-ranked table is the gap we fill.
+// Curated to hub cities where coverage is broad (built only if >= 8 firms).
+const LOCATIONS = [
+  { slug: "new-york", name: "New York" },
+  { slug: "london", name: "London" },
+  { slug: "singapore", name: "Singapore" },
+  { slug: "hong-kong", name: "Hong Kong" },
+  { slug: "chicago", name: "Chicago" },
+  { slug: "sydney", name: "Sydney" },
+  { slug: "boston", name: "Boston" },
+  { slug: "paris", name: "Paris" },
+  { slug: "mumbai", name: "Mumbai" },
+  { slug: "miami", name: "Miami" },
+  { slug: "amsterdam", name: "Amsterdam" },
+  { slug: "austin", name: "Austin" },
+];
+
+const topLangs = (m, n = 3) =>
+  [...m.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, n)
+    .map(([k]) => k)
+    .join(", ");
+
+for (const loc of LOCATIONS) {
+  const matched = ranked
+    .filter((f) => f.locs.has(loc.name))
+    .map((f) => ({ name: f.name, type: f.type, n: f.locs.get(loc.name), langs: f.langs }))
+    .sort((a, b) => b.n - a.n);
+  if (matched.length < 8) continue;
+  const totalPostings = matched.reduce((s, f) => s + f.n, 0);
+  const rows = matched
+    .map(
+      (f, i) =>
+        `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td>${esc(topLangs(f.langs))}</td></tr>`,
+    )
+    .join("\n");
+  write(
+    `/location/${loc.slug}`,
+    page({
+      pathname: `/location/${loc.slug}`,
+      title: `Quant Firms Hiring in ${loc.name} Right Now (Live Data) | Quant Job Market`,
+      description: `${matched.length} hedge funds, prop shops, and market makers with open quant roles in ${loc.name} — ${totalPostings} postings, ranked by firm. Live data updated daily.`,
+      jsonLd: datasetLd(
+        `Quant firms hiring in ${loc.name}`,
+        `${matched.length} quant firms with open roles in ${loc.name} (${totalPostings} postings).`,
+        `${BASE}/location/${loc.slug}`,
+      ),
+      h1: `Quant Firms Hiring in ${loc.name}`,
+      intro: `${matched.length} hedge funds, prop trading firms, and market makers currently have open roles in <strong>${esc(loc.name)}</strong>: ${totalPostings} postings in all, ranked by how many ${esc(loc.name)} roles each firm has open right now. <a href="${PREFIX}/locations">Compare all locations →</a>`,
+      bodyHtml: `${kitTable(
+        `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">${esc(loc.name)} roles</th><th>Top tech</th>`,
+        rows,
+      )}
+<a class="dk-btn seo-cta" href="${PREFIX}/">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
     }),
   );
 }
@@ -228,10 +324,14 @@ for (const tech of TECHS) {
 const techLinks = TECHS.filter((t) => written.includes(`/tech/${t.slug}`))
   .map((t) => `<a href="${PREFIX}/tech/${t.slug}/">${esc(t.name)} firms</a>`)
   .join("\n      ");
-const footer = `    <footer style="max-width:880px;margin:0 auto;padding:24px 20px;font-family:Inter,system-ui,sans-serif;font-size:.82rem;color:#888;border-top:1px solid #e3e3e6">
-      <strong style="color:#555">Explore the data:</strong>
+const locationLinks = LOCATIONS.filter((l) => written.includes(`/location/${l.slug}`))
+  .map((l) => `<a href="${PREFIX}/location/${l.slug}/">${esc(l.name)}</a>`)
+  .join("\n      ");
+const footer = `    <footer style="max-width:960px;margin:0 auto;padding:24px 15px;font-family:var(--dk-font,Inter,system-ui,sans-serif);font-size:var(--dk-fs-s,.82rem);color:var(--dk-muted,#888);border-top:1px solid var(--dk-rule-soft,#e5e6e7);display:flex;flex-wrap:wrap;gap:6px 14px">
+      <strong style="color:var(--dk-ink,#555)">Explore the data:</strong>
       <a href="${PREFIX}/hiring/">Which firms are hiring</a>
       ${techLinks}
+      ${locationLinks}
     </footer>`;
 for (const shell of ["index.html", "tech-stack.html", "locations.html"]) {
   const p = path.join(DIST, shell);
