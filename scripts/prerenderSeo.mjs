@@ -99,7 +99,7 @@ const siteFooter = `<footer class="dk-footer">
   </div>
 </footer>`;
 
-function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml }) {
+function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml, showMeta = true }) {
   const url = `${BASE}${pathname}`;
   return `<!doctype html>
 <html lang="en">
@@ -141,6 +141,8 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
   .seo-jd h2{font-size:var(--dk-fs-l)}
   .seo-jd p,.seo-jd li{margin:0 0 10px}
   .seo-jd ul,.seo-jd ol{padding-left:22px}
+  .seo-back{margin-top:28px;font-size:var(--dk-fs-s)}
+  .seo-back a{color:var(--dk-link)}
 </style>
 </head>
 <body>
@@ -150,7 +152,7 @@ ${siteHeader}
 <h1>${esc(h1)}</h1>
 <p class="seo-lede">${intro}</p>
 ${bodyHtml}
-<p class="dk-hint seo-meta">Aggregated from ${jobs.length.toLocaleString()} live job postings across ${firms.size} quant firms. Updated daily. <a href="${PREFIX}/data/jobs.json">Open dataset (JSON)</a>.</p>
+${showMeta ? `<p class="dk-hint seo-meta">Aggregated from ${jobs.length.toLocaleString()} live job postings across ${firms.size} quant firms. Updated daily. <a href="${PREFIX}/data/jobs.json">Open dataset (JSON)</a>.</p>` : ""}
 </main>
 ${siteFooter}
 </body>
@@ -418,7 +420,8 @@ for (const j of jobs) {
   <span class="dk-hint" style="margin-left:12px">Applications go to ${esc(j.firmName)}'s own site.</span>
 </p>
 <article class="seo-jd">${desc}</article>
-<p><a class="dk-btn seo-cta" href="${PREFIX}/">Browse all ${jobs.length.toLocaleString()} quant roles →</a></p>`,
+<p class="seo-back"><a href="${PREFIX}/">← Browse all ${jobs.length.toLocaleString()} quant roles</a></p>`,
+      showMeta: false,
     }),
   );
   jobPages++;
