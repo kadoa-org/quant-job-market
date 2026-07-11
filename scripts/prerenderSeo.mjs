@@ -352,6 +352,7 @@ const SENIORITY_LABEL = { junior: "Junior", mid: "Mid-level", senior: "Senior", 
 const WORK_MODE_LABEL = { onsite: "On-site", hybrid: "Hybrid", remote: "Remote" };
 
 let jobPages = 0;
+const jobSitemapEntries = [];
 for (const j of jobs) {
   const desc = j.slug && descriptions[j.id];
   if (!desc) continue;
@@ -424,6 +425,7 @@ for (const j of jobs) {
       showMeta: false,
     }),
   );
+  jobSitemapEntries.push({ path: `/job/${j.slug}`, lastmod: j.datePosted || today });
   jobPages++;
 }
 console.log(`job pages: ${jobPages}`);
@@ -452,27 +454,45 @@ for (const shell of ["index.html", "tech-stack.html", "locations.html"]) {
   fs.writeFileSync(p, html);
 }
 
-// ── sitemap (merge with the static one Vite copied from public/) ──────────────
+// ── sitemaps ──────────────────────────────────────────────────────────────────
+//
+// Segmented by page TYPE (not firm) so Search Console reports indexation per
+// segment — the question we'll actually ask is "are the job pages indexed?".
+//   sitemap.xml        index (same URL robots.txt already points at)
+//   sitemap-core.xml   static SPA shells (from public/, has image extensions)
+//   sitemap-pages.xml  aggregate SEO pages — live counts change daily, so a
+//                      daily lastmod is honest here
+//   sitemap-jobs.xml   job pages — lastmod = datePosted; a perpetual "today"
+//                      lastmod is the pattern Google documents as ignored
+const XMLH = `<?xml version="1.0" encoding="UTF-8"?>`;
+const urlTag = ({ loc, lastmod, changefreq, priority }) =>
+  `  <url><loc>${loc}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}${changefreq ? `<changefreq>${changefreq}</changefreq>` : ""}${priority ? `<priority>${priority}</priority>` : ""}</url>`;
+const urlset = (rows) =>
+  `${XMLH}\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rows.join("\n")}\n</urlset>\n`;
 
-const sitemapPath = path.join(DIST, "sitemap.xml");
-const existing = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, "utf8") : "";
-const existingLocs = new Set([...existing.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]));
-const newUrls = written
-  .map((p) => `${BASE}${p}`)
-  .filter((u) => !existingLocs.has(u))
-  .map(
-    (u) =>
-      `  <url><loc>${u}</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>`,
-  );
-if (existing.includes("</urlset>")) {
-  fs.writeFileSync(sitemapPath, existing.replace("</urlset>", `${newUrls.join("\n")}\n</urlset>`));
-} else {
-  fs.writeFileSync(
-    sitemapPath,
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${newUrls.join("\n")}\n</urlset>\n`,
-  );
-}
+const aggregatePaths = written.filter((p) => !p.startsWith("/job/"));
+fs.writeFileSync(
+  path.join(DIST, "sitemap-pages.xml"),
+  urlset(
+    aggregatePaths.map((p) => urlTag({ loc: `${BASE}${p}`, lastmod: today, changefreq: "daily", priority: "0.8" })),
+  ),
+);
+fs.writeFileSync(
+  path.join(DIST, "sitemap-jobs.xml"),
+  urlset(jobSitemapEntries.map((e) => urlTag({ loc: `${BASE}${e.path}`, lastmod: e.lastmod, priority: "0.6" }))),
+);
+// Overwrites the vite-copied file only if someone reintroduces public/sitemap.xml;
+// robots.txt keeps pointing at /quant/sitemap.xml, which is now the index.
+fs.writeFileSync(
+  path.join(DIST, "sitemap.xml"),
+  `${XMLH}\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[
+    "sitemap-core.xml",
+    "sitemap-pages.xml",
+    "sitemap-jobs.xml",
+  ]
+    .map((f) => `  <sitemap><loc>${BASE}/${f}</loc><lastmod>${today}</lastmod></sitemap>`)
+    .join("\n")}\n</sitemapindex>\n`,
+);
 
-const nonJob = written.filter((p) => !p.startsWith("/job/"));
-console.log(`prerendered ${written.length} SEO pages (${jobPages} job pages + ${nonJob.join(", ")})`);
-console.log(`sitemap: +${newUrls.length} urls`);
+console.log(`prerendered ${written.length} SEO pages (${jobPages} job pages + ${aggregatePaths.join(", ")})`);
+console.log(`sitemaps: index + core + pages (${aggregatePaths.length}) + jobs (${jobSitemapEntries.length})`);
