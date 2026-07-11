@@ -133,7 +133,17 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
               <tr key={j.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
                 <td className="px-3 sm:px-4 py-2.5 text-gray-900 font-medium">{j.firmName}</td>
                 <td className="px-3 sm:px-4 py-2.5">
-                  {j.url || j.applyUrl ? (
+                  {/* Titles link to our own /job/<slug>/ page (full description +
+                      Apply button) so the site is the hub; external URL is the
+                      fallback for the few postings without a prerendered page. */}
+                  {j.slug ? (
+                    <a
+                      href={`${import.meta.env.BASE_URL}job/${j.slug}/`}
+                      className="text-violet-600 hover:text-violet-700 hover:underline underline-offset-2"
+                    >
+                      {j.jobTitle || "View posting"}
+                    </a>
+                  ) : j.url || j.applyUrl ? (
                     <a
                       href={j.url || j.applyUrl}
                       target="_blank"

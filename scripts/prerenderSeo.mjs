@@ -134,6 +134,13 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
   .seo-lede a,.dk-hint a{color:var(--dk-link)}
   .seo-cta{display:inline-block;margin-top:20px}
   .seo-meta{margin-top:20px}
+  .seo-apply{background:var(--dk-link);border-color:var(--dk-link);color:#fff !important;font-weight:600}
+  .seo-apply:hover{background:#144e81;border-color:#144e81}
+  .seo-jd{max-width:75ch;font:400 var(--dk-fs-m)/1.55 var(--dk-font);margin-top:24px}
+  .seo-jd h2,.seo-jd h3,.seo-jd h4{font-weight:700;margin:22px 0 8px;line-height:1.3}
+  .seo-jd h2{font-size:var(--dk-fs-l)}
+  .seo-jd p,.seo-jd li{margin:0 0 10px}
+  .seo-jd ul,.seo-jd ol{padding-left:22px}
 </style>
 </head>
 <body>
@@ -318,6 +325,106 @@ for (const loc of LOCATIONS) {
   );
 }
 
+// ── /job/<slug> — one page per live posting ──────────────────────────────────
+//
+// The hub play: host the posting (full description + JobPosting JSON-LD) so
+// pages are eligible for Google for Jobs — the one jobs SERP surface not owned
+// by LinkedIn/Indeed, and one that REQUIRES the full description in markup.
+// "Apply now" hands off to the firm's original posting. Pages regenerate from
+// live data daily, so expired postings drop out (404) automatically.
+
+const descriptions = (() => {
+  const p = path.join(DIST, "data", "job-descriptions.json");
+  return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : {};
+})();
+
+const EMPLOYMENT_TYPE = [
+  [/full.?time/i, "FULL_TIME"],
+  [/part.?time/i, "PART_TIME"],
+  [/intern/i, "INTERN"],
+  [/contract|temporary/i, "CONTRACTOR"],
+];
+const employmentType = (jobType) => (EMPLOYMENT_TYPE.find(([re]) => re.test(jobType || "")) || [])[1];
+
+const SENIORITY_LABEL = { junior: "Junior", mid: "Mid-level", senior: "Senior", lead: "Lead", executive: "Executive" };
+const WORK_MODE_LABEL = { onsite: "On-site", hybrid: "Hybrid", remote: "Remote" };
+
+let jobPages = 0;
+for (const j of jobs) {
+  const desc = j.slug && descriptions[j.id];
+  if (!desc) continue;
+  const applyHref = j.applyUrl || j.url;
+  if (!applyHref) continue;
+
+  const locStr = (j.locations || []).join(", ");
+  const chips = [
+    j.firmName,
+    FIRM_TYPE_LABEL[j.firmType],
+    locStr,
+    SENIORITY_LABEL[j.seniorityLevel],
+    WORK_MODE_LABEL[j.workMode],
+    j.salary ? `$${Math.round(j.salary / 1000)}k` : null,
+    j.datePosted ? `Posted ${j.datePosted}` : null,
+  ].filter(Boolean);
+
+  // JobPosting structured data (only with datePosted — required by Google).
+  const jsonLd = j.datePosted
+    ? {
+        "@context": "https://schema.org",
+        "@type": "JobPosting",
+        title: j.jobTitle,
+        description: desc,
+        datePosted: j.datePosted,
+        hiringOrganization: {
+          "@type": "Organization",
+          name: j.firmName,
+          ...(j.companyLogo ? { logo: j.companyLogo } : {}),
+        },
+        ...(j.locations?.length
+          ? {
+              jobLocation: j.locations.map((l) => ({
+                "@type": "Place",
+                address: { "@type": "PostalAddress", addressLocality: l },
+              })),
+            }
+          : {}),
+        ...(j.workMode === "remote" ? { jobLocationType: "TELECOMMUTE" } : {}),
+        ...(employmentType(j.jobType) ? { employmentType: employmentType(j.jobType) } : {}),
+        ...(j.salary
+          ? {
+              baseSalary: {
+                "@type": "MonetaryAmount",
+                currency: "USD",
+                value: { "@type": "QuantitativeValue", value: j.salary, unitText: "YEAR" },
+              },
+            }
+          : {}),
+        directApply: false,
+        url: `${BASE}/job/${j.slug}`,
+      }
+    : datasetLd(`${j.jobTitle} at ${j.firmName}`, `Open quant role at ${j.firmName}.`, `${BASE}/job/${j.slug}`);
+
+  write(
+    `/job/${j.slug}`,
+    page({
+      pathname: `/job/${j.slug}`,
+      title: `${j.jobTitle} at ${j.firmName}${locStr ? ` – ${(j.locations || [])[0]}` : ""} | Quant Job Market`,
+      description: `${j.jobTitle} at ${j.firmName}${locStr ? ` (${locStr})` : ""}. Live posting aggregated from the firm's careers page — apply directly. One of ${jobs.length.toLocaleString()} open quant roles tracked daily.`,
+      jsonLd,
+      h1: j.jobTitle,
+      intro: `<span class="dk-hint">${chips.map(esc).join(" · ")}</span>`,
+      bodyHtml: `<p>
+  <a class="dk-btn seo-apply" href="${esc(applyHref)}" target="_blank" rel="noopener noreferrer nofollow">Apply now →</a>
+  <span class="dk-hint" style="margin-left:12px">Applications go to ${esc(j.firmName)}'s own site.</span>
+</p>
+<article class="seo-jd">${desc}</article>
+<p><a class="dk-btn seo-cta" href="${PREFIX}/">Browse all ${jobs.length.toLocaleString()} quant roles →</a></p>`,
+    }),
+  );
+  jobPages++;
+}
+console.log(`job pages: ${jobPages}`);
+
 // ── internal links (so the new pages aren't orphaned) ────────────────────────
 // React only owns #root, so a <footer> placed AFTER it survives hydration and
 // gives crawlers real anchor links into every generated page from the SPA shells.
@@ -363,5 +470,6 @@ if (existing.includes("</urlset>")) {
   );
 }
 
-console.log(`prerendered ${written.length} SEO pages: ${written.join(", ")}`);
+const nonJob = written.filter((p) => !p.startsWith("/job/"));
+console.log(`prerendered ${written.length} SEO pages (${jobPages} job pages + ${nonJob.join(", ")})`);
 console.log(`sitemap: +${newUrls.length} urls`);
