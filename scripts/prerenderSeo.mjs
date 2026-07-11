@@ -126,7 +126,8 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
 <style>
   /* Page-only styles; the look comes from the kit's .dk-* classes in the bundle CSS. */
   body{margin:0;background:var(--dk-bg);color:var(--dk-ink);font-family:var(--dk-font)}
-  .seo-main{padding:28px 0 64px}
+  /* vertical only — must not reset the .dk-container 0 15px side padding */
+  .seo-main{padding-top:28px;padding-bottom:64px}
   .seo-crumbs{font-size:var(--dk-fs-s);color:var(--dk-muted);margin:0 0 20px}
   .seo-crumbs a{color:var(--dk-link)}
   h1{font:700 var(--dk-fs-xxl)/1.15 var(--dk-font);letter-spacing:-0.02em;margin:0 0 10px}
