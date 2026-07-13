@@ -51,14 +51,20 @@ const FIRM_TYPE_LABEL = {
   private_equity: "Private equity",
 };
 
+// "Jul 2026"-style freshness stamp for titles. We rebuild daily, so unlike
+// static listicles the month in the title is always actually true.
+const monthYear = new Date().toLocaleString("en-US", { month: "short", year: "numeric" });
+
 // Per-firm aggregates, reused by every page.
 const firms = new Map();
 for (const j of jobs) {
   const name = j.firmName;
   if (!name) continue;
-  if (!firms.has(name)) firms.set(name, { name, type: j.firmType, count: 0, locs: new Map(), langs: new Map() });
+  if (!firms.has(name))
+    firms.set(name, { name, type: j.firmType, count: 0, locs: new Map(), langs: new Map(), roles: new Map() });
   const f = firms.get(name);
   f.count++;
+  if (j.roleCategory) f.roles.set(j.roleCategory, (f.roles.get(j.roleCategory) || 0) + 1);
   for (const l of j.locations || []) f.locs.set(l, (f.locs.get(l) || 0) + 1);
   for (const l of j.programmingLanguages || []) f.langs.set(l, (f.langs.get(l) || 0) + 1);
   for (const t of j.technologies || []) f.langs.set(t, (f.langs.get(t) || 0) + 1);
@@ -199,7 +205,7 @@ write(
   "/hiring",
   page({
     pathname: "/hiring",
-    title: "Which Quant Firms Are Hiring Right Now (Live) | Quant Job Market",
+    title: `Which Quant Firms Are Hiring Right Now (${monthYear}, Live) | Quant Job Market`,
     description: `Live count of open roles across ${firms.size} hedge funds, prop shops, and market makers, ranked by number of postings. Updated daily from ${jobs.length.toLocaleString()} job listings.`,
     jsonLd: datasetLd(
       "Quant firms hiring: live open-role counts",
@@ -248,7 +254,7 @@ for (const tech of TECHS) {
     `/tech/${tech.slug}`,
     page({
       pathname: `/tech/${tech.slug}`,
-      title: `Which Quant Firms Hire ${tech.name} Developers (Live Data) | Quant Job Market`,
+      title: `Which Quant Firms Hire ${tech.name} Developers (${monthYear}, Live Data) | Quant Job Market`,
       description: `${matched.length} hedge funds, prop shops, and market makers with open ${tech.name} roles, ranked by posting count, with locations. Live data from ${jobs.length.toLocaleString()} quant job listings, updated daily.`,
       jsonLd: datasetLd(
         `Quant firms hiring ${tech.name} developers`,
@@ -311,7 +317,7 @@ for (const loc of LOCATIONS) {
     `/location/${loc.slug}`,
     page({
       pathname: `/location/${loc.slug}`,
-      title: `Quant Firms Hiring in ${loc.name} Right Now (Live Data) | Quant Job Market`,
+      title: `Quant Firms Hiring in ${loc.name} (${monthYear}, Live Data) | Quant Job Market`,
       description: `${matched.length} hedge funds, prop shops, and market makers with open quant roles in ${loc.name} — ${totalPostings} postings, ranked by firm. Live data updated daily.`,
       jsonLd: datasetLd(
         `Quant firms hiring in ${loc.name}`,
@@ -325,6 +331,149 @@ for (const loc of LOCATIONS) {
         rows,
       )}
 <a class="dk-btn seo-cta" href="${PREFIX}/">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
+    }),
+  );
+}
+
+// ── /<role>-jobs — role hub pages ─────────────────────────────────────────────
+//
+// OpenQuant's highest-value play: exact-match landing pages for the top role
+// queries ("quant researcher jobs", "quant developer jobs", ...). Ours carry a
+// live firm-ranked table + disclosed-comp stats instead of a plain job list.
+
+const median = (arr) => {
+  if (!arr.length) return null;
+  const s = [...arr].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+const fmtSal = (n) => `$${Math.round(n / 1000)}k`;
+
+const ROLES = [
+  { slug: "quant-researcher-jobs", key: "quantitative_research", name: "Quantitative Researcher" },
+  { slug: "quant-developer-jobs", key: "quantitative_development", name: "Quantitative Developer" },
+  { slug: "quant-trader-jobs", key: "quantitative_trading", name: "Quantitative Trader" },
+  { slug: "machine-learning-engineer-jobs", key: "machine_learning", name: "Machine Learning Engineer" },
+  { slug: "data-scientist-jobs", key: "data_science", name: "Data Scientist" },
+  { slug: "quant-software-engineer-jobs", key: "software_engineering", name: "Software Engineer" },
+  { slug: "hft-jobs", key: "hft_systems", name: "HFT" },
+];
+
+for (const role of ROLES) {
+  const matched = ranked
+    .filter((f) => f.roles.has(role.key))
+    .map((f) => ({ name: f.name, type: f.type, n: f.roles.get(role.key), locs: f.locs }))
+    .sort((a, b) => b.n - a.n);
+  if (matched.length < 8) continue;
+  const totalPostings = matched.reduce((s, f) => s + f.n, 0);
+  const salaries = jobs.filter((j) => j.roleCategory === role.key && j.salary).map((j) => j.salary);
+  const medSal = salaries.length >= 15 ? median(salaries) : null;
+  const rows = matched
+    .map(
+      (f, i) =>
+        `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
+    )
+    .join("\n");
+  const roleLabel = role.key === "hft_systems" ? "HFT" : `${role.name}`;
+  write(
+    `/${role.slug}`,
+    page({
+      pathname: `/${role.slug}`,
+      title: `${role.name} Jobs at Quant Firms (${monthYear}): ${totalPostings} Live Roles | Quant Job Market`,
+      description: `${totalPostings} open ${role.name} roles at ${matched.length} hedge funds, prop shops, and market makers, ranked by firm${medSal ? `. Median disclosed salary ${fmtSal(medSal)}` : ""}. Live data updated daily.`,
+      jsonLd: datasetLd(
+        `${role.name} jobs at quant firms`,
+        `${totalPostings} open ${role.name} roles across ${matched.length} quant firms.`,
+        `${BASE}/${role.slug}`,
+      ),
+      h1: `${role.name} Jobs at Quant Firms`,
+      intro: `${matched.length} hedge funds, prop trading firms, and market makers currently have <strong>${totalPostings} open ${esc(roleLabel)} roles</strong>, ranked below by how many each firm has open right now.${medSal ? ` Median disclosed salary: <strong>${fmtSal(medSal)}</strong> (${salaries.length} postings with published comp — see <a href="${PREFIX}/salaries/">quant salaries</a>).` : ""} <a href="${PREFIX}/">Filter all roles →</a>`,
+      bodyHtml: `${kitTable(
+        `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Open roles</th><th>Top locations</th>`,
+        rows,
+      )}
+<a class="dk-btn seo-cta" href="${PREFIX}/">Browse all ${jobs.length.toLocaleString()} quant roles →</a>`,
+    }),
+  );
+}
+
+// ── /salaries — live disclosed-comp data ──────────────────────────────────────
+
+{
+  const disclosed = jobs.filter((j) => j.salary);
+  const byRole = ROLES.map((r) => {
+    const sal = disclosed.filter((j) => j.roleCategory === r.key).map((j) => j.salary);
+    return { name: r.name, slug: r.slug, n: sal.length, med: median(sal) };
+  }).filter((r) => r.n >= 10);
+  const SEN = [
+    ["intern", "Intern"],
+    ["junior", "Junior"],
+    ["mid", "Mid-level"],
+    ["senior", "Senior"],
+    ["lead", "Lead"],
+    ["vp_director", "VP / Director"],
+  ];
+  const bySen = SEN.map(([key, label]) => {
+    const sal = disclosed.filter((j) => j.seniorityLevel === key).map((j) => j.salary);
+    return { label, n: sal.length, med: median(sal) };
+  }).filter((r) => r.n >= 10);
+  const byFirm = [...firms.values()]
+    .map((f) => {
+      const sal = disclosed.filter((j) => j.firmName === f.name).map((j) => j.salary);
+      return {
+        name: f.name,
+        type: f.type,
+        n: sal.length,
+        med: median(sal),
+        min: Math.min(...sal),
+        max: Math.max(...sal),
+      };
+    })
+    .filter((f) => f.n >= 3)
+    .sort((a, b) => b.med - a.med);
+
+  const roleRows = byRole
+    .sort((a, b) => b.med - a.med)
+    .map(
+      (r) =>
+        `<tr><td><a href="${PREFIX}/${r.slug}/">${esc(r.name)}</a></td><td class="dk-num">${r.n}</td><td class="dk-num">${fmtSal(r.med)}</td></tr>`,
+    )
+    .join("\n");
+  const senRows = bySen
+    .map(
+      (r) => `<tr><td>${esc(r.label)}</td><td class="dk-num">${r.n}</td><td class="dk-num">${fmtSal(r.med)}</td></tr>`,
+    )
+    .join("\n");
+  const firmRows = byFirm
+    .map(
+      (f, i) =>
+        `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td class="dk-num">${fmtSal(f.med)}</td><td class="dk-num">${fmtSal(f.min)}–${fmtSal(f.max)}</td></tr>`,
+    )
+    .join("\n");
+
+  write(
+    "/salaries",
+    page({
+      pathname: "/salaries",
+      title: `Quant Salaries (${monthYear}): Live Comp Data from ${disclosed.length} Job Postings | Quant Job Market`,
+      description: `Quant compensation from ${disclosed.length} live job postings that disclose salary: medians by role, seniority, and firm (${byFirm.length} firms). Base salary only, updated daily.`,
+      jsonLd: datasetLd(
+        "Quant salaries: live disclosed compensation",
+        `Disclosed base salaries from ${disclosed.length} live quant job postings.`,
+        `${BASE}/salaries`,
+      ),
+      h1: "Quant Salaries: Live Disclosed Comp",
+      intro: `Base-salary figures published in <strong>${disclosed.length}</strong> of the ${jobs.length.toLocaleString()} live postings we track (${Math.round((disclosed.length / jobs.length) * 100)}% disclose comp, mostly NYC-based roles where pay-transparency laws apply). Median across all disclosed postings: <strong>${fmtSal(median(disclosed.map((j) => j.salary)))}</strong>. Excludes bonus and PnL-linked comp, which dominate at senior levels.`,
+      bodyHtml: `<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:28px 0 10px">By role</h2>
+${kitTable(`<th>Role</th><th class="dk-num">Postings</th><th class="dk-num">Median base</th>`, roleRows)}
+<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:28px 0 10px">By seniority</h2>
+${kitTable(`<th>Seniority</th><th class="dk-num">Postings</th><th class="dk-num">Median base</th>`, senRows)}
+<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:28px 0 10px">By firm (3+ disclosed postings)</h2>
+${kitTable(
+  `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Postings</th><th class="dk-num">Median base</th><th class="dk-num">Range</th>`,
+  firmRows,
+)}
+<a class="dk-btn seo-cta" href="${PREFIX}/">Browse all ${jobs.length.toLocaleString()} quant roles →</a>`,
     }),
   );
 }
@@ -441,9 +590,14 @@ const techLinks = TECHS.filter((t) => written.includes(`/tech/${t.slug}`))
 const locationLinks = LOCATIONS.filter((l) => written.includes(`/location/${l.slug}`))
   .map((l) => `<a href="${PREFIX}/location/${l.slug}/">${esc(l.name)}</a>`)
   .join("\n      ");
+const roleLinks = ROLES.filter((r) => written.includes(`/${r.slug}`))
+  .map((r) => `<a href="${PREFIX}/${r.slug}/">${esc(r.name)} jobs</a>`)
+  .join("\n      ");
 const footer = `    <footer style="max-width:960px;margin:0 auto;padding:24px 15px;font-family:var(--dk-font,Inter,system-ui,sans-serif);font-size:var(--dk-fs-s,.82rem);color:var(--dk-muted,#888);border-top:1px solid var(--dk-rule-soft,#e5e6e7);display:flex;flex-wrap:wrap;gap:6px 14px">
       <strong style="color:var(--dk-ink,#555)">Explore the data:</strong>
       <a href="${PREFIX}/hiring/">Which firms are hiring</a>
+      <a href="${PREFIX}/salaries/">Quant salaries</a>
+      ${roleLinks}
       ${techLinks}
       ${locationLinks}
     </footer>`;
@@ -453,6 +607,26 @@ for (const shell of ["index.html", "tech-stack.html", "locations.html"]) {
   let html = fs.readFileSync(p, "utf8");
   if (html.includes("Explore the data:")) continue;
   html = html.replace("</body>", `${footer}\n  </body>`);
+  fs.writeFileSync(p, html);
+}
+
+// ── homepage shell: head-term title with live firm count ─────────────────────
+// The static shell title said "Quant Hiring Trends ... 50+ ..." — it never
+// targeted the "quant jobs" head term and the firm count had gone stale.
+// Patch the built shell with the live count (function replacements: values may
+// contain `$`, see renderRoute in the congress prerender for the war story).
+{
+  const p = path.join(DIST, "index.html");
+  const homeTitle = `Quant Jobs & Hiring Trends: Live Data from ${firms.size} Hedge Funds & Prop Shops`;
+  let html = fs.readFileSync(p, "utf8");
+  html = html
+    .replace(/<title>[^<]*<\/title>/, () => `<title>${esc(homeTitle)}</title>`)
+    .replace(/(<meta property="og:title" content=")[^"]*(")/, (_m, a, b) => `${a}${esc(homeTitle)}${b}`)
+    .replace(
+      /(<meta property="og:description" content=")[^"]*(")/,
+      (_m, a, b) =>
+        `${a}${esc(`${jobs.length.toLocaleString()} open postings from ${firms.size} hedge funds, prop shops, and market makers. Interactive treemap, filters, salaries, and tech stack heatmap.`)}${b}`,
+    );
   fs.writeFileSync(p, html);
 }
 
