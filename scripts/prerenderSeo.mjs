@@ -95,6 +95,7 @@ const siteFooter = `<footer class="dk-footer">
       <span class="dk-footer-here" aria-current="page">Quant Jobs</span>
       <a href="https://www.kadoa.com/layoffs/">Layoffs Tracker</a>
       <a href="https://www.kadoa.com/congress/">Congress Trades</a>
+      <a href="https://www.kadoa.com/potus/">POTUS Tracker</a>
     </nav>
   </div>
 </footer>`;
