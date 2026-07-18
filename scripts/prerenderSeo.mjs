@@ -616,12 +616,32 @@ const headRows = ranked
       `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.count}</td></tr>`,
   )
   .join("\n");
-const headSection = `    <section class="dk-container" style="padding:28px 15px 8px">
-      <h1 style="font:700 var(--dk-fs-xxl,1.6rem)/1.15 var(--dk-font,Inter,system-ui,sans-serif);letter-spacing:-0.02em;margin:0 0 10px">Quant Job Market: ${firms.size} Firms Hiring Across ${jobsStr} Open Roles</h1>
-      <p style="font:400 var(--dk-fs-l,1.05rem)/1.5 var(--dk-font,Inter,system-ui,sans-serif);color:var(--dk-muted,#666);max-width:70ch;margin:0 0 20px">A live, daily-updated dataset of ${jobsStr} open quant roles across ${firms.size} hedge funds, prop trading firms, market makers, and asset managers. The 20 firms with the most open postings are listed below; use the interactive board above to filter by role, language, location, and seniority.</p>
+// Per-shell h1 + intro so the three head-term URLs don't share identical
+// crawler-visible content (which would read as duplicate pages). The top-firm
+// table below is shared supporting content; the heading and lede differentiate.
+const HEAD_CONTENT = {
+  "index.html": {
+    h1: `Quant Job Market: ${firms.size} Firms Hiring Across ${jobsStr} Open Roles`,
+    intro: `A live, daily-updated dataset of ${jobsStr} open quant roles across ${firms.size} hedge funds, prop trading firms, market makers, and asset managers. The 20 firms with the most open postings are listed below; use the interactive board above to filter by role, language, location, and seniority.`,
+  },
+  "tech-stack.html": {
+    h1: `Quant Jobs by Tech Stack: Languages &amp; Tools Across ${firmsWithLang} Firms`,
+    intro: `Which programming languages, frameworks, and accelerators quant firms hire for — across ${firmsWithLang} buy-side firms and ${jobsStr} open roles. Explore the interactive tech-stack heatmap above; the firms with the most open roles are listed below.`,
+  },
+  "locations.html": {
+    h1: `Quant Jobs by Location: Where Hedge Funds &amp; Prop Shops Hire`,
+    intro: `Where quant hiring happens — job-posting counts by city across ${firmsWithLoc} firms and ${jobsStr} open roles. Explore the interactive location heatmap above; the firms with the most open roles are listed below.`,
+  },
+};
+const headSectionFor = (shell) => {
+  const c = HEAD_CONTENT[shell] ?? HEAD_CONTENT["index.html"];
+  return `    <section class="dk-container" style="padding:28px 15px 8px">
+      <h1 style="font:700 var(--dk-fs-xxl,1.6rem)/1.15 var(--dk-font,Inter,system-ui,sans-serif);letter-spacing:-0.02em;margin:0 0 10px">${c.h1}</h1>
+      <p style="font:400 var(--dk-fs-l,1.05rem)/1.5 var(--dk-font,Inter,system-ui,sans-serif);color:var(--dk-muted,#666);max-width:70ch;margin:0 0 20px">${c.intro}</p>
       ${kitTable(`<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Open roles</th>`, headRows)}
       <p style="margin-top:16px"><a href="${PREFIX}/hiring">See all ${firms.size} firms ranked by open roles →</a> · <a href="${PREFIX}/salaries">Quant salaries</a></p>
     </section>`;
+};
 
 for (const shell of ["index.html", "tech-stack.html", "locations.html"]) {
   const p = path.join(DIST, shell);
@@ -631,7 +651,7 @@ for (const shell of ["index.html", "tech-stack.html", "locations.html"]) {
   // Refresh stale hardcoded firm/posting counts against live data.
   if (shell === "tech-stack.html") html = html.replace(/\b42\b/g, String(firmsWithLang)).replace(/3,900\+/g, jobsStr);
   if (shell === "locations.html") html = html.replace(/\b38\b/g, String(firmsWithLoc)).replace(/2,700\+/g, jobsStr);
-  html = html.replace("</body>", `${headSection}\n${footer}\n  </body>`);
+  html = html.replace("</body>", `${headSectionFor(shell)}\n${footer}\n  </body>`);
   fs.writeFileSync(p, html);
 }
 
@@ -661,7 +681,10 @@ for (const shell of ["index.html", "tech-stack.html", "locations.html"]) {
       /(<meta name="twitter:description" content=")[^"]*(")/,
       (_m, a, b) =>
         `${a}${esc(`${jobs.length.toLocaleString()} open postings from ${firms.size} hedge funds, prop shops, and market makers. Filter, search, explore.`)}${b}`,
-    );
+    )
+    // Homepage JSON-LD carries the same stale firm counts as the sub-page shells.
+    .replace(/\b42 buy-side/g, `${firmsWithLang} buy-side`)
+    .replace(/\b38 buy-side/g, `${firmsWithLoc} buy-side`);
   fs.writeFileSync(p, html);
 }
 
