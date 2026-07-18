@@ -87,7 +87,7 @@ const GH_ICON = `<svg width="14" height="14" viewBox="0 0 16 16" fill="currentCo
 const siteHeader = `<header class="dk-header">
   <div class="dk-container dk-header-inner">
     <span class="dk-header-brand-group">
-      <a href="${PREFIX}/" class="dk-header-brand">📊 Quant Job Market</a>
+      <a href="${PREFIX}" class="dk-header-brand">📊 Quant Job Market</a>
       <a href="https://www.kadoa.com" target="_blank" rel="noreferrer" class="dk-header-link">by Kadoa</a>
     </span>
     <a class="dk-btn dk-btn--inverse" href="https://github.com/kadoa-org/quant-job-market" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub" style="text-decoration:none">${GH_ICON}<span class="dk-btn-label">Star on GitHub</span></a>
@@ -156,7 +156,7 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
 <body>
 ${siteHeader}
 <main class="dk-container seo-main">
-<nav class="seo-crumbs"><a href="${PREFIX}/">Quant Job Market</a> › ${esc(h1)}</nav>
+<nav class="seo-crumbs"><a href="${PREFIX}">Quant Job Market</a> › ${esc(h1)}</nav>
 <h1>${esc(h1)}</h1>
 <p class="seo-lede">${intro}</p>
 ${bodyHtml}
@@ -213,12 +213,12 @@ write(
       `${BASE}/hiring`,
     ),
     h1: "Which Quant Firms Are Hiring Right Now",
-    intro: `A live, ranked snapshot of where the quant industry is hiring: ${jobs.length.toLocaleString()} open roles across ${firms.size} hedge funds, prop trading firms, and market makers, updated daily. Unlike static "top firms" lists, these counts reflect what's actually open today. <a href="${PREFIX}/">Explore the interactive job board →</a>`,
+    intro: `A live, ranked snapshot of where the quant industry is hiring: ${jobs.length.toLocaleString()} open roles across ${firms.size} hedge funds, prop trading firms, and market makers, updated daily. Unlike static "top firms" lists, these counts reflect what's actually open today. <a href="${PREFIX}">Explore the interactive job board →</a>`,
     bodyHtml: `${kitTable(
       `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Open roles</th><th>Top locations</th>`,
       hiringRows,
     )}
-<a class="dk-btn seo-cta" href="${PREFIX}/">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
+<a class="dk-btn seo-cta" href="${PREFIX}">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
   }),
 );
 
@@ -330,7 +330,7 @@ for (const loc of LOCATIONS) {
         `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">${esc(loc.name)} roles</th><th>Top tech</th>`,
         rows,
       )}
-<a class="dk-btn seo-cta" href="${PREFIX}/">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
+<a class="dk-btn seo-cta" href="${PREFIX}">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
     }),
   );
 }
@@ -387,12 +387,12 @@ for (const role of ROLES) {
         `${BASE}/${role.slug}`,
       ),
       h1: `${role.name} Jobs at Quant Firms`,
-      intro: `${matched.length} hedge funds, prop trading firms, and market makers currently have <strong>${totalPostings} open ${esc(roleLabel)} roles</strong>, ranked below by how many each firm has open right now.${medSal ? ` Median disclosed salary: <strong>${fmtSal(medSal)}</strong> (${salaries.length} postings with published comp — see <a href="${PREFIX}/salaries/">quant salaries</a>).` : ""} <a href="${PREFIX}/">Filter all roles →</a>`,
+      intro: `${matched.length} hedge funds, prop trading firms, and market makers currently have <strong>${totalPostings} open ${esc(roleLabel)} roles</strong>, ranked below by how many each firm has open right now.${medSal ? ` Median disclosed salary: <strong>${fmtSal(medSal)}</strong> (${salaries.length} postings with published comp — see <a href="${PREFIX}/salaries">quant salaries</a>).` : ""} <a href="${PREFIX}">Filter all roles →</a>`,
       bodyHtml: `${kitTable(
         `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Open roles</th><th>Top locations</th>`,
         rows,
       )}
-<a class="dk-btn seo-cta" href="${PREFIX}/">Browse all ${jobs.length.toLocaleString()} quant roles →</a>`,
+<a class="dk-btn seo-cta" href="${PREFIX}">Browse all ${jobs.length.toLocaleString()} quant roles →</a>`,
     }),
   );
 }
@@ -436,7 +436,7 @@ for (const role of ROLES) {
     .sort((a, b) => b.med - a.med)
     .map(
       (r) =>
-        `<tr><td><a href="${PREFIX}/${r.slug}/">${esc(r.name)}</a></td><td class="dk-num">${r.n}</td><td class="dk-num">${fmtSal(r.med)}</td></tr>`,
+        `<tr><td><a href="${PREFIX}/${r.slug}">${esc(r.name)}</a></td><td class="dk-num">${r.n}</td><td class="dk-num">${fmtSal(r.med)}</td></tr>`,
     )
     .join("\n");
   const senRows = bySen
@@ -473,7 +473,7 @@ ${kitTable(
   `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Postings</th><th class="dk-num">Median base</th><th class="dk-num">Range</th>`,
   firmRows,
 )}
-<a class="dk-btn seo-cta" href="${PREFIX}/">Browse all ${jobs.length.toLocaleString()} quant roles →</a>`,
+<a class="dk-btn seo-cta" href="${PREFIX}">Browse all ${jobs.length.toLocaleString()} quant roles →</a>`,
     }),
   );
 }
@@ -572,7 +572,7 @@ for (const j of jobs) {
   <span class="dk-hint" style="margin-left:12px">Applications go to ${esc(j.firmName)}'s own site.</span>
 </p>
 <article class="seo-jd">${desc}</article>
-<p class="seo-back"><a href="${PREFIX}/">← Browse all ${jobs.length.toLocaleString()} quant roles</a></p>`,
+<p class="seo-back"><a href="${PREFIX}">← Browse all ${jobs.length.toLocaleString()} quant roles</a></p>`,
       showMeta: false,
     }),
   );
@@ -585,28 +585,73 @@ console.log(`job pages: ${jobPages}`);
 // React only owns #root, so a <footer> placed AFTER it survives hydration and
 // gives crawlers real anchor links into every generated page from the SPA shells.
 const techLinks = TECHS.filter((t) => written.includes(`/tech/${t.slug}`))
-  .map((t) => `<a href="${PREFIX}/tech/${t.slug}/">${esc(t.name)} firms</a>`)
+  .map((t) => `<a href="${PREFIX}/tech/${t.slug}">${esc(t.name)} firms</a>`)
   .join("\n      ");
 const locationLinks = LOCATIONS.filter((l) => written.includes(`/location/${l.slug}`))
-  .map((l) => `<a href="${PREFIX}/location/${l.slug}/">${esc(l.name)}</a>`)
+  .map((l) => `<a href="${PREFIX}/location/${l.slug}">${esc(l.name)}</a>`)
   .join("\n      ");
 const roleLinks = ROLES.filter((r) => written.includes(`/${r.slug}`))
-  .map((r) => `<a href="${PREFIX}/${r.slug}/">${esc(r.name)} jobs</a>`)
+  .map((r) => `<a href="${PREFIX}/${r.slug}">${esc(r.name)} jobs</a>`)
   .join("\n      ");
 const footer = `    <footer style="max-width:960px;margin:0 auto;padding:24px 15px;font-family:var(--dk-font,Inter,system-ui,sans-serif);font-size:var(--dk-fs-s,.82rem);color:var(--dk-muted,#888);border-top:1px solid var(--dk-rule-soft,#e5e6e7);display:flex;flex-wrap:wrap;gap:6px 14px">
       <strong style="color:var(--dk-ink,#555)">Explore the data:</strong>
-      <a href="${PREFIX}/hiring/">Which firms are hiring</a>
-      <a href="${PREFIX}/salaries/">Quant salaries</a>
+      <a href="${PREFIX}/hiring">Which firms are hiring</a>
+      <a href="${PREFIX}/salaries">Quant salaries</a>
       ${roleLinks}
       ${techLinks}
       ${locationLinks}
     </footer>`;
+// Live counts to replace the stale hardcoded numbers baked into the static shells.
+const firmsWithLang = [...firms.values()].filter((f) => f.langs.size > 0).length;
+const firmsWithLoc = [...firms.values()].filter((f) => f.locs.size > 0).length;
+const jobsStr = jobs.length.toLocaleString();
+
+// Head-term content: a real crawler-visible <h1> + intro + top-firm table for the
+// otherwise-empty SPA shells (#root is blank until JS runs). Placed with the footer
+// AFTER #root so it survives React hydration, same as the link footer above.
+const headRows = ranked
+  .slice(0, 20)
+  .map(
+    (f, i) =>
+      `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.count}</td></tr>`,
+  )
+  .join("\n");
+// Per-shell h1 + intro so the three head-term URLs don't share identical
+// crawler-visible content (which would read as duplicate pages). The top-firm
+// table below is shared supporting content; the heading and lede differentiate.
+const HEAD_CONTENT = {
+  "index.html": {
+    h1: `Quant Job Market: ${firms.size} Firms Hiring Across ${jobsStr} Open Roles`,
+    intro: `A live, daily-updated dataset of ${jobsStr} open quant roles across ${firms.size} hedge funds, prop trading firms, market makers, and asset managers. The 20 firms with the most open postings are listed below; use the interactive board above to filter by role, language, location, and seniority.`,
+  },
+  "tech-stack.html": {
+    h1: `Quant Jobs by Tech Stack: Languages &amp; Tools Across ${firmsWithLang} Firms`,
+    intro: `Which programming languages, frameworks, and accelerators quant firms hire for — across ${firmsWithLang} buy-side firms and ${jobsStr} open roles. Explore the interactive tech-stack heatmap above; the firms with the most open roles are listed below.`,
+  },
+  "locations.html": {
+    h1: `Quant Jobs by Location: Where Hedge Funds &amp; Prop Shops Hire`,
+    intro: `Where quant hiring happens — job-posting counts by city across ${firmsWithLoc} firms and ${jobsStr} open roles. Explore the interactive location heatmap above; the firms with the most open roles are listed below.`,
+  },
+};
+const headSectionFor = (shell) => {
+  const c = HEAD_CONTENT[shell] ?? HEAD_CONTENT["index.html"];
+  return `    <section class="dk-container" style="padding:28px 15px 8px">
+      <h1 style="font:700 var(--dk-fs-xxl,1.6rem)/1.15 var(--dk-font,Inter,system-ui,sans-serif);letter-spacing:-0.02em;margin:0 0 10px">${c.h1}</h1>
+      <p style="font:400 var(--dk-fs-l,1.05rem)/1.5 var(--dk-font,Inter,system-ui,sans-serif);color:var(--dk-muted,#666);max-width:70ch;margin:0 0 20px">${c.intro}</p>
+      ${kitTable(`<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Open roles</th>`, headRows)}
+      <p style="margin-top:16px"><a href="${PREFIX}/hiring">See all ${firms.size} firms ranked by open roles →</a> · <a href="${PREFIX}/salaries">Quant salaries</a></p>
+    </section>`;
+};
+
 for (const shell of ["index.html", "tech-stack.html", "locations.html"]) {
   const p = path.join(DIST, shell);
   if (!fs.existsSync(p)) continue;
   let html = fs.readFileSync(p, "utf8");
-  if (html.includes("Explore the data:")) continue;
-  html = html.replace("</body>", `${footer}\n  </body>`);
+  if (html.includes("Explore the data:")) continue; // already injected on an earlier run
+  // Refresh stale hardcoded firm/posting counts against live data.
+  if (shell === "tech-stack.html") html = html.replace(/\b42\b/g, String(firmsWithLang)).replace(/3,900\+/g, jobsStr);
+  if (shell === "locations.html") html = html.replace(/\b38\b/g, String(firmsWithLoc)).replace(/2,700\+/g, jobsStr);
+  html = html.replace("</body>", `${headSectionFor(shell)}\n${footer}\n  </body>`);
   fs.writeFileSync(p, html);
 }
 
@@ -626,7 +671,20 @@ for (const shell of ["index.html", "tech-stack.html", "locations.html"]) {
       /(<meta property="og:description" content=")[^"]*(")/,
       (_m, a, b) =>
         `${a}${esc(`${jobs.length.toLocaleString()} open postings from ${firms.size} hedge funds, prop shops, and market makers. Interactive treemap, filters, salaries, and tech stack heatmap.`)}${b}`,
-    );
+    )
+    .replace(
+      /(<meta name="description" content=")[^"]*(")/,
+      (_m, a, b) =>
+        `${a}${esc(`Open dataset and interactive viz of ${jobs.length.toLocaleString()} live job postings from ${firms.size} quant firms: hedge funds, prop trading firms, market makers, and asset managers. Filter by role, language, location, and seniority.`)}${b}`,
+    )
+    .replace(
+      /(<meta name="twitter:description" content=")[^"]*(")/,
+      (_m, a, b) =>
+        `${a}${esc(`${jobs.length.toLocaleString()} open postings from ${firms.size} hedge funds, prop shops, and market makers. Filter, search, explore.`)}${b}`,
+    )
+    // Homepage JSON-LD carries the same stale firm counts as the sub-page shells.
+    .replace(/\b42 buy-side/g, `${firmsWithLang} buy-side`)
+    .replace(/\b38 buy-side/g, `${firmsWithLoc} buy-side`);
   fs.writeFileSync(p, html);
 }
 
