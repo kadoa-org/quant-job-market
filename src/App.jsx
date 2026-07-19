@@ -99,6 +99,14 @@ export default function App() {
     syncUrl(view, filters, selectedFirm, search);
   }, [view, filters, selectedFirm, search]);
 
+  // The prerendered shells carry crawler-only content after #root (h1 + firm
+  // table + link footer, class "seo-shell") so the head-term pages aren't
+  // empty for search engines. Once the app is mounted the interactive views
+  // replace it — drop it so it doesn't render below the app.
+  useEffect(() => {
+    for (const el of document.querySelectorAll(".seo-shell")) el.remove();
+  }, []);
+
   // Load data from SQLite
   useEffect(() => {
     if (!db) return;
@@ -176,77 +184,82 @@ export default function App() {
   const totalFirms = filteredFirms.length;
 
   return (
-    <div className="min-h-screen sm:h-screen w-screen flex flex-col">
-      <SiteHeader
-        brand="📊 Quant Job Market"
-        LinkComponent={(p) => <a {...p} />}
-        brandSuffix={
-          <a href="https://www.kadoa.com" target="_blank" rel="noreferrer" className="dk-header-link">
-            by Kadoa
-          </a>
-        }
-        right={
-          <span style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <LiveBadge>Updated daily</LiveBadge>
-            <GitHubButton repo="kadoa-org/quant-job-market" />
-          </span>
-        }
-      />
-      <NavBar
-        LinkComponent={({ href, children, ...rest }) => (
-          <a
-            href={href}
-            {...rest}
-            onClick={(e) => {
-              if (e.metaKey || e.ctrlKey) return;
-              e.preventDefault();
-              const k = href.replace("#", "");
-              setView(k);
-              if (k === "firms") setSelectedFirm(null);
-            }}
-          >
-            {children}
-          </a>
-        )}
-        items={[
-          { key: "firms", label: "Firms" },
-          { key: "table", label: "Jobs" },
-          { key: "dashboard", label: "Insights" },
-          { key: "techstack", label: "Tech stack" },
-          { key: "locations", label: "Locations" },
-        ].map((t) => ({ href: `#${t.key}`, label: t.label, active: view === t.key }))}
-      />
-
-      {view !== "techstack" && view !== "locations" && (
-        <FilterBar
-          filters={filters}
-          setFilters={setFilters}
-          jobs={filteredJobs}
-          allJobs={jobs}
-          selectedFirm={selectedFirm}
-          onClearFirm={() => setSelectedFirm(null)}
-          onSelectFirm={setSelectedFirm}
+    // The app locks to the viewport on desktop (inner views scroll themselves);
+    // the SiteFooter sits OUTSIDE the locked container so it lives below the
+    // fold like on the sibling microsites, instead of being pinned on screen.
+    <>
+      <div className="min-h-screen sm:h-screen w-full flex flex-col">
+        <SiteHeader
+          brand="📊 Quant Job Market"
+          LinkComponent={(p) => <a {...p} />}
+          brandSuffix={
+            <a href="https://www.kadoa.com" target="_blank" rel="noreferrer" className="dk-header-link">
+              by Kadoa
+            </a>
+          }
+          right={
+            <span style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              <LiveBadge>Updated daily</LiveBadge>
+              <GitHubButton repo="kadoa-org/quant-job-market" />
+            </span>
+          }
         />
-      )}
+        <NavBar
+          LinkComponent={({ href, children, ...rest }) => (
+            <a
+              href={href}
+              {...rest}
+              onClick={(e) => {
+                if (e.metaKey || e.ctrlKey) return;
+                e.preventDefault();
+                const k = href.replace("#", "");
+                setView(k);
+                if (k === "firms") setSelectedFirm(null);
+              }}
+            >
+              {children}
+            </a>
+          )}
+          items={[
+            { key: "firms", label: "Firms" },
+            { key: "table", label: "Jobs" },
+            { key: "dashboard", label: "Insights" },
+            { key: "techstack", label: "Tech stack" },
+            { key: "locations", label: "Locations" },
+          ].map((t) => ({ href: `#${t.key}`, label: t.label, active: view === t.key }))}
+        />
 
-      <main className="flex-1 relative sm:overflow-hidden">
-        {view === "firms" && (
-          <Treemap
-            firms={filteredFirms}
-            colorLayer="firmType"
-            onFirmClick={(f) => {
-              setSelectedFirm(f);
-              setView("table");
-            }}
+        {view !== "techstack" && view !== "locations" && (
+          <FilterBar
+            filters={filters}
+            setFilters={setFilters}
+            jobs={filteredJobs}
+            allJobs={jobs}
             selectedFirm={selectedFirm}
+            onClearFirm={() => setSelectedFirm(null)}
+            onSelectFirm={setSelectedFirm}
           />
         )}
-        {view === "table" && <DataTable jobs={filteredJobs} search={search} onSearchChange={setSearch} />}
-        {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
-        {view === "techstack" && <TechStackHeatmap jobs={jobs} />}
-        {view === "locations" && <LocationHeatmap jobs={jobs} />}
-      </main>
+
+        <main className="flex-1 relative sm:overflow-hidden">
+          {view === "firms" && (
+            <Treemap
+              firms={filteredFirms}
+              colorLayer="firmType"
+              onFirmClick={(f) => {
+                setSelectedFirm(f);
+                setView("table");
+              }}
+              selectedFirm={selectedFirm}
+            />
+          )}
+          {view === "table" && <DataTable jobs={filteredJobs} search={search} onSearchChange={setSearch} />}
+          {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
+          {view === "techstack" && <TechStackHeatmap jobs={jobs} />}
+          {view === "locations" && <LocationHeatmap jobs={jobs} />}
+        </main>
+      </div>
       <SiteFooter current="quant" />
-    </div>
+    </>
   );
 }

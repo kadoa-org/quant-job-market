@@ -666,7 +666,7 @@ const locationLinks = LOCATIONS.filter((l) => written.includes(`/location/${l.sl
 const roleLinks = ROLES.filter((r) => written.includes(`/${r.slug}`))
   .map((r) => `<a href="${PREFIX}/${r.slug}">${esc(r.name)} jobs</a>`)
   .join("\n      ");
-const footer = `    <footer style="max-width:960px;margin:0 auto;padding:24px 15px;font-family:var(--dk-font,Inter,system-ui,sans-serif);font-size:var(--dk-fs-s,.82rem);color:var(--dk-muted,#888);border-top:1px solid var(--dk-rule-soft,#e5e6e7);display:flex;flex-wrap:wrap;gap:6px 14px">
+const footer = `    <footer class="seo-shell" style="max-width:960px;margin:0 auto;padding:24px 15px;font-family:var(--dk-font,Inter,system-ui,sans-serif);font-size:var(--dk-fs-s,.82rem);color:var(--dk-muted,#888);border-top:1px solid var(--dk-rule-soft,#e5e6e7);display:flex;flex-wrap:wrap;gap:6px 14px">
       <strong style="color:var(--dk-ink,#555)">Explore the data:</strong>
       <a href="${PREFIX}/hiring">Which firms are hiring</a>
       <a href="${PREFIX}/salaries">Quant salaries</a>
@@ -708,7 +708,7 @@ const HEAD_CONTENT = {
 };
 const headSectionFor = (shell) => {
   const c = HEAD_CONTENT[shell] ?? HEAD_CONTENT["index.html"];
-  return `    <section class="dk-container" style="padding:28px 15px 8px">
+  return `    <section class="dk-container seo-shell" style="padding:28px 15px 8px">
       <h1 style="font:700 var(--dk-fs-xxl,1.6rem)/1.15 var(--dk-font,Inter,system-ui,sans-serif);letter-spacing:-0.02em;margin:0 0 10px">${c.h1}</h1>
       <p style="font:400 var(--dk-fs-l,1.05rem)/1.5 var(--dk-font,Inter,system-ui,sans-serif);color:var(--dk-muted,#666);max-width:70ch;margin:0 0 20px">${c.intro}</p>
       ${kitTable(`<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Open roles</th>`, headRows)}
