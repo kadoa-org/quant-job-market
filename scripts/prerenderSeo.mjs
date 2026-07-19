@@ -129,11 +129,11 @@ const siteHeader = `<header class="dk-header">
 const siteFooter = `<footer class="dk-footer">
   <div class="dk-container dk-footer-inner">
     <nav class="dk-footer-nav" aria-label="Kadoa open datasets">
-      <span class="dk-footer-label">Open data by Kadoa</span>
+      <span class="dk-footer-label"><a href="https://www.kadoa.com/datasets">Open data</a> by <a href="https://www.kadoa.com/">Kadoa</a></span>
       <span class="dk-footer-here" aria-current="page">Quant Jobs</span>
-      <a href="https://www.kadoa.com/layoffs/">Layoffs Tracker</a>
-      <a href="https://www.kadoa.com/congress/">Congress Trades</a>
-      <a href="https://www.kadoa.com/potus/">POTUS Tracker</a>
+      <a href="https://www.kadoa.com/layoffs">Layoffs Tracker</a>
+      <a href="https://www.kadoa.com/congress">Congress Trades</a>
+      <a href="https://www.kadoa.com/potus">POTUS Tracker</a>
     </nav>
   </div>
 </footer>`;
