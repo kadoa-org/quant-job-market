@@ -55,15 +55,37 @@ const FIRM_TYPE_LABEL = {
 // static listicles the month in the title is always actually true.
 const monthYear = new Date().toLocaleString("en-US", { month: "short", year: "numeric" });
 
+// Firm-page slug derived from the (clean) firm NAME, not job.firmSlug — the
+// latter is polluted with upstream workflow artifacts ("blackrock-template-v2-retry",
+// "mlp-test-2") that would otherwise leak into public URLs.
+const firmSlugify = (name) =>
+  name
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
 // Per-firm aggregates, reused by every page.
 const firms = new Map();
 for (const j of jobs) {
   const name = j.firmName;
   if (!name) continue;
   if (!firms.has(name))
-    firms.set(name, { name, type: j.firmType, count: 0, locs: new Map(), langs: new Map(), roles: new Map() });
+    firms.set(name, {
+      name,
+      slug: firmSlugify(name),
+      type: j.firmType,
+      count: 0,
+      locs: new Map(),
+      langs: new Map(),
+      roles: new Map(),
+      jobs: [],
+    });
   const f = firms.get(name);
   f.count++;
+  f.jobs.push(j);
   if (j.roleCategory) f.roles.set(j.roleCategory, (f.roles.get(j.roleCategory) || 0) + 1);
   for (const l of j.locations || []) f.locs.set(l, (f.locs.get(l) || 0) + 1);
   for (const l of j.programmingLanguages || []) f.langs.set(l, (f.langs.get(l) || 0) + 1);
@@ -75,6 +97,16 @@ const topLocs = (m, n = 3) =>
     .slice(0, n)
     .map(([k]) => k)
     .join(", ");
+
+// Firm-name → /firm/<slug> link. Every firm gets a page (built after the job
+// loop) that links its individual /job/ pages, so linking firm names in the
+// aggregate tables gives Google a crawl path down to the otherwise-orphaned job
+// pages. Falls back to plain text if a firm somehow has no slug.
+const firmSlugByName = new Map([...firms.values()].filter((f) => f.slug).map((f) => [f.name, f.slug]));
+const firmLink = (name) => {
+  const s = firmSlugByName.get(name);
+  return s ? `<a href="${PREFIX}/firm/${s}">${esc(name)}</a>` : esc(name);
+};
 
 // ── page chrome ──────────────────────────────────────────────────────────────
 
@@ -198,7 +230,7 @@ const ranked = [...firms.values()].sort((a, b) => b.count - a.count);
 const hiringRows = ranked
   .map(
     (f, i) =>
-      `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.count}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
+      `<tr><td class="dk-num">${i + 1}</td><td>${firmLink(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.count}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
   )
   .join("\n");
 write(
@@ -247,7 +279,7 @@ for (const tech of TECHS) {
   const rows = matched
     .map(
       (f, i) =>
-        `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
+        `<tr><td class="dk-num">${i + 1}</td><td>${firmLink(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
     )
     .join("\n");
   write(
@@ -310,7 +342,7 @@ for (const loc of LOCATIONS) {
   const rows = matched
     .map(
       (f, i) =>
-        `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td>${esc(topLangs(f.langs))}</td></tr>`,
+        `<tr><td class="dk-num">${i + 1}</td><td>${firmLink(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td>${esc(topLangs(f.langs))}</td></tr>`,
     )
     .join("\n");
   write(
@@ -371,7 +403,7 @@ for (const role of ROLES) {
   const rows = matched
     .map(
       (f, i) =>
-        `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
+        `<tr><td class="dk-num">${i + 1}</td><td>${firmLink(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
     )
     .join("\n");
   const roleLabel = role.key === "hft_systems" ? "HFT" : `${role.name}`;
@@ -447,7 +479,7 @@ for (const role of ROLES) {
   const firmRows = byFirm
     .map(
       (f, i) =>
-        `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td class="dk-num">${fmtSal(f.med)}</td><td class="dk-num">${fmtSal(f.min)}–${fmtSal(f.max)}</td></tr>`,
+        `<tr><td class="dk-num">${i + 1}</td><td>${firmLink(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.n}</td><td class="dk-num">${fmtSal(f.med)}</td><td class="dk-num">${fmtSal(f.min)}–${fmtSal(f.max)}</td></tr>`,
     )
     .join("\n");
 
@@ -581,6 +613,47 @@ for (const j of jobs) {
 }
 console.log(`job pages: ${jobPages}`);
 
+// ── /firm/<slug> — one page per firm, linking that firm's job pages ───────────
+// Without this the 4k+ /job/ pages are reachable only from the sitemap, which
+// Google treats as "Discovered - currently not indexed". Each firm page lists
+// the firm's open roles (linked), and the firm names in every aggregate table
+// above now link here — a crawl path from indexed pages down to each job page.
+// Also a strong "<firm> quant jobs" landing page in its own right.
+let firmPages = 0;
+for (const f of ranked) {
+  if (!f.slug) continue;
+  // Only link jobs that actually got a page (same guard as the job loop).
+  const linkable = f.jobs
+    .filter((j) => j.slug && descriptions[j.id] && (j.applyUrl || j.url))
+    .sort((a, b) => (b.datePosted || "").localeCompare(a.datePosted || ""));
+  if (!linkable.length) continue;
+  const typeLabel = FIRM_TYPE_LABEL[f.type] ?? "finance firm";
+  const where = topLocs(f.locs);
+  const rows = linkable
+    .slice(0, 500)
+    .map(
+      (j) =>
+        `<tr><td><a href="${PREFIX}/job/${esc(j.slug)}">${esc(j.jobTitle)}</a></td><td>${esc((j.locations || []).slice(0, 2).join(", "))}</td><td class="dk-num">${esc(j.datePosted || "")}</td></tr>`,
+    )
+    .join("\n");
+  write(
+    `/firm/${f.slug}`,
+    page({
+      pathname: `/firm/${f.slug}`,
+      title: `${f.name} Quant Jobs (${monthYear}): ${f.count} Open Role${f.count === 1 ? "" : "s"} | Quant Job Market`,
+      description: `${f.count} open quant role${f.count === 1 ? "" : "s"} at ${f.name} (${typeLabel})${where ? `, hiring in ${where}` : ""}. Titles, locations, and dates — live data updated daily.`,
+      jsonLd: datasetLd(`${f.name} open quant roles`, `${f.count} open roles at ${f.name}.`, `${BASE}/firm/${f.slug}`),
+      h1: `${f.name} Quant Jobs`,
+      intro: `${esc(f.name)} has <strong>${f.count} open quant role${f.count === 1 ? "" : "s"}</strong> right now${where ? `, hiring in ${esc(where)}` : ""}. Each posting below links to full details and a direct apply link. <a href="${PREFIX}/hiring">See all firms hiring →</a>`,
+      bodyHtml: `${kitTable(`<th>Role</th><th>Locations</th><th class="dk-num">Posted</th>`, rows)}${
+        linkable.length > 500 ? `<p class="dk-hint">Showing 500 of ${f.count} open roles.</p>` : ""
+      }`,
+    }),
+  );
+  firmPages++;
+}
+console.log(`firm pages: ${firmPages}`);
+
 // ── internal links (so the new pages aren't orphaned) ────────────────────────
 // React only owns #root, so a <footer> placed AFTER it survives hydration and
 // gives crawlers real anchor links into every generated page from the SPA shells.
@@ -613,7 +686,7 @@ const headRows = ranked
   .slice(0, 20)
   .map(
     (f, i) =>
-      `<tr><td class="dk-num">${i + 1}</td><td>${esc(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.count}</td></tr>`,
+      `<tr><td class="dk-num">${i + 1}</td><td>${firmLink(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.count}</td></tr>`,
   )
   .join("\n");
 // Per-shell h1 + intro so the three head-term URLs don't share identical
