@@ -82,7 +82,7 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
   };
 
   return (
-    <div className="sm:h-full flex flex-col">
+    <div className="flex flex-col">
       <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 border-b border-gray-100 sticky top-11 sm:static z-20 bg-white">
         <input
           type="text"
@@ -103,7 +103,7 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
         </button>
       </div>
 
-      <div className="sm:flex-1 sm:overflow-auto">
+      <div className="">
         <table className="w-full text-[13px]">
           <thead className="sticky top-0 bg-[#fcfcfc] z-10">
             <tr className="text-[#5c5c5f] border-b border-[#b1b4b6]">

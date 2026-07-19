@@ -222,7 +222,7 @@ export default function TechStackHeatmap({ jobs }) {
   const { svg, totalJobs, numFirms } = useMemo(() => buildSvg(jobs || []), [jobs]);
 
   return (
-    <div className="h-full overflow-auto bg-[#fbfbfa]">
+    <div className="bg-[#fbfbfa]">
       <div className="px-6 py-6 sm:px-10 sm:py-8 max-w-[1380px] mx-auto">
         <h1 className="text-[26px] sm:text-[30px] font-bold leading-tight tracking-tight text-[#1a1a1a] mb-1">
           Quant tech stack

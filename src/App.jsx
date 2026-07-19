@@ -188,7 +188,7 @@ export default function App() {
     // the SiteFooter sits OUTSIDE the locked container so it lives below the
     // fold like on the sibling microsites, instead of being pinned on screen.
     <>
-      <div className="min-h-screen sm:h-screen w-full flex flex-col">
+      <div className="min-h-screen sm:min-h-dvh w-full flex flex-col">
         <SiteHeader
           brand="📊 Quant Job Market"
           LinkComponent={(p) => <a {...p} />}
@@ -241,17 +241,22 @@ export default function App() {
           />
         )}
 
-        <main className="flex-1 relative sm:overflow-hidden">
+        <main className="flex-1 relative">
           {view === "firms" && (
-            <Treemap
-              firms={filteredFirms}
-              colorLayer="firmType"
-              onFirmClick={(f) => {
-                setSelectedFirm(f);
-                setView("table");
-              }}
-              selectedFirm={selectedFirm}
-            />
+            // Desktop: fill the leftover viewport space (main is flex-1 of a
+            // min-h-dvh column) so the treemap fits one screen; the document
+            // stays the only scroller. Mobile: normal flow (card list).
+            <div className="sm:absolute sm:inset-0">
+              <Treemap
+                firms={filteredFirms}
+                colorLayer="firmType"
+                onFirmClick={(f) => {
+                  setSelectedFirm(f);
+                  setView("table");
+                }}
+                selectedFirm={selectedFirm}
+              />
+            </div>
           )}
           {view === "table" && <DataTable jobs={filteredJobs} search={search} onSearchChange={setSearch} />}
           {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
