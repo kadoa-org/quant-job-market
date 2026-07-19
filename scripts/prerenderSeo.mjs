@@ -55,6 +55,15 @@ const FIRM_TYPE_LABEL = {
 // static listicles the month in the title is always actually true.
 const monthYear = new Date().toLocaleString("en-US", { month: "short", year: "numeric" });
 
+// Google Jobs wants a validThrough on every JobPosting or it can treat postings
+// as stale. The board is rebuilt daily and only lists currently-open roles, so a
+// rolling ~45-day window (refreshed each build) keeps them "open" and eligible.
+const jobValidThrough = (() => {
+  const d = new Date();
+  d.setDate(d.getDate() + 45);
+  return d.toISOString().slice(0, 10);
+})();
+
 // Firm-page slug derived from the (clean) firm NAME, not job.firmSlug — the
 // latter is polluted with upstream workflow artifacts ("blackrock-template-v2-retry",
 // "mlp-test-2") that would otherwise leak into public URLs.
@@ -561,6 +570,7 @@ for (const j of jobs) {
         title: j.jobTitle,
         description: desc,
         datePosted: j.datePosted,
+        validThrough: jobValidThrough,
         hiringOrganization: {
           "@type": "Organization",
           name: j.firmName,
