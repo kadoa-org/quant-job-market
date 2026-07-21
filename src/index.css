@@ -7,17 +7,19 @@
   scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
 }
 
-/* Align the kit header + nav container with the full-bleed content and the
-   filter-bar gutter (px-3 sm:px-5) so edges line up. */
+/* Align the kit header, nav + footer containers with the full-bleed content
+   and the filter-bar gutter (px-3 sm:px-5) so all edges line up. */
 .dk-header .dk-container,
-.dk-nav .dk-container {
+.dk-nav .dk-container,
+.dk-footer .dk-container {
   max-width: none;
   padding-left: 12px;
   padding-right: 12px;
 }
 @media (min-width: 640px) {
   .dk-header .dk-container,
-  .dk-nav .dk-container {
+  .dk-nav .dk-container,
+  .dk-footer .dk-container {
     padding-left: 20px;
     padding-right: 20px;
   }
