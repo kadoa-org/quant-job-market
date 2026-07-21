@@ -153,7 +153,7 @@ const siteFooter = `<footer class="dk-footer">
   </div>
 </footer>`;
 
-function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml, showMeta = true }) {
+function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml, showMeta = true, navHtml = "", showCrumbs = true }) {
   const url = `${BASE}${pathname}`;
   return `<!doctype html>
 <html lang="en">
@@ -182,6 +182,8 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
   body{margin:0;background:var(--dk-bg);color:var(--dk-ink);font-family:var(--dk-font)}
   /* vertical only — must not reset the .dk-container 0 15px side padding */
   .seo-main{padding-top:28px;padding-bottom:64px}
+  .insights-panel-inner{padding:24px 12px}
+  @media (min-width:40.0625em){.insights-panel-inner{padding:24px 20px}}
   .seo-crumbs{font-size:var(--dk-fs-s);color:var(--dk-muted);margin:0 0 20px}
   .seo-crumbs a{color:var(--dk-link)}
   h1{font:700 var(--dk-fs-xxl)/1.15 var(--dk-font);letter-spacing:-0.02em;margin:0 0 10px}
@@ -196,15 +198,15 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
   .seo-jd h2{font-size:var(--dk-fs-l)}
   .seo-jd p,.seo-jd li{margin:0 0 10px}
   .seo-jd ul,.seo-jd ol{padding-left:22px}
-  .oss-bleed{width:min(1240px,calc(100vw - 40px));position:relative;left:50%;transform:translateX(-50%)}
   .seo-back{margin-top:28px;font-size:var(--dk-fs-s)}
   .seo-back a{color:var(--dk-link)}
 </style>
 </head>
 <body>
 ${siteHeader}
+${navHtml}
 <main class="dk-container seo-main">
-<nav class="seo-crumbs"><a href="${PREFIX}">Quant Job Market</a> › ${esc(h1)}</nav>
+${showCrumbs ? `<nav class="seo-crumbs"><a href="${PREFIX}">Quant Job Market</a> › ${esc(h1)}</nav>` : ""}
 <h1>${esc(h1)}</h1>
 ${intro ? `<p class="seo-lede">${intro}</p>` : ""}
 ${bodyHtml}
@@ -648,7 +650,7 @@ function firmOssSection(firmName) {
     )
     .join("\n");
   return `<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:32px 0 10px">Open source at ${esc(firmName)}</h2>
-<p class="dk-hint" style="margin:0 0 12px"><a href="${esc(gh.org_url)}" target="_blank" rel="noopener noreferrer">github.com/${esc(gh.org)}</a> — ${gh.public_repos} public repos, ${fmtStars(gh.total_stars)} stars, ${gh.active_repos_90d} active in the last 90 days. <a href="${PREFIX}/open-source">Full quant OSS leaderboard →</a></p>
+<p class="dk-hint" style="margin:0 0 12px"><a href="${esc(gh.org_url)}" target="_blank" rel="noopener noreferrer">github.com/${esc(gh.org)}</a> — ${gh.public_repos} public repos, ${fmtStars(gh.total_stars)} stars, ${gh.active_repos_1y ?? gh.active_repos_90d} active in the last year. <a href="${PREFIX}/open-source/">Full quant OSS leaderboard →</a></p>
 ${kitTable(`<th>Repository</th><th>Language</th><th class="dk-num">Stars</th><th>About</th>`, repoRows)}`;
 }
 
@@ -696,10 +698,15 @@ if (github.firms.length) {
   const totalStars = active.reduce((s, f) => s + f.total_stars, 0);
   const totalRepos = active.reduce((s, f) => s + f.public_repos, 0);
 
+  const maxStars = active[0].total_stars;
+  const starBar = (stars) => {
+    const w = Math.max(2, Math.round((stars / maxStars) * 170));
+    return `<div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:${w}px;height:10px;background:#1d70b8;border-radius:0 2px 2px 0;flex:none"></span><span style="font-weight:600;font-variant-numeric:tabular-nums">${fmtStars(stars)}</span></div>`;
+  };
   const leaderRows = active
     .map(
       (f, i) =>
-        `<tr><td class="dk-num">${i + 1}</td><td>${firmLink(f.firm_name)}</td><td><a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer">${esc(f.org)}</a></td><td class="dk-num">${f.public_repos}</td><td class="dk-num">${fmtStars(f.total_stars)}</td><td class="dk-num">${f.active_repos_90d}</td><td>${f.top_repos[0] ? `<a href="${esc(f.top_repos[0].url)}" target="_blank" rel="noopener noreferrer">${esc(f.top_repos[0].name)}</a> (${fmtStars(f.top_repos[0].stars)}★)` : "—"}</td></tr>`,
+        `<tr><td class="dk-num" style="color:var(--dk-muted)">${i + 1}</td><td><strong>${firmLink(f.firm_name)}</strong><br /><a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer" style="font-size:var(--dk-fs-s);color:var(--dk-muted)">@${esc(f.org)}</a></td><td style="min-width:230px">${starBar(f.total_stars)}</td><td class="dk-num">${f.public_repos}</td><td class="dk-num">${f.active_repos_1y ?? f.active_repos_90d}</td><td>${f.top_repos[0] ? `<a href="${esc(f.top_repos[0].url)}" target="_blank" rel="noopener noreferrer">${esc(f.top_repos[0].name)}</a> <span style="color:var(--dk-muted);white-space:nowrap">${fmtStars(f.top_repos[0].stars)}★</span>` : "—"}</td></tr>`,
     )
     .join("\n");
 
@@ -716,126 +723,30 @@ if (github.firms.length) {
 
   const emptyOrgs = github.firms.filter((f) => f.public_repos === 0);
 
-  // ── the shareable chart: ranked bars, firm-type categorical color ──────────
-  // Palette = the site's firm-type hues, validated (CVD dE 44, contrast WARN
-  // relieved by tip labels on every bar + the table below). Inline JS is
-  // blocked by the dataset CSP, so hover/tooltip logic ships as a same-origin
-  // file and row data rides an inert application/json block.
-  // Single series (stars), single hue — the kit accent. Firm-type coloring
-  // was removed: the classification is noisy and identity isn't the job here.
-  const BAR_COLOR = "#1d70b8";
-  const rows2 = active; // stars desc already
-  const ROW_H = 34, TOP = 34, LEFT_NAME = 208, COL_REPOS = 252, COL_ACT = 300, BAR_X = 322, BAR_W = 540, BAR_H = 18, TIP_GAP = 8, REPO_X = 962, WIDTH = 1240;
-  const HEIGHT = TOP + rows2.length * ROW_H + 8;
-  const maxStars = rows2[0].total_stars;
-  const ink = "#1a1a1a", muted = "#6b6b6b", faint = "#9b9b9b";
-  const barPath = (x, y, w, h) => {
-    const r = Math.min(4, w); // rounded data end, square baseline
-    return `M${x} ${y} h${Math.max(0, w - r)} a${r} ${r} 0 0 1 ${r} ${r} v${h - 2 * r} a${r} ${r} 0 0 1 -${r} ${r} h-${Math.max(0, w - r)} Z`;
-  };
-  let svgRows = "";
-  rows2.forEach((f, i) => {
-    const y = TOP + i * ROW_H;
-    const cy = y + ROW_H / 2;
-    const w = Math.max(2, Math.round((f.total_stars / maxStars) * BAR_W));
-    const top = f.top_repos[0];
-    svgRows += `<g class="oss-row" data-i="${i}" tabindex="0" role="button" aria-label="${esc(f.firm_name)}: ${f.total_stars.toLocaleString()} GitHub stars">
-<rect class="oss-bg" x="0" y="${y}" width="${WIDTH}" height="${ROW_H}" fill="transparent"/>
-<text x="22" y="${cy}" font-size="11.5" fill="${faint}" text-anchor="end" dominant-baseline="central" font-variant-numeric="tabular-nums">${i + 1}</text>
-<text x="${LEFT_NAME}" y="${cy}" font-size="13" font-weight="600" fill="${ink}" text-anchor="end" dominant-baseline="central">${esc(f.firm_name)}</text>
-<text x="${COL_REPOS}" y="${cy}" font-size="12" fill="${muted}" text-anchor="end" dominant-baseline="central" font-variant-numeric="tabular-nums">${f.public_repos}</text>
-<text x="${COL_ACT}" y="${cy}" font-size="12" fill="${muted}" text-anchor="end" dominant-baseline="central" font-variant-numeric="tabular-nums">${f.active_repos_90d}</text>
-<path class="oss-bar" d="${barPath(BAR_X, cy - BAR_H / 2, w, BAR_H)}" fill="${BAR_COLOR}" fill-opacity="0.92"/>
-<text x="${BAR_X + w + TIP_GAP}" y="${cy}" font-size="12.5" font-weight="600" fill="${ink}" dominant-baseline="central">${fmtStars(f.total_stars)}</text>
-<text x="${REPO_X}" y="${cy}" font-size="12" fill="${muted}" dominant-baseline="central">${top ? `${esc(top.name)} ${fmtStars(top.stars)}★` : ""}</text>
-</g>`;
-  });
-  const header = `<text x="${COL_REPOS}" y="18" font-size="11" fill="${muted}" text-anchor="end">repos</text>
-<text x="${COL_ACT}" y="18" font-size="11" fill="${muted}" text-anchor="end">90d</text>
-<text x="${BAR_X}" y="18" font-size="11" fill="${muted}">GitHub stars</text>
-<text x="${REPO_X}" y="18" font-size="11" fill="${muted}">top repo</text>`;
-  const chartSvg = `<svg viewBox="0 0 ${WIDTH} ${HEIGHT}" width="${WIDTH}" height="${HEIGHT}" font-family="Inter,system-ui,sans-serif" role="img" aria-label="Quant firms ranked by GitHub stars">${header}${svgRows}</svg>`;
-
-  const legend = ""; // single series — the heading names it, no legend box
-  const chartData = rows2.map((f) => ({
-    name: f.firm_name,
-    org: f.org,
-    url: f.org_url,
-    stars: f.total_stars,
-    repos: f.public_repos,
-    active: f.active_repos_90d,
-    langs: f.top_languages.slice(0, 3).map((l) => l.lang),
-    top: f.top_repos.slice(0, 3).map((r) => ({ name: r.name, stars: r.stars, lang: r.language, desc: (r.description ?? "").slice(0, 110) })),
-  }));
-  // Share-of-all-stars treemap: part-to-whole is the one job a treemap does
-  // well, and it is the site's signature visual. Sequential blue (darker =
-  // larger share) — area already encodes magnitude, color reinforces it.
-  const othersStars = active.slice(10).reduce((s2, f) => s2 + f.total_stars, 0);
-  const tiles = [
-    ...active.slice(0, 10).map((f) => ({ name: f.firm_name, v: f.total_stars })),
-    ...(othersStars > 0 ? [{ name: "All others", v: othersStars }] : []),
-  ];
-  const TM_W = 1240, TM_H = 380;
-  function squarify(items, x, y, w, h, out) {
-    if (!items.length) return out;
-    if (items.length === 1) { out.push({ ...items[0], x, y, w, h }); return out; }
-    const total = items.reduce((s2, t) => s2 + t.v, 0);
-    let row = [], rest = [...items], best = Infinity;
-    while (rest.length) {
-      const cand = [...row, rest[0]];
-      const side = Math.min(w, h);
-      const rowSum = cand.reduce((s2, t) => s2 + t.v, 0);
-      const rowArea = (rowSum / total) * w * h;
-      const thick = rowArea / side;
-      const worst = Math.max(...cand.map((t) => {
-        const len = ((t.v / rowSum) * rowArea) / thick;
-        return Math.max(thick / len, len / thick);
-      }));
-      if (worst > best && row.length) break;
-      best = worst; row = cand; rest.shift();
-    }
-    const rowSum = row.reduce((s2, t) => s2 + t.v, 0);
-    const frac = rowSum / total;
-    let cx = x, cy = y;
-    if (w >= h) {
-      const rw = w * frac;
-      for (const t of row) { const th = h * (t.v / rowSum); out.push({ ...t, x: cx, y: cy, w: rw, h: th }); cy += th; }
-      return squarify(rest, x + rw, y, w - rw, h, out);
-    }
-    const rh = h * frac;
-    for (const t of row) { const tw = w * (t.v / rowSum); out.push({ ...t, x: cx, y: cy, w: tw, h: rh }); cx += tw; }
-    return squarify(rest, x, y + rh, w, h - rh, out);
-  }
-  const placed = squarify(tiles, 0, 0, TM_W, TM_H, []);
-  const totAll = tiles.reduce((s2, t) => s2 + t.v, 0);
-  const mix = (a, b, t) => Math.round(a + (b - a) * t);
-  const shade = (t) => `rgb(${mix(213, 16, t)},${mix(227, 74, t)},${mix(240, 122, t)})`; // #d5e3f0 -> #104a7a
-  const maxV = tiles[0].v;
-  const tmSvg = `<svg viewBox="0 0 ${TM_W} ${TM_H}" width="${TM_W}" height="${TM_H}" font-family="Inter,system-ui,sans-serif" role="img" aria-label="Share of all GitHub stars by firm">${placed
-    .map((t) => {
-      const tShade = Math.sqrt(t.v / maxV);
-      const fill = shade(tShade);
-      const txt = tShade > 0.45 ? "#fff" : ink;
-      const sub = tShade > 0.45 ? "rgba(255,255,255,0.75)" : muted;
-      const pct = ((t.v / totAll) * 100).toFixed(t.v / totAll >= 0.1 ? 0 : 1);
-      const showBig = t.w > 130 && t.h > 56;
-      const showName = t.w > 78 && t.h > 30;
-      const label = showBig
-        ? `<text x="${t.x + 10}" y="${t.y + 24}" font-size="14" font-weight="700" fill="${txt}">${esc(t.name)}</text><text x="${t.x + 10}" y="${t.y + 42}" font-size="12" fill="${sub}">${pct}% · ${fmtStars(t.v)}★</text>`
-        : showName
-          ? `<text x="${t.x + 7}" y="${t.y + 17}" font-size="10.5" font-weight="600" fill="${txt}">${esc(t.name.length > 14 ? `${t.name.slice(0, 13)}…` : t.name)}</text>`
-          : "";
-      return `<g><rect x="${t.x + 1}" y="${t.y + 1}" width="${Math.max(0, t.w - 2)}" height="${Math.max(0, t.h - 2)}" fill="${fill}" rx="2"><title>${esc(t.name)}: ${t.v.toLocaleString()} stars (${pct}%)</title></rect>${label}</g>`;
-    })
-    .join("")}</svg>`;
-  const treemapBlock = `<p style="font:600 13px/1.4 Inter,system-ui,sans-serif;color:${ink};margin:0 0 8px">Share of all ${fmtStars(totAll)} GitHub stars across quant orgs</p>${tmSvg}<div style="height:26px"></div>`;
-
-  const chartBlock = `${legend}${treemapBlock ? "" : ""}
-<div class="oss-bleed"><div style="overflow-x:auto"><div style="min-width:${WIDTH}px;position:relative" id="oss-chart">${treemapBlock}${chartSvg}</div></div></div>
-<div style="font-size:11.5px;color:${muted};display:flex;justify-content:flex-end;gap:8px;margin:6px 0 0"><span style="color:${ink};font-weight:600">kadoa.com/quant</span><span>·</span><span>github.com/kadoa-org/quant-job-market</span></div>
-<p class="dk-hint" style="margin-top:14px">Hover a row for each firm's top repositories; click to open the org on GitHub. Bars are linear — the gap between Jane Street and everyone else is the story.</p>
-<script type="application/json" id="oss-data">${JSON.stringify(chartData).replace(/</g, "\\u003c")}</script>
-<script src="${PREFIX}/oss-chart.js" defer></script>`;
+  // gov.uk-style nav for this page: same tabs + Insights toggle as the SPA.
+  // Static HTML here; the expand/collapse is wired in oss-chart.js (dataset
+  // CSP blocks inline JS). Panel links stay in the DOM for crawlers either way.
+  const navItem = (href, label, desc, current) =>
+    `<div style="width:208px"><a href="${href}"${current ? ' aria-current="true"' : ""} style="font:${current ? 700 : 600} 15px/1.3 var(--dk-font);color:#1d70b8;text-underline-offset:2px">${label}</a><p style="margin:4px 0 0;font:400 13px/1.35 var(--dk-font);color:#505a5f">${desc}</p></div>`;
+  const ossNav = `<nav class="dk-nav" aria-label="Primary">
+  <div class="dk-container">
+    <ul class="dk-nav-list">
+      <li><a href="${PREFIX}/">Firms</a></li>
+      <li><a href="${PREFIX}/?view=table">Jobs</a></li>
+      <li><a href="#insights" id="insights-toggle" aria-expanded="false" aria-controls="insights-panel">Insights <svg width="11" height="8" viewBox="0 0 11 8" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:2px;margin-top:-2px"><path id="insights-chevron" d="M1 1.5 L5.5 6 L10 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></li>
+    </ul>
+  </div>
+</nav>
+<div id="insights-panel" hidden style="background:#fff;border-bottom:1px solid #b1b4b6">
+  <div class="insights-panel-inner">
+    <div style="display:flex;flex-wrap:wrap;gap:20px 40px">
+      ${navItem(`${PREFIX}/?view=dashboard`, "Hiring insights", "Roles, seniority, salaries and demand across all firms", false)}
+      ${navItem(`${PREFIX}/tech-stack`, "Tech stack", "Languages and tools by firm, the hiring heatmap", false)}
+      ${navItem(`${PREFIX}/locations`, "Locations", "Where quant firms hire, city by city", false)}
+      ${navItem(`${PREFIX}/open-source/`, "Open source", "Firms ranked by GitHub footprint", true)}
+    </div>
+  </div>
+</div>`;
 
   write(
     "/open-source",
@@ -849,99 +760,40 @@ if (github.firms.length) {
         `${BASE}/open-source`,
       ),
       h1: "Quant Open Source Leaderboard",
-      bodyHtml: `${chartBlock}
-<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:28px 0 10px">Full leaderboard</h2>
-${kitTable(
-        `<th class="dk-num">#</th><th>Firm</th><th>GitHub org</th><th class="dk-num">Repos</th><th class="dk-num">Stars</th><th class="dk-num">Active (90d)</th><th>Top repo</th>`,
+      intro: `Top quant firms with public GitHub orgs, ranked by total stars and activity across repositories.`,
+      bodyHtml: `${kitTable(
+        `<th class="dk-num">#</th><th>Firm</th><th>GitHub stars</th><th class="dk-num">Repos</th><th class="dk-num">Active (1y)</th><th>Top repo</th>`,
         leaderRows,
       )}
-<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:28px 0 10px">Top quant open-source projects</h2>
+<div style="font-size:11.5px;color:var(--dk-muted);display:flex;justify-content:flex-end;gap:8px;margin:8px 0 0"><span style="color:var(--dk-ink);font-weight:600">kadoa.com/quant/open-source</span><span>·</span><span>updated daily</span></div>
+<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:32px 0 10px">Top Projects</h2>
 ${kitTable(`<th class="dk-num">#</th><th>Repository</th><th>Firm</th><th>Language</th><th class="dk-num">Stars</th><th>About</th>`, repoRows)}
-${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no public repos yet: ${emptyOrgs.map((f) => `<a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer">${esc(f.firm_name)}</a>`).join(", ")}.</p>` : ""}`,
+${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no public repos yet: ${emptyOrgs.map((f) => `<a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer">${esc(f.firm_name)}</a>`).join(", ")}.</p>` : ""}
+<script src="${PREFIX}/oss-chart.js" defer></script>`,
       showMeta: false,
+      navHtml: ossNav,
+      showCrumbs: false,
     }),
   );
-  // Hover/tooltip layer as a same-origin file (dataset CSP blocks inline JS).
-  // Tooltip DOM is built with textContent only — repo names/descriptions are
-  // untrusted upstream data.
+  // Same-origin JS file (dataset CSP blocks inline scripts): Insights toggle.
   fs.writeFileSync(
     path.join(DIST, "oss-chart.js"),
     `(function () {
-  var host = document.getElementById("oss-chart");
-  var dataEl = document.getElementById("oss-data");
-  if (!host || !dataEl) return;
-  var data = JSON.parse(dataEl.textContent);
-  var tip = document.createElement("div");
-  tip.style.cssText = "position:absolute;pointer-events:none;background:#fff;border:1px solid #d6d6d3;border-radius:6px;box-shadow:0 4px 14px rgba(17,17,17,.12);padding:10px 12px;font:12px/1.45 Inter,system-ui,sans-serif;color:#1a1a1a;max-width:340px;z-index:10;display:none";
-  host.appendChild(tip);
-  function fmt(n) { return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(n); }
-  function fill(d) {
-    tip.textContent = "";
-    var h = document.createElement("div");
-    h.style.cssText = "font-weight:700;margin-bottom:2px";
-    h.textContent = d.name;
-    tip.appendChild(h);
-    var sub = document.createElement("div");
-    sub.style.cssText = "color:#6b6b6b;margin-bottom:6px";
-    sub.textContent = fmt(d.stars) + " stars \u00b7 " + d.repos + " repos \u00b7 " + d.active + " active 90d" + (d.langs.length ? " \u00b7 " + d.langs.join(", ") : "");
-    tip.appendChild(sub);
-    d.top.forEach(function (r) {
-      var row = document.createElement("div");
-      row.style.cssText = "display:flex;gap:6px;align-items:baseline;margin-top:3px";
-      var name = document.createElement("span");
-      name.style.cssText = "font-weight:600";
-      name.textContent = r.name;
-      var meta = document.createElement("span");
-      meta.style.cssText = "color:#6b6b6b;white-space:nowrap";
-      meta.textContent = fmt(r.stars) + "\u2605" + (r.lang ? " \u00b7 " + r.lang : "");
-      row.appendChild(name);
-      row.appendChild(meta);
-      tip.appendChild(row);
-      if (r.desc) {
-        var desc = document.createElement("div");
-        desc.style.cssText = "color:#9b9b9b;font-size:11.5px";
-        desc.textContent = r.desc;
-        tip.appendChild(desc);
-      }
-    });
-    var cta = document.createElement("div");
-    cta.style.cssText = "margin-top:6px;color:#1d70b8";
-    cta.textContent = "Open github.com/" + d.org + " \u2192";
-    tip.appendChild(cta);
-  }
-  function show(row, evt) {
-    var d = data[Number(row.getAttribute("data-i"))];
-    if (!d) return;
-    fill(d);
-    tip.style.display = "block";
-    var rect = host.getBoundingClientRect();
-    var x = (evt ? evt.clientX - rect.left : 340) + 14;
-    var y = (evt ? evt.clientY - rect.top : 0) + 14;
-    if (x + 360 > rect.width) x = Math.max(0, x - 380);
-    tip.style.left = x + "px";
-    tip.style.top = y + "px";
-  }
-  function hide() { tip.style.display = "none"; }
-  host.querySelectorAll(".oss-row").forEach(function (row) {
-    var bar = row.querySelector(".oss-bar");
-    var bg = row.querySelector(".oss-bg");
-    row.style.cursor = "pointer";
-    row.addEventListener("pointermove", function (e) { show(row, e); if (bar) bar.setAttribute("fill-opacity", "1"); if (bg) bg.setAttribute("fill", "#f4f4f2"); });
-    row.addEventListener("pointerleave", function () { hide(); if (bar) bar.setAttribute("fill-opacity", "0.92"); if (bg) bg.setAttribute("fill", "transparent"); });
-    row.addEventListener("focus", function () { show(row, null); });
-    row.addEventListener("blur", hide);
-    row.addEventListener("click", function () {
-      var d = data[Number(row.getAttribute("data-i"))];
-      if (d) window.open(d.url, "_blank", "noopener");
-    });
-    row.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); row.dispatchEvent(new Event("click")); }
-    });
+  var tgl = document.getElementById("insights-toggle");
+  var panel = document.getElementById("insights-panel");
+  var chev = document.getElementById("insights-chevron");
+  if (!tgl || !panel) return;
+  tgl.addEventListener("click", function (e) {
+    e.preventDefault();
+    var opening = panel.hidden;
+    panel.hidden = !opening;
+    tgl.setAttribute("aria-expanded", String(opening));
+    if (chev) chev.setAttribute("d", opening ? "M1 6.5 L5.5 2 L10 6.5" : "M1 1.5 L5.5 6 L10 1.5");
   });
 })();
 `,
   );
-  console.log(`open-source page: ${active.length} firms + chart`);
+  console.log(`open-source page: ${active.length} firms`);
 }
 
 // ── internal links (so the new pages aren't orphaned) ────────────────────────
@@ -960,7 +812,7 @@ const footer = `    <footer class="seo-shell" style="max-width:960px;margin:0 au
       <strong style="color:var(--dk-ink,#555)">Explore the data:</strong>
       <a href="${PREFIX}/hiring">Which firms are hiring</a>
       <a href="${PREFIX}/salaries">Quant salaries</a>
-      <a href="${PREFIX}/open-source">Quant firms on GitHub</a>
+      <a href="${PREFIX}/open-source/">Quant firms on GitHub</a>
       ${roleLinks}
       ${techLinks}
       ${locationLinks}

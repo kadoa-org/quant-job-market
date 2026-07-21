@@ -81,22 +81,13 @@ function syncUrl(view, filters, selectedFirm, search) {
   window.history.replaceState(null, "", url);
 }
 
-// Top nav: Firms | Jobs | Insights ▾. The secondary analytics views (dashboard,
-// tech stack, locations, open source) collapse under one Insights menu — they
-// are interesting, not primary. Reuses the kit's dk-nav look; the dropdown is
-// local to this app.
+// Top nav: Firms | Jobs | Insights. The Insights item works like GOV.UK's
+// header Menu: a chevron toggle that expands a full-width panel in normal
+// flow (pushes the page down, no floating popover), holding underlined links
+// with one-line descriptions. Toggle-only close, like gov.uk.
 function InsightsNav({ view, setView, onFirms }) {
   const [open, setOpen] = useState(false);
-  const ref = React.useRef(null);
   const insightsActive = ["dashboard", "techstack", "locations"].includes(view);
-
-  useEffect(() => {
-    const close = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
-    };
-    document.addEventListener("pointerdown", close);
-    return () => document.removeEventListener("pointerdown", close);
-  }, []);
 
   const go = (k) => {
     setView(k);
@@ -110,20 +101,7 @@ function InsightsNav({ view, setView, onFirms }) {
       onClick={(e) => {
         if (e.metaKey || e.ctrlKey) return;
         e.preventDefault();
-        go(k);
-      }}
-    >
-      {label}
-    </a>
-  );
-  const item = (k, label) => (
-    <a
-      href={`#${k}`}
-      className="px-4 py-2 text-[14px] text-[#1a1a1a] hover:bg-[#f3f2f1] no-underline"
-      style={{ display: "block", fontWeight: view === k ? 600 : 400 }}
-      onClick={(e) => {
-        if (e.metaKey || e.ctrlKey) return;
-        e.preventDefault();
+        setOpen(false);
         go(k);
       }}
     >
@@ -131,43 +109,86 @@ function InsightsNav({ view, setView, onFirms }) {
     </a>
   );
 
+  const ITEMS = [
+    { key: "dashboard", label: "Hiring insights", desc: "Roles, seniority, salaries and demand across all firms" },
+    { key: "techstack", label: "Tech stack", desc: "Languages and tools by firm, the hiring heatmap" },
+    { key: "locations", label: "Locations", desc: "Where quant firms hire, city by city" },
+    { key: "open-source", label: "Open source", desc: "Firms ranked by GitHub footprint", href: `${import.meta.env.BASE_URL}open-source/` },
+  ];
+
   return (
-    <nav className="dk-nav" aria-label="Primary">
-      <div className="dk-container">
-        <ul className="dk-nav-list">
-          <li>{tab("firms", "Firms")}</li>
-          <li>{tab("table", "Jobs")}</li>
-          <li className="relative" ref={ref}>
-            <a
-              href="#insights"
-              aria-current={insightsActive ? "true" : undefined}
-              aria-expanded={open}
-              aria-haspopup="true"
-              onClick={(e) => {
-                e.preventDefault();
-                setOpen((v) => !v);
-              }}
-            >
-              Insights <span aria-hidden="true" style={{ fontSize: 10, verticalAlign: 1 }}>▾</span>
-            </a>
-            {open && (
-              <div className="absolute left-0 top-full z-[1100] mt-px min-w-[180px] bg-white border border-[#b1b4b6] shadow-[0_4px_14px_rgba(17,17,17,0.12)]">
-                {item("dashboard", "Hiring insights")}
-                {item("techstack", "Tech stack")}
-                {item("locations", "Locations")}
-                <a
-                  href={`${import.meta.env.BASE_URL}open-source`}
-                  className="px-4 py-2 text-[14px] text-[#1a1a1a] hover:bg-[#f3f2f1] no-underline border-t border-[#eeedec]"
-                  style={{ display: "block" }}
+    <>
+      <nav className="dk-nav" aria-label="Primary">
+        <div className="dk-container">
+          <ul className="dk-nav-list">
+            <li>{tab("firms", "Firms")}</li>
+            <li>{tab("table", "Jobs")}</li>
+            <li>
+              <a
+                href="#insights"
+                aria-current={insightsActive && !open ? "true" : undefined}
+                aria-expanded={open}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpen((v) => !v);
+                }}
+                style={open ? { borderBottomColor: "var(--dk-link)", fontWeight: 600 } : undefined}
+              >
+                Insights{" "}
+                <svg
+                  width="11"
+                  height="8"
+                  viewBox="0 0 11 8"
+                  aria-hidden="true"
+                  style={{ display: "inline-block", verticalAlign: "middle", marginLeft: 2, marginTop: -2 }}
                 >
-                  Open source
-                </a>
-              </div>
-            )}
-          </li>
-        </ul>
-      </div>
-    </nav>
+                  <path
+                    d={open ? "M1 6.5 L5.5 2 L10 6.5" : "M1 1.5 L5.5 6 L10 1.5"}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      {open && (
+        <div className="bg-white border-b border-[#b1b4b6]">
+          <div className="px-3 sm:px-5 py-6">
+            <div className="flex flex-wrap gap-x-10 gap-y-5">
+              {ITEMS.map((it) =>
+                it.href ? (
+                  <div key={it.key} className="w-52">
+                    <a href={it.href} className="text-[15px] font-semibold text-[#1d70b8] underline underline-offset-2">
+                      {it.label}
+                    </a>
+                    <p className="mt-1 text-[13px] leading-snug text-[#505a5f]">{it.desc}</p>
+                  </div>
+                ) : (
+                  <div key={it.key} className="w-52">
+                    <a
+                      href={`#${it.key}`}
+                      className="text-[15px] font-semibold text-[#1d70b8] underline underline-offset-2"
+                      style={{ fontWeight: view === it.key ? 700 : 600 }}
+                      onClick={(e) => {
+                        if (e.metaKey || e.ctrlKey) return;
+                        e.preventDefault();
+                        go(it.key);
+                      }}
+                    >
+                      {it.label}
+                    </a>
+                    <p className="mt-1 text-[13px] leading-snug text-[#505a5f]">{it.desc}</p>
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
