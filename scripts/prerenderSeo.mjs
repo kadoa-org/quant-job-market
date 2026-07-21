@@ -219,9 +219,14 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
      content, so 1-line and 2-line descriptions don't make rows jump. */
   .oss-projects tbody td{height:52px;vertical-align:middle}
   .oss-projects tbody td:nth-child(2) a{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  /* Mobile: the fixed stars-bar column width would force horizontal scroll;
-     let it shrink to fit once the secondary columns (dk-hide-sm) are gone. */
-  @media (max-width:640px){.oss-stars-col{width:auto !important;min-width:0 !important}}
+  /* Star bar scales to its column so the value label is never clipped: the
+     bar is a % of a flexible track, the value sits in an auto column. */
+  .oss-stars-col{width:260px}
+  .starcell{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px}
+  .starbar{height:10px;background:#1d70b8;border-radius:0 2px 2px 0;min-width:2px}
+  .starval{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+  /* Mobile: the stars column takes the space freed by the hidden columns. */
+  @media (max-width:640px){.oss-stars-col{width:100%}}
   .dk-sort-ind{color:var(--dk-muted);font-size:10px;font-variant-numeric:normal}
   .dk-th-btn:hover .dk-sort-ind{color:var(--dk-ink)}
   .dk-table th[aria-sort="ascending"] .dk-sort-ind,.dk-table th[aria-sort="descending"] .dk-sort-ind{color:var(--dk-ink)}
@@ -724,9 +729,11 @@ if (github.firms.length) {
   const totalRepos = active.reduce((s, f) => s + f.public_repos, 0);
 
   const maxStars = active[0].total_stars;
+  // Bar is a % of a flexible track; the value sits in a separate auto column
+  // (see .starcell CSS) so it scales with the column and never gets clipped.
   const starBar = (stars) => {
-    const w = Math.max(2, Math.round((stars / maxStars) * 170));
-    return `<div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:${w}px;height:10px;background:#1d70b8;border-radius:0 2px 2px 0;flex:none"></span><span style="font-weight:600;font-variant-numeric:tabular-nums">${fmtStars(stars)}</span></div>`;
+    const pct = Math.max(1, Math.round((stars / maxStars) * 100));
+    return `<div class="starcell"><span class="starbar" style="width:${pct}%"></span><span class="starval">${fmtStars(stars)}</span></div>`;
   };
   // Sortable-header helpers for the static tables. Click-to-sort is wired in
   // oss-chart.js (dataset CSP blocks inline JS); sortable cells carry a
@@ -743,11 +750,11 @@ if (github.firms.length) {
   const sortableTable = (head, rows, cls = "") =>
     `<div class="dk-table-wrap"><table class="dk-table dk-sortable${cls ? ` ${cls}` : ""}" data-rank-col="0"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
 
-  const leaderHead = `${plainTh("#", { num: true, width: "44px" })}${sortTh("Firm", 1, "text")}${sortTh("GitHub stars", 2, "num", { active: true, dir: "desc", width: "260px", cls: "oss-stars-col" })}${sortTh("Repos", 3, "num", { num: true, cls: "dk-hide-sm" })}${sortTh("Active (1y)", 4, "num", { num: true, cls: "dk-hide-sm" })}${plainTh("Top repo", { cls: "dk-hide-md" })}`;
+  const leaderHead = `${plainTh("#", { num: true, width: "44px" })}${sortTh("Firm", 1, "text")}${sortTh("GitHub stars", 2, "num", { active: true, dir: "desc", cls: "oss-stars-col" })}${sortTh("Repos", 3, "num", { num: true, cls: "dk-hide-sm" })}${sortTh("Active (1y)", 4, "num", { num: true, cls: "dk-hide-sm" })}${plainTh("Top repo", { cls: "dk-hide-md" })}`;
   const leaderRows = active
     .map(
       (f, i) =>
-        `<tr><td class="dk-num" style="color:var(--dk-muted)">${i + 1}</td><td data-sort="${esc(f.firm_name)}"><strong>${firmLink(f.firm_name)}</strong><br /><a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer" style="font-size:var(--dk-fs-s);color:var(--dk-muted)">@${esc(f.org)}</a></td><td class="oss-stars-col" data-sort="${f.total_stars}" style="min-width:230px">${starBar(f.total_stars)}</td><td class="dk-num dk-hide-sm" data-sort="${f.public_repos}">${f.public_repos}</td><td class="dk-num dk-hide-sm" data-sort="${f.active_repos_1y ?? f.active_repos_90d}">${f.active_repos_1y ?? f.active_repos_90d}</td><td class="dk-hide-md">${f.top_repos[0] ? `<a href="${esc(f.top_repos[0].url)}" target="_blank" rel="noopener noreferrer">${esc(f.top_repos[0].name)}</a> <span style="color:var(--dk-muted);white-space:nowrap">${fmtStars(f.top_repos[0].stars)}★</span>` : "—"}</td></tr>`,
+        `<tr><td class="dk-num" style="color:var(--dk-muted)">${i + 1}</td><td data-sort="${esc(f.firm_name)}"><strong>${firmLink(f.firm_name)}</strong><br /><a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer" style="font-size:var(--dk-fs-s);color:var(--dk-muted)">@${esc(f.org)}</a></td><td class="oss-stars-col" data-sort="${f.total_stars}">${starBar(f.total_stars)}</td><td class="dk-num dk-hide-sm" data-sort="${f.public_repos}">${f.public_repos}</td><td class="dk-num dk-hide-sm" data-sort="${f.active_repos_1y ?? f.active_repos_90d}">${f.active_repos_1y ?? f.active_repos_90d}</td><td class="dk-hide-md">${f.top_repos[0] ? `<a href="${esc(f.top_repos[0].url)}" target="_blank" rel="noopener noreferrer">${esc(f.top_repos[0].name)}</a> <span style="color:var(--dk-muted);white-space:nowrap">${fmtStars(f.top_repos[0].stars)}★</span>` : "—"}</td></tr>`,
     )
     .join("\n");
 
