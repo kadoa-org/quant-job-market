@@ -42,6 +42,12 @@ const cssHref = (() => {
 })();
 
 const jobs = JSON.parse(fs.readFileSync(path.join(DIST, "data", "jobs.json"), "utf8"));
+// GitHub OSS footprint (github.json ships from the jobs pipeline; absent on
+// forks/first builds — the /open-source page and firm sections just skip).
+const githubPath = path.join(DIST, "data", "github.json");
+const github = fs.existsSync(githubPath) ? JSON.parse(fs.readFileSync(githubPath, "utf8")) : { firms: [] };
+const ghByName = new Map(github.firms.map((f) => [f.firm_name, f]));
+const fmtStars = (n) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, "")}k` : String(n));
 
 const FIRM_TYPE_LABEL = {
   hedge_fund: "Hedge fund",
@@ -629,6 +635,22 @@ console.log(`job pages: ${jobPages}`);
 // the firm's open roles (linked), and the firm names in every aggregate table
 // above now link here — a crawl path from indexed pages down to each job page.
 // Also a strong "<firm> quant jobs" landing page in its own right.
+// "Open source at <firm>" section for firm pages with a mapped GitHub org.
+function firmOssSection(firmName) {
+  const gh = ghByName.get(firmName);
+  if (!gh || !gh.public_repos) return "";
+  const repoRows = gh.top_repos
+    .slice(0, 5)
+    .map(
+      (r) =>
+        `<tr><td><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.name)}</a></td><td>${esc(r.language ?? "")}</td><td class="dk-num">${fmtStars(r.stars)}</td><td>${esc((r.description ?? "").slice(0, 90))}</td></tr>`,
+    )
+    .join("\n");
+  return `<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:32px 0 10px">Open source at ${esc(firmName)}</h2>
+<p class="dk-hint" style="margin:0 0 12px"><a href="${esc(gh.org_url)}" target="_blank" rel="noopener noreferrer">github.com/${esc(gh.org)}</a> — ${gh.public_repos} public repos, ${fmtStars(gh.total_stars)} stars, ${gh.active_repos_90d} active in the last 90 days. <a href="${PREFIX}/open-source">Full quant OSS leaderboard →</a></p>
+${kitTable(`<th>Repository</th><th>Language</th><th class="dk-num">Stars</th><th>About</th>`, repoRows)}`;
+}
+
 let firmPages = 0;
 for (const f of ranked) {
   if (!f.slug) continue;
@@ -657,12 +679,67 @@ for (const f of ranked) {
       intro: `${esc(f.name)} has <strong>${f.count} open quant role${f.count === 1 ? "" : "s"}</strong> right now${where ? `, hiring in ${esc(where)}` : ""}. Each posting below links to full details and a direct apply link. <a href="${PREFIX}/hiring">See all firms hiring →</a>`,
       bodyHtml: `${kitTable(`<th>Role</th><th>Locations</th><th class="dk-num">Posted</th>`, rows)}${
         linkable.length > 500 ? `<p class="dk-hint">Showing 500 of ${f.count} open roles.</p>` : ""
-      }`,
+      }${firmOssSection(f.name)}`,
     }),
   );
   firmPages++;
 }
 console.log(`firm pages: ${firmPages}`);
+
+// ── /open-source — quant firms on GitHub ─────────────────────────────────────
+// SERP gap: "quant firms github" queries return stale listicles; nobody ranks
+// firms by live OSS footprint. Data ships daily from the jobs pipeline
+// (github.json), so the leaderboard and repo stars stay current.
+if (github.firms.length) {
+  const active = github.firms.filter((f) => f.public_repos > 0);
+  const totalStars = active.reduce((s, f) => s + f.total_stars, 0);
+  const totalRepos = active.reduce((s, f) => s + f.public_repos, 0);
+
+  const leaderRows = active
+    .map(
+      (f, i) =>
+        `<tr><td class="dk-num">${i + 1}</td><td>${firmLink(f.firm_name)}</td><td><a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer">${esc(f.org)}</a></td><td class="dk-num">${f.public_repos}</td><td class="dk-num">${fmtStars(f.total_stars)}</td><td class="dk-num">${f.active_repos_90d}</td><td>${f.top_repos[0] ? `<a href="${esc(f.top_repos[0].url)}" target="_blank" rel="noopener noreferrer">${esc(f.top_repos[0].name)}</a> (${fmtStars(f.top_repos[0].stars)}★)` : "—"}</td></tr>`,
+    )
+    .join("\n");
+
+  const allRepos = active
+    .flatMap((f) => f.top_repos.map((r) => ({ ...r, firm: f.firm_name })))
+    .sort((a, b) => b.stars - a.stars)
+    .slice(0, 25);
+  const repoRows = allRepos
+    .map(
+      (r, i) =>
+        `<tr><td class="dk-num">${i + 1}</td><td><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.name)}</a></td><td>${firmLink(r.firm)}</td><td>${esc(r.language ?? "")}</td><td class="dk-num">${fmtStars(r.stars)}</td><td>${esc((r.description ?? "").slice(0, 90))}</td></tr>`,
+    )
+    .join("\n");
+
+  const emptyOrgs = github.firms.filter((f) => f.public_repos === 0);
+
+  write(
+    "/open-source",
+    page({
+      pathname: "/open-source",
+      title: `Quant Firms on GitHub (${monthYear}): Open Source Leaderboard | Quant Job Market`,
+      description: `Which quant firms actually open-source? ${active.length} hedge funds, prop shops, and market makers ranked by GitHub footprint: ${totalRepos.toLocaleString()} public repos, ${fmtStars(totalStars)} stars. Updated daily.`,
+      jsonLd: datasetLd(
+        "Quant firms on GitHub: open-source footprint",
+        `GitHub org stats for ${active.length} quant firms.`,
+        `${BASE}/open-source`,
+      ),
+      h1: "Quant Firms on GitHub: Open Source Leaderboard",
+      intro: `<strong>${active.length}</strong> of the ${firms.size} firms we track publish public code — <strong>${totalRepos.toLocaleString()} repositories</strong> holding <strong>${fmtStars(totalStars)} stars</strong>, from Jane Street's OCaml ecosystem to XTX's exchange-scale infra. Ranked below by total stars; each firm links to its live job openings. Notably absent: Citadel Securities, Millennium, Renaissance, and most multi-strats publish nothing public at all.`,
+      bodyHtml: `${kitTable(
+        `<th class="dk-num">#</th><th>Firm</th><th>GitHub org</th><th class="dk-num">Repos</th><th class="dk-num">Stars</th><th class="dk-num">Active (90d)</th><th>Top repo</th>`,
+        leaderRows,
+      )}
+<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:28px 0 10px">Top quant open-source projects</h2>
+${kitTable(`<th class="dk-num">#</th><th>Repository</th><th>Firm</th><th>Language</th><th class="dk-num">Stars</th><th>About</th>`, repoRows)}
+${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no public repos yet: ${emptyOrgs.map((f) => `<a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer">${esc(f.firm_name)}</a>`).join(", ")}.</p>` : ""}
+<a class="dk-btn seo-cta" href="${PREFIX}/hiring">See which of these firms are hiring →</a>`,
+    }),
+  );
+  console.log(`open-source page: ${active.length} firms`);
+}
 
 // ── internal links (so the new pages aren't orphaned) ────────────────────────
 // React only owns #root, so a <footer> placed AFTER it survives hydration and
@@ -680,6 +757,7 @@ const footer = `    <footer class="seo-shell" style="max-width:960px;margin:0 au
       <strong style="color:var(--dk-ink,#555)">Explore the data:</strong>
       <a href="${PREFIX}/hiring">Which firms are hiring</a>
       <a href="${PREFIX}/salaries">Quant salaries</a>
+      <a href="${PREFIX}/open-source">Quant firms on GitHub</a>
       ${roleLinks}
       ${techLinks}
       ${locationLinks}
