@@ -196,6 +196,7 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
   .seo-jd h2{font-size:var(--dk-fs-l)}
   .seo-jd p,.seo-jd li{margin:0 0 10px}
   .seo-jd ul,.seo-jd ol{padding-left:22px}
+  .oss-bleed{width:min(1240px,calc(100vw - 40px));position:relative;left:50%;transform:translateX(-50%)}
   .seo-back{margin-top:28px;font-size:var(--dk-fs-s)}
   .seo-back a{color:var(--dk-link)}
 </style>
@@ -715,6 +716,69 @@ if (github.firms.length) {
 
   const emptyOrgs = github.firms.filter((f) => f.public_repos === 0);
 
+  // ── the shareable chart: ranked bars, firm-type categorical color ──────────
+  // Palette = the site's firm-type hues, validated (CVD dE 44, contrast WARN
+  // relieved by tip labels on every bar + the table below). Inline JS is
+  // blocked by the dataset CSP, so hover/tooltip logic ships as a same-origin
+  // file and row data rides an inert application/json block.
+  const TYPE_COLOR = { hedge_fund: "#8b5cf6", proprietary: "#f97316", market_maker: "#06b6d4", asset_manager: "#10b981", bank: "#3b82f6" };
+  const firmTypeByName = new Map([...firms.values()].map((f) => [f.name, f.type]));
+  const rows2 = active; // stars desc already
+  const ROW_H = 34, TOP = 34, LEFT_NAME = 208, COL_REPOS = 252, COL_ACT = 300, BAR_X = 322, BAR_W = 540, BAR_H = 18, TIP_GAP = 8, REPO_X = 962, WIDTH = 1240;
+  const HEIGHT = TOP + rows2.length * ROW_H + 8;
+  const maxStars = rows2[0].total_stars;
+  const ink = "#1a1a1a", muted = "#6b6b6b", faint = "#9b9b9b";
+  const barPath = (x, y, w, h) => {
+    const r = Math.min(4, w); // rounded data end, square baseline
+    return `M${x} ${y} h${Math.max(0, w - r)} a${r} ${r} 0 0 1 ${r} ${r} v${h - 2 * r} a${r} ${r} 0 0 1 -${r} ${r} h-${Math.max(0, w - r)} Z`;
+  };
+  let svgRows = "";
+  rows2.forEach((f, i) => {
+    const y = TOP + i * ROW_H;
+    const cy = y + ROW_H / 2;
+    const type = firmTypeByName.get(f.firm_name) ?? "hedge_fund";
+    const color = TYPE_COLOR[type] ?? "#6b7280";
+    const w = Math.max(2, Math.round((f.total_stars / maxStars) * BAR_W));
+    const top = f.top_repos[0];
+    svgRows += `<g class="oss-row" data-i="${i}" tabindex="0" role="button" aria-label="${esc(f.firm_name)}: ${f.total_stars.toLocaleString()} GitHub stars">
+<rect class="oss-bg" x="0" y="${y}" width="${WIDTH}" height="${ROW_H}" fill="transparent"/>
+<text x="22" y="${cy}" font-size="11.5" fill="${faint}" text-anchor="end" dominant-baseline="central" font-variant-numeric="tabular-nums">${i + 1}</text>
+<circle cx="34" cy="${cy}" r="4" fill="${color}"/>
+<text x="${LEFT_NAME}" y="${cy}" font-size="13" font-weight="600" fill="${ink}" text-anchor="end" dominant-baseline="central">${esc(f.firm_name)}</text>
+<text x="${COL_REPOS}" y="${cy}" font-size="12" fill="${muted}" text-anchor="end" dominant-baseline="central" font-variant-numeric="tabular-nums">${f.public_repos}</text>
+<text x="${COL_ACT}" y="${cy}" font-size="12" fill="${muted}" text-anchor="end" dominant-baseline="central" font-variant-numeric="tabular-nums">${f.active_repos_90d}</text>
+<path class="oss-bar" d="${barPath(BAR_X, cy - BAR_H / 2, w, BAR_H)}" fill="${color}" fill-opacity="0.92"/>
+<text x="${BAR_X + w + TIP_GAP}" y="${cy}" font-size="12.5" font-weight="600" fill="${ink}" dominant-baseline="central">${fmtStars(f.total_stars)}</text>
+<text x="${REPO_X}" y="${cy}" font-size="12" fill="${muted}" dominant-baseline="central">${top ? `${esc(top.name)} ${fmtStars(top.stars)}★` : ""}</text>
+</g>`;
+  });
+  const header = `<text x="${COL_REPOS}" y="18" font-size="11" fill="${muted}" text-anchor="end">repos</text>
+<text x="${COL_ACT}" y="18" font-size="11" fill="${muted}" text-anchor="end">90d</text>
+<text x="${BAR_X}" y="18" font-size="11" fill="${muted}">GitHub stars</text>
+<text x="${REPO_X}" y="18" font-size="11" fill="${muted}">top repo</text>`;
+  const chartSvg = `<svg viewBox="0 0 ${WIDTH} ${HEIGHT}" width="${WIDTH}" height="${HEIGHT}" font-family="Inter,system-ui,sans-serif" role="img" aria-label="Quant firms ranked by GitHub stars">${header}${svgRows}</svg>`;
+
+  const typesInChart = [...new Set(rows2.map((f) => firmTypeByName.get(f.firm_name) ?? "hedge_fund"))];
+  const legend = `<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:${muted};margin:0 0 10px">${typesInChart
+    .map((t) => `<span style="display:inline-flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:${TYPE_COLOR[t] ?? "#6b7280"};display:inline-block"></span>${esc(FIRM_TYPE_LABEL[t] ?? t)}</span>`)
+    .join("")}</div>`;
+  const chartData = rows2.map((f) => ({
+    name: f.firm_name,
+    org: f.org,
+    url: f.org_url,
+    stars: f.total_stars,
+    repos: f.public_repos,
+    active: f.active_repos_90d,
+    langs: f.top_languages.slice(0, 3).map((l) => l.lang),
+    top: f.top_repos.slice(0, 3).map((r) => ({ name: r.name, stars: r.stars, lang: r.language, desc: (r.description ?? "").slice(0, 110) })),
+  }));
+  const chartBlock = `${legend}
+<div class="oss-bleed"><div style="overflow-x:auto"><div style="min-width:${WIDTH}px;position:relative" id="oss-chart">${chartSvg}</div></div></div>
+<div style="font-size:11.5px;color:${muted};display:flex;justify-content:flex-end;gap:8px;margin:6px 0 0"><span style="color:${ink};font-weight:600">kadoa.com/quant</span><span>·</span><span>github.com/kadoa-org/quant-job-market</span></div>
+<p class="dk-hint" style="margin-top:14px">Hover a row for each firm's top repositories; click to open the org on GitHub. Bars are linear — the gap between Jane Street and everyone else is the story.</p>
+<script type="application/json" id="oss-data">${JSON.stringify(chartData).replace(/</g, "\\u003c")}</script>
+<script src="${PREFIX}/oss-chart.js" defer></script>`;
+
   write(
     "/open-source",
     page({
@@ -728,7 +792,9 @@ if (github.firms.length) {
       ),
       h1: "Quant Firms on GitHub: Open Source Leaderboard",
       intro: `<strong>${active.length}</strong> of the ${firms.size} firms we track publish public code — <strong>${totalRepos.toLocaleString()} repositories</strong> holding <strong>${fmtStars(totalStars)} stars</strong>, from Jane Street's OCaml ecosystem to XTX's exchange-scale infra. Ranked below by total stars; each firm links to its live job openings. Notably absent: Citadel Securities, Millennium, Renaissance, and most multi-strats publish nothing public at all.`,
-      bodyHtml: `${kitTable(
+      bodyHtml: `${chartBlock}
+<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:28px 0 10px">Full leaderboard</h2>
+${kitTable(
         `<th class="dk-num">#</th><th>Firm</th><th>GitHub org</th><th class="dk-num">Repos</th><th class="dk-num">Stars</th><th class="dk-num">Active (90d)</th><th>Top repo</th>`,
         leaderRows,
       )}
@@ -738,7 +804,87 @@ ${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no pu
 <a class="dk-btn seo-cta" href="${PREFIX}/hiring">See which of these firms are hiring →</a>`,
     }),
   );
-  console.log(`open-source page: ${active.length} firms`);
+  // Hover/tooltip layer as a same-origin file (dataset CSP blocks inline JS).
+  // Tooltip DOM is built with textContent only — repo names/descriptions are
+  // untrusted upstream data.
+  fs.writeFileSync(
+    path.join(DIST, "oss-chart.js"),
+    `(function () {
+  var host = document.getElementById("oss-chart");
+  var dataEl = document.getElementById("oss-data");
+  if (!host || !dataEl) return;
+  var data = JSON.parse(dataEl.textContent);
+  var tip = document.createElement("div");
+  tip.style.cssText = "position:absolute;pointer-events:none;background:#fff;border:1px solid #d6d6d3;border-radius:6px;box-shadow:0 4px 14px rgba(17,17,17,.12);padding:10px 12px;font:12px/1.45 Inter,system-ui,sans-serif;color:#1a1a1a;max-width:340px;z-index:10;display:none";
+  host.appendChild(tip);
+  function fmt(n) { return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(n); }
+  function fill(d) {
+    tip.textContent = "";
+    var h = document.createElement("div");
+    h.style.cssText = "font-weight:700;margin-bottom:2px";
+    h.textContent = d.name;
+    tip.appendChild(h);
+    var sub = document.createElement("div");
+    sub.style.cssText = "color:#6b6b6b;margin-bottom:6px";
+    sub.textContent = fmt(d.stars) + " stars \u00b7 " + d.repos + " repos \u00b7 " + d.active + " active 90d" + (d.langs.length ? " \u00b7 " + d.langs.join(", ") : "");
+    tip.appendChild(sub);
+    d.top.forEach(function (r) {
+      var row = document.createElement("div");
+      row.style.cssText = "display:flex;gap:6px;align-items:baseline;margin-top:3px";
+      var name = document.createElement("span");
+      name.style.cssText = "font-weight:600";
+      name.textContent = r.name;
+      var meta = document.createElement("span");
+      meta.style.cssText = "color:#6b6b6b;white-space:nowrap";
+      meta.textContent = fmt(r.stars) + "\u2605" + (r.lang ? " \u00b7 " + r.lang : "");
+      row.appendChild(name);
+      row.appendChild(meta);
+      tip.appendChild(row);
+      if (r.desc) {
+        var desc = document.createElement("div");
+        desc.style.cssText = "color:#9b9b9b;font-size:11.5px";
+        desc.textContent = r.desc;
+        tip.appendChild(desc);
+      }
+    });
+    var cta = document.createElement("div");
+    cta.style.cssText = "margin-top:6px;color:#1d70b8";
+    cta.textContent = "Open github.com/" + d.org + " \u2192";
+    tip.appendChild(cta);
+  }
+  function show(row, evt) {
+    var d = data[Number(row.getAttribute("data-i"))];
+    if (!d) return;
+    fill(d);
+    tip.style.display = "block";
+    var rect = host.getBoundingClientRect();
+    var x = (evt ? evt.clientX - rect.left : 340) + 14;
+    var y = (evt ? evt.clientY - rect.top : 0) + 14;
+    if (x + 360 > rect.width) x = Math.max(0, x - 380);
+    tip.style.left = x + "px";
+    tip.style.top = y + "px";
+  }
+  function hide() { tip.style.display = "none"; }
+  host.querySelectorAll(".oss-row").forEach(function (row) {
+    var bar = row.querySelector(".oss-bar");
+    var bg = row.querySelector(".oss-bg");
+    row.style.cursor = "pointer";
+    row.addEventListener("pointermove", function (e) { show(row, e); if (bar) bar.setAttribute("fill-opacity", "1"); if (bg) bg.setAttribute("fill", "#f4f4f2"); });
+    row.addEventListener("pointerleave", function () { hide(); if (bar) bar.setAttribute("fill-opacity", "0.92"); if (bg) bg.setAttribute("fill", "transparent"); });
+    row.addEventListener("focus", function () { show(row, null); });
+    row.addEventListener("blur", hide);
+    row.addEventListener("click", function () {
+      var d = data[Number(row.getAttribute("data-i"))];
+      if (d) window.open(d.url, "_blank", "noopener");
+    });
+    row.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); row.dispatchEvent(new Event("click")); }
+    });
+  });
+})();
+`,
+  );
+  console.log(`open-source page: ${active.length} firms + chart`);
 }
 
 // ── internal links (so the new pages aren't orphaned) ────────────────────────
