@@ -752,14 +752,14 @@ if (github.firms.length) {
     "/open-source",
     page({
       pathname: "/open-source",
-      title: `Quant Firms on GitHub (${monthYear}): Open Source Leaderboard | Quant Job Market`,
+      title: `Quant Firms on GitHub: Open Source Leaderboard | Quant Job Market`,
       description: `Which quant firms actually open-source? ${active.length} hedge funds, prop shops, and market makers ranked by GitHub footprint: ${totalRepos.toLocaleString()} public repos, ${fmtStars(totalStars)} stars. Updated daily.`,
       jsonLd: datasetLd(
         "Quant firms on GitHub: open-source footprint",
         `GitHub org stats for ${active.length} quant firms.`,
         `${BASE}/open-source`,
       ),
-      h1: "Quant Open Source Leaderboard",
+      h1: "Open Source Leaderboard",
       intro: `Top quant firms with public GitHub orgs, ranked by total stars and activity across repositories.`,
       bodyHtml: `${kitTable(
         `<th class="dk-num">#</th><th>Firm</th><th>GitHub stars</th><th class="dk-num">Repos</th><th class="dk-num">Active (1y)</th><th>Top repo</th>`,
