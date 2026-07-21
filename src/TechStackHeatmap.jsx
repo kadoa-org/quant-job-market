@@ -123,15 +123,9 @@ function buildSvg(jobs) {
   const totalJobs = jobs.length;
   const numFirms = firms.length;
 
-  const typeRank = (t) => {
-    const i = FIRM_TYPE_ORDER.indexOf(t);
-    return i === -1 ? 99 : i;
-  };
-  const ordered = [...firms].sort((a, b) => {
-    const tr = typeRank(a.type) - typeRank(b.type);
-    if (tr !== 0) return tr;
-    return b.total - a.total;
-  });
+  // Plain by-volume ordering; the firm-type classification was noisy and
+  // sometimes wrong, so it no longer drives grouping or color.
+  const ordered = [...firms].sort((a, b) => b.total - a.total);
 
   // Cell colour = absolute count, sqrt-scaled across the whole matrix.
   let globalMax = 0;
@@ -178,8 +172,7 @@ function buildSvg(jobs) {
   const rows = ordered
     .map((f, i) => {
       const y = yByIndex[i];
-      const dotColor = FIRM_TYPE_COLOR[f.type] || "#9ca3af";
-      const dot = `<circle cx="${left + 6}" cy="${y + rowH / 2}" r="3.5" fill="${dotColor}"/>`;
+      const dot = "";
       const firmName = `<text x="${nColX - 8}" y="${y + rowH / 2 + 4}" text-anchor="end" font-size="12" fill="#1a1a1a" font-weight="500">${escapeText(shortenFirm(f.firm))}</text>`;
       const nText = `<text x="${nColX + nW - 4}" y="${y + rowH / 2 + 4}" text-anchor="end" font-size="11" fill="#6b6b6b" font-weight="500" font-variant-numeric="tabular-nums">${f.total}</text>`;
       const cells = TECHS.map((l, j) => {
@@ -230,14 +223,6 @@ export default function TechStackHeatmap({ jobs }) {
         <p className="text-[13.5px] text-[#6b6b6b] leading-snug max-w-[1100px] mb-3">
           Heatmap of {totalJobs.toLocaleString()} open postings across {numFirms} buy-side quant firms (≥{MIN_JOBS} listings). Each cell counts that firm's open postings that explicitly mention the tech. Darker = more.
         </p>
-        <div className="flex gap-4 text-[12px] text-[#6b6b6b] mb-4">
-          {FIRM_TYPE_ORDER.map((t) => (
-            <span key={t} className="inline-flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full inline-block" style={{ background: FIRM_TYPE_COLOR[t] }} />
-              {FIRM_TYPE_LABEL[t]}
-            </span>
-          ))}
-        </div>
         <div className="overflow-x-auto -mx-6 sm:mx-0">
           <div
             className="px-6 sm:px-0 min-w-[1300px]"

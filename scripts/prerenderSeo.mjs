@@ -721,8 +721,9 @@ if (github.firms.length) {
   // relieved by tip labels on every bar + the table below). Inline JS is
   // blocked by the dataset CSP, so hover/tooltip logic ships as a same-origin
   // file and row data rides an inert application/json block.
-  const TYPE_COLOR = { hedge_fund: "#8b5cf6", proprietary: "#f97316", market_maker: "#06b6d4", asset_manager: "#10b981", bank: "#3b82f6" };
-  const firmTypeByName = new Map([...firms.values()].map((f) => [f.name, f.type]));
+  // Single series (stars), single hue — the kit accent. Firm-type coloring
+  // was removed: the classification is noisy and identity isn't the job here.
+  const BAR_COLOR = "#1d70b8";
   const rows2 = active; // stars desc already
   const ROW_H = 34, TOP = 34, LEFT_NAME = 208, COL_REPOS = 252, COL_ACT = 300, BAR_X = 322, BAR_W = 540, BAR_H = 18, TIP_GAP = 8, REPO_X = 962, WIDTH = 1240;
   const HEIGHT = TOP + rows2.length * ROW_H + 8;
@@ -736,18 +737,15 @@ if (github.firms.length) {
   rows2.forEach((f, i) => {
     const y = TOP + i * ROW_H;
     const cy = y + ROW_H / 2;
-    const type = firmTypeByName.get(f.firm_name) ?? "hedge_fund";
-    const color = TYPE_COLOR[type] ?? "#6b7280";
     const w = Math.max(2, Math.round((f.total_stars / maxStars) * BAR_W));
     const top = f.top_repos[0];
     svgRows += `<g class="oss-row" data-i="${i}" tabindex="0" role="button" aria-label="${esc(f.firm_name)}: ${f.total_stars.toLocaleString()} GitHub stars">
 <rect class="oss-bg" x="0" y="${y}" width="${WIDTH}" height="${ROW_H}" fill="transparent"/>
 <text x="22" y="${cy}" font-size="11.5" fill="${faint}" text-anchor="end" dominant-baseline="central" font-variant-numeric="tabular-nums">${i + 1}</text>
-<circle cx="34" cy="${cy}" r="4" fill="${color}"/>
 <text x="${LEFT_NAME}" y="${cy}" font-size="13" font-weight="600" fill="${ink}" text-anchor="end" dominant-baseline="central">${esc(f.firm_name)}</text>
 <text x="${COL_REPOS}" y="${cy}" font-size="12" fill="${muted}" text-anchor="end" dominant-baseline="central" font-variant-numeric="tabular-nums">${f.public_repos}</text>
 <text x="${COL_ACT}" y="${cy}" font-size="12" fill="${muted}" text-anchor="end" dominant-baseline="central" font-variant-numeric="tabular-nums">${f.active_repos_90d}</text>
-<path class="oss-bar" d="${barPath(BAR_X, cy - BAR_H / 2, w, BAR_H)}" fill="${color}" fill-opacity="0.92"/>
+<path class="oss-bar" d="${barPath(BAR_X, cy - BAR_H / 2, w, BAR_H)}" fill="${BAR_COLOR}" fill-opacity="0.92"/>
 <text x="${BAR_X + w + TIP_GAP}" y="${cy}" font-size="12.5" font-weight="600" fill="${ink}" dominant-baseline="central">${fmtStars(f.total_stars)}</text>
 <text x="${REPO_X}" y="${cy}" font-size="12" fill="${muted}" dominant-baseline="central">${top ? `${esc(top.name)} ${fmtStars(top.stars)}★` : ""}</text>
 </g>`;
@@ -758,10 +756,7 @@ if (github.firms.length) {
 <text x="${REPO_X}" y="18" font-size="11" fill="${muted}">top repo</text>`;
   const chartSvg = `<svg viewBox="0 0 ${WIDTH} ${HEIGHT}" width="${WIDTH}" height="${HEIGHT}" font-family="Inter,system-ui,sans-serif" role="img" aria-label="Quant firms ranked by GitHub stars">${header}${svgRows}</svg>`;
 
-  const typesInChart = [...new Set(rows2.map((f) => firmTypeByName.get(f.firm_name) ?? "hedge_fund"))];
-  const legend = `<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:${muted};margin:0 0 10px">${typesInChart
-    .map((t) => `<span style="display:inline-flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:${TYPE_COLOR[t] ?? "#6b7280"};display:inline-block"></span>${esc(FIRM_TYPE_LABEL[t] ?? t)}</span>`)
-    .join("")}</div>`;
+  const legend = ""; // single series — the heading names it, no legend box
   const chartData = rows2.map((f) => ({
     name: f.firm_name,
     org: f.org,
