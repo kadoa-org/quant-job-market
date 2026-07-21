@@ -22,3 +22,8 @@
     padding-right: 20px;
   }
 }
+
+/* The Insights dropdown is absolutely positioned inside the nav list; the
+   kit's overflow-x:auto (for many-tab mobile scroll) would clip it. With
+   three top-level items the list never overflows, so visible is safe. */
+.dk-nav .dk-nav-list { overflow: visible; }

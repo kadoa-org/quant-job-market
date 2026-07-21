@@ -81,6 +81,96 @@ function syncUrl(view, filters, selectedFirm, search) {
   window.history.replaceState(null, "", url);
 }
 
+// Top nav: Firms | Jobs | Insights ▾. The secondary analytics views (dashboard,
+// tech stack, locations, open source) collapse under one Insights menu — they
+// are interesting, not primary. Reuses the kit's dk-nav look; the dropdown is
+// local to this app.
+function InsightsNav({ view, setView, onFirms }) {
+  const [open, setOpen] = useState(false);
+  const ref = React.useRef(null);
+  const insightsActive = ["dashboard", "techstack", "locations"].includes(view);
+
+  useEffect(() => {
+    const close = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("pointerdown", close);
+    return () => document.removeEventListener("pointerdown", close);
+  }, []);
+
+  const go = (k) => {
+    setView(k);
+    setOpen(false);
+    if (k === "firms") onFirms();
+  };
+  const tab = (k, label) => (
+    <a
+      href={`#${k}`}
+      aria-current={view === k ? "true" : undefined}
+      onClick={(e) => {
+        if (e.metaKey || e.ctrlKey) return;
+        e.preventDefault();
+        go(k);
+      }}
+    >
+      {label}
+    </a>
+  );
+  const item = (k, label) => (
+    <a
+      href={`#${k}`}
+      className="px-4 py-2 text-[14px] text-[#1a1a1a] hover:bg-[#f3f2f1] no-underline"
+      style={{ display: "block", fontWeight: view === k ? 600 : 400 }}
+      onClick={(e) => {
+        if (e.metaKey || e.ctrlKey) return;
+        e.preventDefault();
+        go(k);
+      }}
+    >
+      {label}
+    </a>
+  );
+
+  return (
+    <nav className="dk-nav" aria-label="Primary">
+      <div className="dk-container">
+        <ul className="dk-nav-list">
+          <li>{tab("firms", "Firms")}</li>
+          <li>{tab("table", "Jobs")}</li>
+          <li className="relative" ref={ref}>
+            <a
+              href="#insights"
+              aria-current={insightsActive ? "true" : undefined}
+              aria-expanded={open}
+              aria-haspopup="true"
+              onClick={(e) => {
+                e.preventDefault();
+                setOpen((v) => !v);
+              }}
+            >
+              Insights <span aria-hidden="true" style={{ fontSize: 10, verticalAlign: 1 }}>▾</span>
+            </a>
+            {open && (
+              <div className="absolute left-0 top-full z-[1100] mt-px min-w-[180px] bg-white border border-[#b1b4b6] shadow-[0_4px_14px_rgba(17,17,17,0.12)]">
+                {item("dashboard", "Hiring insights")}
+                {item("techstack", "Tech stack")}
+                {item("locations", "Locations")}
+                <a
+                  href={`${import.meta.env.BASE_URL}open-source`}
+                  className="px-4 py-2 text-[14px] text-[#1a1a1a] hover:bg-[#f3f2f1] no-underline border-t border-[#eeedec]"
+                  style={{ display: "block" }}
+                >
+                  Open source
+                </a>
+              </div>
+            )}
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
+}
+
 export default function App() {
   const { db, loading: dbLoading } = useDatabase();
   const [jobs, setJobs] = useState([]);
@@ -204,30 +294,7 @@ export default function App() {
             </span>
           }
         />
-        <NavBar
-          LinkComponent={({ href, children, ...rest }) => (
-            <a
-              href={href}
-              {...rest}
-              onClick={(e) => {
-                if (e.metaKey || e.ctrlKey) return;
-                e.preventDefault();
-                const k = href.replace("#", "");
-                setView(k);
-                if (k === "firms") setSelectedFirm(null);
-              }}
-            >
-              {children}
-            </a>
-          )}
-          items={[
-            { key: "firms", label: "Firms" },
-            { key: "table", label: "Jobs" },
-            { key: "dashboard", label: "Insights" },
-            { key: "techstack", label: "Tech stack" },
-            { key: "locations", label: "Locations" },
-          ].map((t) => ({ href: `#${t.key}`, label: t.label, active: view === t.key }))}
-        />
+        <InsightsNav view={view} setView={setView} onFirms={() => setSelectedFirm(null)} />
 
         {view !== "techstack" && view !== "locations" && (
           <FilterBar

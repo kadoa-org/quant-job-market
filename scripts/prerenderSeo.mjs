@@ -206,7 +206,7 @@ ${siteHeader}
 <main class="dk-container seo-main">
 <nav class="seo-crumbs"><a href="${PREFIX}">Quant Job Market</a> › ${esc(h1)}</nav>
 <h1>${esc(h1)}</h1>
-<p class="seo-lede">${intro}</p>
+${intro ? `<p class="seo-lede">${intro}</p>` : ""}
 ${bodyHtml}
 ${showMeta ? `<p class="dk-hint seo-meta">Aggregated from ${jobs.length.toLocaleString()} live job postings across ${firms.size} quant firms. Updated daily. <a href="${PREFIX}/data/jobs.json">Open dataset (JSON)</a>.</p>` : ""}
 </main>
@@ -767,8 +767,71 @@ if (github.firms.length) {
     langs: f.top_languages.slice(0, 3).map((l) => l.lang),
     top: f.top_repos.slice(0, 3).map((r) => ({ name: r.name, stars: r.stars, lang: r.language, desc: (r.description ?? "").slice(0, 110) })),
   }));
-  const chartBlock = `${legend}
-<div class="oss-bleed"><div style="overflow-x:auto"><div style="min-width:${WIDTH}px;position:relative" id="oss-chart">${chartSvg}</div></div></div>
+  // Share-of-all-stars treemap: part-to-whole is the one job a treemap does
+  // well, and it is the site's signature visual. Sequential blue (darker =
+  // larger share) — area already encodes magnitude, color reinforces it.
+  const othersStars = active.slice(10).reduce((s2, f) => s2 + f.total_stars, 0);
+  const tiles = [
+    ...active.slice(0, 10).map((f) => ({ name: f.firm_name, v: f.total_stars })),
+    ...(othersStars > 0 ? [{ name: "All others", v: othersStars }] : []),
+  ];
+  const TM_W = 1240, TM_H = 380;
+  function squarify(items, x, y, w, h, out) {
+    if (!items.length) return out;
+    if (items.length === 1) { out.push({ ...items[0], x, y, w, h }); return out; }
+    const total = items.reduce((s2, t) => s2 + t.v, 0);
+    let row = [], rest = [...items], best = Infinity;
+    while (rest.length) {
+      const cand = [...row, rest[0]];
+      const side = Math.min(w, h);
+      const rowSum = cand.reduce((s2, t) => s2 + t.v, 0);
+      const rowArea = (rowSum / total) * w * h;
+      const thick = rowArea / side;
+      const worst = Math.max(...cand.map((t) => {
+        const len = ((t.v / rowSum) * rowArea) / thick;
+        return Math.max(thick / len, len / thick);
+      }));
+      if (worst > best && row.length) break;
+      best = worst; row = cand; rest.shift();
+    }
+    const rowSum = row.reduce((s2, t) => s2 + t.v, 0);
+    const frac = rowSum / total;
+    let cx = x, cy = y;
+    if (w >= h) {
+      const rw = w * frac;
+      for (const t of row) { const th = h * (t.v / rowSum); out.push({ ...t, x: cx, y: cy, w: rw, h: th }); cy += th; }
+      return squarify(rest, x + rw, y, w - rw, h, out);
+    }
+    const rh = h * frac;
+    for (const t of row) { const tw = w * (t.v / rowSum); out.push({ ...t, x: cx, y: cy, w: tw, h: rh }); cx += tw; }
+    return squarify(rest, x, y + rh, w, h - rh, out);
+  }
+  const placed = squarify(tiles, 0, 0, TM_W, TM_H, []);
+  const totAll = tiles.reduce((s2, t) => s2 + t.v, 0);
+  const mix = (a, b, t) => Math.round(a + (b - a) * t);
+  const shade = (t) => `rgb(${mix(213, 16, t)},${mix(227, 74, t)},${mix(240, 122, t)})`; // #d5e3f0 -> #104a7a
+  const maxV = tiles[0].v;
+  const tmSvg = `<svg viewBox="0 0 ${TM_W} ${TM_H}" width="${TM_W}" height="${TM_H}" font-family="Inter,system-ui,sans-serif" role="img" aria-label="Share of all GitHub stars by firm">${placed
+    .map((t) => {
+      const tShade = Math.sqrt(t.v / maxV);
+      const fill = shade(tShade);
+      const txt = tShade > 0.45 ? "#fff" : ink;
+      const sub = tShade > 0.45 ? "rgba(255,255,255,0.75)" : muted;
+      const pct = ((t.v / totAll) * 100).toFixed(t.v / totAll >= 0.1 ? 0 : 1);
+      const showBig = t.w > 130 && t.h > 56;
+      const showName = t.w > 78 && t.h > 30;
+      const label = showBig
+        ? `<text x="${t.x + 10}" y="${t.y + 24}" font-size="14" font-weight="700" fill="${txt}">${esc(t.name)}</text><text x="${t.x + 10}" y="${t.y + 42}" font-size="12" fill="${sub}">${pct}% · ${fmtStars(t.v)}★</text>`
+        : showName
+          ? `<text x="${t.x + 7}" y="${t.y + 17}" font-size="10.5" font-weight="600" fill="${txt}">${esc(t.name.length > 14 ? `${t.name.slice(0, 13)}…` : t.name)}</text>`
+          : "";
+      return `<g><rect x="${t.x + 1}" y="${t.y + 1}" width="${Math.max(0, t.w - 2)}" height="${Math.max(0, t.h - 2)}" fill="${fill}" rx="2"><title>${esc(t.name)}: ${t.v.toLocaleString()} stars (${pct}%)</title></rect>${label}</g>`;
+    })
+    .join("")}</svg>`;
+  const treemapBlock = `<p style="font:600 13px/1.4 Inter,system-ui,sans-serif;color:${ink};margin:0 0 8px">Share of all ${fmtStars(totAll)} GitHub stars across quant orgs</p>${tmSvg}<div style="height:26px"></div>`;
+
+  const chartBlock = `${legend}${treemapBlock ? "" : ""}
+<div class="oss-bleed"><div style="overflow-x:auto"><div style="min-width:${WIDTH}px;position:relative" id="oss-chart">${treemapBlock}${chartSvg}</div></div></div>
 <div style="font-size:11.5px;color:${muted};display:flex;justify-content:flex-end;gap:8px;margin:6px 0 0"><span style="color:${ink};font-weight:600">kadoa.com/quant</span><span>·</span><span>github.com/kadoa-org/quant-job-market</span></div>
 <p class="dk-hint" style="margin-top:14px">Hover a row for each firm's top repositories; click to open the org on GitHub. Bars are linear — the gap between Jane Street and everyone else is the story.</p>
 <script type="application/json" id="oss-data">${JSON.stringify(chartData).replace(/</g, "\\u003c")}</script>
@@ -785,8 +848,7 @@ if (github.firms.length) {
         `GitHub org stats for ${active.length} quant firms.`,
         `${BASE}/open-source`,
       ),
-      h1: "Quant Firms on GitHub: Open Source Leaderboard",
-      intro: `<strong>${active.length}</strong> of the ${firms.size} firms we track publish public code — <strong>${totalRepos.toLocaleString()} repositories</strong> holding <strong>${fmtStars(totalStars)} stars</strong>, from Jane Street's OCaml ecosystem to XTX's exchange-scale infra. Ranked below by total stars; each firm links to its live job openings. Notably absent: Citadel Securities, Millennium, Renaissance, and most multi-strats publish nothing public at all.`,
+      h1: "Quant Open Source Leaderboard",
       bodyHtml: `${chartBlock}
 <h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:28px 0 10px">Full leaderboard</h2>
 ${kitTable(
@@ -795,8 +857,8 @@ ${kitTable(
       )}
 <h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:28px 0 10px">Top quant open-source projects</h2>
 ${kitTable(`<th class="dk-num">#</th><th>Repository</th><th>Firm</th><th>Language</th><th class="dk-num">Stars</th><th>About</th>`, repoRows)}
-${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no public repos yet: ${emptyOrgs.map((f) => `<a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer">${esc(f.firm_name)}</a>`).join(", ")}.</p>` : ""}
-<a class="dk-btn seo-cta" href="${PREFIX}/hiring">See which of these firms are hiring →</a>`,
+${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no public repos yet: ${emptyOrgs.map((f) => `<a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer">${esc(f.firm_name)}</a>`).join(", ")}.</p>` : ""}`,
+      showMeta: false,
     }),
   );
   // Hover/tooltip layer as a same-origin file (dataset CSP blocks inline JS).
