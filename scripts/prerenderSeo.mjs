@@ -137,7 +137,10 @@ const siteHeader = `<header class="dk-header">
       <a href="${PREFIX}" class="dk-header-brand">📊 Quant Job Market</a>
       <a href="https://www.kadoa.com" target="_blank" rel="noreferrer" class="dk-header-link">by Kadoa</a>
     </span>
-    <a class="dk-btn dk-btn--inverse" href="https://github.com/kadoa-org/quant-job-market" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub" style="text-decoration:none">${GH_ICON}<span class="dk-btn-label">Star on GitHub</span></a>
+    <span style="display:flex;align-items:center;gap:14px">
+      <span class="dk-live"><span class="dk-live-dot" aria-hidden="true"></span>Updated daily</span>
+      <a class="dk-btn dk-btn--inverse" href="https://github.com/kadoa-org/quant-job-market" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub" style="text-decoration:none">${GH_ICON}<span class="dk-btn-label">Star on GitHub</span></a>
+    </span>
   </div>
 </header>`;
 
@@ -153,7 +156,18 @@ const siteFooter = `<footer class="dk-footer">
   </div>
 </footer>`;
 
-function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml, showMeta = true, navHtml = "", showCrumbs = true }) {
+function page({
+  pathname,
+  title,
+  description,
+  jsonLd,
+  h1,
+  intro,
+  bodyHtml,
+  showMeta = true,
+  navHtml = "",
+  showCrumbs = true,
+}) {
   const url = `${BASE}${pathname}`;
   return `<!doctype html>
 <html lang="en">
@@ -200,6 +214,17 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
   .seo-jd ul,.seo-jd ol{padding-left:22px}
   .seo-back{margin-top:28px;font-size:var(--dk-fs-s)}
   .seo-back a{color:var(--dk-link)}
+  .oss-about{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--dk-muted);font-size:var(--dk-fs-s);line-height:1.4}
+  /* Uniform row height: every cell reserves the same box and centres its
+     content, so 1-line and 2-line descriptions don't make rows jump. */
+  .oss-projects tbody td{height:52px;vertical-align:middle}
+  .oss-projects tbody td:nth-child(2) a{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  /* Mobile: the fixed stars-bar column width would force horizontal scroll;
+     let it shrink to fit once the secondary columns (dk-hide-sm) are gone. */
+  @media (max-width:640px){.oss-stars-col{width:auto !important;min-width:0 !important}}
+  .dk-sort-ind{color:var(--dk-muted);font-size:10px;font-variant-numeric:normal}
+  .dk-th-btn:hover .dk-sort-ind{color:var(--dk-ink)}
+  .dk-table th[aria-sort="ascending"] .dk-sort-ind,.dk-table th[aria-sort="descending"] .dk-sort-ind{color:var(--dk-ink)}
 </style>
 </head>
 <body>
@@ -703,10 +728,26 @@ if (github.firms.length) {
     const w = Math.max(2, Math.round((stars / maxStars) * 170));
     return `<div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:${w}px;height:10px;background:#1d70b8;border-radius:0 2px 2px 0;flex:none"></span><span style="font-weight:600;font-variant-numeric:tabular-nums">${fmtStars(stars)}</span></div>`;
   };
+  // Sortable-header helpers for the static tables. Click-to-sort is wired in
+  // oss-chart.js (dataset CSP blocks inline JS); sortable cells carry a
+  // data-sort attribute so the JS sorts on raw values, not formatted text.
+  const thCls = (o) => [o.num ? "dk-num" : "", o.cls || ""].filter(Boolean).join(" ");
+  const sortTh = (label, col, type, o = {}) => {
+    const c = thCls(o);
+    return `<th${c ? ` class="${c}"` : ""}${o.width ? ` style="width:${o.width}"` : ""} aria-sort="${o.active ? (o.dir === "asc" ? "ascending" : "descending") : "none"}"><button type="button" class="dk-th-btn" data-col="${col}" data-type="${type}">${label} <span class="dk-sort-ind" aria-hidden="true">${o.active ? (o.dir === "asc" ? "▲" : "▼") : "↕"}</span></button></th>`;
+  };
+  const plainTh = (label, o = {}) => {
+    const c = thCls(o);
+    return `<th${c ? ` class="${c}"` : ""}${o.width ? ` style="width:${o.width}"` : ""}>${label}</th>`;
+  };
+  const sortableTable = (head, rows, cls = "") =>
+    `<div class="dk-table-wrap"><table class="dk-table dk-sortable${cls ? ` ${cls}` : ""}" data-rank-col="0"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
+
+  const leaderHead = `${plainTh("#", { num: true, width: "44px" })}${sortTh("Firm", 1, "text")}${sortTh("GitHub stars", 2, "num", { active: true, dir: "desc", width: "260px", cls: "oss-stars-col" })}${sortTh("Repos", 3, "num", { num: true, cls: "dk-hide-sm" })}${sortTh("Active (1y)", 4, "num", { num: true, cls: "dk-hide-sm" })}${plainTh("Top repo", { cls: "dk-hide-md" })}`;
   const leaderRows = active
     .map(
       (f, i) =>
-        `<tr><td class="dk-num" style="color:var(--dk-muted)">${i + 1}</td><td><strong>${firmLink(f.firm_name)}</strong><br /><a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer" style="font-size:var(--dk-fs-s);color:var(--dk-muted)">@${esc(f.org)}</a></td><td style="min-width:230px">${starBar(f.total_stars)}</td><td class="dk-num">${f.public_repos}</td><td class="dk-num">${f.active_repos_1y ?? f.active_repos_90d}</td><td>${f.top_repos[0] ? `<a href="${esc(f.top_repos[0].url)}" target="_blank" rel="noopener noreferrer">${esc(f.top_repos[0].name)}</a> <span style="color:var(--dk-muted);white-space:nowrap">${fmtStars(f.top_repos[0].stars)}★</span>` : "—"}</td></tr>`,
+        `<tr><td class="dk-num" style="color:var(--dk-muted)">${i + 1}</td><td data-sort="${esc(f.firm_name)}"><strong>${firmLink(f.firm_name)}</strong><br /><a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer" style="font-size:var(--dk-fs-s);color:var(--dk-muted)">@${esc(f.org)}</a></td><td class="oss-stars-col" data-sort="${f.total_stars}" style="min-width:230px">${starBar(f.total_stars)}</td><td class="dk-num dk-hide-sm" data-sort="${f.public_repos}">${f.public_repos}</td><td class="dk-num dk-hide-sm" data-sort="${f.active_repos_1y ?? f.active_repos_90d}">${f.active_repos_1y ?? f.active_repos_90d}</td><td class="dk-hide-md">${f.top_repos[0] ? `<a href="${esc(f.top_repos[0].url)}" target="_blank" rel="noopener noreferrer">${esc(f.top_repos[0].name)}</a> <span style="color:var(--dk-muted);white-space:nowrap">${fmtStars(f.top_repos[0].stars)}★</span>` : "—"}</td></tr>`,
     )
     .join("\n");
 
@@ -714,10 +755,11 @@ if (github.firms.length) {
     .flatMap((f) => f.top_repos.map((r) => ({ ...r, firm: f.firm_name })))
     .sort((a, b) => b.stars - a.stars)
     .slice(0, 25);
+  const repoHead = `${plainTh("#", { num: true, width: "44px" })}${sortTh("Repository", 1, "text", { width: "22%" })}${sortTh("Firm", 2, "text", { width: "16%" })}${sortTh("Language", 3, "text", { width: "13%", cls: "dk-hide-sm" })}${sortTh("Stars", 4, "num", { num: true, active: true, dir: "desc", width: "84px" })}${plainTh("About", { cls: "dk-hide-md" })}`;
   const repoRows = allRepos
     .map(
       (r, i) =>
-        `<tr><td class="dk-num">${i + 1}</td><td><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.name)}</a></td><td>${firmLink(r.firm)}</td><td>${esc(r.language ?? "")}</td><td class="dk-num">${fmtStars(r.stars)}</td><td>${esc((r.description ?? "").slice(0, 90))}</td></tr>`,
+        `<tr><td class="dk-num" style="color:var(--dk-muted)">${i + 1}</td><td data-sort="${esc(r.name)}"><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" style="font-weight:600">${esc(r.name)}</a></td><td data-sort="${esc(r.firm)}">${firmLink(r.firm)}</td><td class="dk-hide-sm" data-sort="${esc(r.language ?? "")}">${r.language ? `<span class="dk-tag dk-tag--grey">${esc(r.language)}</span>` : ""}</td><td class="dk-num" data-sort="${r.stars}">${fmtStars(r.stars)}</td><td class="dk-hide-md"><span class="oss-about">${esc(r.description ?? "")}</span></td></tr>`,
     )
     .join("\n");
 
@@ -761,13 +803,9 @@ if (github.firms.length) {
       ),
       h1: "Open Source Leaderboard",
       intro: `Top quant firms with public GitHub orgs, ranked by total stars and activity across repositories.`,
-      bodyHtml: `${kitTable(
-        `<th class="dk-num">#</th><th>Firm</th><th>GitHub stars</th><th class="dk-num">Repos</th><th class="dk-num">Active (1y)</th><th>Top repo</th>`,
-        leaderRows,
-      )}
-<div style="font-size:11.5px;color:var(--dk-muted);display:flex;justify-content:flex-end;gap:8px;margin:8px 0 0"><span style="color:var(--dk-ink);font-weight:600">kadoa.com/quant/open-source</span><span>·</span><span>updated daily</span></div>
+      bodyHtml: `${sortableTable(leaderHead, leaderRows)}
 <h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:32px 0 10px">Top Projects</h2>
-${kitTable(`<th class="dk-num">#</th><th>Repository</th><th>Firm</th><th>Language</th><th class="dk-num">Stars</th><th>About</th>`, repoRows)}
+${sortableTable(repoHead, repoRows, "oss-projects")}
 ${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no public repos yet: ${emptyOrgs.map((f) => `<a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer">${esc(f.firm_name)}</a>`).join(", ")}.</p>` : ""}
 <script src="${PREFIX}/oss-chart.js" defer></script>`,
       showMeta: false,
@@ -775,20 +813,68 @@ ${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no pu
       showCrumbs: false,
     }),
   );
-  // Same-origin JS file (dataset CSP blocks inline scripts): Insights toggle.
+  // Same-origin JS file (dataset CSP blocks inline scripts): Insights toggle +
+  // click-to-sort on the leaderboard/projects tables. Rows are sorted on the
+  // raw data-sort value (not the formatted text), and the rank column
+  // (data-rank-col) is renumbered to match the visible order.
   fs.writeFileSync(
     path.join(DIST, "oss-chart.js"),
     `(function () {
   var tgl = document.getElementById("insights-toggle");
   var panel = document.getElementById("insights-panel");
   var chev = document.getElementById("insights-chevron");
-  if (!tgl || !panel) return;
-  tgl.addEventListener("click", function (e) {
-    e.preventDefault();
-    var opening = panel.hidden;
-    panel.hidden = !opening;
-    tgl.setAttribute("aria-expanded", String(opening));
-    if (chev) chev.setAttribute("d", opening ? "M1 6.5 L5.5 2 L10 6.5" : "M1 1.5 L5.5 6 L10 1.5");
+  if (tgl && panel) {
+    tgl.addEventListener("click", function (e) {
+      e.preventDefault();
+      var opening = panel.hidden;
+      panel.hidden = !opening;
+      tgl.setAttribute("aria-expanded", String(opening));
+      if (chev) chev.setAttribute("d", opening ? "M1 6.5 L5.5 2 L10 6.5" : "M1 1.5 L5.5 6 L10 1.5");
+    });
+  }
+
+  function cellVal(row, col, type) {
+    var cell = row.cells[col];
+    if (!cell) return type === "num" ? 0 : "";
+    var raw = cell.getAttribute("data-sort");
+    if (raw == null) raw = cell.textContent;
+    if (type === "num") { var n = parseFloat(raw); return isNaN(n) ? 0 : n; }
+    return String(raw).trim().toLowerCase();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll("table.dk-sortable"), function (table) {
+    var tbody = table.tBodies[0];
+    if (!tbody) return;
+    var rankAttr = table.getAttribute("data-rank-col");
+    var rankCol = rankAttr == null ? -1 : Number(rankAttr);
+    Array.prototype.forEach.call(table.querySelectorAll("thead .dk-th-btn"), function (btn) {
+      btn.addEventListener("click", function () {
+        var col = Number(btn.getAttribute("data-col"));
+        var type = btn.getAttribute("data-type");
+        var th = btn.parentNode;
+        var cur = th.getAttribute("aria-sort");
+        var dir = cur === "ascending" ? "descending" : cur === "descending" ? "ascending" : type === "num" ? "descending" : "ascending";
+        Array.prototype.forEach.call(table.querySelectorAll("thead th"), function (h) {
+          h.setAttribute("aria-sort", "none");
+          var ind = h.querySelector(".dk-sort-ind");
+          if (ind) ind.textContent = "↕";
+        });
+        th.setAttribute("aria-sort", dir);
+        var ind = th.querySelector(".dk-sort-ind");
+        if (ind) ind.textContent = dir === "ascending" ? "▲" : "▼";
+        var rows = Array.prototype.slice.call(tbody.rows);
+        rows.sort(function (a, b) {
+          var av = cellVal(a, col, type), bv = cellVal(b, col, type);
+          if (av < bv) return dir === "ascending" ? -1 : 1;
+          if (av > bv) return dir === "ascending" ? 1 : -1;
+          return 0;
+        });
+        rows.forEach(function (r, i) {
+          tbody.appendChild(r);
+          if (rankCol >= 0 && r.cells[rankCol]) r.cells[rankCol].textContent = String(i + 1);
+        });
+      });
+    });
   });
 })();
 `,
