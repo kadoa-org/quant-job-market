@@ -146,13 +146,17 @@ const siteHeader = `<header class="dk-header">
 
 const siteFooter = `<footer class="dk-footer">
   <div class="dk-container dk-footer-inner">
-    <nav class="dk-footer-nav" aria-label="Kadoa open datasets">
-      <span class="dk-footer-label"><a href="https://www.kadoa.com/datasets">Open data</a> by <a href="https://www.kadoa.com/">Kadoa</a></span>
-      <span class="dk-footer-here" aria-current="page">Quant Jobs</span>
-      <a href="https://www.kadoa.com/layoffs">Layoffs Tracker</a>
-      <a href="https://www.kadoa.com/congress">Congress Trades</a>
-      <a href="https://www.kadoa.com/potus">POTUS Tracker</a>
+    <h2 class="dk-footer-heading">Kadoa open datasets</h2>
+    <nav aria-label="Kadoa open datasets">
+      <ul class="dk-footer-links">
+        <li><span class="dk-footer-here" aria-current="page">Quant Jobs</span></li>
+        <li><a href="https://www.kadoa.com/layoffs">Layoffs Tracker</a></li>
+        <li><a href="https://www.kadoa.com/congress">Congress Trades</a></li>
+        <li><a href="https://www.kadoa.com/potus">POTUS Tracker</a></li>
+        <li><a href="https://www.kadoa.com/mining">Mining Monitor</a></li>
+      </ul>
     </nav>
+    <p class="dk-footer-meta">Free and open, refreshed daily&nbsp;· <a href="https://www.kadoa.com/datasets">All datasets</a>&nbsp;· built by <a href="https://www.kadoa.com/">Kadoa</a></p>
   </div>
 </footer>`;
 
@@ -215,6 +219,9 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
   .seo-back{margin-top:28px;font-size:var(--dk-fs-s)}
   .seo-back a{color:var(--dk-link)}
   .oss-about{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--dk-muted);font-size:var(--dk-fs-s);line-height:1.4}
+  /* Subtle source line under each table — carries attribution into shared screenshots. */
+  .oss-attr{margin:10px 0 0;font-size:12px;color:var(--dk-muted)}
+  .oss-attr strong{color:var(--dk-ink);font-weight:600}
   /* Uniform row height: every cell reserves the same box and centres its
      content, so 1-line and 2-line descriptions don't make rows jump. */
   .oss-projects tbody td{height:52px;vertical-align:middle}
@@ -811,8 +818,10 @@ if (github.firms.length) {
       h1: "Open Source Leaderboard",
       intro: `Top quant firms with public GitHub orgs, ranked by total stars and activity across repositories.`,
       bodyHtml: `${sortableTable(leaderHead, leaderRows)}
+<p class="oss-attr">Source: <strong>kadoa.com/quant/open-source</strong> · live GitHub data, updated daily</p>
 <h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:32px 0 10px">Top Projects</h2>
 ${sortableTable(repoHead, repoRows, "oss-projects")}
+<p class="oss-attr">Source: <strong>kadoa.com/quant/open-source</strong> · live GitHub data, updated daily</p>
 ${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no public repos yet: ${emptyOrgs.map((f) => `<a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer">${esc(f.firm_name)}</a>`).join(", ")}.</p>` : ""}
 <script src="${PREFIX}/oss-chart.js" defer></script>`,
       showMeta: false,
