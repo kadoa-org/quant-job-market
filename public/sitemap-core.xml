@@ -28,4 +28,9 @@
       <image:title>Where quants hire heatmap by firm and city</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.kadoa.com/quant/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>

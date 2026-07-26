@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import AboutPage from "./AboutPage";
 import Dashboard from "./Dashboard";
 import DataTable from "./DataTable";
 import FilterBar from "./FilterBar";
@@ -40,12 +41,14 @@ function viewFromPath() {
   const p = window.location.pathname.replace(/\/$/, "");
   if (p === `${BASE_PATH}/tech-stack` || p === `${BASE_PATH}/heatmap`) return "techstack";
   if (p === `${BASE_PATH}/locations`) return "locations";
+  if (p === `${BASE_PATH}/about`) return "about";
   return null;
 }
 
 function pathForView(view) {
   if (view === "techstack") return `${BASE_PATH}/tech-stack`;
   if (view === "locations") return `${BASE_PATH}/locations`;
+  if (view === "about") return `${BASE_PATH}/about`;
   return `${BASE_PATH}/`;
 }
 
@@ -69,7 +72,7 @@ function parseUrl() {
 function syncUrl(view, filters, selectedFirm, search) {
   const params = new URLSearchParams();
   // /tech-stack and /locations carry their own view; do not duplicate as ?view=
-  if (view !== "firms" && view !== "techstack" && view !== "locations") params.set("view", view);
+  if (view !== "firms" && view !== "techstack" && view !== "locations" && view !== "about") params.set("view", view);
   if (selectedFirm) params.set("firm", selectedFirm);
   for (const [key, values] of Object.entries(filters)) {
     if (values.length > 0) params.set(key, values.join(","));
@@ -113,7 +116,12 @@ function InsightsNav({ view, setView, onFirms }) {
     { key: "dashboard", label: "Hiring insights", desc: "Roles, seniority, salaries and demand across all firms" },
     { key: "techstack", label: "Tech stack", desc: "Languages and tools by firm, the hiring heatmap" },
     { key: "locations", label: "Locations", desc: "Where quant firms hire, city by city" },
-    { key: "open-source", label: "Open source", desc: "Firms ranked by GitHub footprint", href: `${import.meta.env.BASE_URL}open-source/` },
+    {
+      key: "open-source",
+      label: "Open source",
+      desc: "Firms ranked by GitHub footprint",
+      href: `${import.meta.env.BASE_URL}open-source/`,
+    },
   ];
 
   return (
@@ -151,6 +159,7 @@ function InsightsNav({ view, setView, onFirms }) {
                 </svg>
               </a>
             </li>
+            <li>{tab("about", "About")}</li>
           </ul>
         </div>
       </nav>
@@ -317,7 +326,7 @@ export default function App() {
         />
         <InsightsNav view={view} setView={setView} onFirms={() => setSelectedFirm(null)} />
 
-        {view !== "techstack" && view !== "locations" && (
+        {view !== "techstack" && view !== "locations" && view !== "about" && (
           <FilterBar
             filters={filters}
             setFilters={setFilters}
@@ -350,6 +359,7 @@ export default function App() {
           {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
           {view === "techstack" && <TechStackHeatmap jobs={jobs} />}
           {view === "locations" && <LocationHeatmap jobs={jobs} />}
+          {view === "about" && <AboutPage />}
         </main>
       </div>
       <SiteFooter current="quant" />
