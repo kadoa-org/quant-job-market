@@ -671,6 +671,22 @@ const placeFor = (loc) => {
   return { "@type": "Place", address };
 };
 
+// Feeds list one place at several granularities ("Bangalore", "Karnataka",
+// "India"), which became three Place entries; Google validates each one, so
+// the country-only entry kept the addressRegion warning alive on postings
+// whose city entry was complete. An address that is a strict subset of a
+// sibling (same values for every field it has, fewer fields) is the same
+// place, not another location, so it is dropped. Genuinely distinct cities
+// are never subsets of each other and all survive.
+const dedupePlaces = (places) => {
+  const addrs = places.map((p) => p.address);
+  const isSubset = (a, b) =>
+    a !== b &&
+    Object.keys(a).every((k) => k === "@type" || b[k] === a[k]) &&
+    Object.keys(a).length < Object.keys(b).length;
+  return places.filter((p, i) => !addrs.some((other) => isSubset(addrs[i], other)));
+};
+
 // Pay-transparency ranges published in the posting text itself. Only the
 // employer's own numbers qualify for baseSalary (Google forbids estimates
 // there), so this stays keyword-anchored and bounded to plausible annual
@@ -727,7 +743,7 @@ for (const j of jobs) {
           name: j.firmName,
           ...(j.companyLogo ? { logo: j.companyLogo } : {}),
         },
-        ...(j.locations?.length ? { jobLocation: j.locations.map(placeFor) } : {}),
+        ...(j.locations?.length ? { jobLocation: dedupePlaces(j.locations.map(placeFor)) } : {}),
         ...(j.workMode === "remote" ? { jobLocationType: "TELECOMMUTE" } : {}),
         employmentType: employmentType(j.jobType, j.jobTitle),
         ...(j.salary
