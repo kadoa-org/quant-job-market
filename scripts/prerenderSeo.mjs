@@ -584,7 +584,112 @@ const EMPLOYMENT_TYPE = [
   [/intern/i, "INTERN"],
   [/contract|temporary/i, "CONTRACTOR"],
 ];
-const employmentType = (jobType) => (EMPLOYMENT_TYPE.find(([re]) => re.test(jobType || "")) || [])[1];
+// Search Console flags every posting without employmentType, and only 9% of
+// feeds carry a jobType. The title is the next-best employer signal (interns
+// are always titled as such); everything else on a quant careers page is a
+// full-time role, which is the standard job-board assumption.
+const employmentType = (jobType, title) =>
+  (EMPLOYMENT_TYPE.find(([re]) => re.test(jobType || "")) || [])[1] ??
+  (EMPLOYMENT_TYPE.find(([re]) => re.test(title || "")) || [])[1] ??
+  "FULL_TIME";
+
+// City → region/country for JobPosting addresses. Locations arrive as bare
+// city strings, and Search Console flags the missing addressRegion and
+// addressCountry on every posting. Covers every location with 10+ postings;
+// unknown cities still emit locality-only rather than a guessed country.
+// Region uses the local first-level unit (US/CA/AU/IN have meaningful ones);
+// city-states and most European postings carry country only.
+const CITY_GEO = {
+  "New York": { region: "NY", country: "US" },
+  "Brookfield Place": { locality: "New York", region: "NY", country: "US" },
+  "Brookfield Place New York": { locality: "New York", region: "NY", country: "US" },
+  Chicago: { region: "IL", country: "US" },
+  Boston: { region: "MA", country: "US" },
+  "Bala Cynwyd (Philadelphia Area)": { locality: "Bala Cynwyd", region: "PA", country: "US" },
+  Baltimore: { region: "MD", country: "US" },
+  Miami: { region: "FL", country: "US" },
+  "Newport Beach": { region: "CA", country: "US" },
+  Greenwich: { region: "CT", country: "US" },
+  "Owings Mills": { region: "MD", country: "US" },
+  Austin: { region: "TX", country: "US" },
+  Stamford: { region: "CT", country: "US" },
+  Houston: { region: "TX", country: "US" },
+  Berkeley: { region: "CA", country: "US" },
+  "San Francisco": { region: "CA", country: "US" },
+  Radnor: { region: "PA", country: "US" },
+  "Colorado Springs": { region: "CO", country: "US" },
+  Westport: { region: "CT", country: "US" },
+  Pennsylvania: { locality: null, region: "PA", country: "US" },
+  Illinois: { locality: null, region: "IL", country: "US" },
+  Massachusetts: { locality: null, region: "MA", country: "US" },
+  Florida: { locality: null, region: "FL", country: "US" },
+  London: { country: "GB" },
+  "Greater London": { locality: "London", country: "GB" },
+  England: { locality: null, country: "GB" },
+  Edinburgh: { country: "GB" },
+  Scotland: { locality: null, country: "GB" },
+  "Hong Kong": { country: "HK" },
+  "Hong Kong Island": { locality: "Hong Kong", country: "HK" },
+  Singapore: { country: "SG" },
+  Sydney: { region: "NSW", country: "AU" },
+  Australia: { locality: null, country: "AU" },
+  Bangalore: { region: "KA", country: "IN" },
+  Bengaluru: { locality: "Bangalore", region: "KA", country: "IN" },
+  Karnataka: { locality: null, region: "KA", country: "IN" },
+  Mumbai: { region: "MH", country: "IN" },
+  Gurgaon: { region: "HR", country: "IN" },
+  Haryana: { locality: null, region: "HR", country: "IN" },
+  India: { locality: null, country: "IN" },
+  Paris: { country: "FR" },
+  Amsterdam: { country: "NL" },
+  "Noord-Holland": { locality: null, country: "NL" },
+  Netherlands: { locality: null, country: "NL" },
+  Dublin: { country: "IE" },
+  Ireland: { locality: null, country: "IE" },
+  Shanghai: { country: "CN" },
+  China: { locality: null, country: "CN" },
+  Montreal: { region: "QC", country: "CA" },
+  "Montréal": { locality: "Montreal", region: "QC", country: "CA" },
+  Toronto: { region: "ON", country: "CA" },
+  Warsaw: { country: "PL" },
+  Tokyo: { country: "JP" },
+  Dubai: { country: "AE" },
+  "United Arab Emirates": { locality: null, country: "AE" },
+  Budapest: { country: "HU" },
+  Geneva: { country: "CH" },
+  Zurich: { country: "CH" },
+  "São Paulo": { country: "BR" },
+};
+
+const placeFor = (loc) => {
+  const geo = CITY_GEO[loc];
+  const address = { "@type": "PostalAddress" };
+  const locality = geo && "locality" in geo ? geo.locality : loc;
+  if (locality) address.addressLocality = locality;
+  if (geo?.region) address.addressRegion = geo.region;
+  if (geo?.country) address.addressCountry = geo.country;
+  return { "@type": "Place", address };
+};
+
+// Pay-transparency ranges published in the posting text itself. Only the
+// employer's own numbers qualify for baseSalary (Google forbids estimates
+// there), so this stays keyword-anchored and bounded to plausible annual
+// comp; portfolio sizes ("manage $2B") never match.
+const SALARY_RANGE =
+  /(?:base salary|salary|compensation|pay)[^$£€]{0,80}([$£€])\s?([\d,]{5,9})(?:\s?(?:-|–|to)\s?)(?:[$£€]\s?)?([\d,]{5,9})/i;
+const CURRENCY = { $: "USD", "£": "GBP", "€": "EUR" };
+function salaryFromDescription(html) {
+  const m = String(html || "").replace(/<[^>]+>/g, " ").match(SALARY_RANGE);
+  if (!m) return null;
+  const lo = Number(m[2].replace(/,/g, ""));
+  const hi = Number(m[3].replace(/,/g, ""));
+  if (!Number.isFinite(lo) || !Number.isFinite(hi) || lo < 40_000 || hi > 2_500_000 || hi < lo) return null;
+  return {
+    "@type": "MonetaryAmount",
+    currency: CURRENCY[m[1]],
+    value: { "@type": "QuantitativeValue", minValue: lo, maxValue: hi, unitText: "YEAR" },
+  };
+}
 
 const SENIORITY_LABEL = { junior: "Junior", mid: "Mid-level", senior: "Senior", lead: "Lead", executive: "Executive" };
 const WORK_MODE_LABEL = { onsite: "On-site", hybrid: "Hybrid", remote: "Remote" };
@@ -622,16 +727,9 @@ for (const j of jobs) {
           name: j.firmName,
           ...(j.companyLogo ? { logo: j.companyLogo } : {}),
         },
-        ...(j.locations?.length
-          ? {
-              jobLocation: j.locations.map((l) => ({
-                "@type": "Place",
-                address: { "@type": "PostalAddress", addressLocality: l },
-              })),
-            }
-          : {}),
+        ...(j.locations?.length ? { jobLocation: j.locations.map(placeFor) } : {}),
         ...(j.workMode === "remote" ? { jobLocationType: "TELECOMMUTE" } : {}),
-        ...(employmentType(j.jobType) ? { employmentType: employmentType(j.jobType) } : {}),
+        employmentType: employmentType(j.jobType, j.jobTitle),
         ...(j.salary
           ? {
               baseSalary: {
@@ -640,7 +738,9 @@ for (const j of jobs) {
                 value: { "@type": "QuantitativeValue", value: j.salary, unitText: "YEAR" },
               },
             }
-          : {}),
+          : salaryFromDescription(desc)
+            ? { baseSalary: salaryFromDescription(desc) }
+            : {}),
         directApply: false,
         url: `${BASE}/job/${j.slug}`,
       }
