@@ -281,7 +281,7 @@ export default function StackCards({ jobs = [], onApply }) {
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 pt-6 pb-16">
         <div className="stk-head">
-          <h1 className="dk-h1">{groupBy === "tech" ? "Tech stack" : "Tech stack by firm"}</h1>
+          <h1 className="dk-h1">{groupBy === "tech" || lensTech ? "Tech stack" : "Tech stack by firm"}</h1>
           {!lensTech && !detailFirm && (
             <nav className="stk-subnav" aria-label="Group stacks">
               <button
