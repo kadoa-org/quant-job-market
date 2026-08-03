@@ -1,0 +1,1318 @@
+{"id":"d0a42e9d749c5c6046170129d0b27508f8c6bc1f","firm":"DRW","techs":["Python","Bloomberg","Refinitiv"]}
+{"id":"b21894dd497dea0ab5f5f17a8c39106dbbee9f33","firm":"DRW","techs":["Python","SQL","Pandas","AWS","S3","Snowflake"]}
+{"id":"c1822feeca89ffe6b8987daae41692cf1a738fa4","firm":"DRW","techs":["Git","Python","Cron","Linux"]}
+{"id":"8cee4a0b69fa400d60563b7b69b98c75f0e7c4ce","firm":"DRW","techs":["Python","C++","Linux","PyTorch"]}
+{"id":"6c7ccc918f5f78b526c2772508d6b276f9563769","firm":"DRW","techs":["Kubernetes","Python","FastAPI","Airflow","Prefect"]}
+{"id":"a7892229ae2c5d8298a491093c80951dcc63736f","firm":"DRW","techs":["Python","Jupyter","Go","Rust","MCP","NGINX","Envoy"]}
+{"id":"78094475a3e8e7820d2cac9a2dfa7cb06cb008d4","firm":"DRW","techs":["Linux","Windows","Python","PowerShell","Bash","FIX","Chef","Ansible","Docker","Splunk","Kibana","Grafana"]}
+{"id":"489f413f55ceb54dc48758c164cb93b3f4f7f1bb","firm":"DRW","techs":["Ruby","Python","Kubernetes","FastAPI","Rails","Airflow","Prefect"]}
+{"id":"fb58185a3f7723e0f2064089dd94721339391126","firm":"DRW","techs":["Python","SQL","R"]}
+{"id":"88267c19ca90a8de01fdd0fa53e71897e76ba1a4","firm":"DRW","techs":["Python","C++","Redis","RabbitMQ","GraphQL","Kafka","MongoDB","ELK","Docker","TCP","HTTP","Regex"]}
+{"id":"0754bb1c15689d338590f98c912f427fccdeb17b","firm":"DRW","techs":["Windows","macOS","Linux","Active Directory","Zoom","Microsoft Teams","Windows 11","BitLocker","MBAM","Microsoft Office","Outlook","Excel","AirWatch","Microsoft Exchange","Apple Business Manager","MEMCM","SCCM","Intune","Windows Server"]}
+{"id":"73d6821a258a31c20bfd2fafa1a71b77419e2ddf","firm":"DRW","techs":["FIX","Python","Java","Git","SQL","Linux","PowerPoint"]}
+{"id":"3f40d273588ab34396ba7b918001c59f82a35e85","firm":"DRW","techs":[]}
+{"id":"c4d79b68a38d7294c5c37b91b3384434b744e666","firm":"DRW","techs":[]}
+{"id":"40a43a3ec600e80fa409ecc9b4e6da173e0adf02","firm":"DRW","techs":["Git","Python","Cron","Linux"]}
+{"id":"35d1173e3ded43ad877b22146f0792b93380c431","firm":"DRW","techs":["Linux","Windows","HTML","CSS","JavaScript","JSONPath","Docker","Python","PowerShell","Bash","Chef","Ansible","Splunk","Kibana","Grafana"]}
+{"id":"c7c82e19e3b7f800adca7cb621305f3e1fa70dee","firm":"DRW","techs":[]}
+{"id":"4bd22af68b0791dc1cbae4f84da0788070a039df","firm":"DRW","techs":["Linux","Parquet","Iceberg"]}
+{"id":"372c8ee4e048d77fadf7ca93c6036f1475afbc05","firm":"DRW","techs":["TensorFlow","PyTorch","TensorRT","ONNX","CUDA","OpenCL"]}
+{"id":"e42e14532bc98416a7e52bb9066e46b79b47651e","firm":"DRW","techs":["Linux","Windows","HP","IBM","Dell","Cisco"]}
+{"id":"1d3a68758a5e8bd3e0a33522ce4681e1f3cca57d","firm":"DRW","techs":["C++","Rust","Java","Python","JavaScript","Ruby","TCP","UDP","IPv4"]}
+{"id":"b9b08cf05e7d6247a013aa9bc5fd342ae2bf0674","firm":"DRW","techs":["ServiceNow","JavaScript","HTML","CSS"]}
+{"id":"509ca2eada97a8744ff00660fbc8ca9b849488f8","firm":"DRW","techs":["FPGA","Verilog/VHDL","SystemVerilog","TCP/IP","Xilinx","Altera"]}
+{"id":"634f90875e353285aaec06788c068cd6d07baa78","firm":"DRW","techs":["C++","Linux","STL","Boost"]}
+{"id":"a6dc0a958693b7965aa21b210b877ec0ddad08cd","firm":"DRW","techs":["FPGA","Verilog/VHDL","Xilinx","Altera","SystemVerilog","TCP/IP"]}
+{"id":"b3234ecc934527265875253811bce4aaa81ad614","firm":"DRW","techs":["C++","Linux","STL","Boost"]}
+{"id":"8f911fc9b58a0414c3e485892e647202d9c8d80d","firm":"DRW","techs":["Windows","Linux","MacOS"]}
+{"id":"37e17900eb2b76a6dfee5c5583709f52c61c360f","firm":"DRW","techs":["Bash","Python","Ruby","Linux"]}
+{"id":"3b41137acca44023e4ad14a602877774da3a750e","firm":"DRW","techs":["Bash","Linux","Python","Ruby"]}
+{"id":"a6cf7acb58e891e178a218a5240a1ca63de8b7ff","firm":"DRW","techs":["HashiCorp Vault","Kubernetes","Docker","Terraform","CloudFormation","Linux","AWS","Azure","GCP","OPA","Sentinel","Prometheus","Grafana","Splunk"]}
+{"id":"44ed749b5c1fca9c4cc5c4d1684cc6c3a097dda4","firm":"DRW","techs":["HashiCorp Vault","Kubernetes","Docker","Terraform","CloudFormation","Linux","AWS","Azure","GCP","OPA","Sentinel","Prometheus","Grafana","Splunk"]}
+{"id":"2e93c6e95e8f4e1dfc0f0bb7e7ec6af2759eb8ff","firm":"DRW","techs":["Python","MATLAB","Linux","FPGA","Verilog/VHDL","C","C++"]}
+{"id":"f52d7ba5ea6c9dc0b430f04a242d07584c000824","firm":"DRW","techs":[]}
+{"id":"9e004b1a7e33b1f5e8281bd482a12be3fbf0f0b6","firm":"DRW","techs":["Java","Python","Clojure","Airflow","Kubernetes","Docker","Linux","Kafka","RabbitMQ","Git","SQL","HTML","CSS","JavaScript","JVM"]}
+{"id":"712b27c816cb38827cdd19c10d16d861c1271bdd","firm":"DRW","techs":[]}
+{"id":"dc4e9fb89df964d1b0681571980109aa014db2ee","firm":"DRW","techs":["Clojure","Kubernetes","Python","Ruby","PL/SQL","Oracle","Kafka","Airflow","Docker"]}
+{"id":"d761edc6b465557dff1b8db79d67b21ccde844c6","firm":"DRW","techs":["Python","Java","C++","TypeScript","Linux"]}
+{"id":"26d1a2042aac0c4e6787f6df4a8b4ab263a49c7a","firm":"DRW","techs":["Python","Java","C++","TypeScript","Linux"]}
+{"id":"e1098f05518e3349791169c340b5821bed0f69dc","firm":"DRW","techs":["Ethereum","Solana","Arbitrum","Uniswap","Compound","Chainlink","ethers.js","web3.js","Clojure","Node.js","TypeScript","Kubernetes","Docker","ArgoCD","PostgreSQL","Oracle","SQS","RabbitMQ","Linux","Ansible","Nginx","Git"]}
+{"id":"8ab970f1ac0748c3cb4e9318388a718e3b5d72b4","firm":"DRW","techs":["Python","Go","Rust","C++","Java","Docker","PostgreSQL","Redis","Kafka","RabbitMQ"]}
+{"id":"046296eb93d00a6a3d863044536036f8755a56f2","firm":"DRW","techs":["C++","Linux","STL","Boost"]}
+{"id":"85e09eee4b52f39ccd5ce415cfb9643f0353c4e5","firm":"DRW","techs":["SQL","Java","Python","Flink","Spark","Polars","Dask","S3","Delta","Iceberg","Cassandra","ClickHouse","Kafka","Arrow","Parquet","Protobuf","gRPC","Avro","Thrift","JSON","Kubernetes","Argo Workflows","Airflow","Prefect","Dagster"]}
+{"id":"926032026246db9bd644766fbd49fc146984155e","firm":"DRW","techs":["Python","Java","C++","TypeScript","Linux"]}
+{"id":"3c1af6a25d5a9080659a029221117d8865797086","firm":"DRW","techs":["TypeScript","Node.js","NestJS","Docker","React","JavaScript","WebAssembly","Rust"]}
+{"id":"ce707ae377870e1168d1d6e232095a32b4566aec","firm":"DRW","techs":["Python","Linux"]}
+{"id":"c18ec8650b0f0eb4efa44135fdfe325a903e4103","firm":"DRW","techs":["Python","Java","C++","Linux","Airflow","Dagster","Kafka","Delta Lake","Iceberg"]}
+{"id":"ef7cc4be177998bc8f4be9aac0e5683e0e022e55","firm":"DRW","techs":["Python","Linux"]}
+{"id":"16285f672fad9a10446370c3e9e90d87c6f3e4eb","firm":"DRW","techs":["Python","Java","C++","TypeScript","Linux"]}
+{"id":"d9c7de670e3a55a63c9a2427c4a18e1688bdfe7d","firm":"DRW","techs":["Milvus","ChromaDB","Pinecone","Weaviate","Qdrant","Python","Airflow","Dagster","Prefect","Spark","Ray","Dask","Docker"]}
+{"id":"1cd1e4f7874691e48e58c4b1d9a0f75aa66c0e37","firm":"DRW","techs":[]}
+{"id":"58c9db07c81c340bef8d7b466fae2ef03800b60e","firm":"DRW","techs":["Python","Git"]}
+{"id":"708f1100497e8b6397062db1cb99c2fbd940d8fe","firm":"DRW","techs":["Python","Linux"]}
+{"id":"63d0d3f3eda46c9bcf1f401965b0bb6775414868","firm":"DRW","techs":["Python","Git"]}
+{"id":"d48a3a60f4fe053ca4d66b7573d72c386846254c","firm":"DRW","techs":[]}
+{"id":"ca2dc6733c23747327bf1dbd945ed7833055ac3c","firm":"DRW","techs":[]}
+{"id":"2d085dfec4efbd0bf7412ac8fbb188e2292e1a9f","firm":"DRW","techs":["Kubernetes","Terraform","Terragrunt","Ansible","Prometheus","Grafana","Python","Linux","TLS","WebSockets","AWS"]}
+{"id":"57bcbe411e275a9e48a995faaa55759dc5480583","firm":"DRW","techs":[]}
+{"id":"58ba9a60946f038d678c8f43551213f183610d1d","firm":"DRW","techs":["Elixir","Python","Java","C#","C","C++","Rust","Docker","Kubernetes"]}
+{"id":"ca120aa70f86888d7e18b1fc3a871927c7212891","firm":"DRW","techs":["Git","GitHub","Python","Bash","SQL","Linux"]}
+{"id":"541ae9fb14d04c1a9bdd8a1cb956081100689954","firm":"DRW","techs":["C++","Python","WebSockets"]}
+{"id":"b60c53b37d88ca0ac8260307db14cf18bb157a00","firm":"DRW","techs":["Python","C","C++","Rust","TeamCity","Jenkins","Linux"]}
+{"id":"2dbc0c35144c41aaa5ada4fc2857deff8969a22b","firm":"DRW","techs":["C++","Python","WebSockets"]}
+{"id":"ddc5906349a86727d63c72935be38e9fda68baaa","firm":"DRW","techs":["MATLAB","Python","R"]}
+{"id":"67035bdc439fc5d0ff4b388dd1116bae675ad03e","firm":"DRW","techs":["Python","TeamCity","Jenkins","Linux"]}
+{"id":"2ba5b14f27746d236d3c8b7b1f3024327483080c","firm":"DRW","techs":["C++","Python","WebSockets"]}
+{"id":"52d4c7185667381a48542de379a447108b8096db","firm":"DRW","techs":["Python","C++"]}
+{"id":"8b92e02015c801969e30434efa4948375a25f5e9","firm":"DRW","techs":["C#","RX","LINQ","Python","C++"]}
+{"id":"39c9d700348426b077d42d8da8788319d079979a","firm":"DRW","techs":["SQL","Java","Python"]}
+{"id":"9572fee98be2c9bead7723283a6e359818766b29","firm":"DRW","techs":["Python","Pandas","NumPy","FIX","ethers.js","Polygon RPC"]}
+{"id":"1d1e88997c4656e9de181785934af0bd97416987","firm":"DRW","techs":["Python","PowerShell","Bash","Linux","Windows","Chef","Ansible","Docker","Splunk","Kibana","Grafana"]}
+{"id":"d2d3854350e7d7538707576851e271a712cf05cc","firm":"DRW","techs":["Python"]}
+{"id":"8b46effb61b44b05f3b4e823372402a6e2279712","firm":"DRW","techs":["Python","Java","C++","TypeScript","Linux"]}
+{"id":"75199578bfc40f3c237d94e81f91d36492158961","firm":"DRW","techs":["C++","Python"]}
+{"id":"958c5ec745dec5c76dcc97ad66ceaa1159f05194","firm":"DRW","techs":["C++","Python"]}
+{"id":"794023b87a44d5e7c3fd508101506f7fa902933c","firm":"DRW","techs":["Python","Java","C++","TypeScript","Linux"]}
+{"id":"4e8da1f01cf75cecc08828ae5e482a74d3525ccb","firm":"DRW","techs":["Python","C++"]}
+{"id":"40a98f073c7d256e46385bc3e3689f1ccc73a48e","firm":"DRW","techs":["C++","Python","Cython"]}
+{"id":"57e0167070f0ba157d9a381dc28ee1c5763084f7","firm":"DRW","techs":["Python","C++"]}
+{"id":"3a67e66962de1dcfb1588045fc119c41df22b974","firm":"DRW","techs":["Python","C++"]}
+{"id":"d81d9ffc3c0fe4bd5d97b1c1db5e2bf3d8e7b507","firm":"DRW","techs":["Python","Java","C++","Linux","Airflow","Dagster","Kafka","Delta Lake","Iceberg"]}
+{"id":"7ff4484c692d01d9a2ae5c31609687b165779413","firm":"DRW","techs":["Python","Java","C++","Linux","Airflow","Dagster","Kafka","Delta Lake","Iceberg"]}
+{"id":"4ad37e5f803acf80866ea398829210bb131bc18f","firm":"DRW","techs":["Python","Linux","C","C++","Rust","Zig"]}
+{"id":"5a04268528df6f5a171d7daffce63b10c301643e","firm":"DRW","techs":["Python","Linux","C++","C","Rust","Zig"]}
+{"id":"e9294369bfeceaa2cff72c55b7d8f9177c2d12f2","firm":"DRW","techs":["C++","Python"]}
+{"id":"fbc6744a78a4eb7a33441829ff5521f2da9d5950","firm":"DRW","techs":["TCP/IP","DNS","DHCP","Docker","Kubernetes","Python","Bash","PowerShell","Linux","Unix"]}
+{"id":"81caead96cb8b38ed37ebe3d5136a91971c3463a","firm":"DRW","techs":["FPGA","Verilog/VHDL","SystemVerilog","TCP/IP","Xilinx","Altera"]}
+{"id":"a0de779a51cd27c39ad7c1e1721f438054a6ccba","firm":"DRW","techs":["Python","TensorFlow","PyTorch","TensorRT","ONNX"]}
+{"id":"a346eeedf64dba928311d91ef3303fb6dd49e7a1","firm":"DRW","techs":["Python","C++","Java","TCP/IP","HTTP","Redis","RabbitMQ","GraphQL","Kafka","MongoDB","ELK","Docker","WebSocket","AMQP","TCP","PostgreSQL","MySQL","SQL Server","Oracle"]}
+{"id":"37bdf85833dc93eaef402ef2cb3d11c72a97f456","firm":"DRW","techs":["Python","TensorFlow","PyTorch","TensorRT","ONNX"]}
+{"id":"8050c90adbcef897518176e90e7aac5111a85672","firm":"DRW","techs":["C++","Python","Boost","STL","Pandas","Polars"]}
+{"id":"2420984e0135ac0b47b731a29cc609a04501b356","firm":"DRW","techs":["Python","TensorFlow","PyTorch","TensorRT","ONNX"]}
+{"id":"1804f4b015144ef670310de94f176a6c36d00334","firm":"DRW","techs":["C++","Python"]}
+{"id":"295f15e13fdc41d2381418090c4e5b6a232d837a","firm":"DRW","techs":["FPGA","Verilog/VHDL","SystemVerilog","Ethernet","Xilinx","Altera","Python"]}
+{"id":"29dffabe-ac5d-4ebb-b202-cffc9d5e2f9d","firm":"Citadel Securities","techs":["Python","SQL","R"]}
+{"id":"36284bc2-6711-4f49-8eee-ae9da6fb56ea","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"81f2808e-6f52-43c1-a852-8a6177ec976d","firm":"Citadel Securities","techs":[]}
+{"id":"5be53eec-ae47-46b9-853c-2617d9a2eced","firm":"Citadel Securities","techs":["C++","ITCH","PITCH","iMpact","OUCH"]}
+{"id":"7bd72751-6ddb-4677-b3bf-a4c1c082ea7b","firm":"Citadel Securities","techs":["Python","R","MATLAB","C++"]}
+{"id":"94146923-29cb-4a9d-a7ed-b6ee58fd8ef6","firm":"Citadel Securities","techs":["C++"]}
+{"id":"bc499799-817d-45c3-a4cb-9e54034298a6","firm":"Citadel Securities","techs":[]}
+{"id":"55215f10-0325-47de-aa0d-a4056a2f5dc3","firm":"Citadel Securities","techs":["C++","Linux"]}
+{"id":"7ab8a20c-0e36-4f0b-bb60-3862aef61780","firm":"Citadel Securities","techs":["Python","R","Pandas","scikit-learn","TensorFlow","Tableau","SQL","GCP","Spark","Kafka"]}
+{"id":"0bb88a81-4dea-4067-a465-7efae5d05c55","firm":"Citadel Securities","techs":["Python","CUDA","C++","PyTorch"]}
+{"id":"48e60faf-2a14-4624-a1d2-c9318ebf97a6","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"a6bfbf41-6b4d-47f7-9911-86f3638c4fe6","firm":"Citadel Securities","techs":["Python","C++"]}
+{"id":"a77d1100-5178-4f91-b7fd-42f3e2743ce5","firm":"Citadel Securities","techs":["FPGA","Verilog/VHDL","Python","C","Tcl","Bash"]}
+{"id":"26e3afc3-bdc7-4c7a-bc7c-4979ad68cba7","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"5b7931f4-3157-4013-9f4e-5d4dac3aa8a1","firm":"Citadel Securities","techs":["C++","Python","R"]}
+{"id":"b9837021-2b2b-41b8-b63e-9f548ee3dad8","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"721d345e-20a1-4144-89d5-4f18a10888b3","firm":"Citadel Securities","techs":["C++","Python","R"]}
+{"id":"cf97791e-5f01-44e0-9257-756f6a00a3f7","firm":"Citadel Securities","techs":["FPGA","SystemVerilog","Verilog/VHDL","Python","C","Tcl","Bash"]}
+{"id":"10ae170b-0204-4666-b642-284ffd21013c","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"9c89c902-1a32-43b5-9bb9-e6ad87094e2e","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"861476a1-9cd8-41c0-9bc0-5a9b09d2137b","firm":"Citadel Securities","techs":["Python","PyTorch","TensorFlow"]}
+{"id":"199cac33-c6eb-4130-b646-9d3bd201996e","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"17a9f5bc-69ca-43bb-8200-333d896832e9","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"bc0c3f97-04e4-4e62-a549-62f69e6a8f25","firm":"Citadel Securities","techs":["C++","Python","R"]}
+{"id":"d5d2a6b8-c464-4123-b1e3-5b1dbb492e28","firm":"Citadel Securities","techs":["Python","R","MATLAB","C++"]}
+{"id":"e991cfab-a9b7-47b5-a62f-d27ff50c9e8e","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"21f87a9f-e697-40fc-934a-af1a0806fa48","firm":"Citadel Securities","techs":["Python","R","SQL"]}
+{"id":"60cc6367-b0e1-4bfe-928c-efdf2fa0d517","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"9b01d2d2-bb7b-4f43-831e-09bd8e48db69","firm":"Citadel Securities","techs":["Microsoft Outlook"]}
+{"id":"3680e5a5-4904-41df-9e7c-7f7c94853fde","firm":"Citadel Securities","techs":["C++","GPU","TPU"]}
+{"id":"104d2fdb-90c1-47b6-b6ff-6eaa19d09115","firm":"Citadel Securities","techs":[]}
+{"id":"cf56fdf9-cd58-470f-8a19-f818bdd25cb9","firm":"Citadel Securities","techs":[]}
+{"id":"4ea6e379-bc85-46ff-861d-f9702fb47b60","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"e1980a81-f098-4b45-a34b-7a1f01870e94","firm":"Citadel Securities","techs":["Microsoft Outlook"]}
+{"id":"24200940-c415-4680-acd8-dadb9d590360","firm":"Citadel Securities","techs":["C++"]}
+{"id":"188650a9-784b-4a74-99e0-ecab3e3018e5","firm":"Citadel Securities","techs":["Python","SQL","dbt"]}
+{"id":"ad1ab54a-932d-4424-b15b-e491d5ff1861","firm":"Citadel Securities","techs":["Linux","SQL","Bash","Python"]}
+{"id":"a20839dd-4494-4102-9c25-b263d47be8c0","firm":"Citadel Securities","techs":["Python","C++","PyTorch","HuggingFace"]}
+{"id":"1450c4f2-ea72-41ce-b2f9-550280b1ee96","firm":"Citadel Securities","techs":["C++","Python","Linux","Jira","Git","Bazel","Jenkins","Slurm","Airflow","systemd","cgroups","FUSE","TLS","Kerberos","Active Directory","HTTP","DNS","Multicast","TCP","UDP","Terraform"]}
+{"id":"edd7b279-bb81-4ee7-b55b-93417ab7187b","firm":"Citadel Securities","techs":["Python","Linux","C++","kdb+/q","SQL"]}
+{"id":"9ccc4ebb-483a-4c01-be6f-89c106067d35","firm":"Citadel Securities","techs":["C++","Python"]}
+{"id":"5f1343e7-366b-4fb4-a09d-7bf18c762c57","firm":"Citadel Securities","techs":["Python","Linux"]}
+{"id":"2a62fb9f-b0f3-48d3-8ff2-6b65da3ab904","firm":"Citadel Securities","techs":["Linux","SQL","Bash","Python"]}
+{"id":"1ca37d94-53b8-48af-9054-984d41593f43","firm":"Citadel Securities","techs":["Linux","Python"]}
+{"id":"0eec983c-dd95-4697-80dc-105bf230f32b","firm":"Citadel Securities","techs":[]}
+{"id":"c1c815a3-ac94-403c-b834-34e9c25d257a","firm":"Citadel Securities","techs":["TypeScript","React","C++","Python","kdb+/q"]}
+{"id":"fd6a4c39-d4c4-40b3-b08f-af7fb6a96e5a","firm":"Citadel Securities","techs":[]}
+{"id":"7265ea48b2cdfa137b47e759a7c80ef93176a9ef","firm":"Citadel Securities","techs":[]}
+{"id":"8d5124952dc8b3b5b77fe5e5d5b45cca7c315727","firm":"Citadel Securities","techs":["C++"]}
+{"id":"576731de-ff7c-442d-98dd-f14f42a3b720","firm":"Citadel Securities","techs":["Python","C++","Linux","TCP/UDP","Wireshark","Jenkins","GitHub Actions","Git","CMake","FIX","QuickFIX","Prometheus","Grafana","Jaeger","Tempo","kdb+/q","Kafka","Rust","Go","Haskell","OCaml","Pact","Hypothesis"]}
+{"id":"ad188a107f975ad66b5d3354ab2311e5509c84f2","firm":"Citadel Securities","techs":["C++"]}
+{"id":"b0dbe196-9916-48be-a781-c8b1ef0b37be","firm":"Citadel Securities","techs":["Python","Pandas","Polars","scikit-learn","Plotly","Matplotlib","kdb+/q","Linux","SQL","Git","VS Code"]}
+{"id":"a07646a03c22795fd7ffbfb9f53cb6ad97520d01","firm":"Citadel Securities","techs":[]}
+{"id":"cbfffa466d4c51951464c4631c7afdbae94158fe","firm":"Citadel Securities","techs":["Python","C++"]}
+{"id":"d505c6716e3b35e26788a2b76222abc83a20893b","firm":"Citadel Securities","techs":["TypeScript","React","C++","Python"]}
+{"id":"231c606e4e69365f4a5eed038ebd3f5cf8a4882d","firm":"Citadel Securities","techs":["Go","Python","C++","GCP","AWS","Azure","Linux","Kubernetes"]}
+{"id":"9acf96b44d52b4a5df6d61f0bb6c615debf29ae2","firm":"Citadel Securities","techs":["FPGA","Verilog/VHDL","Python","C","Tcl","Bash"]}
+{"id":"3061a0db74e2466a2832dd60b353020b93553131","firm":"Citadel Securities","techs":["Python","C++"]}
+{"id":"9a7f5a0d1f73ab8c3c37b5584a067220043d6b2b","firm":"Citadel Securities","techs":["kdb+/q","Python","Java","C++","Linux"]}
+{"id":"2e8009576f3fbe3f6cc63182fd5181f84e2508ac","firm":"Citadel Securities","techs":["Python","C++"]}
+{"id":"83e0f83cdc1e530780380f75eeb44da6cc4ddfea","firm":"Citadel Securities","techs":["Python","Go","C++","AWS","GCP","Azure","Kafka","Kubernetes","Spark","Airflow"]}
+{"id":"abe0a5891cd947dfc03a5ea5aeedbd706405d26e","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"444927a21c7d186ee554b1c67b7383092806636f","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"c2f76d79f8c53f265d3053a6603c9a5332a93593","firm":"Citadel Securities","techs":[]}
+{"id":"e9c9a1415329bbd2b10db90c41d83df3e9b17077","firm":"Citadel Securities","techs":["Python","C++"]}
+{"id":"14668437c99bde12d2059065e86374675f43bfa4","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"9dba44e07f1423c7181a1a84ff0451699e53a8d3","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"183d7c33c664d3fa8bfbf7e96842835b78f15abf","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"8320b1056a93478f701b9a86c587a96db0e95b94","firm":"Citadel Securities","techs":["C++"]}
+{"id":"0aa00490915e6ed12c75271affec29374adfef65","firm":"Citadel Securities","techs":[]}
+{"id":"f67a9a11db08ff9089552480ff91d1e0e7c07415","firm":"Citadel Securities","techs":["Python","SQL"]}
+{"id":"ec4019dbfc50feaaad22eaa293cb43fcd5d9728c","firm":"Citadel Securities","techs":["Linux","Python","Go"]}
+{"id":"ef0292260f9a907b340e19153b540522a3a368d9","firm":"Citadel Securities","techs":[]}
+{"id":"72be21ce3911ff3b673666ab86e0f95c46daa432","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"e10c64b7ebd807bbe079f98cb36c4904836a1da6","firm":"Citadel Securities","techs":["JavaScript","React","Angular","Redux","Electron","WebAssembly","Node.js","TypeScript","HTML5","Canvas","WebWorkers","WebSockets","CSS3","SASS"]}
+{"id":"a9dbe60fe585747275550f44b4690a7f53af5555","firm":"Citadel Securities","techs":[]}
+{"id":"98397c515165d31db628a4172c56a043be8ff817","firm":"Citadel Securities","techs":[]}
+{"id":"9dc71b47c4bbc60aede67ae4402d252fa9e866a0","firm":"Citadel Securities","techs":[]}
+{"id":"ea125a0ba17ebd330b43e903be241a5cd1fe1c84","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"18e723b45b5bb7ee34d504b3dd80c37a93ca88ef","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"9591af19dedf785802281976c2c8b5b108525d93","firm":"Citadel Securities","techs":[]}
+{"id":"c09b392fede0e415f2d2e44752f1899c23bc79b8","firm":"Citadel Securities","techs":[]}
+{"id":"305699e70787656b2e533a7a08349b33d90241a2","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"965cda9a7f57f20079e9c0c172366617f92dbfd1","firm":"Citadel Securities","techs":["Python","NumPy","PyTorch"]}
+{"id":"5c3df0b1921f7f4e3ba9b5f0fa7d7e9a4107d8ac","firm":"Jane Street","techs":[]}
+{"id":"2a9ac0f858891ae6d53df64dce77023333935fc8","firm":"Citadel Securities","techs":[]}
+{"id":"b49ce4d20e1119b05578bb768238cf5783d2aea6","firm":"Citadel Securities","techs":["Python","R","C++"]}
+{"id":"88374f17c8a11bfb6a681bb5d03d2d503f8ca66e","firm":"Jane Street","techs":[]}
+{"id":"b69a9a44d3605fcf47ec15130aa3ccf6c10e11d8","firm":"Jane Street","techs":["FPGA","Hardcaml","OCaml","Synopsys","Cadence","Python","C++","Java","Haskell"]}
+{"id":"2c45db34f2ca27d2b4319ad755016a97300185c5","firm":"Citadel Securities","techs":["FPGA","SystemVerilog","Verilog/VHDL","Python","C","Tcl","Bash"]}
+{"id":"317c084e17cd0ab322990e140d0773bd4a5e753c","firm":"Jane Street","techs":[]}
+{"id":"d82450a44b055452ecd9ffd75c79a83ef8395a4e","firm":"Jane Street","techs":["Hardcaml","OCaml","Python","C++","Haskell"]}
+{"id":"919f24ed66e956c01cc9d725a6f15208549dfeeb","firm":"Jane Street","techs":[]}
+{"id":"a8500072ddfbb33e47daf0b24a62f7177131b457","firm":"Jane Street","techs":["FPGA","Hardcaml","OCaml","Synopsys","Cadence","Python","C++","Java","Haskell"]}
+{"id":"4c7192babfe255e78ae7f96316982461d05c1a44","firm":"Jane Street","techs":[]}
+{"id":"1fccff096b03ae6661915a11c9936f2e548c64a0","firm":"Jane Street","techs":[]}
+{"id":"242acf174d51d48bdea62ec4b102f693a7712d04","firm":"Jane Street","techs":[]}
+{"id":"c0e7dba5c13a534071711f54a2a0fd092e770eb5","firm":"Jane Street","techs":["Hardcaml","OCaml","Python","C++","Haskell"]}
+{"id":"5f8ea62e7b37566a0dd9ecad874fe07ba519363e","firm":"Jane Street","techs":[]}
+{"id":"f157c7b66395ae1dacaf9b3505912caaa2d92e71","firm":"Jane Street","techs":["Python","SQL"]}
+{"id":"a5a6d44379e4cd85ac0fa1fe68dbbdcf1cd40bf8","firm":"Jane Street","techs":[]}
+{"id":"40fa2bae8ea88182226a560a601519c8e7325c47","firm":"Citadel Securities","techs":["Claude Code","Cursor","GPU","JAX","PyTorch","TPU"]}
+{"id":"7b3dec58223f74146c07c73889f28e623337bfc8","firm":"Jane Street","techs":[]}
+{"id":"4633edf24fc9515fedf98df0006269ca613fe6eb","firm":"Jane Street","techs":[]}
+{"id":"776d4d20758c3ad3efe5d2c762f4a1aeac63dce0","firm":"Jane Street","techs":[]}
+{"id":"4d121c07e236c3b0657de471d8e8738e132ac510","firm":"Jane Street","techs":["OCaml","OxCaml","lldb","gdb","Linux","x86-64","AArch64","LLVM"]}
+{"id":"c4d21674a9e1746b8bad0c039062a2def398f39a","firm":"Jane Street","techs":[]}
+{"id":"0fec6b1c459df1e35f3a910f98ae000b6fbe14c3","firm":"Jane Street","techs":[]}
+{"id":"96b78271b7bea2986a7c9f01d8c7a648b5eb36ee","firm":"Jane Street","techs":[]}
+{"id":"8f4376ceff5af653230fea451b4fbde824fb2ce8","firm":"Jane Street","techs":[]}
+{"id":"d414dd8c535e78c812dc12455436cd7a5310d002","firm":"Jane Street","techs":[]}
+{"id":"4de170a3eb53ee8e89bd072f38c6b442ed484497","firm":"Jane Street","techs":["Linux"]}
+{"id":"64294e72a5173f5b1205c6b7daab3c5df87ffe5d","firm":"Jane Street","techs":["Linux"]}
+{"id":"fa54a87a59154bc9d4af8e53ec3b24286c5e220a","firm":"Jane Street","techs":[]}
+{"id":"ce2e2a5c8d0e71cdc02ec3e8c607b80579bb4d9a","firm":"Jane Street","techs":["Rapid7","Tenable","Qualys"]}
+{"id":"5e4aa127e63fa46e09798ae1424a9ee9013d8fa6","firm":"Jane Street","techs":["Windows","Linux"]}
+{"id":"c198e2e3b75c4be4a5301eb6d3c4a58fb3839fe9","firm":"Jane Street","techs":[]}
+{"id":"0b23e2a2c52c6afebde3935a7ba0e3c92ed51334","firm":"Jane Street","techs":["CAD"]}
+{"id":"45ee213fe05b0960b987cb40947b75a742ad397a","firm":"Jane Street","techs":["PXE","Linux","Bash","Python","Dell","Cisco","Arista","Ciena","Corning","Ortronics"]}
+{"id":"2fd79fcd5c6b2b7d284b24187ce108d16e0507b6","firm":"Jane Street","techs":["Linux","PXE","Bash","Python","Dell","Cisco","Arista","Ciena","EXFO","VIAVI"]}
+{"id":"aec486ab09475988e01f1542554e8c30cfc34134","firm":"Jane Street","techs":["Python","SQL","Pandas","Polars"]}
+{"id":"491d22b1f58df63d2ed0778cee00f87dd468455e","firm":"Jane Street","techs":["PlanGrid","Autodesk Build","Procore","Bluebeam","MS Project","AutoCAD","Revit","BIM","MS Office"]}
+{"id":"5aea75990b7a788346f1ff720b3c8c9764635ec4","firm":"Jane Street","techs":[]}
+{"id":"281399fe3b8242a4e49c274eadc3f9a852dd9e86","firm":"Jane Street","techs":["Python","SQL","Pandas","Polars"]}
+{"id":"45da2ba7ff1ddfc325b4d9ef00e5736c0a116e9e","firm":"Jane Street","techs":["SQL"]}
+{"id":"91a45524ff04f637722a58b23e79959a90a4943c","firm":"Jane Street","techs":["Linux","Bash","Python","PXE","Dell","Cisco","Arista","Ciena","Corning","Ortronics"]}
+{"id":"eba3c88ae60efface5d6ccc9953ec8825f79bb1a","firm":"Jane Street","techs":[]}
+{"id":"635812c461ca3ee26aeb97f331a6afe05209ad75","firm":"Jane Street","techs":[]}
+{"id":"f4042a3a4078926baf36ddf769780c0b3a6fd710","firm":"Jane Street","techs":["Python"]}
+{"id":"4d8516880af059f484583e46f477ad5c83f69b24","firm":"Jane Street","techs":["Python","SQL","Pandas","Polars"]}
+{"id":"e36033642acfd5adee444a7e73fdeece356b0863","firm":"Jane Street","techs":[]}
+{"id":"d70c98040079b38ac54da9c7e62e1fc6e736db12","firm":"Jane Street","techs":[]}
+{"id":"e1a823de02032c26dc2bd0b3ad282102089211ab","firm":"Jane Street","techs":[]}
+{"id":"6da0c09c314c99ae086fd4dfbcc04c199e228b67","firm":"Jane Street","techs":["Microsoft Excel","Workday"]}
+{"id":"415476893556e69b1bfb6fcd9e577e3fb6498acf","firm":"Jane Street","techs":["Python","SQL"]}
+{"id":"65100fe47202898ee658f00b569d8c6604485bd5","firm":"Jane Street","techs":["Python","SQL"]}
+{"id":"6c70217a3f3e6a2ccee980066b0c88d5ec9ccef0","firm":"Jane Street","techs":["Microsoft Word","Microsoft Excel"]}
+{"id":"8de2edeff9fdf9e65f6f080e18ea9e4baa41ddcc","firm":"Jane Street","techs":["Python","SQL"]}
+{"id":"9f11f76f759f71a5e97332fc045477d1e324b1ec","firm":"Jane Street","techs":[]}
+{"id":"136200d56f8379094be2a32e80921f62bc1e5050","firm":"Jane Street","techs":[]}
+{"id":"2581cc72e47bb355635cf1bfc201b5cf88a9e85d","firm":"Jane Street","techs":["OCaml"]}
+{"id":"541d8e03e282b9b549a37f21b62290a4bc8dc229","firm":"Jane Street","techs":[]}
+{"id":"5f81e4d7eee4a6b548aa554657b56aa54ccd2ec7","firm":"Jane Street","techs":["OCaml"]}
+{"id":"315acfbfdcc3dd763b9b3c5d0e8ffd744ffed84f","firm":"Jane Street","techs":["FIX","Unix"]}
+{"id":"99583c97f9165538fec95cedc24d7945dd7e4597","firm":"Jane Street","techs":[]}
+{"id":"4a78ae8f6f79affbcddb5ae369c6153758b477f3","firm":"Jane Street","techs":["FIX","Unix"]}
+{"id":"84393e108d68a9092e77797a0a1ae59e93b9fbf1","firm":"Jane Street","techs":[]}
+{"id":"e8dcd1262a63c3184e722e7ac97e86a27ae28b8c","firm":"Jane Street","techs":["CSS","DOM","Vue","Angular","React","Flutter","Elm","ReasonML","PureScript","TypeScript","OCaml"]}
+{"id":"23f4e084ba9e12aef82ff5e1890edcf1e423ebc9","firm":"Jane Street","techs":["Workday"]}
+{"id":"b1ed8008cf023fd1283a5c0de4299c6821fbcd8b","firm":"Jane Street","techs":["FPGA","Hardcaml","OCaml","Verilog/VHDL","C","Chisel","PyMTL","Vivado","Quartus"]}
+{"id":"82512009f5b69f2440f83982e6b93aa7b18e6c96","firm":"Jane Street","techs":["Oracle","Ariba","Coupa","Workday"]}
+{"id":"62fede2c61fb4457b5c56df1a839a4e204368aa9","firm":"Jane Street","techs":["Workday"]}
+{"id":"df705bf2e303a2720b0728cd702bb44c76c99430","firm":"Jane Street","techs":[]}
+{"id":"5091f7f3d67349ec482a860080489771350fb276","firm":"Jane Street","techs":["Excel","Google Sheets"]}
+{"id":"e9e72d84b7daf958c7aeaf3826d95ea01075a79e","firm":"Jane Street","techs":["Excel","Google Sheets"]}
+{"id":"cbf594d8797df971714a750fe919af1f24bb45ff","firm":"Jane Street","techs":["Excel","Google Sheets"]}
+{"id":"2634a5ab1881536d37a036925a64bf37e113d9ba","firm":"Jane Street","techs":[]}
+{"id":"7736f3f640c56bd54385c3ed652fb3d1fb10884e","firm":"Jane Street","techs":["CSS","DOM","Vue","Angular","React","Flutter","Elm","ReasonML","PureScript","TypeScript","OCaml"]}
+{"id":"b8429c0d02bb348e516832b450a2296364f82d0b","firm":"Jane Street","techs":["Windows","Linux","PowerShell","Bash"]}
+{"id":"b9636a70ccf4e026d98e2e3af965ee664186609a","firm":"Jane Street","techs":[]}
+{"id":"a023169372d0a373e075e1bb14642b8822f6ef95","firm":"Jane Street","techs":["Windows","Linux","macOS","PowerShell","Active Directory","Group Policy","Bash"]}
+{"id":"96e3d758f2e99e6523cd5f952d3b6547416ab365","firm":"Jane Street","techs":[]}
+{"id":"ca23d7b4cb678859a5629a92b402b6ccb5326abd","firm":"Jane Street","techs":["Windows","Linux","macOS","Active Directory","Group Policy","iOS","Android","Omnissa Workspace ONE","Jamf","Chocolatey","Google Workspace","Bloomberg","PowerShell","Bash","Python"]}
+{"id":"101587be9b9e9715f4aa535b12bd40bf868375fc","firm":"Jane Street","techs":["Windows","Active Directory","Entra ID","PKI","PowerShell"]}
+{"id":"017f33c0d25077d30306e629e696e9be7b513c4c","firm":"Jane Street","techs":["PowerShell","Python","Windows","Active Directory","Entra ID"]}
+{"id":"36f55968b9f8f8562a53b386f23b361451f95942","firm":"Jane Street","techs":["Linux","OCaml","Unix","C","gdb","perf","DTrace","eBPF","SystemTap"]}
+{"id":"c1799030f8c9f863d389cb259ed83f2fb9f4463e","firm":"Jane Street","techs":["Linux","C"]}
+{"id":"fdcba2afd23b1b008b36238a588cde4773572d0a","firm":"Jane Street","techs":["Linux","OCaml","Unix","C","gdb","perf","DTrace","eBPF","SystemTap","PCIe","NVMe","NUMA"]}
+{"id":"6f9f82e22e1b02889e751845a575587cd9ec1aab","firm":"Jane Street","techs":["Linux","Unix","OCaml","C","gdb","perf","DTrace","eBPF","SystemTap"]}
+{"id":"03c742cf9fb8073bfc7081dd972e8468792c2be9","firm":"Jane Street","techs":["Linux","Unix","OCaml","C","gdb","perf","DTrace","eBPF","SystemTap"]}
+{"id":"d1092b27c794769fcdc8feec708c8b2d35ace7ee","firm":"Jane Street","techs":["Linux","OCaml","Unix","C","gdb","perf","DTrace","eBPF","SystemTap"]}
+{"id":"b078ec250fe12109b804e903fcf4be2b6963c910","firm":"Jane Street","techs":[]}
+{"id":"46f1765d3ce9076a078b6e05843088f67937d48e","firm":"Jane Street","techs":["Linux","OCaml","Unix"]}
+{"id":"693262fc92545ba5a1adf4521a5e66bf25e3fc45","firm":"Jane Street","techs":["PyTorch","JAX","TensorFlow"]}
+{"id":"a14df04403ff975a0f00e6c31b72bfe8724b8a00","firm":"Jane Street","techs":["PyTorch","JAX","TensorFlow"]}
+{"id":"fd6d43dcf1f55e1104f96ab4692245b062582362","firm":"Jane Street","techs":["Linux","OCaml","Unix"]}
+{"id":"6cc81db897a04996c282583ff9d1896151c53bb9","firm":"Jane Street","techs":["PyTorch","JAX","TensorFlow"]}
+{"id":"032ee925da39876c41df36eb4d19fe04c40a1930","firm":"Jane Street","techs":["Linux","Unix","OCaml","C","gdb","perf","DTrace","eBPF","SystemTap"]}
+{"id":"dbc574e1ab6fe7f46595033c8b62a92ff661dec2","firm":"Jane Street","techs":["OCaml","C","C++","Solarflare OpenOnload","TCPDirect","ef_vi","Exablaze","InfiniBand","DPDK","Java","C#"]}
+{"id":"162424d268630d2f24b9f339f38ed8571b426919","firm":"Jane Street","techs":["Python"]}
+{"id":"8702e7cf24fd08a4e7206b76ce9850d540a44033","firm":"Jane Street","techs":["Python"]}
+{"id":"8dba74e0d836616efab44cd1aa123111d65d2b2f","firm":"Jane Street","techs":["CUDA","PTX","SASS","CUDA GDB","NSight Systems","NSight Compute","Triton","CUTLASS","CUB","Thrust","cuDNN","cuBLAS","InfiniBand","RoCE","GPUDirect","PXN","NVLink","NCCL","MPI"]}
+{"id":"8f5ded118d7141775357a572a57b81cd50cacb1c","firm":"Jane Street","techs":["Python"]}
+{"id":"07a5a446ccf3128a7bbf589aa74005d1872c0afb","firm":"Jane Street","techs":["CUDA","PTX","SASS","CUDA GDB","NSight Systems","NSight Compute","Triton","CUTLASS","CUB","Thrust","cuDNN","cuBLAS","InfiniBand","RoCE","GPUDirect","PXN","NVLink","NCCL","MPI"]}
+{"id":"11969fc4eba87436da915e42e10866e46b3ad6e8","firm":"Jane Street","techs":["Python"]}
+{"id":"165005abb7695edd8480e09cd617085b1efece10","firm":"Jane Street","techs":["Python"]}
+{"id":"3aa359f7cca140dcbf0aafd3328092376502924c","firm":"Hudson River Trading","techs":["Unix","Python","SQL"]}
+{"id":"7104f44b8bd12f35abd86a95b2e6dd437e39bf78","firm":"Hudson River Trading","techs":[]}
+{"id":"e23cec16cf40060571e0d0ccb3acca94e62ec1af","firm":"Hudson River Trading","techs":["Python","SQL"]}
+{"id":"ef9ba336a08ac310a1dda55b8bb760f7f4fdf640","firm":"Jane Street","techs":["CUDA","CUDA GDB","Nsight Systems","Nsight Compute","Triton","CUTLASS","CUB","Thrust","cuDNN","cuBLAS","InfiniBand","RoCE","GPUDirect","PXN","NVLink","NCCL","MPI","PTX","SASS"]}
+{"id":"eeb5333a26aa3ab925475d60d9cdeb44693a6cc9","firm":"Hudson River Trading","techs":["Python","Pandas","NumPy","R","MATLAB"]}
+{"id":"5d52017abd7a5b53d4f15cbcfac870307279b82d","firm":"Hudson River Trading","techs":["Excel","Google Docs","Tradeweb","Bloomberg","Python","C++","SQL","R"]}
+{"id":"867c7caf5bd732dc0cb2bd59ef163debb31f5d71","firm":"Jane Street","techs":["Python"]}
+{"id":"f54e08e9c444925704c12fe3a9abca00abe79852","firm":"Hudson River Trading","techs":["Python","C++","Pandas","NumPy","R","MATLAB"]}
+{"id":"88b1670746e2536e7ba2e986275df819d78f83ab","firm":"Hudson River Trading","techs":[]}
+{"id":"b89d4ea27e493159b0e2012dcb827650ffcc23fa","firm":"Hudson River Trading","techs":["Python","C++","Pandas","NumPy","R","MATLAB"]}
+{"id":"4d014829604ba58dfb08e789a193c31edb53d910","firm":"Hudson River Trading","techs":["Python","C++","Pandas","NumPy","R","MATLAB"]}
+{"id":"ce9167d82471a9d78eb678ed7960d429a57795a9","firm":"Hudson River Trading","techs":["C++","Python","C"]}
+{"id":"8265ea9ed0c94efd7a31ce4cb2fae299fec3bdf6","firm":"Hudson River Trading","techs":[]}
+{"id":"804a498e4dbe23fd56457d54d341ecd90789ec22","firm":"Hudson River Trading","techs":["Python","Linux","SQL","PostgreSQL","SQL Server","MySQL","Refinitiv","Bloomberg"]}
+{"id":"c6a6db6c207ad57cab87de66f012d05557838204","firm":"Hudson River Trading","techs":["Python","NumPy","Pandas","PyTorch","TensorFlow"]}
+{"id":"b6aa70cfc8f7ffa4391b5484815ba7bc1e0b3cc9","firm":"Hudson River Trading","techs":["Linux","Debian","Ubuntu","SaltStack","Puppet","Ansible","Chef","CFEngine","Python","Bash","Jira","AWS","GCP"]}
+{"id":"9f1a6d3c9b3c4ed93286354259eb19a5a4dc8dd8","firm":"Hudson River Trading","techs":[]}
+{"id":"c9e7c3169eccddaad7f4bb5ce277d0cb2da51482","firm":"Hudson River Trading","techs":["C","C++","Python","Linux","UNIX"]}
+{"id":"cd2aec19ceed6b17eb84815cf6a537ddb48a688d","firm":"Hudson River Trading","techs":["Windows","Azure","PowerShell","Ansible","Terraform","Microsoft Graph API","Microsoft Intune","Autopilot","Entra ID","Active Directory"]}
+{"id":"396301fdd6b8f11d8ec3f7da42cb6e96d27d3bc0","firm":"Hudson River Trading","techs":["Workday"]}
+{"id":"c1d7415c0cd8fff12dd925dc4f7fa7d4d2d4702f","firm":"Hudson River Trading","techs":["Linux","Debian","Ubuntu","SaltStack","Puppet","Ansible","Chef","CFEngine","Bash","Jira","AWS","GCP"]}
+{"id":"15742075824b4e3824e5ef5b6b15ffd4768f552e","firm":"Hudson River Trading","techs":["Google Workspace"]}
+{"id":"466717da11817442448edee6ecacc9797a1bd89d","firm":"Hudson River Trading","techs":["PyTorch"]}
+{"id":"f171a48a3dca83b0aec5efe42478219860f1035c","firm":"Hudson River Trading","techs":["Python","SQL","Unix"]}
+{"id":"f212beb98dfd99085bb81ecd0e9662775742aaab","firm":"Hudson River Trading","techs":["Python","GCP","Azure","AWS","Linux","macOS","Windows"]}
+{"id":"c80923f5f084743213d694b9deb221314c07aa32","firm":"Hudson River Trading","techs":["SQL","Python","R","Workday","Excel","Google Sheets","Qualtrics","Culture Amp","Glint"]}
+{"id":"1a714024bea345deb2eaa1b63939b2cf661d2552","firm":"Hudson River Trading","techs":["Linux","Python"]}
+{"id":"7503d30baa084f3b679d1f814ba6a94165dc9b31","firm":"Hudson River Trading","techs":["CUDA","Triton","Pallas","CuTe","PyTorch","JAX","XLA","CUDA Graphs","FPGA","ASIC"]}
+{"id":"faaf222bc9e47b91090b7f7267d2646bad412a62","firm":"Hudson River Trading","techs":["Linux","Kubernetes","Python","Jenkins","GitHub Actions","ArgoCD","Terraform","SaltStack","Chef","Puppet","Ansible","AWS","Azure","GCP"]}
+{"id":"eb98138a7438ca388f609254f016a0c1101010ce","firm":"Hudson River Trading","techs":["Linux","Kubernetes","Python","NetApp","NFS","SMB","Windows","Jenkins","GitHub Actions","ArgoCD","Terraform","SaltStack","Chef","Puppet","Ansible"]}
+{"id":"e926db593f12a893234a5332f2faa0ba97f27b97","firm":"Hudson River Trading","techs":[]}
+{"id":"59487575d8b24ca31462027e607a7815a4e0786d","firm":"Hudson River Trading","techs":["CUDA","Triton","Pallas","CuTe","PyTorch","JAX","XLA","CUDA Graphs","FPGA","ASIC"]}
+{"id":"efd7f0678b3f196a04c66a55d07d3d90cec05766","firm":"Hudson River Trading","techs":["Linux","PCIe","Redfish","OpenBMC","Open Compute Project","MGX","CAD"]}
+{"id":"6500830207698c51a8185543ca298cfc61fb609e","firm":"Hudson River Trading","techs":["Jira"]}
+{"id":"b1f0681512a8c9fa185f2795c8c903441c4e7771","firm":"Hudson River Trading","techs":[]}
+{"id":"96e4a97dd521e3b0383120c28ee47cfa671228a3","firm":"Hudson River Trading","techs":["Python","Linux","Windows","macOS","Smallstep"]}
+{"id":"b9b50c9dfc53357a17bdb281dc05a7eb9fbb9bb2","firm":"Hudson River Trading","techs":["FPGA","ASIC","Slang","Verilator","Cocotb","SystemVerilog","UVM","Python","Linux","C++"]}
+{"id":"b4cf902b05900a92df51b9cb1e4244d01dae9a78","firm":"Hudson River Trading","techs":["Google Workspace","Slack","Okta","Python"]}
+{"id":"6340c887f031f6a990606af2b24b0791a6d81ce2","firm":"Hudson River Trading","techs":[]}
+{"id":"aab79bd8e1b22bf570ff00ea5516bf5c6d5f92bc","firm":"Hudson River Trading","techs":["FPGA","ASIC","Python","Tcl","Shell","Innovus","PrimeTime"]}
+{"id":"6fe418d92493064e0418576d1c912f34300bff66","firm":"Hudson River Trading","techs":["Python","Linux"]}
+{"id":"07e1c96ea43fa2e4013f34f6d6eff56f5ab0af67","firm":"Hudson River Trading","techs":["Python","Ansible","Terraform","SaltStack","Arista","Cisco","Juniper","tcpdump","Wireshark","AWS","GCP","Azure","Unix","Linux","Prometheus","Grafana","ELK"]}
+{"id":"26351926b22f3ad14b08d77075aeb2d80d9bc487","firm":"Hudson River Trading","techs":["Python","Pandas","NumPy","SciPy","TCP","UDP"]}
+{"id":"6a5da4e29b49d9cc71836301c5e16c7f5588d289","firm":"Hudson River Trading","techs":["Python","Ansible","Terraform","Saltstack","BGP","MPLS","OSPF","IS-IS","Arista","Cisco","Juniper","tcpdump","Wireshark","AWS","GCP","Azure","Unix","Linux","Prometheus","Grafana","ELK","DWDM"]}
+{"id":"5443e6e64ab038bf33ede565017040918da37ceb","firm":"Hudson River Trading","techs":["Workday","Workday Financials","Workday Extend","Adaptive Planning","Workday Prism","Workday HCM","Workday Studio","EIBs","SOAP","REST","WQL","Jira"]}
+{"id":"630f0fad2ba31b4605bcda9f48c01d470e1ac0cf","firm":"Hudson River Trading","techs":["Okta","Google Workspace","Jira","Microsoft 365","Slack","Zoom","macOS","Linux","Windows","Git"]}
+{"id":"44f7a7ec684c2113b97d30e6b343f5d20d0e6e03","firm":"Hudson River Trading","techs":["Linux","Bash","Python"]}
+{"id":"cf8a6c94df91973c797c11fbaf27fa4c4f0007a7","firm":"Hudson River Trading","techs":["Python","C++","Pandas","scikit-learn","PyTorch"]}
+{"id":"0323a5ecb3154fe357c8ab806a086a5c1261fb72","firm":"Hudson River Trading","techs":["Python","NumPy","PyTorch","TensorFlow"]}
+{"id":"9e50c789310214ddee74fab0af6eaa68bfe6bec7","firm":"Hudson River Trading","techs":["Linux","UNIX","Python","Shell","Debian","Ubuntu"]}
+{"id":"c0045b876946f29b516775cf44d0e3d1d2024e15","firm":"Hudson River Trading","techs":["Python","C++","JavaScript","TypeScript","React","UNIX","Linux","MCP"]}
+{"id":"058a6d5de0bcb17b245a669df6323d3c597c4f44","firm":"Hudson River Trading","techs":["Python","Linux","Unix","Debian"]}
+{"id":"6dd26f325b4877ee27c1298bc9696c0d41f19d6a","firm":"Hudson River Trading","techs":["Python","Jupyter"]}
+{"id":"a4be80b778239a3f95a80fc906d7e0c157bd87c9","firm":"Hudson River Trading","techs":["Python","React","JavaScript","TypeScript"]}
+{"id":"b29645ba2b63cf9508d8aa9ee36ff5a3e56f2b81","firm":"Hudson River Trading","techs":["C++","Python","Linux"]}
+{"id":"ed09711df03ffee79ba4c1c7544964ad72157c78","firm":"Hudson River Trading","techs":["PCIe"]}
+{"id":"d8dbe2cbdb527b2d790c42e7daa2bd7c1364adb9","firm":"Hudson River Trading","techs":["C++","Linux","UNIX","FPGA","ASIC"]}
+{"id":"1b70fba55298f2191158c310cce73abe1e8e84ba","firm":"Hudson River Trading","techs":["Unix","Bash","Python"]}
+{"id":"cd65c48831d627a7ec49e431b7f0d71dda0318f7","firm":"Hudson River Trading","techs":["Python","Linux","SQL"]}
+{"id":"78a5199c4da5071ff1873b71eb8a4e4a7e2957c9","firm":"Hudson River Trading","techs":["Python","AWS","GCP","Azure","Ansible","Salt","Linux","Unix","Prometheus","Grafana","ELK","GitHub","tcpdump","Wireshark","Arista EOS","Cisco NX-OS","Cumulus","SONiC","OSPF","BGP","PIM","IGMP","RoCEv2","VXLAN"]}
+{"id":"fe28fe6d54f4c6a8ec136aef117a4d47373a7f50","firm":"Hudson River Trading","techs":["Lustre","CephFS","GPFS","NAS","Isilon","VAST","NetApp","Pure","Linux","NFS","ZFS","Python","Bash"]}
+{"id":"d7e48042e8582f3910856f07bd40226d49619338","firm":"Hudson River Trading","techs":["Linux","Python","CUDA","C","C++","NCCL","GPUDirect RDMA","NVLink","Salt","Ansible","Puppet","Chef"]}
+{"id":"4d727035349b9e24babb9b76bad20e4cacd797dc","firm":"Hudson River Trading","techs":["C++","Python","Linux"]}
+{"id":"e359f14d34b2858ed43a6abdd0f72fb7c14f9bdd","firm":"Hudson River Trading","techs":["PyTorch","JAX","C++","FPGA","ASIC"]}
+{"id":"3df52b4a582a7df919c30f71d9b303d8f2b2812f","firm":"Hudson River Trading","techs":["UNIX","Python","Perl","Bash"]}
+{"id":"980cea4d795b422fc7160ff51251f7412c634938","firm":"Hudson River Trading","techs":["C++","Linux","UNIX"]}
+{"id":"acbf3990aff54667768e6867cce6c7611b7b50cc","firm":"Hudson River Trading","techs":["GoodTime","Greenhouse","Google Suite"]}
+{"id":"8cabbb4256d3185a7e0a1778846711f7512c6b09","firm":"Hudson River Trading","techs":["C++"]}
+{"id":"0183963e9c020d20c5aed845368b36bcbaf6f79f","firm":"Hudson River Trading","techs":["Python","C++"]}
+{"id":"d905a81745bad72c5472d42f734ce86b50b82638","firm":"Hudson River Trading","techs":["UNIX","Python","Perl","Bash"]}
+{"id":"ecb2f95c5ed8e0a8f89690f249df51fe434b6f18","firm":"Hudson River Trading","techs":["FPGA","ASIC","SystemVerilog","Python","C++","Linux","AMD Vivado"]}
+{"id":"59aac0fb33eb9ad845553baa3cfb81a44e057811","firm":"Hudson River Trading","techs":["C++","UNIX"]}
+{"id":"074adc1a1d89bf059eaede895b004dfe2938a0d1","firm":"Hudson River Trading","techs":["Python","C++","Linux","UNIX"]}
+{"id":"4ae6c9b9298721d80fa9db654a3fe6b19b1ebf7e","firm":"Hudson River Trading","techs":["C++","UNIX"]}
+{"id":"9f0ade67-a8d3-405a-b668-2344dda5ceac","firm":"Two Sigma","techs":[]}
+{"id":"3a38bc48-b21c-4f24-bd82-f41c625407c1","firm":"Two Sigma","techs":[]}
+{"id":"143e7000-93b8-4106-8d35-5ee3b41d982a","firm":"Two Sigma","techs":[]}
+{"id":"b344b6d6-13c2-40ad-98f4-52d89dbca77e","firm":"Two Sigma","techs":["Python","Rust","Java","C++","TensorFlow","PyTorch","JAX"]}
+{"id":"9270dae0-9f45-47a4-9629-3b1cc15d8fb1","firm":"Two Sigma","techs":[]}
+{"id":"da856f86843a2eadd98fb8c21eae27c43fce2b00","firm":"Hudson River Trading","techs":["Arista","Cisco","Adva","Ciena","tcpdump","Wireshark","Linux","Palo Alto","Fortinet","Ansible","Salt","Python","Prometheus","Grafana","ELK","GitHub","AWS","GCP","Azure"]}
+{"id":"5855474f-c09e-4214-abd3-2255e17ef2c1","firm":"Two Sigma","techs":["Python","Java","C","C++"]}
+{"id":"68792732-dd72-44d8-a9e1-c6c07405006a","firm":"Two Sigma","techs":["Linux","Python","Java","C++"]}
+{"id":"eea3cb64-636c-4065-b02a-de69e998859a","firm":"Two Sigma","techs":[]}
+{"id":"c9acfedd-05b7-426a-b0ea-5360ee04c8dc","firm":"Two Sigma","techs":["Python","SQL"]}
+{"id":"fda579a4-2c62-4566-8545-f460a1fb3d3e","firm":"Two Sigma","techs":["Python"]}
+{"id":"a1266c66-bab9-44cb-b805-6dc4bd5bbaa2","firm":"Two Sigma","techs":[]}
+{"id":"d64d4b65-8ba1-4efe-8ecd-b06163ca08f9","firm":"Two Sigma","techs":["Linux","Debian","Python","Go","FPGA","Kubernetes","C"]}
+{"id":"b54147ea-137f-4762-87b5-019cef8db458","firm":"Two Sigma","techs":["Python","Java","SQL","Spark","Linux"]}
+{"id":"5ccbdada-5d9c-465a-b6b9-59184569d618","firm":"Two Sigma","techs":["C","C++","Java","Python"]}
+{"id":"a77d10a4-1b9b-4cf2-a08c-e16ca243ee8c","firm":"Two Sigma","techs":[]}
+{"id":"0677d2b8-d94f-42dd-ab73-3d4efeb4b8eb","firm":"Two Sigma","techs":["C","C++","Java","Python"]}
+{"id":"4e717c30-b048-4bfa-ad37-06a2fc19aa2c","firm":"Two Sigma","techs":["Python","Java"]}
+{"id":"da280145-60ff-43cb-bffe-b425b53d8a6c","firm":"Two Sigma","techs":["NumPy","SciPy","scikit-learn","Python"]}
+{"id":"00289335-be92-4ac1-af26-ffc71fe472c2","firm":"Two Sigma","techs":["Rust","C++","Python","C"]}
+{"id":"1aed7faf-77c2-4652-b5e0-a356ea0201c2","firm":"Two Sigma","techs":[]}
+{"id":"2dedc5e5-59c1-46ca-a40b-a4559efa33f6","firm":"Two Sigma","techs":[]}
+{"id":"0ff1c7c6-cb6b-4d19-b40b-92ff8f4e1174","firm":"Two Sigma","techs":["Python","CUDA","PyTorch","TensorFlow","Hugging Face"]}
+{"id":"b0c8bd04-3571-4f84-9e04-65882736bfed","firm":"Two Sigma","techs":["Python","PyTorch","TensorFlow"]}
+{"id":"637346ca-3d94-4014-8df9-0908c9eb3e9d","firm":"Two Sigma","techs":["Python","Java","C","C++"]}
+{"id":"1ea4aeb4-eea7-4c73-8408-e08c3ec249dc","firm":"Two Sigma","techs":["Workday","Slack","Microsoft Outlook","Microsoft Office","Google Workspace"]}
+{"id":"f993f20b-e118-490e-bbb1-bb7a6a8d8c26","firm":"Two Sigma","techs":["Python","Java","C++","SQL"]}
+{"id":"96214c10-9f61-4bdc-a03c-f2308b56ad6f","firm":"Two Sigma","techs":["Java","Python","C","C++"]}
+{"id":"fd72898c-5f62-40fa-af77-d76a8abe9a63","firm":"Two Sigma","techs":["Python","Go","GCP","AWS","Azure","Docker","Kubernetes","SQL","C","Bash"]}
+{"id":"ade42a66-23f7-47c6-ab1d-1d217962cae7","firm":"Two Sigma","techs":["Linux","Python","Java","C++"]}
+{"id":"f9c5a256-1440-4073-a041-4ea4006c91c7","firm":"Two Sigma","techs":["C","C++","Rust","Python"]}
+{"id":"17e863ca-9881-4194-a9e1-d76f1056bc00","firm":"Two Sigma","techs":[]}
+{"id":"eda4754e-ef04-43b9-a392-66037179bfab","firm":"Two Sigma","techs":["Python","Java","C","C++"]}
+{"id":"ec9de089-d646-4c7f-9a06-645772c992fa","firm":"Two Sigma","techs":["Python","Java","C","C++"]}
+{"id":"21f9c72b-d3ae-4577-875b-e0a3a516c883","firm":"Two Sigma","techs":["Java","Go","Python","SQL","Docker","Kubernetes","GCP","AWS","Azure"]}
+{"id":"983aa550-6ed8-4686-901d-e34770dfe520","firm":"Two Sigma","techs":[]}
+{"id":"4a32333f-655e-4085-a7c9-365ff4b58a82","firm":"Two Sigma","techs":["SQL"]}
+{"id":"422a608d-4c04-4195-bf7f-a603bd8cb0bf","firm":"Two Sigma","techs":[]}
+{"id":"828845c9-32db-4823-a848-6a16c22bc0c4","firm":"Two Sigma","techs":["Jira","Python"]}
+{"id":"afdfbb96-c021-4e24-b8c7-c71ecd4477fe","firm":"Two Sigma","techs":["Python"]}
+{"id":"40f63aae-5d00-4697-a8c0-c482b81cdc74","firm":"Two Sigma","techs":["Python","SQL"]}
+{"id":"1247b634-9387-44ac-83df-3b02dfc03f3c","firm":"Two Sigma","techs":["Python","Ruby","JavaScript","Linux","Unix"]}
+{"id":"91560690-ddb4-4da3-97ee-ce4013acc83d","firm":"Two Sigma","techs":["C","C++","Java","Python"]}
+{"id":"912f136d-980b-4780-aa98-da64f6350e7d","firm":"Two Sigma","techs":[]}
+{"id":"7b13cc70-17f9-4c6b-a0ea-dd91c6b45a10","firm":"Two Sigma","techs":[]}
+{"id":"8d8818bb-4b06-487b-b292-5e804bc36344","firm":"Two Sigma","techs":["Python","Rust","Java","TensorFlow","PyTorch"]}
+{"id":"a4fdf50b-7f26-4fcd-ba50-cf3db502d333","firm":"Two Sigma","techs":["Python","Java","C++","Rust","Linux","Unix"]}
+{"id":"634753ea-6488-4bc6-94da-ee612ec7fc22","firm":"Two Sigma","techs":[]}
+{"id":"adc42350-dc0a-4754-b3fa-2fb3ad08e28c","firm":"Two Sigma","techs":["C","C++","Java","Python"]}
+{"id":"e6f2359c-f68a-4721-88ec-88378d6f2fc8","firm":"Two Sigma","techs":["FPGA","ASIC","SystemVerilog","Python","C++"]}
+{"id":"93e923d8-8d18-4158-98ba-d5339fdb49c8","firm":"Two Sigma","techs":["Python","Java","C++","Linux"]}
+{"id":"5ffd8731-8264-4219-a04e-44611638f680","firm":"Two Sigma","techs":["Linux","SQL","Bash","Python","Windows","Unix"]}
+{"id":"68050bae-e91b-4306-b90b-b24ce110d5e1","firm":"Two Sigma","techs":["Python","NumPy","Pandas","scikit-learn","CuPy","RAPIDS","cuDF"]}
+{"id":"5eb5ce40-aeb7-4010-b367-25ac38898b19","firm":"Two Sigma","techs":["PyTorch","JAX","DeepSpeed","FSDP"]}
+{"id":"a916f60b-b250-446c-9e8d-63e8caf62a3c","firm":"Two Sigma","techs":[]}
+{"id":"94eef298-cdef-4d5a-9c9d-234167965c8a","firm":"Two Sigma","techs":["C","C++","Java","Python"]}
+{"id":"1b1d6830-63c7-489d-a9e2-339adf868083","firm":"Two Sigma","techs":["CUDA","Nsight Systems","Nsight Compute","RAPIDS","CUTLASS","cuBLAS","TensorRT","C++","Python","NCCL","MPI","cuDF"]}
+{"id":"4f06969f-0955-4fcf-966f-76d235660aca","firm":"Two Sigma","techs":["MCP"]}
+{"id":"871259391045af28b79d1c48a20888fb2f026b93","firm":"Optiver","techs":["Python"]}
+{"id":"654c1fa07834d2b31222a827b72a37acfeeee649","firm":"Optiver","techs":[]}
+{"id":"13184554-a1db-42ff-8d6d-442e25a3e9ce","firm":"Two Sigma","techs":["C++","Python","FPGA","PTP"]}
+{"id":"a9efa043b5cbe10a9d986b051840593cf7b6d73c","firm":"Optiver","techs":["Coupa","Rossum","NetSuite","Concur","OneStream"]}
+{"id":"4b77f8f8-44bd-46a6-a4a1-23ba046da356","firm":"Two Sigma","techs":["SQL","Linux","Git","JUnit","Java","Python","React","SwiftUI"]}
+{"id":"2352dc66c6ec03b67795e8ac291d18eb074322f2","firm":"Optiver","techs":["C++"]}
+{"id":"55d18ce3e683025ffca36c35ebd440b0b3a2a8ba","firm":"Optiver","techs":["Excel","Greenhouse","LinkedIn Recruiter"]}
+{"id":"d971cf549eb02bbc18edf0fd8ea376645ee69189","firm":"Optiver","techs":["Greenhouse","LinkedIn Recruiter","Excel"]}
+{"id":"0fa71b0d984372f1d34f22a1e509618d530bd073","firm":"Optiver","techs":[]}
+{"id":"3551bdcdabe876d310337101513a67be544eda8f","firm":"Optiver","techs":["Microsoft 365","SharePoint Online","Exchange Online","Entra ID","Azure AD","Entra ID Connect","iOS","Android","Azure","Log Analytics","KQL","PowerShell","Microsoft Graph","Azure CLI","Terraform","GitHub","Intune","Microsoft 365 Defender","Purview","Logic Apps","Power Automate"]}
+{"id":"6621f16dc7756426d6bc2c51e280de5f6c8fa41e","firm":"Optiver","techs":[]}
+{"id":"ba969d8f044f9e7556a2f6660c849c697fc0024b","firm":"Optiver","techs":["OSTTRA","Acadia","CloudMargin","SWIFT"]}
+{"id":"97030e5ded2c4de4842cca29bfc1c2fe1369bc63","firm":"Optiver","techs":["Bloomberg"]}
+{"id":"932e036c5b58edb69ad3eb85ce0a31c8a797d900","firm":"Optiver","techs":["Python"]}
+{"id":"45f0c3d95d6a647d6cc2daf4213f6c0f4475d02d","firm":"Optiver","techs":[]}
+{"id":"26cd623af096a017b0ef5c97e384ffeda51c0b4f","firm":"Optiver","techs":["Linux","Python","PostgreSQL"]}
+{"id":"ea665f955744cf71797e3dde57385b8d43abf880","firm":"Optiver","techs":["C++","Python","Java"]}
+{"id":"91c72c5741abf64f8960e5d97e6df984e45c372a","firm":"Optiver","techs":[]}
+{"id":"2728c8567b3375b587e30415113ae54286f2c851","firm":"Optiver","techs":["FPGA","ASIC","Verilog/VHDL","SystemVerilog"]}
+{"id":"607d545610887aee50e79f899cb5247265fb9c37","firm":"Optiver","techs":["FPGA","ASIC","Verilog/VHDL","SystemVerilog"]}
+{"id":"6d61157f3be5bcfd08e3f9df4458d2e36a1d299f","firm":"Optiver","techs":["Bloomberg","Refinitiv","IHS Markit","Totem","ICE"]}
+{"id":"09c2698d228170e1fb45615ad89d176fb824c9a7","firm":"Optiver","techs":["FPGA","Verilog/VHDL","SystemVerilog","ASIC"]}
+{"id":"83e96cba95c21447bbb4b877ff8d28c15888f856","firm":"Optiver","techs":["Greenhouse","Confluence","Microsoft Office Suite","Microsoft Outlook"]}
+{"id":"0dbe103c0312b1e0312cadb5209d4aedbe8d7d72","firm":"Optiver","techs":["Bloomberg"]}
+{"id":"86180844815974282623f542a6eadb7cd74c11c1","firm":"Optiver","techs":["Python","Rust","C","C++","CUDA"]}
+{"id":"1811d3b8674327447e5599f3049654e35e4cf526","firm":"Optiver","techs":["Coupa","SAP Ariba"]}
+{"id":"8e921ddbde792e0e95b52dda6c54566fb469d7ce","firm":"Optiver","techs":["Python"]}
+{"id":"c39e52bd3c68566a33a756f49af43b287e48b8e9","firm":"Optiver","techs":["Python","C++","Spark","Polars","Airflow"]}
+{"id":"89685d3839955854979d1e534d3f31d572c29aa7","firm":"Optiver","techs":["SQL","Python"]}
+{"id":"610e7950d0792cbfcf3dab59e4c864ac87e5635f","firm":"Optiver","techs":["C++","Python","Delta Lake"]}
+{"id":"6d03bddd100710dfc759c58c3e6220b72ac8a08d","firm":"Optiver","techs":["Greenhouse","LinkedIn Recruiter","Excel"]}
+{"id":"e129d31889a285fd5a2121c79391d1cdb51d09f9","firm":"Optiver","techs":["Active Directory","Confluence","DHCP","DNS","Exchange","Group Policy","Intune","Jira","Linux","Office","PowerShell","Python","SCCM","Slack","SQL","VMware","Windows OS","Windows Server","Zoom"]}
+{"id":"ac58ab47b12ceb7d97ad73783fcef9bb57e8420f","firm":"Optiver","techs":[]}
+{"id":"e6e1981ff7a6fcb25d47baa4354fe7f121086b34","firm":"Optiver","techs":["C++","Python","Java"]}
+{"id":"0c7511d2cc02a274a4ef081496c8bcd71cfdd48d","firm":"Optiver","techs":["C++","Python","Java"]}
+{"id":"7cf98d509f00fcbefa36f27cedc52d36e74875ea","firm":"Optiver","techs":["C++","Python","Java"]}
+{"id":"c491ec7c3dbbbaa49092413f6d2e961d6a73a75d","firm":"Optiver","techs":["C++","Python","Java"]}
+{"id":"fbb97a6c87492de8a6a7603dd601d9f0575e0f1c","firm":"Optiver","techs":["Python","asyncio","Git","Confluence","Slack"]}
+{"id":"05eb712c301b2d9bf5561f7ef2c08bd3744d8891","firm":"Optiver","techs":["Databricks","dbt","SQL","PySpark","Unity Catalog","DataHub","Databricks Genie","Delta Lake"]}
+{"id":"270c957465eb7213fe761130fc76a70d4805c5aa","firm":"Optiver","techs":[]}
+{"id":"69ff5ee62ba97b4509a5f5027f3825fc3140065e","firm":"Optiver","techs":[]}
+{"id":"9b9e96fdd76298f37b9b4ad87b4cbf1738091503","firm":"Optiver","techs":["Databricks","dbt","SQL","PySpark","Unity Catalog","DataHub","Databricks Genie","Delta Lake"]}
+{"id":"6e261f30ec94ac3608a6d041b883cce93b57a4bf","firm":"Optiver","techs":[]}
+{"id":"7afe2e5675e225332feaca04c790ee8d11dcfcc9","firm":"Optiver","techs":["Python"]}
+{"id":"62cdb94418f3e8469830b2fc7134c2dcffdc3104","firm":"Optiver","techs":["Anthropic","Bedrock","Vertex","GLM","DeepSeek","Qwen","Kimi","Alicloud","GPU"]}
+{"id":"7c5470a35661b7b0cfec70b5ecba891e79818783","firm":"Optiver","techs":[]}
+{"id":"d71ae3a7cdfa3e60f451423ca944ddab672b6533","firm":"Optiver","techs":[]}
+{"id":"8703cbaa88fcca4f870f8e815ad2337ab0b7cbee","firm":"Optiver","techs":["C","C++","Linux","FPGA"]}
+{"id":"37dc4ae2fb67b4eb5e310db1daaee3d3b209cb25","firm":"Optiver","techs":[]}
+{"id":"63c0d3ecdb6aafd948a194a8ade08cd38b637918","firm":"Optiver","techs":["C++","Git","Linux"]}
+{"id":"3022e81735454f657e85e51004e789f379822415","firm":"Optiver","techs":["Greenhouse","Microsoft Office Suite","Microsoft Excel"]}
+{"id":"2f8a58823f6b66a7b5c2c585392bf074563d3e95","firm":"Optiver","techs":[]}
+{"id":"f29a7257731f1e55850e565b549a4bb9600cb086","firm":"Optiver","techs":["Cisco","Arista","Juniper"]}
+{"id":"763a82c00a93f6123653f206c3377a29974013fd","firm":"Optiver","techs":["Linux","Python","PostgreSQL"]}
+{"id":"1a8b9e2436ecddb364084544ecad2245f06663ca","firm":"Optiver","techs":[]}
+{"id":"136e1dda62b962f5960a4811e114a8e7b425b962","firm":"Optiver","techs":["Unix","TCP","UDP","OSPF","BGP","Multicast","Git","Terraform","Ansible"]}
+{"id":"b8ae95fadc28a20336a7eda902cb0abffe00aa37","firm":"Optiver","techs":["Python","C++"]}
+{"id":"2bd52e37e29816bfdd87e875151972081b26ae58","firm":"Optiver","techs":["Cisco","Arista","Juniper"]}
+{"id":"5f49b104984760909e6301e430e99eda453b1baf","firm":"Optiver","techs":["Python"]}
+{"id":"bd25afc1264ba74402b78b87831ab8e8b708ce47","firm":"Optiver","techs":["C++","Java","Python"]}
+{"id":"d161961fe353c4ed12297a07c5b6c2cfce942a4a","firm":"Optiver","techs":["FPGA","ASIC","Verilog/VHDL","SystemVerilog"]}
+{"id":"58b1c07ba6c79847adce67f5f1d0e7b7f28fd1a8","firm":"Optiver","techs":["C++"]}
+{"id":"7d5d405ded3c7752a67dd0e800309f29344dd3e0","firm":"Optiver","techs":["Arista","Cisco","Unix"]}
+{"id":"32c97168e52f261828caa129c704f07d3db461de","firm":"Optiver","techs":[]}
+{"id":"f4ceddbcb7a13702c38bc3bd8a7e5e38069d480f","firm":"Optiver","techs":["Workday"]}
+{"id":"3d2673480c1f9d40eac2de66c8d3f3f18b4aa5b8","firm":"Optiver","techs":[]}
+{"id":"967dab66e51bc4b223d48c10643119682012521b","firm":"Optiver","techs":[]}
+{"id":"90905794c1843caaf50c6d22c02802b41d45ed02","firm":"Optiver","techs":[]}
+{"id":"62b5933d318216d9af30f088a2f404fb1ad0ef3f","firm":"Optiver","techs":[]}
+{"id":"a5fb49fc84e3638ba8912a177146a9050615f24f","firm":"Optiver","techs":["C++","C","FIX"]}
+{"id":"0782608d3244c1ab45893a54fd7842342c4a6054","firm":"Optiver","techs":[]}
+{"id":"639b1c24526b4a14f7af09cfa790b5ce66308ed7","firm":"Optiver","techs":["SQL","Python","Databricks","Excel","Oracle","SAP","NetSuite"]}
+{"id":"9ad1cb7632940b1d6e2be959c6ffa81e72db2b5f","firm":"Optiver","techs":[]}
+{"id":"36537a17904be4241c182555e5c4accc5f029642","firm":"Optiver","techs":[]}
+{"id":"d96fe5f03cb300d1bcda53f83069b3cc3c3b156a","firm":"Optiver","techs":[]}
+{"id":"3a7ffb5220e61d3a551b9926f6be9576a986a6fe","firm":"Optiver","techs":["Databricks","DataHub","Databricks Genie","dbt","Delta Lake","PySpark","SQL","Unity Catalog"]}
+{"id":"e16ddaf1f55e107e6e8b0dc756f052e96962a322","firm":"Optiver","techs":[]}
+{"id":"64b8c98431cd8c0a6e74fe05e11830a7cb795d91","firm":"Optiver","techs":["Python","Claude Code","Cursor","ChatGPT"]}
+{"id":"7b619044c3113052548fb8030ec10d34546e31ae","firm":"Optiver","techs":["C++","Linux","Python"]}
+{"id":"b7449655f3de4f6c381b4dcb5e42d1a832db8355","firm":"Optiver","techs":["Python"]}
+{"id":"a19d660af204e66529e39ba50c8a8bdc2c9d0442","firm":"Optiver","techs":["C++","Linux","Python"]}
+{"id":"d183e708c087c353798b54dca5c102d0f00faa75","firm":"Optiver","techs":["C++","C","C#","Python"]}
+{"id":"d575d2f04f9f764f65e1e1b7b8ba7fd414d60c7a","firm":"Optiver","techs":["Python"]}
+{"id":"7e55e92db5c0b7afc4fdef31f2b964e6ef47e789","firm":"Optiver","techs":[]}
+{"id":"088103dc7af33bb1bd36cb269a336b8ba02a9ca7","firm":"Optiver","techs":["Linux"]}
+{"id":"f6f2a37c33dd80f249352f3de008304b7dd38551","firm":"Optiver","techs":["C++","Java","Python"]}
+{"id":"e2821b9edd9e59c8a4be76b60d28c55091a819b7","firm":"Optiver","techs":["Python"]}
+{"id":"2163fbafa12533703c620c56c86df98d140c971c","firm":"Optiver","techs":["AWS","Microsoft 365","Entra ID","Microsoft Purview","Microsoft Defender","Defender for Endpoint","Defender for Identity","Defender for O365","Python","PowerShell","Graph API","GuardDuty","CloudTrail","Security Hub","AWS Config","KMS","Windows","Linux","TCP/IP","DNS","Git","SAML","OAuth","OIDC"]}
+{"id":"b2313d67faa51e173dc728a9ec9eddf23d280488","firm":"Optiver","techs":["Python","ADS","AWR","HFSS","CST","Spice","FPGA"]}
+{"id":"489323afa232b8bf5497a62f8f6f014ced7d1e8c","firm":"Optiver","techs":["Greenhouse","Microsoft Excel","Microsoft Office"]}
+{"id":"8916c710b56031486ebd85bc9025a206db411f7a","firm":"Optiver","techs":["C++","Python","Spark","Databricks"]}
+{"id":"9de78902d2c305dea830b156e501188793887261","firm":"Optiver","techs":["Coupa"]}
+{"id":"155a22b6fc33599d8d5afcecd9cc88ec14a2648e","firm":"Optiver","techs":["PyTorch","TensorFlow","Keras","Python"]}
+{"id":"8335ce252879ee6a5a17c17a989239a71e647b2c","firm":"Optiver","techs":[]}
+{"id":"2220d35956194a7e3f197de444727af5ebf1a11b","firm":"Optiver","techs":[]}
+{"id":"11a8b8331ecf64ede0703f99a52edbe4adec4192","firm":"Optiver","techs":["Bloomberg","Refinitiv"]}
+{"id":"5638fd93e0cc5c7779efbf1949f1c44af71f253d","firm":"Optiver","techs":[]}
+{"id":"608861a6afe3612add440850b525ca971b938e3d","firm":"Optiver","techs":["AWS","GCP","Azure"]}
+{"id":"01b9c0987adc84d96ea946a047b7a9d54fb88eec","firm":"Optiver","techs":["Python","PowerShell","Terraform","HCL","VMware","Windows Server","NetApp","Active Directory","DNS","SCOM","Telegraf","InfluxDB","Grafana","Prometheus"]}
+{"id":"f4fbfee91203bf6a1729154f94739cb11e79efe9","firm":"Optiver","techs":[]}
+{"id":"d526cf91dd80b714336710952bafc53e670765a1","firm":"Optiver","techs":[]}
+{"id":"1bf6a594a5e53249ace250854c8f192047c165ad","firm":"Optiver","techs":[]}
+{"id":"0d227dca677c31829788aab0b4fa0ddeae2a0cba","firm":"IMC","techs":["Java","C++"]}
+{"id":"d6c4850075b553411b49d4e1a0d14e13d48e9d18","firm":"IMC","techs":["C++","Java","Python"]}
+{"id":"1b4942508aa830618a4260f11eb601e79f7f3224","firm":"IMC","techs":["Microsoft Excel","Workday","PayFactors","Salary.com"]}
+{"id":"3263157bac2476519be8f21249a86cb257104c76","firm":"IMC","techs":["Python"]}
+{"id":"ee0ad61e53a910aa719af96a60294b8ab5d83ce5","firm":"IMC","techs":["Python","MATLAB","C++"]}
+{"id":"795af07df3f70b0215108e9e0f1ceca12f9beb9e","firm":"IMC","techs":["Python","MATLAB","R"]}
+{"id":"07617f9adcea0893a38b332164834e4d635898f0","firm":"IMC","techs":["Python","MATLAB","R"]}
+{"id":"ac9de3940837d9645cd080301d6813ad348172cf","firm":"IMC","techs":["Python","MATLAB","R"]}
+{"id":"4f3d2c846b9556483b106e27c9537ed8908dd5c3","firm":"IMC","techs":["C++","Java"]}
+{"id":"4780a65810c4bdc57d79028ec4bafdb4b3f15632","firm":"IMC","techs":["C++","Java","Python"]}
+{"id":"e9c04486f994c45be5a9b5826ac6ed81b5e94af7","firm":"IMC","techs":["FPGA","Verilog/VHDL","SystemVerilog","C++","Python"]}
+{"id":"6ba95ce9cdc0371b5d37cf0a4a8640fe0481e355","firm":"IMC","techs":["Python","SQL"]}
+{"id":"704962eee97390d5d118eaf7c72551ea5f2f64f3","firm":"IMC","techs":["Python"]}
+{"id":"cabff0dc88ffa97ddfcf1bc50da5c8ee6294322e","firm":"IMC","techs":["Excel","Python"]}
+{"id":"a0b6f1b68dd927897ea4235ad58805fc0f9c4464","firm":"IMC","techs":["C++","Java"]}
+{"id":"725a8ba791a535298745deb5941e498c89f7f8f3","firm":"IMC","techs":["C++","Java"]}
+{"id":"86052f96366765f3736841b305b96b401b269bb2","firm":"IMC","techs":["C++","Java"]}
+{"id":"a87a7f5c29d460e248ab83461bd3a9b023d879b6","firm":"IMC","techs":["Python","MATLAB","R"]}
+{"id":"f85d40df0263fa30ba5328ccd75bb83490876930","firm":"IMC","techs":["Neeyamo","Workday","ADP","Ramco"]}
+{"id":"b7572bfb900b7e2ae53398fa564be380ccdab096","firm":"IMC","techs":[]}
+{"id":"e82b8cbeb6f2a9c43177b9e7352ed68daf67cd69","firm":"IMC","techs":["Excel","OneTick","SMARTS","NICE Actimize","Trading Technologies","First Derivatives"]}
+{"id":"9427cb967b987fb482cc43a05a7d99630479b5de","firm":"IMC","techs":["Python","C","C++"]}
+{"id":"ee6fab8b2a160fed2b1c02a893e2bd1af143cda9","firm":"IMC","techs":["Workday"]}
+{"id":"a7f16b89c93004e3e9fd14327f6aafeb8eb8505d","firm":"IMC","techs":["Excel","Bloomberg","Python"]}
+{"id":"eaa59bd55df113a6d3638fa707a5fb816d43dfa2","firm":"IMC","techs":["Active Directory","Linux","macOS","Office 365","Windows"]}
+{"id":"9654c65aa1cffa2c50c283004520d651c5d9d0ec","firm":"IMC","techs":["Python","PyTorch","TensorFlow","JAX"]}
+{"id":"463753af8dfd746b56a5089cc28acbc08b5489ef","firm":"IMC","techs":["Workday"]}
+{"id":"8df25428a439fd28978c52e655d481d85fb5e3d5","firm":"IMC","techs":["Python","C","C++"]}
+{"id":"2d2c30077659339923c282f7f0dce0452d1c8594","firm":"IMC","techs":["Python","C","C++"]}
+{"id":"ed73df9924e424fa773d368a12bf923c245af49c","firm":"IMC","techs":["Python","Java","React","SQL"]}
+{"id":"7d1a33bfc138b4f3d17ac3cb66e9a34f73be8ee6","firm":"IMC","techs":["Python","PyTorch","TensorFlow","JAX"]}
+{"id":"f638f4557dccf1171a9d1c5f6f6dd99639d26c17","firm":"IMC","techs":[]}
+{"id":"77a3fe9e9895cb372911f089c4579fc8da09482b","firm":"IMC","techs":["Python","C","C++"]}
+{"id":"4148d8acd015d77a340a5c279803b78f39c2c35b","firm":"IMC","techs":["Python","C++"]}
+{"id":"5601f2ee29e4d1b436a09abe9191029557ae2ae7","firm":"IMC","techs":["Java","C++"]}
+{"id":"4651d58d528bf1bb40d5a49bf69f49dd07924359","firm":"IMC","techs":["Python","MATLAB","R"]}
+{"id":"b99b887dcc8883261aa3127cca4f3b6055417462","firm":"IMC","techs":["C++","Linux"]}
+{"id":"d62531979c3670206003c3c64e4830463556ad9b","firm":"IMC","techs":["Greenhouse"]}
+{"id":"9940e24c0a5d6cc2ebb06b4ce697293daf8a0759","firm":"IMC","techs":["Python","Java","Scala","C++","Go","Polars","Pandas","NumPy","SciPy","TensorFlow","Kubernetes","Docker"]}
+{"id":"2564ed61d01a20436b3d754a99aba774d93df96b","firm":"IMC","techs":["Linux","Git"]}
+{"id":"83af3b0bee09a3c01645f1eff80569ccc92597d6","firm":"IMC","techs":["Java","C++"]}
+{"id":"186c0850fa8a102f869039c3f035c787a8d4d74e","firm":"IMC","techs":["Python","MATLAB","R"]}
+{"id":"95f90301aaa4d50b77ff9a8dbd0b4a2b3f5eb650","firm":"IMC","techs":["Python"]}
+{"id":"756827a68b470e994969e4983acdedbcaa3217a0","firm":"IMC","techs":["Python"]}
+{"id":"79e0876e6cbc257f6776a283a33c98b844c60ed3","firm":"IMC","techs":["C++","Rust","Python","MLIR","CUDA"]}
+{"id":"19c1dfe9d6797458e6c1157f6dafde30ad175521","firm":"IMC","techs":["Python","C++"]}
+{"id":"dfe2cef59d0eda53a8c2a27935ae63ba607db91a","firm":"IMC","techs":["Python"]}
+{"id":"03f748feee4fdb56c9b3861eee4c5808003ae321","firm":"IMC","techs":["Verilog/VHDL","SystemVerilog","C++","Python"]}
+{"id":"c1f7413662fd370be91615f450ac9186b98ead1c","firm":"IMC","techs":["Python","MATLAB","R"]}
+{"id":"5baf098bda29e28357d3ef2d90f34b4162906253","firm":"IMC","techs":["Java","Kotlin","Python"]}
+{"id":"a814116e0ffae97d6e928b4a018c2d617a6f5e9a","firm":"IMC","techs":["Python","C++"]}
+{"id":"7b02284b24f6e27a007ac71960ca3308c89d8fa8","firm":"IMC","techs":["Python","C++"]}
+{"id":"8d1dff07c0d0c7df74cc110531c81fa0558c0b94","firm":"IMC","techs":["Verilog/VHDL","SystemVerilog","C++","Python"]}
+{"id":"240e2aebbabed35ac4f2c085a41518d385396b82","firm":"IMC","techs":["Python","C++"]}
+{"id":"a1bea22743ddf064d525020bbb9200303ea0c7cc","firm":"IMC","techs":["Python","Verilog/VHDL","FPGA","ASIC","HLS","hls4ml","FINN","Vitis AI","PyTorch","TensorFlow"]}
+{"id":"3f6e5aba97c9b2c3859c8f49a35d77fdd1bd4c72","firm":"IMC","techs":["Python"]}
+{"id":"944c4ab22ffc446f032c020e4ee56170fa48d368","firm":"IMC","techs":["Go","Rust","Solidity","Move","Linux","Git","EVM"]}
+{"id":"399124dc35ecda795b71b52d9213c19fad5a8924","firm":"IMC","techs":["Python"]}
+{"id":"9945b160ea9213a95d7cecf5a2f27c00101d51e3","firm":"IMC","techs":["Python","Java","Scala","Go","C++","Rust","Jupyter Notebook","Pandas","NumPy","Spark","Flink","Iceberg","ClickHouse","Kafka","Airflow","Dagster","Kubernetes","Docker"]}
+{"id":"995c846f665e19b2f051a669ffcd1bd4772a2b93","firm":"IMC","techs":["C++","Rust","Python","Java"]}
+{"id":"6b220cf06a66d3c22c8a3b7585eca5f342ad2b9f","firm":"IMC","techs":["Java","Python","Kubernetes","React","PostgreSQL","ClickHouse","Parquet","Hadoop"]}
+{"id":"feaabbc44933807a0f51597847fa7db0cd56a5a5","firm":"IMC","techs":["Python"]}
+{"id":"593489eeed0d175f4da5062cadcedd1b1f4407ec","firm":"IMC","techs":["Workday"]}
+{"id":"6a84915e6a9a44b8590197847d7ff22ef25b7f94","firm":"IMC","techs":["Python","PyTorch"]}
+{"id":"a1725bc41b0f929e2b4f2072289b55804f7c29c3","firm":"IMC","techs":[]}
+{"id":"24e482f666c3bc59ba2b6aaa7ee71f556f087e31","firm":"IMC","techs":["Bash","Python","OSPF","BGP","PIM SM","STP","NAT","Palo Alto Firewalls"]}
+{"id":"77156726891abf05fa85d7b744c5a87448173138","firm":"IMC","techs":[]}
+{"id":"82b3090d378d623cae82c3ce4a051ba1a6d41cc3","firm":"IMC","techs":[]}
+{"id":"8dd7d1a37c3125c11dff061f302d5014d66d2730","firm":"IMC","techs":["Linux","Bash","Python"]}
+{"id":"d0ebca934029e6fc0d11248b4ccbe5d754626f1a","firm":"IMC","techs":["PyTorch","Python"]}
+{"id":"25527a6784505f7a1696d88a48a1ef2ec745ad2b","firm":"IMC","techs":[]}
+{"id":"5b0f18d0856b759e0c6a79e2dd184376dbe9269a","firm":"IMC","techs":["TensorFlow","PyTorch"]}
+{"id":"6ccfabda7b22d16a255ba53039e56521ef2c9920","firm":"IMC","techs":["Workday"]}
+{"id":"6d9242f4c768db6ba0068289adc5defd3884c7c6","firm":"IMC","techs":["Confluence"]}
+{"id":"179d7108a36eb501547fee2891d2592e1e1e8c8f","firm":"IMC","techs":["MS Office","Outlook","Excel","Word"]}
+{"id":"a41e09322d7580292cfdfbc1050bc9dae5764ba7","firm":"IMC","techs":["Python"]}
+{"id":"ffd335b349e42cfc2756d0eca4c8d9dea698dc88","firm":"IMC","techs":["Linux","Vast","DDN","Isilon","Kubernetes","Docker","Slurm","InfiniBand","Ethernet","Python","Go","C++"]}
+{"id":"3b02e8ef1a2f718b01c508bef431c531499dc129","firm":"IMC","techs":[]}
+{"id":"6d696359bb892418cc3ff1d01ca26e3270a89740","firm":"IMC","techs":["Bash","Python"]}
+{"id":"df572a09fd4c9b1f9ec590b34a0d05c50438e2a7","firm":"IMC","techs":["Python","FastAPI","AsyncIO","APScheduler","Pandas","Polars","RQ","Pytest","TensorFlow","SciPy","XGBoost","scikit-learn","NumPy","Numba","Celery","Kubernetes","Helm","Docker","GitLab CI","TypeScript","React","Redis","PostgreSQL","MongoDB","Dremio","Iceberg","HDFS","Kafka","Arrow","Parquet"]}
+{"id":"e6332f7c42155da2908e5d9bf1f6c8ead475f686","firm":"IMC","techs":["Linux","Vast","DDN","Isilon","Kubernetes","Docker","Slurm","GPU","InfiniBand","Ethernet","Python","Go","C++"]}
+{"id":"f06c95b5958db5288dbe9f3273fca860de6df7b6","firm":"IMC","techs":["Workday","Microsoft Office","Microsoft Word","Microsoft Excel"]}
+{"id":"5b573a395f270f0f6f7dc37a5e5172f7cd5ee4be","firm":"IMC","techs":[]}
+{"id":"a06efe9371b6bac3685ea029c696d923d2514283","firm":"IMC","techs":["Python","CUDA","C++","PyTorch","TensorFlow","JAX","CuDNN","TensorRT","Horovod","NCCL"]}
+{"id":"bf5ea2fec17a3817a7f5a81a40b0e12db0dfe292","firm":"IMC","techs":[]}
+{"id":"6bd73704728ebaeff0b2a13948ae1df9e730787e","firm":"IMC","techs":["Python","CUDA","C++","PyTorch","TensorFlow","JAX","CuDNN","TensorRT","Horovod","NCCL"]}
+{"id":"c8cd11bc8738364c8fa1cce4237333a413ab9407","firm":"IMC","techs":["Java","Kotlin","Python"]}
+{"id":"d79ccdbe3d4fb8e94e8e83aa9ba3a52e7e412a9a","firm":"IMC","techs":[]}
+{"id":"f8f52a6dca615f31356f6e853a3cebc581932ccc","firm":"IMC","techs":["Python","Linux","Kubernetes","Prometheus","SQL","MongoDB","InfluxDB","Kafka"]}
+{"id":"71fa515fac30c3d7784a92122b8de3e01eba431a","firm":"IMC","techs":["Python","SQL"]}
+{"id":"62078a616f945085bdb1ec7b507253389d66d164","firm":"IMC","techs":[]}
+{"id":"40eafc8954e837347824274df6774d8e96c983b6","firm":"IMC","techs":["Java","Python","LangChain","LangGraph","AutoGen"]}
+{"id":"d330c70e81d4065701d2ec677ab2ae18a821cd7f","firm":"IMC","techs":["Python","C++","Pandas","Polars"]}
+{"id":"5d5c962ad528f01414ce4f3ee2e1b3c10eeb2cce","firm":"IMC","techs":["C++","Linux","Python","Docker","Kubernetes"]}
+{"id":"c59c8bb1c874c106ad70b9525470c656d01c646d","firm":"IMC","techs":["C++","Linux","Docker","Kubernetes","Kafka","Spark","Impala","Hadoop","Python","FPGA"]}
+{"id":"457fd31b371808c9ffe703866c6d2bcc8b910638","firm":"IMC","techs":["Python","Polars","Pandas","NumPy","SciPy","TensorFlow","FastAPI","React","Kubernetes","Docker"]}
+{"id":"99b47ef0565299223adc61ee8a8f3e83d9dd75c9","firm":"IMC","techs":["C++","Java"]}
+{"id":"74323acbcfab651c1b8dfeecd876b086bfa01578","firm":"Jump Trading","techs":[]}
+{"id":"45369e8ac61af3e9f6555d7cbb29e0875e8d45be","firm":"Jump Trading","techs":["Workday","Greenhouse","Culture Amp","Confluence","Jira"]}
+{"id":"9112ad1e7263e4c4276aba6e5c19abe210576c8c","firm":"IMC","techs":["Kafka","Haddop","Dremio","Java","Python","Spark","Flink","S3","HDFS","Databricks","Iceberg","SQL","Kubernetes","Docker","Prometheus","Grafana","Alert Manager","Alerta","OpsGenie","Unix","Bash"]}
+{"id":"eef830408b1f1fde4ccba1db104210b231e0b2cf","firm":"Jump Trading","techs":["Python"]}
+{"id":"e76b9baa18379f73c02edb60aa93cf9d74a262cb","firm":"Jump Trading","techs":[]}
+{"id":"7b4fc0929d05d140215cb0d884af0d82fb5db30c","firm":"IMC","techs":["ASIC","Multimeter","Oscilloscope","3D Printer"]}
+{"id":"f11ef40f2549c5e59e224d55d96befee3c97f83c","firm":"IMC","techs":["Linux","eBPF","Python","C++"]}
+{"id":"1448658b3bcd2b39fdb58c3097687602313844a1","firm":"Jump Trading","techs":["Python","Linux"]}
+{"id":"883aceb4182f93a2d8a948021cce8872a4564261","firm":"Jump Trading","techs":["Python"]}
+{"id":"9b6485c19311d785110f5c7167155434bc63a241","firm":"Jump Trading","techs":["NetSuite","Excel"]}
+{"id":"a59c247b1f101fb7f6dcb543c14a527d2fe52864","firm":"Jump Trading","techs":["MS Project","Smartsheet","Procore","Bluebeam","AutoCAD","Revit"]}
+{"id":"3eca6c8e4d4d9d9e98a648c92ddd1755784dda93","firm":"Jump Trading","techs":["Schneider EcoStruxure","Microsoft Office","Jira","Confluence"]}
+{"id":"4616787396b0ee7a356de46a1e42178d7a2ec9c0","firm":"Jump Trading","techs":["Claude","Cowork","Confluence","ChatGPT","Copilot"]}
+{"id":"b48d9da1cf3cb38d29b33c7f341f00595d2d0f28","firm":"Jump Trading","techs":["C++","Rust","Linux"]}
+{"id":"b230931853b168859c0640cd1637c66a43687514","firm":"Jump Trading","techs":["Python","C++","PyTorch","TensorFlow","JAX","CUDA","ROCm"]}
+{"id":"e725ab1900c72cf96e3c9894ead03392733a58ba","firm":"Jump Trading","techs":["Python","C++","PyTorch","TensorFlow","JAX","CUDA","ROCm"]}
+{"id":"493c89b7ca87564ed1e6ea29456c1f82753f3d68","firm":"Jump Trading","techs":["React","WebAssembly","WebGPU","WebGL","Rust","C++"]}
+{"id":"113f5aa1ae093bafa5c51ba14238c1c95772179f","firm":"Jump Trading","techs":["Python","Linux"]}
+{"id":"b1290abbada81c6a6b327accd066b117cc1a9c1a","firm":"Jump Trading","techs":["FPGA","SystemVerilog","Verilog/VHDL"]}
+{"id":"12031cf345bd82e4cdf274552c051e626b3d950e","firm":"Jump Trading","techs":["Python","Linux"]}
+{"id":"bab4ea354c456116cd07f255199e7b8059a1285b","firm":"Jump Trading","techs":["Python","C++","C","CUDA","PyTorch","JAX","TensorFlow","Triton","SYCL","ROCm"]}
+{"id":"e0c411bb0176b431a4175d3ec1c6b2020ae13c81","firm":"Jump Trading","techs":["C++"]}
+{"id":"0b61901304dda48e0bfc2844930655d20b3fb24c","firm":"Jump Trading","techs":["R","Python","C++"]}
+{"id":"75be329c26707ebd7a88e84e748715df388ec82d","firm":"Jump Trading","techs":["C++"]}
+{"id":"951284258be3ca672f7051e90a828e17f6db050f","firm":"Jump Trading","techs":[]}
+{"id":"5178d7f2541e8262b6f8faf8fb2260253afe0a93","firm":"Jump Trading","techs":[]}
+{"id":"61efb85349376bae50cf1b1055e8840972005621","firm":"Jump Trading","techs":["FPGA","SystemVerilog","Verilog/VHDL","C","C++","Python","Claude Code"]}
+{"id":"41954ae846b66579c40ef6b4d34c628c9f9d1895","firm":"Jump Trading","techs":["Python","C++","C","CUDA","PyTorch","JAX","TensorFlow","Triton","SYCL","ROCm"]}
+{"id":"42af19abdd85b7359cc5a360c6a0ffd81499ee28","firm":"Jump Trading","techs":["TypeScript","Python","Linux"]}
+{"id":"97bb798a36cd24efd16638a319b122e1bfd9bf6c","firm":"Jump Trading","techs":["C++","Python","Linux","Git"]}
+{"id":"dada8d8052c00ae7a3d830d67ba233c33b11a252","firm":"Jump Trading","techs":["C","C++","Python","CUDA"]}
+{"id":"ee22f4c19441b79747bdcfee3cfa03c21d088e8b","firm":"Jump Trading","techs":["C","C++","Python","CUDA"]}
+{"id":"df8bb7a53cab1e651dfc1217eaaa06ad6eabaa81","firm":"Jump Trading","techs":["FIX","kdb+/q","Python","SQL"]}
+{"id":"745175920b70602228b9569c3ea722fad167b20f","firm":"Jump Trading","techs":["C","C++","Python","CUDA"]}
+{"id":"927b47212726c56fecc2da1799778b56317578a3","firm":"Jump Trading","techs":["Linux","Unix","Python"]}
+{"id":"1e5ddcf945fb8aefd325f27db8757cca7ab38c6d","firm":"Jump Trading","techs":["C","C++","Python","CUDA"]}
+{"id":"a915b4ec3f0981a085be63b287e6b4390b64cf72","firm":"Jump Trading","techs":["C","C++","Python","CUDA"]}
+{"id":"2953c94f8f12ffcf0de7b676306ae005c9801b1d","firm":"Jump Trading","techs":["Python","Linux","Claude Code","Pandas"]}
+{"id":"f0c1e234e47aaa0d4022d1e59724eb5347aae57c","firm":"Jump Trading","techs":["Linux","Unix","Python"]}
+{"id":"047392d37b8048250b3f6e4a987bfaa17ab953b5","firm":"Jump Trading","techs":["Python","C++"]}
+{"id":"b9b96e61e4f037242d11662a889f0c26c79a0207","firm":"Jump Trading","techs":["Python","C++"]}
+{"id":"28e691613282fd16a559a6ec0a7f6beeb96544d1","firm":"Jump Trading","techs":[]}
+{"id":"c995463d236610c8d487af4f69ffddfd499935a8","firm":"Jump Trading","techs":["C++","Python"]}
+{"id":"552d82102eb91dc9f299f92d2b3101542d97d0df","firm":"Jump Trading","techs":["FPGA","SystemVerilog","Verilog/VHDL","C","C++","Python","lowRISC","RISC-V","Cocotb","Chisel","Opencore","Bluespec","HLS","OpenCL","Linux","Raspberry Pi","Arduino"]}
+{"id":"ee99740fd20da2afc1422e40a8a68e512cf50d6e","firm":"Jump Trading","techs":[]}
+{"id":"57ecfda9f5ee6cf79cdb9b4f6ada92d8fbad48c7","firm":"Jump Trading","techs":["C++","Python","Linux"]}
+{"id":"198cfc8810caa03473b7b90155f3dcaf8365a044","firm":"Jump Trading","techs":["C++","Linux","Python","Claude Code"]}
+{"id":"5f9ceaf7867802b6e1014e687d451ab3d8943899","firm":"Jump Trading","techs":["Linux","Python"]}
+{"id":"face8dd9b4cc1c133eb8fff9dbffb2a7a7367939","firm":"Jump Trading","techs":["TypeScript","Python","Linux","React","Claude Code"]}
+{"id":"63b45c9d71761ffcd7d03da5045dd0ceabf0754f","firm":"Jump Trading","techs":["Python","C++"]}
+{"id":"b5a1fba2ff71a1a6bef86154ea8ece11d3a5369b","firm":"Jump Trading","techs":["Python","Linux","Unix"]}
+{"id":"e48f57a0770fb654226566c0871e90d3b268f03f","firm":"Jump Trading","techs":["Workday","Ultimate Software","PeopleSoft","Greenhouse","Confluence","Excel"]}
+{"id":"dd4f4d30d0036f7cbd660b6ac69aca8fd6fb7252","firm":"Jump Trading","techs":["Python","Bash","C++","Linux"]}
+{"id":"20195d2050a24d1ad4ab7bdf890b216efa36f268","firm":"Jump Trading","techs":["Windows","Windows 11","macOS","Microsoft Office"]}
+{"id":"3a146358606b3069f781268e74cac7c3e9aea948","firm":"Jump Trading","techs":["Python","Linux"]}
+{"id":"a2fc84b10f1ce4577cee27c47cd70c8aaa3eea63","firm":"Jump Trading","techs":["Python","Linux"]}
+{"id":"08c55586a11f6c7cc204fe074895d02868fcb0ff","firm":"Jump Trading","techs":[]}
+{"id":"b10ec9efe430b6632a554d2d550e66e3ba9af6a7","firm":"Jump Trading","techs":[]}
+{"id":"98a95c05e66126498e6aaa83f75bc4926b15bd72","firm":"Jump Trading","techs":["Python","Go"]}
+{"id":"ab8a5499177a59993dfb59809d38e1c78b8563dd","firm":"Jump Trading","techs":[]}
+{"id":"968aa852a57a37f900ca959361a2ee16fcb0419a","firm":"Jump Trading","techs":["Python"]}
+{"id":"94e4a60bab08134ccc4eaf80bf360a3526ec1f4f","firm":"Jump Trading","techs":["Workday","Excel"]}
+{"id":"4c6ea66cec9ae94b2bbb218aa96524273b2b363f","firm":"Jump Trading","techs":["C","C++","Python","CUDA"]}
+{"id":"539bef4a2bf7929071dac274b0620d71c407ed3c","firm":"Jump Trading","techs":["Workday"]}
+{"id":"641012cd4d8e92a6b43d6745b2e80e952b5fe9bd","firm":"Jump Trading","techs":["C++","Linux"]}
+{"id":"c499deeead28d69d81b1b5aa01c290f167916c0c","firm":"Jump Trading","techs":["Python","C++","C","MATLAB","FPGA","ASIC","RTL","PCB"]}
+{"id":"7b8308f54b2497e5d0ad440d9879de0985b85798","firm":"Jump Trading","techs":["Linux","RDMA","Lustre","GPFS","Slurm","Grid Engine","FUSE","Go","Python","C"]}
+{"id":"d7386344ffadd334ebaf905afd28e6602278cbe8","firm":"Jump Trading","techs":["Python","PyTorch","JAX","Kubernetes","Slurm","NVLink","InfiniBand","CUDA","Triton","Pallas","CuTe","XLA","FPGA","ASIC"]}
+{"id":"069e81d19af41ae56f10751f4087f0d917e358d0","firm":"Jump Trading","techs":["C++"]}
+{"id":"7faaf2b16c31689dd3d192383577e897c116657b","firm":"Jump Trading","techs":["MS Excel","NetSuite","SAP Concur"]}
+{"id":"5de6eafabe2f1e9a625b389160b764b434d36b35","firm":"Jump Trading","techs":["Linux","Go","Python","C","Lustre","GPFS","Slurm","Grid Engine","SaltStack","Ansible","Puppet"]}
+{"id":"ce28b9e5fc5b57c8e94385448ea15ff8358f11c1","firm":"Jump Trading","techs":["Go","IPMI","BMC","Redfish","SNMP"]}
+{"id":"7a24d16527a28b9f47c33a762235e42e39b74bff","firm":"Jump Trading","techs":["Python","Linux","C++","SQL"]}
+{"id":"9fc1adc6295c74b0c1c9ff0846e7b37e8664fadf","firm":"Jump Trading","techs":["Linux","Cisco","Arista","Python"]}
+{"id":"622e33c8b255a6fee76110ead1a4d6d8e5eaf005","firm":"Jump Trading","techs":["InfiniBand","Ethernet"]}
+{"id":"3636d0d531eaa86aa25534bcfeaf47a3dbba33f6","firm":"Jump Trading","techs":["Python","C++","Linux","GitLab CI","Jenkins","Terraform","Ansible","Docker","Kubernetes","Prometheus","Grafana"]}
+{"id":"9a9e9ea94fa60504229dc4048a9019deab7f7322","firm":"Jump Trading","techs":["Python","C++","SQL","Pandas","NumPy","Linux"]}
+{"id":"33332d8f613d84453413f23b4fcee1cb9649aac8","firm":"Jump Trading","techs":["C++","Python","Linux","Pandas","NumPy"]}
+{"id":"196d382d3c9f2e95a173a8f40cd95e7ef03dbb82","firm":"Jump Trading","techs":["Linux","TCP/IP","BGP","IGMP","PIM"]}
+{"id":"00699184e30818f1f025fa3d1c422db0c2558410","firm":"Jump Trading","techs":[]}
+{"id":"d87347ca62819ecbebbffb7206a33d0069b7c7d2","firm":"Jump Trading","techs":["Arista","Cisco","Linux"]}
+{"id":"0bc4793864cf345cbbaeb858c8fda1e69680d087","firm":"Jump Trading","techs":["Python"]}
+{"id":"6e6fd8bc3b46c093619ddd401e24e2f176409b00","firm":"Jump Trading","techs":["Python","SQL","Excel","Barra","Axioma"]}
+{"id":"3b2d88235d323bcc227e57d04e9efd8cfb7dc31d","firm":"Jump Trading","techs":["Python","C++","SQL","IP","UDP","TCP","Ethernet"]}
+{"id":"59d7912af640ce073802bfdd4b549a9b4f70ca2d","firm":"Jump Trading","techs":[]}
+{"id":"13c057371f831d322ef293b69283eaa60fafb956","firm":"Jump Trading","techs":["Python"]}
+{"id":"4ca13270e897c267d65ffb1ee06cf7b545679d64","firm":"Jump Trading","techs":[]}
+{"id":"2bff7bde58433254cd7cab6996df938143a037d0","firm":"Jump Trading","techs":["Linux","Python"]}
+{"id":"506cdcd645116f1e132e2116a2c15f06a9391d60","firm":"Jump Trading","techs":["C++","Linux","Python","R","MATLAB"]}
+{"id":"04182fe8ce197f24cd0c17b75c8ac2f1c1419402","firm":"Jump Trading","techs":["Python","C++"]}
+{"id":"e20d81d2d35c628a599cd6da500afab5acb2f71a","firm":"Jump Trading","techs":["PyTorch","TensorFlow","JAX","Python","C++"]}
+{"id":"6e0e314a040e9b3683cd12163c4da03ee431ad43","firm":"Jump Trading","techs":["Python","SQL","Linux"]}
+{"id":"95123f3ea9bef1b58720360135c8c689b0024d89","firm":"Jump Trading","techs":["Linux","RDMA","Lustre","GPFS","Slurm","Grid Engine","FUSE","Go","Python","C"]}
+{"id":"7609245c305106885ca97daaebbe137e544fdca5","firm":"Jump Trading","techs":["Python","Git","JSON","Cisco","Mellanox","Arista","Ansible","MySQL","PostgreSQL","Splunk","InfluxDB","Grafana","Icinga","Kapacitor","Linux"]}
+{"id":"a91db308de2c5982e826c24e33a4f21da347dec6","firm":"Jump Trading","techs":["Python","C++"]}
+{"id":"a0433f93acbc0f2ee648813112fc7d914a0ac99f","firm":"Jump Trading","techs":[]}
+{"id":"6d941e802212eec66bc1cfe5ce2009caa92a1db3","firm":"Jump Trading","techs":["C++","Python","Linux","R","MATLAB"]}
+{"id":"9dc400eac83da571ce1d1d56b85fae957a4c3311","firm":"Jump Trading","techs":["C++","Python","Linux"]}
+{"id":"3cdd79ce96800ab2d0e586f1add02c4ecb19c405","firm":"Jump Trading","techs":["Python","C++"]}
+{"id":"c45da522e8ff9744de53e4ce5f7cd655c1ce12cc","firm":"Jump Trading","techs":["Linux","Lustre","GPFS","Slurm","Grid Engine","Go","Python","C","SaltStack","Ansible","Puppet"]}
+{"id":"7cbe2b8694e93188a0129e76124db4ae285da8df","firm":"Jump Trading","techs":["Python","C++"]}
+{"id":"ab7c5a59ff33bd48f96f9f75f2d0ff66f9fda81d","firm":"Millennium","techs":[]}
+{"id":"2222ec5305aa2cb61acccfdd8c73accad13b4472","firm":"Jump Trading","techs":["Python","C++","PyTorch","TensorFlow","JAX","CUDA","ROCm"]}
+{"id":"0398fb9d8aebea46a1a6bbbe269b48fb915efd19","firm":"Millennium","techs":["Python","Pandas","NumPy","SciPy","Polars","scikit-learn"]}
+{"id":"1554288f0870ace74c8a33de3dffdc7ef2f64777","firm":"Jump Trading","techs":["React","TypeScript","Kubernetes","Helm"]}
+{"id":"4c8d8acbdaaabdf45d778d2de0a0392aa3627b75","firm":"Millennium","techs":["Python","FastAPI","Java","Spring Boot","React","Next.js","Angular","PostgreSQL","AWS","Docker"]}
+{"id":"e9dc3f924316508874273cf89f79b6deff2b27a9","firm":"Millennium","techs":["Angular","C#",".NET","HTML","CSS","JavaScript","SQL"]}
+{"id":"cd4e3aa0cc70ae60d6b2c4de41e13e03551acce8","firm":"Millennium","techs":["Python"]}
+{"id":"808c5ee379b66211a892cf11f84e6cdc66225236","firm":"Millennium","techs":["Microsoft Windows","Microsoft Outlook","Microsoft Word","Microsoft Excel"]}
+{"id":"e73f074c16b4cbf2646a0c67311716b7d54834d6","firm":"Millennium","techs":["C#",".NET Core","Angular","SQL","JWT","OAuth2","Active Directory","LDAP","PingFederate","Kafka","AWS","Docker","Kubernetes","Windows","Linux"]}
+{"id":"deef3b6d161296a9a7163a6b5600a3191ca85b57","firm":"Millennium","techs":["C#",".NET Core","Angular","React","JavaScript","SQL","Windows","Linux"]}
+{"id":"7ffce14d556d132ca9508e108a2a775e6e212fda","firm":"Millennium","techs":["Python","Airflow","SQL","Linux","Git"]}
+{"id":"8317566d314e495ccceebec9b03ec3b31aa28b31","firm":"Millennium","techs":["Python","C++","Linux"]}
+{"id":"a9b05295a8d6cc431bc724d350dd8cc936cebac7","firm":"Millennium","techs":["Python"]}
+{"id":"3613d61be248f5efa9a0fbdfa95e26b7f5dd743c","firm":"Millennium","techs":["Excel","Alteryx","Oracle"]}
+{"id":"f45daf8ab8a8de47c9423143f07d5078213d210d","firm":"Millennium","techs":["SQL","Alteryx","Tableau","Microsoft Office","Excel","PowerPoint","Word"]}
+{"id":"942f462ffcff5d60b484f9a4a472ebcaf7b95e8a","firm":"Millennium","techs":["Excel"]}
+{"id":"bfbcadb551860295c0ee3935e8605f54cc0d1364","firm":"Millennium","techs":["C++","Linux","Python"]}
+{"id":"f11ca7e59ed6560e58fc93d5944012ded704d9d0","firm":"Millennium","techs":[]}
+{"id":"724ec95febbfa2a54c69487df542248ebe7556a2","firm":"Millennium","techs":["C++","Linux"]}
+{"id":"e73fbec839276e08e73af283912bbb8d07b68d91","firm":"Millennium","techs":["Splunk","Elasticsearch","Sentinel","S3","Athena","tcpdump","Wireshark","ngrep","AWS","GCP","Azure","Python","PowerShell","Bash"]}
+{"id":"aca4dbe386e02b34d74021aa5cd70911ef874af9","firm":"Millennium","techs":["AWS","VPC","IAM","EC2","S3","ECS","EKS","Kubernetes","Linux","Python","Bash","Terraform","CloudFormation","ArgoCD","GitHub Actions","Jenkins","Datadog","Prometheus","Grafana"]}
+{"id":"6d6ead086ff3f701fc773bfdd008369b6a6df7cd","firm":"Millennium","techs":[]}
+{"id":"b34406587a6212c2263a778fd3d9987142b5b08f","firm":"Millennium","techs":["C++","Python","AWS","GCP","Azure","kdb+/q","Spark","Dask","Redis","SQL","Docker","Kubernetes","Terraform","CloudFormation","GitHub Actions","GitLab CI"]}
+{"id":"3eb6ec56d9bf51a0928d4d2092fa8429201f8f2f","firm":"Millennium","techs":["Python","kdb+/q","PyTorch","Git","Unix","Linux","Bash","PyKX"]}
+{"id":"2b13367a1d4e6869d499cb671fcf1de7411e9502","firm":"Millennium","techs":[]}
+{"id":"73c9d3b4658533ff84589a8a513ece971adf9b1a","firm":"Millennium","techs":["AWS","Arrow","Bash","C++","Delta Lake","Git","Linux","Parquet","PyKX","S3","Unix","kdb+/q"]}
+{"id":"e7aff29320edcf74b9bb3298118640897f6233dc","firm":"Millennium","techs":["Bloomberg","Visible Alpha"]}
+{"id":"b1a7f9ea2c2b6da9fc48e852c83a8569aa655488","firm":"Millennium","techs":["Python","C++","CUDA"]}
+{"id":"fa3e63b5b9d2a7eab2bf26881e567754d6ec8d7f","firm":"Millennium","techs":["Python"]}
+{"id":"d4cf90bc6abfccbeadfe5bbac6be43a9195fc011","firm":"Millennium","techs":["C++","Linux","Java","Claude Code","GitHub Copilot","kdb+/q","Aeron"]}
+{"id":"b0581be6c3bb935df6e4336be808f6122136c0e2","firm":"Millennium","techs":["Java","Python","SQL","PostgreSQL","SQL Server","Linux","Git","Jenkins","TypeScript","JavaScript","Angular","AWS"]}
+{"id":"21e9db2996bb4e8c26d74749bfa571981e79cf15","firm":"Millennium","techs":["Polars","Ray","Dask","Spark","PySpark","Slurm","PyTorch","XGBoost","Python","kdb+/q","Git","Linux","Bash","PyKX","Arrow","Kubernetes"]}
+{"id":"8b9112ee41e65ebe989956f50e71773ac8567bb7","firm":"Millennium","techs":["Python","AWS","Bedrock","Linux","Cursor","Copilot","Claude","LangGraph","Pydantic","Airflow","Temporal","GraphRAG"]}
+{"id":"8ee497e2c102b6b1ee1fc5a92bcbe44fd9be0cc7","firm":"Millennium","techs":["C#",".NET","Angular","SQL","AWS","SQL Server","Snowflake","Kafka","SQS","SNS","Claude Code","GitHub Copilot","JSON","Avro"]}
+{"id":"daa6c7e83706f71a2f79ef719074e7283af5f081","firm":"Millennium","techs":["SQL","Python","Kyriba","Athena"]}
+{"id":"049da9ffd628ca275640dab8e0ae7fe4b0709127","firm":"Millennium","techs":[]}
+{"id":"4e4b86c7d91fad7485b3e5b62a7fbfae77dc9a41","firm":"Millennium","techs":["Claude Code","Python","JavaScript","SQL","Tableau","Datadog"]}
+{"id":"74f2b5e3c208f0f175c6c3e6e74520bb4e246623","firm":"Millennium","techs":[]}
+{"id":"f714069fdd68fac990d43ed2a6f13b121b5311a8","firm":"Millennium","techs":["AWS","Azure","GCP"]}
+{"id":"26c2d3f0843987fedb53b95f7042800fc75c5962","firm":"Millennium","techs":["Microsoft Excel","Microsoft Word","Microsoft PowerPoint"]}
+{"id":"67b638568ce3ca64592a80dce3df2f5d1260e4d3","firm":"Millennium","techs":["Python","C#",".NET Core","Angular","React","JavaScript","SQL Server","PostgreSQL","SQL","GitHub","Jenkins","Jira"]}
+{"id":"b01b81b827ea6d207328e6dc93dcef7a9f40c1b3","firm":"Millennium","techs":[".NET Core","SQL Server","PostgreSQL","Kafka","Jira"]}
+{"id":"71fe8f866b8060a92cc0d328cbc39d4488726c56","firm":"Millennium","techs":["Excel"]}
+{"id":"a85f43c3359ba8b4d99b92c63b0bbda16eccb49e","firm":"Millennium","techs":["Python"]}
+{"id":"0955be76435312079bf8c62abfc1e62ab66b0b1e","firm":"Millennium","techs":["StreamBase","Solace","Tibco","SoupTCP"]}
+{"id":"e6590aecb565496ebf28faeecab8887e7a59c358","firm":"Millennium","techs":[]}
+{"id":"49948c7395dc5fce74efea2fcfa9c5ae6e8baaa3","firm":"Millennium","techs":["Linux","GPFS","DNS","NTP","PTP","NIS","Salt","Kubernetes","Nomad","VMware","Slurm"]}
+{"id":"7a3fc5282216d66b32e01fac987ae9377e987737","firm":"Millennium","techs":[]}
+{"id":"f1a8d8c3c0903a7e2f8775bb6ad6c365f1f8c28e","firm":"Millennium","techs":["Python"]}
+{"id":"92b4b338bb227fdc1af618b9fa96612b8dfb48b7","firm":"Millennium","techs":["Linux","Onload","VMA","FPGA","SmartNIC","Python","Perl","Ansible","C","C++"]}
+{"id":"fe7c9bf65df04f969ca4c334226c696a866d0d1b","firm":"Millennium","techs":["Excel","SQL"]}
+{"id":"67972e1c9994f366c75045e32d224cd9c4d3fd72","firm":"Millennium","techs":["Jira","Confluence","SQL","Python","Java","AWS"]}
+{"id":"17b5032da6a588460b404a99ff1efe84bd759e42","firm":"Millennium","techs":["Jira","Confluence","SQL","Python","Java","AWS"]}
+{"id":"3246a2f3bbc52ed47b69def3d866eb603c422719","firm":"Millennium","techs":["Excel","SQL","Python"]}
+{"id":"30a78d6c723e0a8233f5a8f4acec1ab19053e397","firm":"Millennium","techs":["Excel","Workday"]}
+{"id":"a3f0d07ab9512ffb2be8e3d0a0b5bf1cb5de1f6f","firm":"Millennium","techs":["Python","Jupyter","Pandas","NumPy","scikit-learn"]}
+{"id":"4f4564fa440c12159bec9c5a654ac41f07cd6c74","firm":"Millennium","techs":["Python"]}
+{"id":"260515b41e09194791d94653ad13dc08cb827c44","firm":"Millennium","techs":["Java","C++","Rust","SQL","DuckDB","PostgreSQL","Kubernetes","ArgoCD","Kafka","Arrow","Parquet","Avro","AWS","GCP"]}
+{"id":"d90fd74985b1023f68fd8ee41b04d7ecf24784f1","firm":"Millennium","techs":["Concur","Oracle","Amex GBT","Microsoft Office","Outlook"]}
+{"id":"97699ccabd7b6a45dcb680cc80964a5ae81e45ea","firm":"Millennium","techs":["kdb+/q","Linux","C","C++","Python","Datadog","ELK stack"]}
+{"id":"1dac95e7f3f8a475a121b8af4a8a2085b3fe6bb2","firm":"Millennium","techs":["Java","Kafka","RabbitMQ","Hazelcast","Redis","Memcached","Bloomberg","Refinitiv"]}
+{"id":"5e9417b41b1e92a2e365b72f613ebb0215d82159","firm":"Millennium","techs":["Jira","Python","Java"]}
+{"id":"8659203ac95f7a43e6ab10e561ab8db51e8dd459","firm":"Millennium","techs":["Adobe Premiere Pro","Adobe Creative Suite","After Effects","Photoshop","Lightroom","Illustrator","Audition"]}
+{"id":"86ca81a506b9a175c31256d1bcfac5779ea4f19f","firm":"Millennium","techs":["Python","Pandas","NumPy","SQL","Bash"]}
+{"id":"640c8e59d8411834ce4e3745498faae9e4935615","firm":"Millennium","techs":["Java","Kafka","SQL","PostgreSQL","SQL Server","Linux","Jenkins","Git","TypeScript","JavaScript","Angular","AWS","EC2","S3","Aurora","Redshift"]}
+{"id":"8df7ec0bfdccf09edb4df9a09c11ef888a5d724b","firm":"Millennium","techs":["CME EFS","BPS","Atlantis","GMI","FIA Docs","EGUS"]}
+{"id":"25ac7075e8989a15ecf88fa85c04bd1e42a51cfc","firm":"Millennium","techs":["C#",".NET","ASP.NET Web API","Angular","TypeScript","AG Grid","SQL Server","Sybase","Oracle","AWS","Python"]}
+{"id":"2786702679d61a626b23e3e259714761bf7b218d","firm":"Millennium","techs":["Python","Scala","Java","Angular","Kafka","AWS"]}
+{"id":"77a3ca3b17072e0cc716483b1af512e4f0044bc1","firm":"Millennium","techs":["Power BI","Tableau"]}
+{"id":"af4fb4322b473754dc8c7174a8f14316b05a9891","firm":"Millennium","techs":["Python","AWS","Bedrock","MCPs","GraphRAG","LangGraph","Pydantic"]}
+{"id":"b773fac8d2e2a8eead45f7c9a860946378592dbf","firm":"Millennium","techs":[]}
+{"id":"49ff85a61c6e6240405de511224790a9280b910c","firm":"Millennium","techs":["Excel"]}
+{"id":"f5db8598fa5fd33163af27fd64e2e387d23fce06","firm":"Millennium","techs":["Excel","PowerPoint","Word"]}
+{"id":"6360465d34ba5b2e6c72a99254a5b51a3e887a7f","firm":"Millennium","techs":[]}
+{"id":"4c5b5dc52945008a121462c8196e6ddcc10a49f0","firm":"Millennium","techs":["ServiceNow","PowerShell","Python","Claude Code","Copilot","Microsoft Windows","DNS","DHCP","TCP/IP","Microsoft Office","Bloomberg","Citrix","Microsoft Intune","Android","iOS","Webex","Zoom","Teams"]}
+{"id":"a4a157b7437b443131be51896be36162fa3c9e91","firm":"Millennium","techs":["Excel","SQL"]}
+{"id":"777ba7b0c3cf968d4ee7be1fbe0871b5f69a9cb5","firm":"Millennium","techs":["Python","React","TypeScript","Deno","Kubernetes","ArgoCD","Excel","Claude Code","Codex","Cursor"]}
+{"id":"3fa1b158cc669e4a1aa26cd79dfd33428999fb4e","firm":"Millennium","techs":["React","WebSockets","WebAssembly","JavaScript","TypeScript","HTML5","CSS3","Java","Spring Boot","SSE","Redux","Zustand"]}
+{"id":"35704ec1c078c65b779720fda0bd071b636b7243","firm":"Millennium","techs":[]}
+{"id":"005fba38713eb588d24de077773b2e972f142549","firm":"Millennium","techs":["AWS","VPC","IAM","EC2","S3","ECS","EKS","Kubernetes","Linux","Python","Bash","Terraform","CloudFormation","ArgoCD","GitHub Actions","Jenkins","Datadog","Prometheus","Grafana"]}
+{"id":"7d259a1c44bff6911766043bef0476ecf74b47ab","firm":"Millennium","techs":["Java","Angular","SQL"]}
+{"id":"f831e07349de605d23b2da5bfe8f8ac4a319e957","firm":"Millennium","techs":["Microsoft Excel","Microsoft Word","Microsoft PowerPoint"]}
+{"id":"82d3aa1a0fcbf115ea0f9ac08d4453da7f06b137","firm":"Millennium","techs":["Excel","SAP Concur"]}
+{"id":"bf47cf62d00fb4c62b5d3c7ef0d45181ebfa73c6","firm":"Millennium","techs":["Python","Flask","Django","Linux","Windows","SQL Server","PostgreSQL","SQL","Claude","Pandas","NumPy","Apache","Nginx","IIS","Gunicorn","uWSGI","GitHub","Jenkins","JIRA"]}
+{"id":"db970e31da532292630ee4e92537345414370ca3","firm":"Millennium","techs":["ServiceNow","Jira"]}
+{"id":"69677a08f939eef79c98f5288ccb429bc84786fb","firm":"Millennium","techs":["React","WebSockets","WebAssembly","JavaScript","TypeScript","HTML5","CSS3","SSE","Redux","Zustand","AG Grid","Ant Design","Node.js","Java","Spring Boot","Rust","SQL Server","Elasticsearch","Kerberos","JWT"]}
+{"id":"a522564d7c78966ca5d23eca5ba509e948bea07b","firm":"Millennium","techs":[]}
+{"id":"206a5f0d2b14dd8aca8b30632b70330cb30450a0","firm":"Millennium","techs":["Acronis","PowerShell","VMware","SQL","Citrix","Azure MFA","Azure","SCCM","Intune","StoreFront",".NET","C#","C++","VMware ESX","VMware vCenter","Sysinternals","Citrix XenApp","Citrix XenDesktop","Citrix VDA","Active Directory","Group Policy","Windows","Windows 11"]}
+{"id":"be7744d71d00ee8b57ef6af7c55e3a654b5f630c","firm":"Millennium","techs":["Python","C++","Java","Linux","SQL","kdb+/q","Iceberg","Lake Formation"]}
+{"id":"b965dffaedd51ed715509f21f90027ab738fcd64","firm":"Millennium","techs":["Excel","NTS","Actimize","Tableau"]}
+{"id":"5e651f9896a80e6f98ebb14fb03174b4be360edd","firm":"Millennium","techs":[]}
+{"id":"d6b8a48ffd84a25f00b78a688b65f9f48576c175","firm":"Millennium","techs":["Python","PyTorch","TensorFlow","JAX","scikit-learn","Hugging Face","LangChain","LlamaIndex","Claude","Codex","GitHub Copilot","Cursor"]}
+{"id":"a701e0f6a6d6a4a823ad4adcac36094af70fe128","firm":"Millennium","techs":["Python","Pandas","NumPy","SciPy","statsmodels","Flask","Django","Tableau","Streamlit","SQL","Snowflake","Airflow","dbt","Git"]}
+{"id":"200f6162ed653472d6bdcd1adb7e199c3a53bb9b","firm":"Millennium","techs":["Alteryx","Jira","SQL","Tableau","Python","Workday"]}
+{"id":"94af82d227649116c9209a6d6419c3a9acc99816","firm":"Millennium","techs":[]}
+{"id":"08f975f23b4d8868fe5ffb3ee86bfb54e25e7fa8","firm":"Millennium","techs":["Angular","Python","SQL","SQL Server","PostgreSQL","GitHub","Jenkins","Jira"]}
+{"id":"74fc20b335fec4299bf2c94fd62f5c8268bfdef7","firm":"Millennium","techs":["Python","SQL","Airflow","Git","GitHub Actions","PyTest","Snowflake"]}
+{"id":"c03ce644cf6927a8314c3bd4682fa2ba1dc9f55f","firm":"Point72","techs":[]}
+{"id":"35aa5622f87d408fbc2d19b4bf18de550ae9e226","firm":"Millennium","techs":["Cisco UCM","Cisco Expressways","SIP","Zoom","DTEN","Poly","Logitech","Webex","Microsoft Teams","Dante","Python","PowerShell"]}
+{"id":"4e2bab968cb1ef7ef934ba25135bfd49599e4497","firm":"Millennium","techs":[".NET","C#","SQL Server","PostgreSQL","Kubernetes","Kafka","Python","Angular","SQL","GitHub","Jenkins","Jira"]}
+{"id":"2cbaaf2e8e1992b51f0a9e540365914185789eaf","firm":"Point72","techs":["Active Directory","SailPoint","CyberArk"]}
+{"id":"dc4920f4ed7df307d16b67c79e9bde31a0552178","firm":"Point72","techs":["SailPoint","JIRA","SQL","Splunk","Power BI","Confluence","Excel","Tableau","Copilot"]}
+{"id":"8e225e4cfd5313fd40e59858b22498464f465947","firm":"Millennium","techs":["Python","Linux","PostgreSQL","FIX","Jenkins","TeamCity","AWS CodePipeline","AWS","GCP","Azure"]}
+{"id":"1c8adb9790b6c5c9105eae4bbccf52a5f6f6d844","firm":"Millennium","techs":["Python","Java","Go","GitHub Actions","AWS","GCP","Kubernetes","Terraform","CloudFormation","Ansible","Datadog","Elasticsearch"]}
+{"id":"f7dfeb9d45c1f8a7c860f56bf2c2ae36a51fdac6","firm":"Point72","techs":["SQL","Kafka","Java","JavaScript","C#","Python"]}
+{"id":"76848fdce62695587ce9aa3141d8b3c8ec2a15ef","firm":"Point72","techs":["Python","Java","C++","AWS","Azure","GCP","Docker","Kubernetes"]}
+{"id":"3716ecbb653f0d1a79a22ddfa861882de4f74aa1","firm":"Point72","techs":["Excel","PowerPoint","Power BI"]}
+{"id":"02572f700c3673ac1b6a79628f62557415f8d4f6","firm":"Point72","techs":[]}
+{"id":"9bbc12cc34116b4322a925a506406b2113b13982","firm":"Millennium","techs":["Microsoft Outlook","Microsoft Excel","Microsoft Word","Microsoft PowerPoint"]}
+{"id":"e7b875433497add1266a057249c6611799bbd325","firm":"Point72","techs":["Python","Ansible","F5 BIG-IP"]}
+{"id":"36c7588f5bfe18c77bc9053fdfa04b8d0f7544a9","firm":"Point72","techs":["Bloomberg","JPM PricingDirect","BofA PriceServe"]}
+{"id":"c0a7f29df629362678cba687589b9b4f9bb430f5","firm":"Point72","techs":[]}
+{"id":"5305b9d11949921d3399f415f0ab7d670a40d5a0","firm":"Point72","techs":["Microsoft Outlook","Microsoft Excel","Microsoft Word"]}
+{"id":"2301774659afaaccf203d5db1b908d8c46aa617e","firm":"Point72","techs":["CyberArk","Active Directory","Claude"]}
+{"id":"052f8a362863647345a595e323816adb056d7bf2","firm":"Point72","techs":["C#","gRPC","Kafka","Kubernetes","Python","C++"]}
+{"id":"b9a3a2d6cdf63869a94330faef6b5ce5ef246278","firm":"Point72","techs":["Python"]}
+{"id":"b715d19d83db49165e6c5af42ffd2d2a9effd5d6","firm":"Point72","techs":["Microsoft Intune","iOS","iPadOS","Android","Windows","macOS","Windows 365","Windows Autopilot","Entra ID","Azure AD","Microsoft Defender for Endpoint","PowerShell","Microsoft Graph","Active Directory","Group Policy"]}
+{"id":"dcba1b4bcc004d16f115e20553b3fa4260654367","firm":"Point72","techs":["Python","C","C++"]}
+{"id":"e7de0ba46669a073427c32b9a09affd353240d6a","firm":"Point72","techs":["Java","SQL","Redis","MongoDB","Kubernetes","AWS","Angular","React"]}
+{"id":"03993b04cb70e2a46902fa862c7a3c534cafad0b","firm":"Point72","techs":["Python","Shell","PowerShell",".NET","Java","C#","SQL"]}
+{"id":"c211d61b39004713e96945ee854b095c411cfe9f","firm":"Point72","techs":["Python","SQL"]}
+{"id":"2c0e052dfa94a148473dac73c3872804d51d541f","firm":"Point72","techs":["SQL Server","PostgreSQL","MongoDB","Sybase","AWS","AWS Aurora","Amazon RDS","Amazon EC2","Amazon EBS","S3","PowerShell","Korn Shell","Python"]}
+{"id":"e4efda0f7a32d515c1d257c3b48321dc3a73e98c","firm":"Point72","techs":[]}
+{"id":"c68ba0055a0da3f46adbbcd2d15c381bb24b3236","firm":"Point72","techs":["Python"]}
+{"id":"91ee46950b028ea5acefd299cd6f05ef25e156b1","firm":"Point72","techs":["SQL","Python","Databricks","Alteryx"]}
+{"id":"8b0eeee2064ff7994f750a60162414636062a2a2","firm":"Point72","techs":["Linux","ZFS","systemd","cron","apt","Bash","SSH","DNS","TCP/IP","Prometheus","Grafana","Nagios","Datadog"]}
+{"id":"f7d6fd0dec2cd7c5343024a191a305e8775d12da","firm":"Point72","techs":[]}
+{"id":"44c2f92a148126b5301498e14e12a838e9b74e3a","firm":"Point72","techs":["AWS","Docker","ECS","EKS","Git","Terraform","CloudFormation","Jenkins","GitHub","GitLab"]}
+{"id":"bcee37970d11fc54bc0c6d0d8cdf6ae8bdbeb9df","firm":"Point72","techs":["Python","SQL"]}
+{"id":"12a3c3598b2b274a313034f81f437a9f221e53d2","firm":"Point72","techs":["Jira","Microsoft Office"]}
+{"id":"09ef31b92bbe13fe658677d97f9fa8799a4e1b7c","firm":"Point72","techs":[]}
+{"id":"02f83c8ace0e814533e26c47f4bcad4add6f4f88","firm":"Point72","techs":["Java","SQL","Python","Databricks","Kubernetes","AWS","Angular","React","Redis","MongoDB"]}
+{"id":"dd94976034e69a87a2f309ee86f44a903af58e87","firm":"Point72","techs":["Orchestrade","Murex"]}
+{"id":"73a2d478d0534d46e8f3975afc5adc5479408385","firm":"Point72","techs":["Windows","Mac","Microsoft 365","Active Directory","VPN","ServiceNow","Jira","Bloomberg"]}
+{"id":"067041804105117a254c7d6d91aedfff72bb9c34","firm":"Point72","techs":[]}
+{"id":"fb3d2935d3384bd0e668a1acf9dc542c88a96712","firm":"Point72","techs":["Python","Java","C++","PyTorch","TensorFlow","scikit-learn"]}
+{"id":"efc111bd0ef2cd2ec8a48bf447990ccf3a82d087","firm":"Point72","techs":["Python","SQL"]}
+{"id":"fae163cb588b7508637de2ca7f66be6d95760692","firm":"Point72","techs":["Python"]}
+{"id":"395ac4362de6990fc61aa84368d7c035e443a88f","firm":"Point72","techs":[]}
+{"id":"93ddba33f493935d46b0152b55e3fc82647c151f","firm":"Point72","techs":["Python","SQL"]}
+{"id":"833c5c1ad3f1320a17c35b8cea62f4b90712edb2","firm":"Point72","techs":["Microsoft Outlook","Microsoft Excel","Microsoft Word"]}
+{"id":"b7012f8807e2770e8a55f56c13a5b00053cae32d","firm":"Point72","techs":["Airflow","C#","JavaScript","Python","React","SQL","T-SQL"]}
+{"id":"f57316b8334f83e11abed9f56011b518838b5bd8","firm":"Point72","techs":[]}
+{"id":"c9356d87eae692bce61f3f97603ae4acbd25fb95","firm":"Point72","techs":["Python","SQL","Excel","PowerPoint","Linux"]}
+{"id":"a31b3d7b26d0d28c9a55897feb4d6aa9234b7875","firm":"Point72","techs":["Microsoft Excel"]}
+{"id":"419c4b54dc4be4605ba0cb8ceec02d6cdaffcb7b","firm":"Point72","techs":["TensorFlow","PyTorch","scikit-learn","Python","Java","C++"]}
+{"id":"8f71cd7b8d9a2db40415097a1be3fb88910ee27c","firm":"Point72","techs":["Illumio","Palo Alto Networks","GlobalProtect","Prisma Access","Cloudflare","Cisco ISE","AWS","Azure","GCP","Guardicore","VMware NSX","vArmour","Cisco ACI","ShieldX","Unisys Stealth","Zero Networks","Zscaler","Netskope","Darktrace","ExtraHop","Vectra"]}
+{"id":"716ec9dece6355cbe80b62e9add527cd4486f7dd","firm":"Point72","techs":["Python","AWS"]}
+{"id":"eaab7226287e429a03311d79adb8011f0160fe01","firm":"Point72","techs":["Python","C++","Linux"]}
+{"id":"8522dbbc0ca537114105933cd4d175bf453d1d09","firm":"Point72","techs":["C++","Linux","Python","SQL"]}
+{"id":"d13feb5ec2ece2a6ce75bded5ad44b3298826b6a","firm":"Point72","techs":["Microsoft Excel","SQL","Bloomberg"]}
+{"id":"64522ccb7d1f878317e41a58dd6ed9e328aa39c6","firm":"Point72","techs":["Bloomberg","Tradeweb","Excel","Python","R","VBA"]}
+{"id":"b324ecd9d11edf4513b85d6c3021f2dd2279a8db","firm":"Point72","techs":["R","Python"]}
+{"id":"d682e55138e68955e63c679f1da086525e14ab03","firm":"Point72","techs":["Python","SQL","AWS","Linux","Airflow"]}
+{"id":"7bbf0e293e849dd6f3b4f944440dc5af67770356","firm":"Point72","techs":["Python","C++","Java","Linux"]}
+{"id":"1a1a2aea-8406-467e-a565-17c865becd10","firm":"Point72","techs":["Adobe Creative Cloud","Canva","Microsoft Office","Mailchimp","Hootsuite","Classy"]}
+{"id":"ef2508c233ae51fa65b8bbcb87cdb7c42542f066","firm":"Point72","techs":["Excel"]}
+{"id":"f9d27938157e6966b580be027526293595f6b8cd","firm":"Point72","techs":["Python"]}
+{"id":"759c81b1591d56639c942ac169687c06d8995f7d","firm":"Point72","techs":["Java","AWS","Terraform","SQL Server"]}
+{"id":"30878ecb7e52ed083122a3d049b41768199f81f3","firm":"Point72","techs":[]}
+{"id":"3d16c3b2f69c7f4aa5bfb122d60fa2e50ca5c062","firm":"Point72","techs":[]}
+{"id":"685e6664-d0a6-47a7-baf1-51d51acda2d6","firm":"Point72","techs":["SQL","Alteryx","Tableau","Excel","MS Office Suite"]}
+{"id":"9efed625b02918853c5bb38de09003af1d2f2c43","firm":"Point72","techs":["Python","C++","C","Java","Linux","Git","MySQL"]}
+{"id":"d57073ecdcf054c5281b7c709b21a54bbecc17f7","firm":"Point72","techs":["Python","Ansible","Cisco","Arista","Palo Alto Networks"]}
+{"id":"9a7096ecab29ee5527fbbc4205ac9b0da5568bd3","firm":"Point72","techs":["Python","R","TensorFlow","PyTorch"]}
+{"id":"2bfe16d92bd2dcaeddf19bc2d590ce59981e30f1","firm":"Point72","techs":["Python","Bash","Ansible","Rubrik","Cohesity","Data Domain"]}
+{"id":"281457886e284e2dfe1895a1c1d13c767c937f4c","firm":"Point72","techs":["Python","SQL","Pandas","Linux"]}
+{"id":"2e57273e796910df1793fd211c21b4d49e148f94","firm":"Point72","techs":["Python","SQL"]}
+{"id":"27f9c4b75c54602e6556535c057a7a4e454de930","firm":"Point72","techs":["Microsoft Outlook","Microsoft Excel","Microsoft Word"]}
+{"id":"4f2e730fe2d39740f8fb64e439079c71b2deb195","firm":"Point72","techs":[]}
+{"id":"42c7b1846da3c8ef4a19c66d6a7a237ae00d3977","firm":"Point72","techs":[]}
+{"id":"499fcf4139f43201e0e57fe0190c0f78b5cb11c1","firm":"Point72","techs":["Python","Rust","GitHub","Linux","AWS","Azure","GCP","Terraform","Datadog","Splunk"]}
+{"id":"27ae1fd97c2c50388ffd097f11a949b663d3c1ad","firm":"Point72","techs":[]}
+{"id":"36f94688446c3cb898bf2e58c4f6d6ae918c587b","firm":"Point72","techs":[]}
+{"id":"abd39b92ba7fc32ff347a893d6575f43d0d936ad","firm":"Point72","techs":["SQL","Excel","Alteryx"]}
+{"id":"1aeeba9c6ae0c8c0ba4364bcde989c60dc979ddf","firm":"Point72","techs":["PyTorch","JAX","TensorFlow","Python"]}
+{"id":"0bc732dac4dc8bf90983589071c84b6e87c69b93","firm":"Point72","techs":["Python","SQL","AWS","Linux","Airflow"]}
+{"id":"3327bb1ab799405ff8510e00c8481b89e69cb663","firm":"Point72","techs":["Python","R","Spark","SQL"]}
+{"id":"8e38acfb2288834b3d36abe26ee726d6280c036a","firm":"Point72","techs":["Python","NumPy","Pandas","Polars","scikit-learn","TensorFlow","PyTorch","JAX","Linux","C","C++"]}
+{"id":"43eea47223d962578fad0be50d050667f75779ba","firm":"Point72","techs":["Bloomberg","Neovest","PowerShell","Splunk"]}
+{"id":"6deea978baabff311d2b2a092c12e84583fff173","firm":"Point72","techs":["Excel","SQL","Power BI"]}
+{"id":"c8c1cdc8bb092f9612eecdf4a8073b3da0a45b54","firm":"Point72","techs":[]}
+{"id":"fba69bda19630123841d4de484736f064301601a","firm":"Point72","techs":["C++","Python","Linux","AWS"]}
+{"id":"f7412fee9cd14def1dce867c4faa001ec576aa53","firm":"Point72","techs":["ServiceNow"]}
+{"id":"eac12b38103791a6ceb543250b2e00d86cd59df2","firm":"Point72","techs":["C++","Java","C#","MATLAB","R","Python","Perl"]}
+{"id":"6ea9a3d07a4c99281b0cfe7ccc4d5a5c9a0488f5","firm":"Point72","techs":[]}
+{"id":"e3ed3965b5867ca9b501cdfd1ad17b6193d443e7","firm":"Point72","techs":[]}
+{"id":"0dbb904e39b7f1a64d187723633aef7113373530","firm":"Point72","techs":["Python","GitHub","PyTorch","HuggingFace"]}
+{"id":"1936b578dde49aeef6695c41429d04146789b6dd","firm":"Point72","techs":["C++","Java","C#","MATLAB","R","Python","Perl"]}
+{"id":"ac1fb4c3703721ed67156239b2732c0efaece1eb","firm":"Point72","techs":[]}
+{"id":"7a73b2d523345a1395575ee1b9c38203e9ca5208","firm":"Point72","techs":["Geneva","ClearPar","Microsoft Excel"]}
+{"id":"14e223d783902d9337bcf7a089a7b650fc5405b6","firm":"Point72","techs":["Python","SQL","Git","Compustat","IBES","Barra","Axioma"]}
+{"id":"c3d31a9dd4e3d8cfdc72769640c9579277b5aa52","firm":"Point72","techs":["Geneva","Python","SQL"]}
+{"id":"107456f3f48509b913470f463d69369527f3038b","firm":"Point72","techs":["Excel","Workday"]}
+{"id":"a1fc8b9f4951a2bcc95549f4fa5e417a891941d7","firm":"Point72","techs":["Python","SQL","AWS","Azure","Windows",".NET","SQL Server","Databricks"]}
+{"id":"c49e1b4f3adef63b3d589fa36451b94025216441","firm":"Point72","techs":["C++","Java","C#","MATLAB","R","Python","Perl"]}
+{"id":"d2988a5914b36284878b43abbfbe703f7228a461","firm":"Point72","techs":["Jenkins","GitHub","Bitbucket","AWS","Artifactory","SonarQube","Docker","ECS","EKS","Git","Python","Go","Terraform","CloudFormation","GitLab"]}
+{"id":"545fc0103f2accad5f7703d27446ffe157aae6df","firm":"Point72","techs":["Microsoft Excel","Microsoft PowerPoint"]}
+{"id":"2edbedb854360b0f147b647c46a1d402a7ded862","firm":"D. E. Shaw","techs":[]}
+{"id":"bc8c577f11f0cf548ef6ad807b6a63fd1a21bab0","firm":"Point72","techs":["Python","Go","C++","NumPy","Pandas","Polars","scikit-learn"]}
+{"id":"cc2ab7476cfe3376c002093dcaf4a7f07abc512a","firm":"Point72","techs":["Power Automate","UiPath","Alteryx","SQL","Python","Microsoft Excel","PowerPoint"]}
+{"id":"76f42a13eeae0081fea26d7a087a974d740eece6","firm":"Point72","techs":["Microsoft Office"]}
+{"id":"4f2c2dc2a6732e843312cc17d239d7f3eff9d2f6","firm":"D. E. Shaw","techs":[]}
+{"id":"09fb9add3b6327ca19f24d4e1100c08cf91d140e","firm":"Point72","techs":["Bloomberg","Neovest","PowerShell","Splunk"]}
+{"id":"d441a331c9d3b2e2697ef59bd7e7fb136b927402","firm":"D. E. Shaw","techs":[]}
+{"id":"77d79a1972e545eac5b36c103e7d47566a5dace9","firm":"D. E. Shaw","techs":[]}
+{"id":"7f5e3aa657e95692db4f855ac5ccdfdc76318af4","firm":"D. E. Shaw","techs":[]}
+{"id":"55103d1b8cf1056e2ee830268874e71845794cc9","firm":"D. E. Shaw","techs":[]}
+{"id":"06b517344d98016e9e2742182977ca97e78cf28c","firm":"D. E. Shaw","techs":[]}
+{"id":"5f5ec429e148d2a9a59ecd68dfe57f6427308b0c","firm":"D. E. Shaw","techs":[]}
+{"id":"2f44faa2612f21321603aa2c07fff98192828282","firm":"D. E. Shaw","techs":[]}
+{"id":"5d0fd8117526f131635423fa7502cba0b847d56e","firm":"D. E. Shaw","techs":[]}
+{"id":"49cc911bb3b52f8dea4d537addc564164c263d24","firm":"D. E. Shaw","techs":[]}
+{"id":"cac0074bc5a10ac9b6e2e2d8311fb27fc5629805","firm":"D. E. Shaw","techs":[]}
+{"id":"9df6c9063a90bbedaaadc7d3a431e0d30fb1bd6b","firm":"D. E. Shaw","techs":["Linux","Windows"]}
+{"id":"c8cbe48360e8c5b0f082aa65b1d1fda0b643569c","firm":"D. E. Shaw","techs":[]}
+{"id":"5923e581241d16a1a4d1472056bae70b8aebebd1","firm":"D. E. Shaw","techs":["Windows","UNIX"]}
+{"id":"1e0b2388dda04a6fc3ad8432d95e3566f755f2bc","firm":"D. E. Shaw","techs":[]}
+{"id":"3faa3857b388628e75e11046a9e395cbe74298e0","firm":"D. E. Shaw","techs":[]}
+{"id":"33af506e34c48c9a98251a77fc405e4402d0c6ad","firm":"D. E. Shaw","techs":[]}
+{"id":"e8cbccc6c04950e9cd2f5cae35a02e1a009693d6","firm":"D. E. Shaw","techs":["Windows","UNIX"]}
+{"id":"e2b09ac20da4ece1d001c2610fa9b87a4cc0ba03","firm":"D. E. Shaw","techs":["Webex","Zoom","Microsoft Teams"]}
+{"id":"e7364c55fa682ecdcd620d4b323e5e702f8d63c1","firm":"D. E. Shaw","techs":[]}
+{"id":"b3cb60ca25ba1bb51e894da9e7bf99ba56697b3c","firm":"D. E. Shaw","techs":["Claude","ChatGPT","Copilot","Gemini"]}
+{"id":"64dbaf06d94b9601ad9a7ba2ece4b50e1d986e57","firm":"D. E. Shaw","techs":[]}
+{"id":"b9fa22677b3dc190ee0d67dd2ea9600e736924f1","firm":"D. E. Shaw","techs":["Linux","Windows"]}
+{"id":"187e53be374a6c449d95b9cc2998d4bc208b850c","firm":"D. E. Shaw","techs":[]}
+{"id":"b603a0a5796213bbe4177615ada193def965954f","firm":"D. E. Shaw","techs":[]}
+{"id":"8acb28d877d9c7e4e3e214ec2d183de917d569ab","firm":"D. E. Shaw","techs":[]}
+{"id":"232b803361be6a821c927c7707dc58bc18817cdd","firm":"D. E. Shaw","techs":[]}
+{"id":"cd1f005e94ceeae2940624aec0a2615dfa03dc06","firm":"D. E. Shaw","techs":[]}
+{"id":"b88a40a3aa14ee7f59710dce063b6a7cd90d366c","firm":"D. E. Shaw","techs":[]}
+{"id":"8551d3c6e2fc9d2fc28886a42bb812808c721ab3","firm":"D. E. Shaw","techs":[]}
+{"id":"e899273d9a5e5f6befe8e3c077cf88900ecf4fcf","firm":"D. E. Shaw","techs":[]}
+{"id":"456ec8c9d0c6efe24296f075c5543bfa4c89ddc0","firm":"D. E. Shaw","techs":[]}
+{"id":"834babcedbe6a47db5851c17d267b1c254c3d13d","firm":"D. E. Shaw","techs":[]}
+{"id":"db9c574c8b4f2116abeb1bb728b117de956f89da","firm":"D. E. Shaw","techs":[]}
+{"id":"d2489baaeab395a9309a6ab450dedb05ef862b4e","firm":"D. E. Shaw","techs":[]}
+{"id":"a4fc8bdc10b03cd80331cdafd9d48864f80851dd","firm":"D. E. Shaw","techs":[]}
+{"id":"2b2f57a7e0169ab7bbc8e853eeb8934c3dbaf07d","firm":"D. E. Shaw","techs":[]}
+{"id":"ef86fc2eefc4e65ef1c77b01450485d91e721904","firm":"D. E. Shaw","techs":[]}
+{"id":"7939cf68b121e833d53c9bc884de016445f3481b","firm":"D. E. Shaw","techs":["Python"]}
+{"id":"85b8e3254cf065713c3cd77212e08aae2f1f3598","firm":"D. E. Shaw","techs":[]}
+{"id":"3704b0d647294effac5e81cee1e4e6e952554f15","firm":"D. E. Shaw","techs":[]}
+{"id":"0760ed9a8581b19c8d32b9b9a9ea7d82a129426d","firm":"D. E. Shaw","techs":[]}
+{"id":"af707ce9e2062299f6d7a577284f4ecd7946fb54","firm":"D. E. Shaw","techs":["Windows","Linux"]}
+{"id":"d94e5cac57fd187a835ac421dbfeff7cd6a07acc","firm":"D. E. Shaw","techs":[]}
+{"id":"026e82629937898a096f422722457697240fd04d","firm":"D. E. Shaw","techs":[]}
+{"id":"ddfbdd1ffc95bf55dd332a90bce661e26ef98117","firm":"D. E. Shaw","techs":[]}
+{"id":"b13eae560c926573ac4194f2d9c3ff475746e530","firm":"D. E. Shaw","techs":["Windows"]}
+{"id":"f359420fb4cf240ca526ffbddb97a1501ce71517","firm":"D. E. Shaw","techs":[]}
+{"id":"fbee24da59bbd115f64912c91f21de036311c89a","firm":"D. E. Shaw","techs":[]}
+{"id":"c9a9f60669051cf0629dcb29a4f8106fdcc9d070","firm":"D. E. Shaw","techs":[]}
+{"id":"617be4cd4e8599d6489202b2c13f4744e0d27cc0","firm":"D. E. Shaw","techs":[]}
+{"id":"83fee346a5048bf73018dc735506a57d6f154723","firm":"D. E. Shaw","techs":["Python","Git","GitHub"]}
+{"id":"0416ee461d99e75ebfee88a004a13a00b9d0f038","firm":"D. E. Shaw","techs":[]}
+{"id":"75b42ae241a9a9d4617398db28d72c15a9879e0f","firm":"D. E. Shaw","techs":[]}
+{"id":"feb32dc9eda9c0037c4c3fd04e5d059b4714e270","firm":"D. E. Shaw","techs":[]}
+{"id":"c07bd3cdcc3f2dba2a17836bc3b89051ee26ac9e","firm":"D. E. Shaw","techs":[]}
+{"id":"15e01d9c52d98dda007ba5ce96d4f256daf60483","firm":"D. E. Shaw","techs":[]}
+{"id":"c5cdea992f00dde8dc3d6b447622a4d711e7bc19","firm":"D. E. Shaw","techs":[]}
+{"id":"1f2aa45153c7c7272a53bb80c1803752b9e5c72b","firm":"D. E. Shaw","techs":[]}
+{"id":"5ff401ee161c376cf3e462cd9688b027649674dd","firm":"D. E. Shaw","techs":[]}
+{"id":"7c4c75516790c069dbaaefb630085c325d8050f7","firm":"D. E. Shaw","techs":[]}
+{"id":"1767efa219d70f4c740f4d5743545ce60a6ad510","firm":"D. E. Shaw","techs":["Python","React","PostgreSQL"]}
+{"id":"3b5f4743511ff87cbf54df87951f612e979d23c0","firm":"D. E. Shaw","techs":[]}
+{"id":"2c58e5ed46be1c316cdb61220701151a618e7ef0","firm":"D. E. Shaw","techs":[]}
+{"id":"25b6f00e4abd72122aad05bd88a700a265dfc97d","firm":"D. E. Shaw","techs":[]}
+{"id":"a83c6261c20d99f77cdaf924d66a41797e94ee07","firm":"D. E. Shaw","techs":[]}
+{"id":"52042db98cb26cc04e26802e75a21713f09ff709","firm":"D. E. Shaw","techs":[]}
+{"id":"c7d8e3ea527a1dbda8fa895a02317dfdb124e43f","firm":"D. E. Shaw","techs":[]}
+{"id":"2dc99a7dcb4121e8edeb3d031238658cb439ef27","firm":"D. E. Shaw","techs":["Claude Code"]}
+{"id":"04c4091f5c1712e6cd43518def7a66aafaa15316","firm":"D. E. Shaw","techs":[]}
+{"id":"ff2968537510bc1c89cc01e21b8343d66d835a8f","firm":"D. E. Shaw","techs":[]}
+{"id":"a13902d4174e2bebb1a7fa5193f7679328a0a898","firm":"D. E. Shaw","techs":["Linux"]}
+{"id":"842004b9df6fd88dc9108be1c309abcec790c4c2","firm":"D. E. Shaw","techs":[]}
+{"id":"839277e48d6ce2fd5cf61fcecbe55776aa7f734c","firm":"D. E. Shaw","techs":[]}
+{"id":"9b7f70b45961449b187ddbd391326b0e0ef27338","firm":"D. E. Shaw","techs":[]}
+{"id":"b0430eb5185c65a4e00bbe2238ac797fdf1a861c","firm":"D. E. Shaw","techs":["OpenAI API","LangChain","LlamaIndex"]}
+{"id":"15b1317a36b20f9271c7031fbca68b45c52afd40","firm":"D. E. Shaw","techs":[]}
+{"id":"439e26fd2048c0115cb7505ef7e976bc48d77a90","firm":"D. E. Shaw","techs":[]}
+{"id":"ef63afd5b893a06f79177f50b1492ee9de350b4c","firm":"D. E. Shaw","techs":[]}
+{"id":"96d88d6c184d91113bad37c1b4229885aa858f28","firm":"D. E. Shaw","techs":[]}
+{"id":"fc507540cab4df4cd477c2c1fec34f550dc3152a","firm":"D. E. Shaw","techs":[]}
+{"id":"f3b23818f0f4f193dc3f72938953596f48c2bc41","firm":"D. E. Shaw","techs":[]}
+{"id":"f438a6cbf31e34bfd004430969fbecd3200504e5","firm":"D. E. Shaw","techs":[]}
+{"id":"0f137538a49c968bb38ad4cb36b23c7e5a2a75c7","firm":"D. E. Shaw","techs":[]}
+{"id":"01dafa74a3f03cc9556cd7d26291ebb6321e5cc8","firm":"D. E. Shaw","techs":[]}
+{"id":"dcb49cea8b9d15ac97383f8b420d69308bb934ca","firm":"D. E. Shaw","techs":[]}
+{"id":"6ed760a3f228245c0c783dc01cdf6a2e307b8499","firm":"D. E. Shaw","techs":[]}
+{"id":"c24b1533ec0dddd4cb2b005ee4d8648101340f5d","firm":"D. E. Shaw","techs":[]}
+{"id":"9bf7d45a3e8270e89e22fd50a1b600897977c19a","firm":"D. E. Shaw","techs":[]}
+{"id":"fb694ec1499cdb7adca56235c64cea7b519eb7ee","firm":"Man Group","techs":["PowerPoint","Excel","Visio"]}
+{"id":"028a910c8ac0fd3eadbb7310b488a7533bdd1942","firm":"Man Group","techs":[]}
+{"id":"0bc87a09441a6362d28beb8fcbddd65e46fd93e6","firm":"Man Group","techs":["Python","SQL"]}
+{"id":"b3b5966cbc0c4ec471478b76f5e03a49973b86fb","firm":"Man Group","techs":[]}
+{"id":"eed33ba2501295ea71f1f6344520e186e00559ea","firm":"Man Group","techs":["Slack","Microsoft Outlook","Microsoft Excel","Microsoft PowerPoint"]}
+{"id":"c03fd1715b6f9748894fb1364748222df160188a","firm":"Man Group","techs":[]}
+{"id":"0699d3d522f3766657de0ab3e93dc8e570288bc6","firm":"Man Group","techs":["Excel"]}
+{"id":"e1229e7afc0d2d102fb73865398a4c9f95cd852a","firm":"Man Group","techs":["MS Word","MS Excel","MS PowerPoint","MS Outlook","Star Compliance"]}
+{"id":"b382429f2199ceb06a198c1971d79caf6b116731","firm":"Man Group","techs":[]}
+{"id":"e3c4d1387fff4493c7710d34f965d658a50d73b3","firm":"Man Group","techs":["Python"]}
+{"id":"4d2960793a372e478430048037164b094be8bc17","firm":"Man Group","techs":["Python"]}
+{"id":"3acc8dd5bac23fe103d56ff5d5f37d5082de8077","firm":"Man Group","techs":["Bloomberg","Refinitiv","Python","SQL","Linux","Git","Jira"]}
+{"id":"cc5b2f140c743a47128ea75a5a548af6de1c249c","firm":"Man Group","techs":["Linux","Python","NumPy","SciPy","Pandas","statsmodels","scikit-learn","Java","MongoDB","SQL Server","Control-M","Airflow","Kafka","Bitbucket","Jenkins","Grafana","Prometheus","ELK","Docker","OpenStack","Ansible","Slack","ArcticDB","Git","PostgreSQL","React","Spark","Dask","Kubernetes","Redis"]}
+{"id":"8db2392cb25e298075ff72e5e321cebb212bc7fd","firm":"Man Group","techs":["Linux","Windows","ServiceNow","Slack","Git","Python","Kubernetes","Terraform","PowerShell"]}
+{"id":"c94d5419671c1ce512e4117946408a588a4f49e3","firm":"Man Group","techs":["Glass Lewis","ISS Proxy Exchange"]}
+{"id":"e51640a308e1280a6f354084dcde0dd05c9898cb","firm":"Man Group","techs":["Python","SQL"]}
+{"id":"9d219d1c3074b2cde21ac379b86b77331241e3f7","firm":"Man Group","techs":["Python","Kubernetes","Spark","Hadoop","Ray","Airflow","Linux","C++","C"]}
+{"id":"b72095d2ee027d4d4975553ea5212c26e7b8799d","firm":"Man Group","techs":["C#",".NET","SQL Server","Kafka","MongoDB"]}
+{"id":"1f6c2472222cbe12999c2aa887ecabcadbb066f1","firm":"Man Group","techs":[]}
+{"id":"3e011e654b61bbff16790ac781120044d24a20f3","firm":"Man Group","techs":[]}
+{"id":"48f35d6846da33871cd11285e00d78f0eb5b7fc2","firm":"Man Group","techs":["Workday","Greenhouse","CultureAmp","Kyriba","FloQast","Workato","Claude Code"]}
+{"id":"db524f970292935b4e31e75919c0f6b496df2ee8","firm":"Man Group","techs":["Python"]}
+{"id":"ffd136a78de7effdc34678cc5ec82b54b594d761","firm":"Man Group","techs":["Python","Linux","NumPy","SciPy","Pandas","Kubernetes","Airflow","C#",".NET","scikit-learn","Excel","React","Streamlit","FastAPI","Django","ArcticDB"]}
+{"id":"7526e08b9e5ba1dd0575d50912736d80ab5cb9fa","firm":"Man Group","techs":["SQL","Zendesk","Slack","ServiceNow","Jira","Windows 11","Windows Server","Office 365","Oracle","SQL Server","Unix","Linux",".NET","Python","MSMQ","RegEx","PowerShell","OpsGenie","Nagios","ELK","Automate","Salerio","SWIFT","MoveIT"]}
+{"id":"bd5a1ebfabc38d24f8002c3d289a747a6430321b","firm":"Man Group","techs":["Workday","Greenhouse","CultureAmp","Kyriba","FloQast","Workato","Claude Code"]}
+{"id":"1b068df2915f498442eb0aaef65228a2bb86e63c","firm":"Man Group","techs":["Bloomberg","Intex","Python","Yieldbook"]}
+{"id":"e9668d99ab32551053c4b31bf323b32d975c574d","firm":"Man Group","techs":[]}
+{"id":"8d68cc17860b4f3e34ba0d375f25eeecd9b7359f","firm":"Man Group","techs":["Excel"]}
+{"id":"227ccf40a37dd660344b724625977a7ee95516a8","firm":"Man Group","techs":["Python","SQL","Pandas"]}
+{"id":"f257d832024d029063cd16e5a2246766060a4d37","firm":"Man Group","techs":["Python"]}
+{"id":"9ca44a9fb1de4d878c2a32e061937990610dc9d7","firm":"Man Group","techs":["PowerPoint","Word","Excel","Salesforce","MMD"]}
+{"id":"1fbafdaef554042c00cf67b702762d6048c04b48","firm":"Man Group","techs":["Linux","Python","NumPy","SciPy","Pandas","statsmodels","scikit-learn","MongoDB","SQL Server","Control-M","Airflow","Kafka","Bitbucket","Jenkins","Grafana","Prometheus","Docker","Ansible","Slack","Git","PostgreSQL","React","Spark","Dask","Kubernetes","Redis","ArcticDB"]}
+{"id":"bf50b477e7a7d5ac60ad8590fd0a46cfcfa41402","firm":"Man Group","techs":["Python","Java","Kafka","ArcticDB","MongoDB","Linux","Git","Iceberg","PostgreSQL"]}
+{"id":"7569f96114a612bf438d516306e9898c9fecf1d7","firm":"Man Group","techs":["Linux","Python","NumPy","SciPy","Pandas","statsmodels","scikit-learn","MongoDB","SQL Server","Control-M","Airflow","Kafka","Bitbucket","Jenkins","Grafana","Prometheus","Docker","Ansible","Slack","Git","PostgreSQL","React","Spark","Dask","Kubernetes","Redis","ArcticDB"]}
+{"id":"ae3230e48e390b706582be4deb5abb7126d946c5","firm":"Man Group","techs":[]}
+{"id":"d2b64c7b5f7299b20854393f240a9e0ca68a6d56","firm":"Man Group","techs":["Python","TypeScript","React","Pandas","NumPy","Kafka","FastAPI","Flask","Streamlit","Tableau","Kubernetes","Airflow","Claude Code","pytest","Linux","Git","C#",".NET"]}
+{"id":"56f48d60ffd20e0c58fb6e7a60aebec854a0eaee","firm":"Man Group","techs":[]}
+{"id":"65e457b69c98777ed9c90d3e5842a7d9d9844dc6","firm":"Man Group","techs":["Python","Linux","Pandas","NumPy","SciPy","scikit-learn","ArcticDB","SQL","SQL Server","PostgreSQL","MongoDB","Git"]}
+{"id":"4818495e9ca062de3cc3f16b805d8245cad59242","firm":"Man Group","techs":["Python","MATLAB","R"]}
+{"id":"6be705a6daf46bcf31376b79fb2f0ce8f34b0155","firm":"Man Group","techs":["Pure FlashArray","Pure FlashBlade","VAST","Dell PowerStore","Rubrik","NetApp","Azure","iSCSI","Prometheus","Grafana","Python","PowerShell","Git","ServiceNow","Bash","Terraform","Ansible","Windows","Linux","VMware"]}
+{"id":"e2ec03d4782209b594fc016a25ccabe4baba1dd8","firm":"Man Group","techs":["Excel","VBA"]}
+{"id":"43cc0f8fc46dcc3ce6ed526c6103658e62eeafec","firm":"Man Group","techs":["Python"]}
+{"id":"8cee970afed5bfb256d129584165a762ab5fe4dc","firm":"Man Group","techs":["Terraform","Active Directory","Entra ID","Azure","AWS","Docker","Kubernetes"]}
+{"id":"6dff76ad8bcb9931f333b96decfb23e1dddbf450","firm":"Man Group","techs":["Excel"]}
+{"id":"ff9b92a31569aed2e14033959a0c676d6bb038a2","firm":"Man Group","techs":["Python"]}
+{"id":"650237d5cbde0d668f3c9e70d8e92be798f4c66e","firm":"Man Group","techs":[]}
+{"id":"0c1571cb4931cb2f8e584b923ed19c29c711994a","firm":"Man Group","techs":["Linux","Python","NumPy","SciPy","Pandas","scikit-learn","Java","C++","Airflow","Kafka","Bitbucket","Jenkins","Grafana","Prometheus","ELK","Docker","Kubernetes","OpenStack","Ansible","Terraform","Slack","ArcticDB","TensorFlow"]}
+{"id":"1e20b3a3edf30cf827c653685ba7241b267ac9d7","firm":"Man Group","techs":["Terraform","Ansible","Python","Prometheus","Grafana","Jenkins","GitHub Actions","Microsoft 365","Slack","Active Directory","Entra ID"]}
+{"id":"89100d7cc0f30c1cd7daece75b96b83b04a57369","firm":"Man Group","techs":["Excel"]}
+{"id":"5194e3a69bdd620acb3582390d7546588673c129","firm":"Man Group","techs":["Excel","iLevel","SQL","Power BI","Python"]}
+{"id":"f68a2ceef2b8a7889dc9b17d5b390bdecfc7127d","firm":"Man Group","techs":[]}
+{"id":"66e9a826dc0952993554af67f0161c399ef28a1a","firm":"Man Group","techs":["Python","SQL"]}
+{"id":"f62c6e0d6941177dedfa4e9b17961c7069d76438","firm":"Man Group","techs":["Python"]}
+{"id":"0280fa6926e704cfc19cc13955f34e863b4d2f8e","firm":"Man Group","techs":["Python","R"]}
+{"id":"9226a8d45b331446f55db97e72579afec4ca29e3","firm":"Man Group","techs":["Microsoft Excel","Microsoft PowerPoint","Microsoft Word"]}
+{"id":"20f3edd912daea14f8a94ca532dfb97b2de95b08","firm":"Man Group","techs":["Python","Linux","C++","Java"]}
+{"id":"4081ce78897f1bb3ba004b4275f36445a55bd5c9","firm":"Squarepoint Capital","techs":["Python","kdb+/q","PostgreSQL","Linux","SQL"]}
+{"id":"4300ddab9b7061d04604785a82e69fc7918664d4","firm":"Squarepoint Capital","techs":["Concur Invoice","Workday","EDI","Excel"]}
+{"id":"dd8fab218efc0649ae199b661f686331a48e0ae5","firm":"Squarepoint Capital","techs":[]}
+{"id":"c55d142eb871b7097d41497e6db1b1c4b31fa333","firm":"Squarepoint Capital","techs":["Python","Linux","PostgreSQL","Git","Consul","Grafana","Kibana","GCP","AWS","Jira"]}
+{"id":"40f070c2f36efabdf0b901016990bd29857f6a46","firm":"Man Group","techs":["Python","Terraform","Ansible","Chef","Puppet","Salt","Kubernetes","Prometheus","Grafana","Ubuntu","RHEL","Windows Server","PowerShell","Bash","Go","Jenkins","GitHub Actions","Docker","ArgoCD","Flux","HashiCorp Vault"]}
+{"id":"741831adcd75e7e450210ffe617aacdb34885e72","firm":"Squarepoint Capital","techs":["C++","Java","Python"]}
+{"id":"446795fa0eaf62faf54c028367676c20b5556d7a","firm":"Squarepoint Capital","techs":["Python","C++","Rust","Linux","CUDA"]}
+{"id":"c5318d122446ec9076855f482a29462b101c520a","firm":"Squarepoint Capital","techs":[]}
+{"id":"9aae3ea6eb0fedeaf1f8116d3c493c6dbb7403e2","firm":"Squarepoint Capital","techs":["Python","Git","GitLab","Jira","Linux","Kafka","AMPS","Kubernetes","Slurm","PostgreSQL","ClickHouse","kdb+/q"]}
+{"id":"89a4eb4d994e3f8e42ededa7347e692a8f4965ba","firm":"Man Group","techs":["Prometheus","Grafana","ELK","Loki","Ansible","Terraform","Python","Go","PowerShell","Kubernetes","Git","Jenkins","TeamCity","Linux","Windows","AWS","Azure"]}
+{"id":"00d96e57d72d23053028632d72842dc162dcaa77","firm":"Squarepoint Capital","techs":["Python","React","FTP","SFTP","S3","AWS","SQL","JavaScript","TypeScript","C++","Rust","PostgreSQL","Redis","Valkey","FastAPI","Kubernetes","Helm","HashiCorp Vault","HashiCorp Nomad"]}
+{"id":"78045dcc076c1ca207ece152ae01162ea5f748f1","firm":"Squarepoint Capital","techs":[]}
+{"id":"3bf0220baf8542c049b00c05f56b368134e96e5f","firm":"Squarepoint Capital","techs":["Python","Excel"]}
+{"id":"4a84108a1eb5a8c0103c87ac4f0cd14f0c4b8806","firm":"Squarepoint Capital","techs":["Python","Bash","Linux"]}
+{"id":"3262eef0c7e01e4d127bace50589de04c7867cd7","firm":"Squarepoint Capital","techs":["Python","kdb+/q","Shell","Excel","VBA"]}
+{"id":"fce8890be243a8754e3bb7394b573ea66761b46a","firm":"Squarepoint Capital","techs":["Linux","Python","kdb+/q"]}
+{"id":"a61922aec3c301c0dda5a267a08e7a925ce49ba0","firm":"Squarepoint Capital","techs":["Salesforce","Microsoft Office","Microsoft Excel","Microsoft Word","Microsoft Outlook"]}
+{"id":"77f7baa583576d6c08bb49537cc3c42aba94b97c","firm":"Squarepoint Capital","techs":["Windows","Microsoft Office","Active Directory","Office 365","Azure","SharePoint","PowerShell","Python"]}
+{"id":"c1cdfb81f647c6e44150871afc74d62ed9522d3d","firm":"Squarepoint Capital","techs":["Python"]}
+{"id":"4f13fe8ff7e4f74ecc369e60cc897f40ffdc97e6","firm":"Squarepoint Capital","techs":["C++","Linux","Python","kdb+/q","SVN","Git","Jira","Slurm"]}
+{"id":"941931373c567a3e9df6403ad004bb45cc872472","firm":"Squarepoint Capital","techs":["Microsoft Office","Microsoft Word","Microsoft Excel","Microsoft PowerPoint"]}
+{"id":"a4abd0c365753c1bbb6a7f37ce8bb66e76528929","firm":"Squarepoint Capital","techs":["Jira","Confluence","Refinitiv","Bloomberg","C++","Python","Linux"]}
+{"id":"301f6cb7ddac604b654913c87655d4b77ec107e4","firm":"Squarepoint Capital","techs":["C++","Linux","Python"]}
+{"id":"d94cfac84f7442285f8af27002a73d0fa16d3450","firm":"Squarepoint Capital","techs":["MS Office"]}
+{"id":"b9cc73afca12b347a81d6c99e0f1769955241f7d","firm":"Squarepoint Capital","techs":["Linux","Bash","Python","Perl","SQL","PostgreSQL","MySQL","SQL Server","Jira","Jira Service Desk","Confluence","Tableau","Grafana"]}
+{"id":"0995fe66a7362525db2faaf088e5aa12f58af3ab","firm":"Squarepoint Capital","techs":["Python","kdb+/q"]}
+{"id":"c9a991f5dfe0f2fd1d8c80687363d7c8819214bb","firm":"Squarepoint Capital","techs":["Python","React","Rust","JavaScript"]}
+{"id":"071d1ff8512d3b83f9aba85bb46670398bfeaf57","firm":"Squarepoint Capital","techs":["Workday Financials","Excel"]}
+{"id":"c7cf7b9a54f03c5f809080133f9da7f58259da5f","firm":"Squarepoint Capital","techs":["Python","kdb+/q","Jira","Confluence"]}
+{"id":"0b0ff6e0a13abc46f7510ea375149b73b460ec3e","firm":"Squarepoint Capital","techs":["C++","Java","Python","kdb+/q","Linux","Bash"]}
+{"id":"acc0cd75c07a5df92d99a2c567918de9991cb094","firm":"Squarepoint Capital","techs":["NFS","GPFS","WEKA","AWS","S3","EBS","EFS","GCP","Filestore"]}
+{"id":"e9f0b6c8853b920d77211dcf3a6310589cb554bb","firm":"Squarepoint Capital","techs":["Linux","Kubernetes","Python","Bash","Ansible"]}
+{"id":"0c8f92f8581e7024b86062d62f1b73987261d658","firm":"Squarepoint Capital","techs":["Windows Server","Active Directory","DNS","DHCP","Group Policy","VMware vSphere","ESXi","vCenter","Omnissa VDI","VMware Horizon","Microsoft Entra ID","Azure AD","Microsoft 365","Exchange Online","SharePoint","Microsoft Teams","Microsoft Intune","PowerShell","Azure DevOps","GitHub Actions"]}
+{"id":"f4164bf131a8e965392d1908f687015837df95d0","firm":"Squarepoint Capital","techs":["kdb+/q","Python","C++","Rust","SQL"]}
+{"id":"ed67ee27b41e75394bb2312bf8d4766bc29f3e75","firm":"Squarepoint Capital","techs":["Python","Git","Linux","C++","Rust","kdb+/q","JavaScript","TypeScript","React","SQL"]}
+{"id":"2a7c6118a7d34a56efaaeb65b23f62a3a27086bb","firm":"Squarepoint Capital","techs":["React","TypeScript","Git","Linux"]}
+{"id":"3f7146b9a8a573fdb0f6455023896ffc11982c1d","firm":"Squarepoint Capital","techs":["Linux","RHEL","CentOS","Ubuntu","Ansible","Chef","SaltStack","Python","Go","Rust","AWS","GCP","Azure","Terraform","Pulumi","Prometheus","Grafana","Datadog","Zabbix","ELK stack","Fluentd","OpenTelemetry","Jaeger","LDAP","Kerberos","OAuth2","S3","EBS","GKE","EKS","Cloud Functions","Git","GitLab CI","Jenkins","ArgoCD","KVM","VMware","Hyper-V","Docker","Kubernetes","Helm","SELinux","AppArmor","Netbox"]}
+{"id":"43b9b25771e756a0980430fe16de12fc6e7fb1fa","firm":"Squarepoint Capital","techs":["Python","kdb+/q","Tradeweb","Bloomberg","Git","Jupyter"]}
+{"id":"de309562226532db12e01660bdcd0f63d4e21e69","firm":"Squarepoint Capital","techs":["C++","Git","Linux","kdb+/q","Python"]}
+{"id":"ff87acceeb7fd8413409ebc749b05b8d4108a53a","firm":"Squarepoint Capital","techs":["Workday Adaptive Planning","Anaplan","Vena","Microsoft Office","Excel","SQL","Python","M"]}
+{"id":"e9c5f87909c121156357cdd0ff9ecf1c4dcbeeef","firm":"Squarepoint Capital","techs":["Linux","Unix","RHEL","CentOS","OEL","Python","Bash","NFS","GPFS","Chef","Puppet","Ansible","Kafka","ELK","Prometheus","MySQL","PostgreSQL","Docker","Podman","Kubernetes","GKE","Helm","TCP/IP","tcpdump","PTP","NTP"]}
+{"id":"ce798c5cfd4ab8eaf1306ced8e769bc3c45adf48","firm":"Squarepoint Capital","techs":["Python","C++","kdb+/q","Linux","Git"]}
+{"id":"5cf587322b9c78900b3b849e73e8237318d89f0e","firm":"Squarepoint Capital","techs":["Python","C++","React","TypeScript","kdb+/q","JavaScript","Linux","Git"]}
+{"id":"581fb630130622b41a8c633bc53e8b341445501a","firm":"Squarepoint Capital","techs":["Excel","MarkitWire","CTM","Traiana","NYFIX","Bloomberg"]}
+{"id":"080662b212f0506c2f46c254818693bb4c104ba4","firm":"Squarepoint Capital","techs":["Linux","RHEL"]}
+{"id":"ef62935b967e6a8e9ac411d246a82e37090957ce","firm":"Squarepoint Capital","techs":["Python","C++","kdb+/q","Git","Linux","SQL"]}
+{"id":"f9925f2f959877b96c1a9d458d538f2910af6073","firm":"Squarepoint Capital","techs":[]}
+{"id":"b21b89e858216d151dfb8aa8a603fb1043f7e579","firm":"Squarepoint Capital","techs":["Backstop","Hedgetek","Investran"]}
+{"id":"6b00b47963b100a91db14d3a6adda5356e9c7ff1","firm":"Squarepoint Capital","techs":["Linux","RHEL"]}
+{"id":"36759119247572a0bd3f0d734633de664c8bf9a6","firm":"Squarepoint Capital","techs":["Linux"]}
+{"id":"e0ae97176722a96e0cf1f111a84430cd8db2f373","firm":"Squarepoint Capital","techs":["Python","C++","kdb+/q"]}
+{"id":"457a8c2e2242ee13ecfb94f8b9833cb32309fcc3","firm":"Squarepoint Capital","techs":["Workday","Greenhouse"]}
+{"id":"7abfe45d39e5e210e884dcf346319c12ea8f756e","firm":"Squarepoint Capital","techs":["Linux","Unix","RHEL","CentOS","OEL","NFS","GPFS","Chef","Puppet","Ansible","TCP/IP","multicast","tcpdump","PTP","NTP"]}
+{"id":"e07a2799a247d8abfe7a9cb03a3e2eb8c5399bc9","firm":"Squarepoint Capital","techs":["Python"]}
+{"id":"a68426e871baa4879f1c864158de890b152c3c7b","firm":"Squarepoint Capital","techs":["Python","Excel"]}
+{"id":"484c32ee807b7a6fc23e5ee58b77b4a909fe527f","firm":"Squarepoint Capital","techs":["C++","Java","Python"]}
+{"id":"8658e82ddb07728a0c7d2c2b9e6db4dd9b4edcbc","firm":"Squarepoint Capital","techs":["Microsoft Excel","Workday"]}
+{"id":"bcc2c52adb97c73d1fa9b83769877f43c1607e25","firm":"Squarepoint Capital","techs":[]}
+{"id":"2ee338bbc9eb5165e65dc11ffe38b7205afcce74","firm":"Squarepoint Capital","techs":["Python","kdb+/q"]}
+{"id":"8152a864b299e8ead1c427f971bd69dffaf350bf","firm":"Squarepoint Capital","techs":["Figma","React","JavaScript","TypeScript","HTML","CSS"]}
+{"id":"7f967b331dccd14f0f9d6cc4e5b16c9566d0d435","firm":"Squarepoint Capital","techs":["OAuth 2.0","OpenID Connect","SAML","Linux","Kubernetes","Python","Terraform","Ansible"]}
+{"id":"4a99b45f93e1af57dc21b17467dfab484ca0b726","firm":"Squarepoint Capital","techs":[]}
+{"id":"1a074c07dc53a032bf9f636f7d9289cfc620eeb3","firm":"Squarepoint Capital","techs":["Python","Git","Bash","Linux","GitLab","Artifactory","Docker","Ansible","Terraform","Slurm","Kubernetes","Elasticsearch","Datadog","Prometheus","PostgreSQL"]}
+{"id":"4773b83ff928f481a3f1c6674df7c1ed63fc55b3","firm":"Squarepoint Capital","techs":["AWS","Azure","Cisco ISE","Fortinet","GCP","Illumio","Palo Alto","Python"]}
+{"id":"962f89630c1daaeee60e1fa32b21dc1c479a9120","firm":"Squarepoint Capital","techs":[]}
+{"id":"3f045a6e6235f63f793f2f9df670ca19daab3de7","firm":"Squarepoint Capital","techs":[]}
+{"id":"d1a12a14c063ca9a9725a96b3f9d0f9c534f1da8","firm":"Squarepoint Capital","techs":["Python","Linux","C++","kdb+/q","OpenAI","LangChain"]}
+{"id":"2dd299fffc6093e9e21abb2078d02eb1b9672aa6","firm":"Squarepoint Capital","techs":[]}
+{"id":"06b18b7767fadca39a792efbd2f3455cb4a3a2e7","firm":"Squarepoint Capital","techs":["kdb+/q"]}
+{"id":"2329f96a9a6ca922aef719b19ccadb9329727bcc","firm":"Squarepoint Capital","techs":[]}
+{"id":"6c2535bbb74a790705e2181745bd95a64fb89619","firm":"Squarepoint Capital","techs":["C++","Java","Python"]}
+{"id":"c97fa0700dd92a535c9601f0c4e02897a8442f41","firm":"Squarepoint Capital","techs":[]}
+{"id":"1c10130300ff13030ab7ef8b8e0f8a06e264dd9f","firm":"Squarepoint Capital","techs":["C++","Java","Python"]}
+{"id":"cdd99d733d1c601ebaa852b7525b5674fc806164","firm":"Squarepoint Capital","techs":["C++","Java","Python"]}
+{"id":"b301f32e8de495c2d32b700051e91fd9acd918f4","firm":"Squarepoint Capital","techs":["Python","PowerShell","Azure","AWS","GCP"]}
+{"id":"4d2a1abf1b674f6a7a78b46ea96cfda5b971420d","firm":"Squarepoint Capital","techs":["C++","Java","Python"]}
+{"id":"cf6e9a177e384daa448bd3a111148e07d6aade6c","firm":"Squarepoint Capital","techs":["Python","PowerShell","AWS","Azure","GCP"]}
+{"id":"92c22defa3dd62caf37a59d9960db67eb7d611b2","firm":"Squarepoint Capital","techs":["C++","Java","Python"]}
+{"id":"1b74d9812585814d0e51c66e6d669b4e606b6ec0","firm":"Squarepoint Capital","techs":["Python","Linux","Bash","Ansible","Terraform","Puppet","Prometheus","Grafana","Elasticsearch","Vector","AlertManager","PostgreSQL","ClickHouse","SQL Server","Redis","FoundationDB","Kafka","Consul","Slurm","Kubernetes","Airflow","Prefect","GitLab","Artifactory","JupyterHub","Go","Rust","JavaScript"]}
+{"id":"cd4464d97c002c1bc106db2efb374f239b5cfad5","firm":"Squarepoint Capital","techs":["Python","Java","Kotlin","Scala","Docker","Kubernetes","Linux"]}
+{"id":"a070a4137258d38d2d3790935342c9b68a009508","firm":"Squarepoint Capital","techs":["Rust","Python","Kubernetes","C++","Docker","Linux"]}
+{"id":"b3af9ebb9184369b10d3d9622489f2cb13af94ad","firm":"Squarepoint Capital","techs":["Python","SQL","PostgreSQL","FTP","SFTP","AWS","S3","C++","kdb+/q","Rust"]}
+{"id":"b97d59dde025aaaba8dd61a05c14e54082e38525","firm":"Squarepoint Capital","techs":[]}
+{"id":"db2aa3192a7ffc9c76b9869408f01d5cdca19492","firm":"Squarepoint Capital","techs":["C++","Linux","Kafka","AMPS","QPID","Python","Bash","kdb+/q"]}
+{"id":"4a8f61f5dd74a928e80a76c3f08bcbab3e025baa","firm":"Squarepoint Capital","techs":["Bloomberg","Fidessa","SpiderRock","Python","SQL","FIX","Pandas","R","Julia","kdb+/q"]}
+{"id":"eafd5330534b53d850ba8d3ce36e7eaeccc6c49d","firm":"Squarepoint Capital","techs":[]}
+{"id":"9024d7ebe6d228e4f76dd2d07a73fd70557417e7","firm":"Squarepoint Capital","techs":["C++","Linux","SQL","Boost ASIO","Arrow","Parquet","Google Protocol Buffers","FlatBuffers","gRPC","WebSocket","GCP","AWS","Docker","Kubernetes","Rust","Python","kdb+/q"]}
+{"id":"2a674b1e64cf11ddd92da8eab437ef5e78292e88","firm":"Squarepoint Capital","techs":["Python","Azure","Linux","PowerShell","Active Directory","Group Policy","Microsoft Exchange","Microsoft Outlook","Microsoft Office","Office 365","OneDrive","SharePoint","Windows","Windows Server"]}
+{"id":"4cedebad-3a71-457f-b117-11ae2c3b84b3","firm":"G-Research","techs":["C#","Python"]}
+{"id":"ae1d2714-28ef-42dc-95f2-36b2e37ff1c6","firm":"G-Research","techs":[]}
+{"id":"72d3d7ec7f240f209f5737520fc09e8fdf1a1b12","firm":"Squarepoint Capital","techs":["Linux","Python","Bash","kdb+/q","SQL Server","PostgreSQL","FIX"]}
+{"id":"8b80c7bb-625b-43a2-8afc-70ec20d9ad91","firm":"G-Research","techs":["Python","scikit-learn","SciPy","NumPy","Pandas","Jupyter Notebooks"]}
+{"id":"ff9e01df-ac32-4f29-b3f7-95d9c6b443a6","firm":"G-Research","techs":["Java","Kotlin","C#","C++","Rust","Kubernetes"]}
+{"id":"a9492fe5-3a46-4083-8acf-9d2cd8b8f337","firm":"G-Research","techs":["C++","C","C#","Solarflare OpenOnload","TPCDirect","ef_vi","InfiniBand","DPDK"]}
+{"id":"70172c18-fc37-4a67-8d18-85f94f4bf727","firm":"G-Research","techs":["Python","C++"]}
+{"id":"a2bc1455-5be3-438a-8354-c115859d19b3","firm":"G-Research","techs":[]}
+{"id":"ad90b41b-b66a-401c-815f-59f32a28ec94","firm":"G-Research","techs":[]}
+{"id":"d5763d48-87f7-4173-807e-17e4a7abd6d8","firm":"G-Research","techs":["YAML","JSON"]}
+{"id":"d825eaee7355236b4ee468718cc9e25718605d88","firm":"Squarepoint Capital","techs":["Linux","Bash","Python","Perl","FIX","SQL","PostgreSQL","MySQL","SQL Server","kdb+/q","tcpdump","Jira","Jira Service Desk","Confluence","Bitbucket","Bamboo","Elasticsearch","Nagios"]}
+{"id":"27814702-c434-49d6-8484-bf0ce24fc437","firm":"G-Research","techs":["Python","PyTorch","vLLM"]}
+{"id":"faa96906-6fb8-483a-ad95-30a7d93f6fc1","firm":"G-Research","techs":["Kubernetes","Linux","Bash","Python","Git","GitHub","Artifactory","Jenkins","Bamboo","ArgoCD","Go","Coder","GitHub Codespaces","Gitpod","Prometheus","Jaeger","Grafana","CRI-O","Cilium","Citrix","VMWare"]}
+{"id":"383927fd-f186-4330-9ec1-126703a9e7b3","firm":"G-Research","techs":["Python","PyTorch","NumPy"]}
+{"id":"098a5782-2924-4986-acc2-b0850e62580e","firm":"G-Research","techs":["Python","PyTorch","NumPy"]}
+{"id":"4588ce07-42fa-4db8-8d11-6ef831cf2ed9","firm":"G-Research","techs":[]}
+{"id":"1db18fcb-591e-41eb-9563-0127ab557a84","firm":"G-Research","techs":["OpenTelemetry","DataDog","NewRelic","Dynatrace","AWS","Kubernetes","Terraform","ArgoCD","Helm","Jenkins","Go","Python","eBPF","Pixie","Parca","Kafka"]}
+{"id":"ee23fa1f-1fb8-4f98-9847-19b33f564dc6","firm":"G-Research","techs":[]}
+{"id":"a7eae85f-7a75-4063-91d6-83c4746c7243","firm":"G-Research","techs":["AWS","Kubernetes"]}
+{"id":"f793846a-d305-4cc4-a345-4cfc70a3f4fe","firm":"G-Research","techs":["PostgreSQL","SQL Server","MySQL","CockroachDB","AWS","Python","Ansible","Terraform","Linux","Jenkins","Dagger","ArgoCD","Kubernetes","RDS","Aurora","S3","EC2","EKS","Prometheus","Grafana","ELK","OpenTelemetry","YugabyteDB","TiDB","Kafka","Debezium"]}
+{"id":"f3a83ccc-4050-4e8a-9297-484648958b99","firm":"G-Research","techs":["Linux","Kubernetes","perf","eBPF","VTune","Flamegraphs","Prometheus","Grafana"]}
+{"id":"585f50d2-02f1-46f3-84a3-766f4eec9fab","firm":"G-Research","techs":["F#","Python",".NET","TypeScript","React","ASP.NET","PostgreSQL","Kubernetes","Haskell","OCaml","Erlang","Elixir","C#"]}
+{"id":"4412eab6-e1ea-4031-9253-812b42b22352","firm":"G-Research","techs":["Linux","Kubernetes","Python","Go"]}
+{"id":"3148d694-8e8e-405b-85f6-d4f14dae010f","firm":"G-Research","techs":["C#","Python"]}
+{"id":"d006e3eb-e72f-4009-b5cc-fbe5ec74147b","firm":"G-Research","techs":["Cisco","Arista","BGP","EVPN-VXLAN","TACACS","Ansible","Python","Jenkins","Prometheus","Grafana","OpenTelemetry","ELK"]}
+{"id":"3aec6c15-0bb3-4205-ad58-e126076fd992","firm":"G-Research","techs":[]}
+{"id":"41866a4e-19f1-4073-b5c3-2832206f005c","firm":"G-Research","techs":["F#","Python",".NET","TypeScript","React","ASP.NET","PostgreSQL","Kubernetes"]}
+{"id":"1af5d114-f169-4dac-929a-87afc1f77882","firm":"G-Research","techs":["Python","LangGraph","Pydantic AI","C#","C++","JVM","gRPC","Kubernetes"]}
+{"id":"000823b5-dd47-41ce-a174-9c9b2ed57728","firm":"G-Research","techs":[]}
+{"id":"0ce9dc2b-3748-4722-acc1-6ec68dcd387a","firm":"G-Research","techs":["Spark","Trino","Kafka","ClickHouse","Airflow","AWS","Linux","Python","Terraform","Ansible","EMR","MSK","Athena","Redshift","Glue","MWAA","Jenkins","ArgoCD","Prometheus","Grafana","OpenTelemetry","Flink","Kafka Streams","Kafka Connect","Delta Lake","Iceberg","Glue Data Catalog","RAPIDS","Java","Scala","C#","Go"]}
+{"id":"8be4a72e-5ac2-43b5-a138-1e2aeeef80f0","firm":"G-Research","techs":["SQL","Python","Pandas","Polars","Git","Kubernetes"]}
+{"id":"d80df18e-4d74-49c3-b595-03cf723656ad","firm":"G-Research","techs":["Rust"]}
+{"id":"0f260d41-6edb-48b2-8f4c-559ee7d8bb84","firm":"G-Research","techs":["C#","Python","Kubernetes","Docker","Terraform","AWS","Prometheus","Grafana","OpenTelemetry"]}
+{"id":"78ddec50-e41a-4ab7-a85a-010cd8694fb0","firm":"G-Research","techs":[]}
+{"id":"a6f63ecd-e040-4770-b277-fae945e7ec93","firm":"G-Research","techs":["AWS","Kubernetes","Windows","Elasticsearch","Azure","Tines","Python"]}
+{"id":"9b51964d-15d4-43d5-9b24-3508ab833b5b","firm":"G-Research","techs":[]}
+{"id":"fea4d483-0c11-4bd0-b26b-34c96a542825","firm":"G-Research","techs":["Arrow","Parquet","Polars","Kubernetes","LLVM","Python","C++","Java","Rust","Go"]}
+{"id":"8320baee-68c3-4179-96ec-5b0e7b49b63f","firm":"G-Research","techs":["Kubernetes","OPA/Gatekeeper","ArgoCD","FluxCD","Terraform","Helm","Prometheus","Grafana","OpenTelemetry","Linux","Go","Python","Open Policy Agent"]}
+{"id":"b1f6c88c-1de6-4e24-a677-c4c15fc2d40f","firm":"G-Research","techs":["SQL","Python","Tableau","Power BI"]}
+{"id":"304b100b-94ef-45cf-86a3-9bce70fdc106","firm":"G-Research","techs":["Python","SQL","dbt","dlt","LangGraph","Docker","Kubernetes","Linux"]}
+{"id":"d1a1bb76-3bbe-4986-b41c-237a1ba7993f","firm":"G-Research","techs":["Python","C#"]}
+{"id":"fd7e89d2-2aec-42db-8b69-7ca6068db216","firm":"G-Research","techs":[]}
+{"id":"b5e5847e-662f-4043-a947-b00c413baf86","firm":"G-Research","techs":["PyTorch","JAX","Arrow","Parquet","Polars","Ray","CUDA","Python","C++","Rust","Go","GitHub","GitLab","Bitbucket"]}
+{"id":"33dd7bb1-1cf0-4a6d-af72-a08864c69e93","firm":"G-Research","techs":["C#","Python","Kubernetes","OpenTelemetry","Terraform","ArgoCD","Helm","Jenkins","Prometheus","PromQL","VictoriaMetrics","OpenSearch","Grafana","Kafka"]}
+{"id":"d83ba223-28c2-44b6-b740-d898e611923a","firm":"G-Research","techs":["Kubernetes","Terraform","Jenkins"]}
+{"id":"fb552472-839f-4d51-ae32-912dede83dbd","firm":"G-Research","techs":["Linux","Windows 11","PowerShell","Python","C","C++","Go","C#"]}
+{"id":"4bfebf18-5009-404a-96dd-83d522a31c93","firm":"G-Research","techs":["Python","C#"]}
+{"id":"bee20edb-e371-4ee7-8708-ba4fe638dae9","firm":"G-Research","techs":["Python","Ansible","Terraform","Jinja2","Claude Code","Docker","Kubernetes"]}
+{"id":"23da6809-60f9-44c2-a9b0-a1eb0622b870","firm":"G-Research","techs":[]}
+{"id":"22151309-980d-46f8-b6e3-3f3839408d92","firm":"G-Research","techs":["Windows","Linux","PowerShell","Python","C","C++","Go","C#"]}
+{"id":"dedd2a5f-af4e-4872-9021-a9c78af08702","firm":"G-Research","techs":["Workday","SailPoint IdentityIQ","Active Directory","LDAP","SCIM","SPML"]}
+{"id":"cc3b950b-7bb4-48b9-9cb8-9f7937acd46a","firm":"G-Research","techs":["Git","Python","Jenkins","Ansible"]}
+{"id":"08d99508-05cc-4f76-a845-7d659b25f78d","firm":"G-Research","techs":["Windows","Linux","Elastic Security","Sentinel","Azure Defender XDR","AWS Security Hub","Python","PowerShell"]}
+{"id":"1d844def-4c46-4982-8c81-650156a3905d","firm":"G-Research","techs":["Kubernetes"]}
+{"id":"a4c430bd-a42b-4039-9e3e-6c693285a8b7","firm":"G-Research","techs":[]}
+{"id":"f619a9f8-96c1-44d6-9616-67a43ebe92ee","firm":"G-Research","techs":["C#",".NET","Linux","Kubernetes","Python","TypeScript","Go","Rust","Git"]}
+{"id":"6509ad0c-989e-4d66-a3e9-6c7d98f421ad","firm":"G-Research","techs":["Python","PyTorch","TensorFlow"]}
+{"id":"9a5f4200-846b-4a8c-be3b-6e0ef0179c0d","firm":"G-Research","techs":["AWS","Azure"]}
+{"id":"b7c17b2a-7cf6-4245-a131-af258329dace","firm":"G-Research","techs":["Python","C#","GitHub","Kaggle"]}
+{"id":"65e8d988-0bf3-4d2e-8103-66a9e03f21f1","firm":"G-Research","techs":["Python","Bash","Elastic Stack","Elastic SIEM","Elastic Security","Logstash","Beats","Kafka","Azure","AWS","GCP"]}
+{"id":"b4b7b1e2-939a-4cf2-bbd3-bb4c3607455f","firm":"G-Research","techs":["Python","scikit-learn","SciPy","NumPy","Pandas","Jupyter"]}
+{"id":"c34d5127-f024-4795-bbb5-df8a22927940","firm":"G-Research","techs":["Python","CUDA","vLLM","SGLang","TensorRT-LLM","TGI","PyTorch"]}
+{"id":"91222915-194a-46e9-b242-99f327c44f1f","firm":"G-Research","techs":["Kubernetes","Jenkins","Windows Domain Services","Python","Ansible"]}
+{"id":"d972ec65-67c0-4d72-a04b-f12942c38e03","firm":"G-Research","techs":["Python","GitHub","Kaggle"]}
+{"id":"87445703-a22d-44f2-b9c8-db6bac9afb5d","firm":"G-Research","techs":["Python","AWS","Azure","Windows","Jenkins","ArgoCD","Terraform","Ansible","Azure Defender XDR","AWS Security Hub","Elastic Security","Microsoft Sentinel"]}
+{"id":"9fe4a889-6612-499f-bc0e-f1f4072e5896","firm":"G-Research","techs":["PingFederate","PingAM","Teleport","Microsoft Entra ID","Okta","Active Directory","LDAP","C#","Java","Python","Go","Kubernetes"]}
+{"id":"c8144891-1252-496c-8933-14fde6a37b1f","firm":"G-Research","techs":[]}
+{"id":"eba392f6-2bbf-46c6-9983-010c43e103e2","firm":"G-Research","techs":["SAML","OIDC","OAuth2","SCIM"]}
+{"id":"e5693864-d296-4110-b0b3-1414bccbe452","firm":"G-Research","techs":["Python","Ansible","Terraform","Jinja2","Docker","Kubernetes","Kafka","RabbitMQ","Cisco","Arista"]}
+{"id":"95b66160db05325f8a8789050e9267d8737a077a","firm":"Qube RT","techs":["Python"]}
+{"id":"7c93fb8592df51805debdd8ee0c590045b1b88cd","firm":"Qube RT","techs":["Python"]}
+{"id":"211b10a0-7cda-4d85-9672-d1765e8ddf4d","firm":"G-Research","techs":["Active Directory","Jenkins","Linux","Terraform","Terraform Enterprise","Windows"]}
+{"id":"61983d04-d177-4894-8963-e6af14aebb37","firm":"G-Research","techs":["Terraform","Active Directory","Windows","Windows Server","Linux","Jenkins","PowerShell","Python","HCL","Kubernetes"]}
+{"id":"237483e6558080de143c69665208650865ce698c","firm":"Qube RT","techs":["Greenhouse","LinkedIn Recruiter"]}
+{"id":"5710870b2d8ed4736f6b9fcdfb7671b3386a0f1a","firm":"Qube RT","techs":["Python","C++","C#"]}
+{"id":"fe39af265a21d1fe056e93f43d6f38f406373982","firm":"Qube RT","techs":["C++",".NET","C#","Python","SQL","NoSQL"]}
+{"id":"7faf9dda426a1863004394b85efd951919bbae50","firm":"Qube RT","techs":["Python","Airflow","AWS Batch","AWS","S3","EC2","IAM","CloudWatch","Linux","C++","SQL","Docker","Kubernetes","Terraform","CloudFormation","Parquet","Arrow","Spark","Ray","Dask"]}
+{"id":"c2b76dc2f59d620588591fce7f4e7a2a629601e3","firm":"Qube RT","techs":["Python","NumPy","Pandas","SQL","AWS","Git","FastAPI","Plotly","Dash","Streamlit","Docker","Kubernetes","S3","Lambda","RDS","DynamoDB","ECS","AWS CDK"]}
+{"id":"0be3f4474761f2cdc0cfabe1b82221112f3e1153","firm":"Qube RT","techs":["Linux","Atlassian JIRA"]}
+{"id":"7833077bb80f5169a98319965b24e8a5a22a4edd","firm":"Qube RT","techs":["Python","SQL"]}
+{"id":"1a4e2b9b7623ae82e4169e5f1eccca452c19f7aa","firm":"Qube RT","techs":["Workday"]}
+{"id":"e474f87ea70f9cf76f2670b99285e306e6c5b263","firm":"Qube RT","techs":["Workday"]}
+{"id":"018478eda265988786036f64a0362f12d78ed73c","firm":"Qube RT","techs":["C++","Linux"]}
+{"id":"7cf92e25e5b66466a3f9b3ac3af8203c776899d1","firm":"Qube RT","techs":["Python"]}
+{"id":"53321e877c70deb513f7389504ab63e92132fc16","firm":"Qube RT","techs":["Python"]}
+{"id":"2eafce4386b88ffccf88ad80c3a160e18a5127e8","firm":"Qube RT","techs":["C++","Python","Dash","AWS","FastAPI","SQLAlchemy","Pydantic","Terraform","React","SQL"]}
+{"id":"ca8b5198e6b05f3152a80f05af2729f0200ff91f","firm":"Qube RT","techs":["Python","C++"]}
+{"id":"172a3e2e866067484cc98051e63e8e5107207499","firm":"Qube RT","techs":["Python","SQL"]}
+{"id":"51b3b2142c56c13a0e70e0f2a067c0a6040da5c1","firm":"Qube RT","techs":["Microsoft Office","Excel","Word","PowerPoint","Workday"]}
+{"id":"6f983796809fb597dca6838a37c684725e64316d","firm":"Qube RT","techs":["Python","AWS"]}
+{"id":"e65f83de220b7eeb4f5e88a416602a427431ba50","firm":"Qube RT","techs":["AWS","Kubernetes","Terraform","OpenTofu","Windows","Linux","Python","Git","C++","C","Make","CMake","Prometheus","Grafana","Elasticsearch","Splunk","Coralogix"]}
+{"id":"aac408013aa38d8ad0482e0ea7c80d93868207ed","firm":"Qube RT","techs":["Workday"]}
+{"id":"c5fca70864453eae1c0d949c4709f59149c98494","firm":"Qube RT","techs":["Linux","Windows","C++","Python","Bash","SQL"]}
+{"id":"1e0be1b70c9df254c80bec2a1564d43e72795daa","firm":"Qube RT","techs":["Python","C#","C","C++","Java","AWS"]}
+{"id":"07a80afa9cdf86579e20c7603f7f2ddf01c6b948","firm":"Qube RT","techs":["Python","SQL","VBA"]}
+{"id":"f002f797d0e2548471e480e81f46be6627a36767","firm":"Qube RT","techs":["Python"]}
+{"id":"3ced2b095e22278706e195b5d144d87fc5cc2878","firm":"Qube RT","techs":["Python","SQL","VBA"]}
+{"id":"874eb97f417187584e009573be75f40db4baf1f2","firm":"Qube RT","techs":["C++","Python","R","MATLAB","C#"]}
+{"id":"c45d9a62ce6aba57e59aca9ff24f7cae3ce940c0","firm":"Qube RT","techs":[]}
+{"id":"2dcadd9228d36cc501c139c7869649bd3ccbbfaf","firm":"Qube RT","techs":["Python","SQL","VBA"]}
+{"id":"c231b5e4deaabbf8cd070f8f212f7c63fe6432c0","firm":"Qube RT","techs":["Linux","Python","Bash","RedHat","CentOS","Rocky Linux","Ansible","TCP","UDP","NFS","SAN"]}
+{"id":"485a18782ad715b83c390e82fe1ce7bbfa64ea8d","firm":"Qube RT","techs":["Greenhouse","LinkedIn"]}
+{"id":"44d4a8b4c56370596813cd95b6fcacc8dd839712","firm":"Qube RT","techs":["Python","C#","SQL"]}
+{"id":"9caec93b4c19f16179ec93e8b0dbc0e1f9eb0ea6","firm":"Qube RT","techs":["Greenhouse","LinkedIn"]}
+{"id":"29576674ef214c4d7d23cbe2f8cd5917d49831f3","firm":"Qube RT","techs":["Workday"]}
+{"id":"30193b333d8adec8f189e4cedb186dd3d4bb4005","firm":"Qube RT","techs":["Python"]}
+{"id":"61c66c79653fed3e078b7c9775395e45aac63629","firm":"Qube RT","techs":["Python","R","MATLAB","C++","C#"]}
+{"id":"bfe29f1b8715103865c175b8a157e14f99dc6ab5","firm":"Qube RT","techs":["Python","Rust","Iceberg","Delta Lake","Snowflake","AWS"]}
+{"id":"0e40cb02a3545c1cb0b6936309c2b86feeaf8c74","firm":"Qube RT","techs":["Python","SQL","Airflow"]}
+{"id":"920290ccf6893dacf7cc8c757e68485830bea285","firm":"Qube RT","techs":["PowerPoint"]}
+{"id":"49c3ed92eb929d0ceaa1ad5eb7f28d1666f00f8a","firm":"Qube RT","techs":["Linux","OpenTelemetry","TCP/IP","DNS","BGP","Bash","Python","Flask","Django REST Framework","Docker","Kubernetes","Prometheus","Grafana","Loki","Terraform","AWS"]}
+{"id":"41912345c17e2b79498259e242ee4c1d8d8c10f1","firm":"Qube RT","techs":["C++","Python","C","Linux","STL","GCC","Red Hat Enterprise Linux","Qt","wxWidgets","MFC"]}
+{"id":"83b29f2ada948b9eb4507def88d8647b48d020ec","firm":"Qube RT","techs":[]}
+{"id":"15c5226f8e94bd651579e61481e25f9d06315398","firm":"Qube RT","techs":["Excel"]}
+{"id":"18ac45aeb2d900a2c8c77b10c5de39ba72cef91a","firm":"Qube RT","techs":[]}
+{"id":"413d0becf84bad8645065847da90e32dc08ebf17","firm":"Qube RT","techs":["Excel"]}
+{"id":"cd1888445f0058428e8201e4657fe7625b1f3d51","firm":"Qube RT","techs":[]}
+{"id":"0b69829abc4a50d68b2cc66d399784826ad88af4","firm":"Qube RT","techs":["Python","SQL","AWS","Docker","Kubernetes","Prometheus","Grafana","OpenTelemetry","FastAPI","Kafka","Airflow","Terraform","gRPC"]}
+{"id":"fc504c1df0fbaf2a4f8db8e745f5d0fc031b8bd7","firm":"Qube RT","techs":["Python","FastAPI","Flask","React","Dash","AG Grid"]}
+{"id":"0ff144714956d8b0944e5fa1da5f466bc97bfaa9","firm":"Qube RT","techs":[]}
+{"id":"d2faea9089762a750b3e03d3c2883fab9647ae0b","firm":"Qube RT","techs":[]}
+{"id":"5bd8a3141d4b643e08ef0174081aae00bd08e99d","firm":"Qube RT","techs":["Linux","Python","C++"]}
+{"id":"d438ebe729817d9ef78f0b4b752264ee20159163","firm":"Qube RT","techs":["Python","R","MATLAB","C++","C#"]}
+{"id":"6ab3ba5592d84a980dbbe263c616b937c8d941e0","firm":"Qube RT","techs":["Python","SQL","NoSQL"]}
+{"id":"44702c84097e3014b9d62910321d33041015e153","firm":"Qube RT","techs":["Python","Rust","Ray","Spark","AWS"]}
+{"id":"55017018e8db82deef7034cfd2af135fdef57dfc","firm":"Qube RT","techs":[]}
+{"id":"5bc740794aa09bfca8894ef1563819ce8647a8a7","firm":"Qube RT","techs":["Arista","Cisco","DWDM","DCI","PTP","GPS"]}
+{"id":"466916fa3fa3b02f4f9ae95c1873496dfa36f70b","firm":"Qube RT","techs":["React","TypeScript","GraphQL","Material UI","Chakra","Ant Design","Jest","React Testing Library","Cypress"]}
+{"id":"a8cbde516637069c12262b38dd902c2a3c0f48c3","firm":"Qube RT","techs":["Vault","Terraform","Python","Go","Bash","Kubernetes","AWS","OIDC","JWT","SailPoint","PrivX","CyberArk"]}
+{"id":"ff4e35cb8e4bf82241683089be650058a7e211a7","firm":"Qube RT","techs":["Python","Bash","PowerShell","Windows","Linux","SQL Server","PostgreSQL","AWS"]}
+{"id":"bf02985dce685db904824918fdf1757e2c605e04","firm":"Qube RT","techs":["Python","PyTorch","AWS"]}
+{"id":"a8dabb32b8f5a732a35548b068048ba39557f23c","firm":"Qube RT","techs":["Python","Bash","PowerShell","Copilot","Windows","Linux","SQL Server","PostgreSQL","AWS"]}
+{"id":"f20315c2b1e7daa2590501c586f2cae04f1b74ab","firm":"Qube RT","techs":["AWS","Azure","Python","PowerShell"]}
+{"id":"6c1c5a14e75d3a28a611e7d079756ad2a5500763","firm":"Qube RT","techs":["Python","Bash","PowerShell"]}
+{"id":"3c18bba7459a04788c5de3f8ca260b89fa72124f","firm":"Qube RT","techs":["Kafka","OIDC"]}
+{"id":"9675405a3211749211e3172f90f0241b04132462","firm":"Qube RT","techs":["Python","NumPy","Pandas","Polars","Xarray","Plotly","Dash","Streamlit","AWS","AWS Lambda","S3","DynamoDB","AWS RDS","AWS CDK","PostgreSQL"]}
+{"id":"d0559edd4cd3b56d407a00e562f15119076549a5","firm":"Qube RT","techs":["tcpdump","Wireshark"]}
+{"id":"55e891cdd7560196858e93f81fb5d990425539c2","firm":"Qube RT","techs":["Python","C++","C#"]}
+{"id":"b26bdf547363e711d58ee46f2e99b46d72ce370a","firm":"Qube RT","techs":["Linux","AWS","CloudWatch","Prometheus","Datadog","ELK","Docker","Kubernetes","Python","Bash"]}
+{"id":"f14c309cf0418664ee891a92f10ef434505db2a4","firm":"Qube RT","techs":["Python","Pandas","NumPy"]}
+{"id":"2bae1a53adb42943149a7cc667d40dae65a39020","firm":"Qube RT","techs":["Python","C++","Linux"]}
+{"id":"6d992bd9db7711d7ef2234374a0fff7fb60bbbfb","firm":"Qube RT","techs":["FPGA","Verilog/VHDL","C++","Python","C#"]}
+{"id":"04569b937ef38d2bee2f50a7aeecd8026eb5626b","firm":"Qube RT","techs":["C++","FPGA","Linux"]}
+{"id":"d1574e064f2e1a7cc862e20a0278c5bd73367e4b","firm":"Qube RT","techs":["PostgreSQL","SQL Server","PowerShell","Shell","Python","Ansible","SQL","T-SQL","PL/SQL","ClickHouse","Snowflake"]}
+{"id":"00e533472ab6472ae8e7d80d28a2ed0a96104d93","firm":"Qube RT","techs":[]}
+{"id":"fab47948c93fd5ec3bc9fc4148ebad0e74a518c7","firm":"Qube RT","techs":["Python","SQL"]}
+{"id":"008ad9f5e4b2f136bf78e5d019d89be31680963f","firm":"Qube RT","techs":["Python"]}
+{"id":"313d7e6ce7ec05f7d6b381081266c54589cfbf18","firm":"Qube RT","techs":["Python","AWS"]}
+{"id":"0f0492a8ab1e11718651a5ea6e0c2159cacbd43b","firm":"Qube RT","techs":["AWS","Refinitiv","Grafana","Tableau","ChatGPT","ECS","RDS","IAM","Terraform","Ansible","Splunk","Python","Bash","PowerShell","Linux","Windows","Git","GitHub","Slack","OpsGenie"]}
+{"id":"5bd67c10839c262ae804caf766f009d36f6092f5","firm":"Qube RT","techs":["AWS","Excel","SQL","Python","Tableau","SAP","Coupa"]}
+{"id":"a4c708f279b6c31363fdbe5bdb1786143fa2115c","firm":"Qube RT","techs":["Python","SQL","AWS"]}
+{"id":"a4d130cb946b385606018f1ade5bf7cd8d75a587","firm":"Qube RT","techs":["Kubernetes","AWS","Python"]}
+{"id":"c3777812ab6f341dac105c86635c3aa352d6f770","firm":"Qube RT","techs":[]}
+{"id":"10fcbbf96a9c5b1d415bdae22c025a99dee4421b","firm":"Qube RT","techs":["C++","Java","Rust","Go","PyTorch","TensorFlow"]}
+{"id":"66be5fc74f07ca9fb8a2eebce57a3b43df45ed84","firm":"Qube RT","techs":["C++","Java","Rust","Go","PyTorch","TensorFlow"]}
+{"id":"a2080e504ec6539f4d1e9d55aa68849cd7b379c8","firm":"Qube RT","techs":["Python","SQL"]}
+{"id":"01c1a72f7c70ecbdf85104458ec25cd4d04516be","firm":"Qube RT","techs":["Linux","JIRA Assets"]}
+{"id":"4fb7d5ea189b7c6b00362f3d0238bc2db5a31ecb","firm":"Qube RT","techs":[]}
+{"id":"9d7ef3c5266e072deed698b26c409e0ca54800e1","firm":"Qube RT","techs":["C++","Linux","Python"]}
+{"id":"b382747f98aa78be686b6e1b50db0b2355ba0607","firm":"Qube RT","techs":["Windows","Linux","Python","C++","Rust","Go","Kotlin","Java","AWS"]}
+{"id":"8c9c405654ca8861637e15d64f733be6b12ba3d4","firm":"Qube RT","techs":["Kubernetes","AWS","Helm","Kustomize","EKS","EC2","Python","Terraform"]}
+{"id":"c802db0d587afdab9be01e3a0cd031bcc173cd23","firm":"Qube RT","techs":[]}
+{"id":"8956115e2e033b931fac9aa5b96cca6600ddb646","firm":"Qube RT","techs":[]}
+{"id":"7b72deba9d5873724af1bca3a7349db1ce77cb87","firm":"Qube RT","techs":["Power BI","Tableau"]}
+{"id":"e89759d5403c0fb4f23cc726c1564c220ee9398a","firm":"Qube RT","techs":["FIX","Python"]}
+{"id":"c20ad3ecf670fa9940449bab82678f8e8e3c70be","firm":"Qube RT","techs":["C++","Linux","Bash","Python"]}
+{"id":"98d7aad55aa466c298415139ad24c36164faddcc","firm":"Qube RT","techs":["Ansible","FPGA","Grafana","Prometheus","Python","Splunk"]}
+{"id":"2a81b865f00c0b3bd83373e5a59b191db279da54","firm":"Qube RT","techs":["C++","FPGA","Linux"]}
+{"id":"d6d1dd1822a7ed519edb3ba3a1529de22b4f0d3f","firm":"Qube RT","techs":["Ansible","Python","Kibana","Splunk","Prometheus","Grafana","Cisco"]}
+{"id":"7d651972a1aebc7f94ddc7271be07c2bcd799dcb","firm":"Qube RT","techs":["ISO 27001","NIST","SOC 2","DORA","Drata","Vanta","ServiceNow GRC","Archer"]}
+{"id":"229ebb2b0e24bc7717279ef612b0a30277c4c558","firm":"Qube RT","techs":["Kubernetes","Kafka","Python","NumPy","Numba","C++","Rust","Polars","Arrow","gRPC"]}

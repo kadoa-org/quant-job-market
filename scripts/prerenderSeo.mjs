@@ -1062,6 +1062,10 @@ const HEAD_CONTENT = {
     h1: `Quant Jobs by Tech Stack: Languages &amp; Tools Across ${firmsWithLang} Firms`,
     intro: `Which programming languages, frameworks, and accelerators quant firms hire for — across ${firmsWithLang} buy-side firms and ${jobsStr} open roles. Explore the interactive tech-stack heatmap above; the firms with the most open roles are listed below.`,
   },
+  "stacks.html": {
+    h1: `Quant Firm Stack Cards: Each Firm&#x27;s Stack, Layer by Layer`,
+    intro: `Every firm&#x27;s hiring stack as frontend, backend, data, and infra layers, tiered by how often the firm&#x27;s own postings name each technology. Browse the interactive cards above; the firms with the most open roles are listed below.`,
+  },
   "locations.html": {
     h1: `Quant Jobs by Location: Where Hedge Funds &amp; Prop Shops Hire`,
     intro: `Where quant hiring happens — job-posting counts by city across ${firmsWithLoc} firms and ${jobsStr} open roles. Explore the interactive location heatmap above; the firms with the most open roles are listed below.`,
@@ -1077,7 +1081,7 @@ const headSectionFor = (shell) => {
     </section>`;
 };
 
-for (const shell of ["index.html", "tech-stack.html", "locations.html"]) {
+for (const shell of ["index.html", "tech-stack.html", "locations.html", "stacks.html"]) {
   const p = path.join(DIST, shell);
   if (!fs.existsSync(p)) continue;
   let html = fs.readFileSync(p, "utf8");

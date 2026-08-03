@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import AboutPage from "./AboutPage";
 import Dashboard from "./Dashboard";
 import DataTable from "./DataTable";
+import StackCards from "./StackCards";
 import FilterBar from "./FilterBar";
 import { Button, GitHubButton, LiveBadge, NavBar, SiteFooter, SiteHeader } from "./kit";
 import LocationHeatmap from "./LocationHeatmap";
@@ -42,6 +43,7 @@ function viewFromPath() {
   if (p === `${BASE_PATH}/tech-stack` || p === `${BASE_PATH}/heatmap`) return "techstack";
   if (p === `${BASE_PATH}/locations`) return "locations";
   if (p === `${BASE_PATH}/about`) return "about";
+  if (p === `${BASE_PATH}/stacks`) return "stacks";
   return null;
 }
 
@@ -49,6 +51,7 @@ function pathForView(view) {
   if (view === "techstack") return `${BASE_PATH}/tech-stack`;
   if (view === "locations") return `${BASE_PATH}/locations`;
   if (view === "about") return `${BASE_PATH}/about`;
+  if (view === "stacks") return `${BASE_PATH}/stacks`;
   return `${BASE_PATH}/`;
 }
 
@@ -72,7 +75,7 @@ function parseUrl() {
 function syncUrl(view, filters, selectedFirm, search) {
   const params = new URLSearchParams();
   // /tech-stack and /locations carry their own view; do not duplicate as ?view=
-  if (view !== "firms" && view !== "techstack" && view !== "locations" && view !== "about") params.set("view", view);
+  if (view !== "firms" && view !== "techstack" && view !== "locations" && view !== "about" && view !== "stacks") params.set("view", view);
   if (selectedFirm) params.set("firm", selectedFirm);
   for (const [key, values] of Object.entries(filters)) {
     if (values.length > 0) params.set(key, values.join(","));
@@ -90,7 +93,7 @@ function syncUrl(view, filters, selectedFirm, search) {
 // with one-line descriptions. Toggle-only close, like gov.uk.
 function InsightsNav({ view, setView, onFirms }) {
   const [open, setOpen] = useState(false);
-  const insightsActive = ["dashboard", "techstack", "locations"].includes(view);
+  const insightsActive = ["dashboard", "techstack", "locations", "stacks"].includes(view);
 
   const go = (k) => {
     setView(k);
@@ -115,6 +118,7 @@ function InsightsNav({ view, setView, onFirms }) {
   const ITEMS = [
     { key: "dashboard", label: "Hiring insights", desc: "Roles, seniority, salaries and demand across all firms" },
     { key: "techstack", label: "Tech stack", desc: "Languages and tools by firm, the hiring heatmap" },
+    { key: "stacks", label: "Stack cards", desc: "Browse each firm\u2019s stack as layers, from its own postings" },
     { key: "locations", label: "Locations", desc: "Where quant firms hire, city by city" },
     {
       key: "open-source",
@@ -326,7 +330,7 @@ export default function App() {
         />
         <InsightsNav view={view} setView={setView} onFirms={() => setSelectedFirm(null)} />
 
-        {view !== "techstack" && view !== "locations" && view !== "about" && (
+        {view !== "techstack" && view !== "locations" && view !== "about" && view !== "stacks" && (
           <FilterBar
             filters={filters}
             setFilters={setFilters}
@@ -358,6 +362,11 @@ export default function App() {
           {view === "table" && <DataTable jobs={filteredJobs} search={search} onSearchChange={setSearch} />}
           {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
           {view === "techstack" && <TechStackHeatmap jobs={jobs} />}
+          {view === "stacks" && (
+            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 pt-6 pb-16">
+              <StackCards />
+            </div>
+          )}
           {view === "locations" && <LocationHeatmap jobs={jobs} />}
           {view === "about" && <AboutPage />}
         </main>

@@ -16,6 +16,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         techStack: resolve(__dirname, "tech-stack.html"),
+        stacks: resolve(__dirname, "stacks.html"),
         locations: resolve(__dirname, "locations.html"),
         about: resolve(__dirname, "about.html"),
       },
