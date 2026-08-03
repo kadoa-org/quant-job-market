@@ -59,7 +59,7 @@ function Strata({ firm, onTech, highlightTechs, compact }) {
             </span>
             <span className="stk-chips">
               {rows.length === 0 ? (
-                <span className="stk-none">none named</span>
+                <span className="stk-none">N/A</span>
               ) : (
                 rows.map((t) => (
                   <Chip
