@@ -34,9 +34,9 @@ if (fs.existsSync("enrichment/stack-extract-2026-08.jsonl")) {
 // Frontend is incidental at most quant firms (half the cards read "none
 // named"), so web techs fold into one Languages row instead of their own.
 const LAYERS = {
-  be: ["C++", "Java", "C", "C#", "Rust", "Go", "OCaml", "Scala", "CUDA", "Verilog/VHDL", "VBA", ".NET",
-    "TypeScript", "JavaScript", "React", "Angular", "Vue"],
-  data: ["Python", "SQL", "R", "MATLAB", "Julia", "kdb+/q", "Kafka", "Airflow", "Spark", "Flink", "dbt",
+  be: ["Python", "SQL", "R", "MATLAB", "Julia", "C++", "Java", "C", "C#", "Rust", "Go", "OCaml",
+    "Scala", "CUDA", "Verilog/VHDL", "VBA", ".NET", "TypeScript", "JavaScript", "React", "Angular", "Vue"],
+  data: ["kdb+/q", "Kafka", "Airflow", "Spark", "Flink", "dbt",
     "Snowflake", "Databricks", "ClickHouse", "ArcticDB", "PostgreSQL", "MySQL", "SQL Server", "MongoDB",
     "Cassandra", "Redis", "Elasticsearch", "InfluxDB", "TimescaleDB", "Iceberg", "Parquet", "Arrow",
     "Pandas", "NumPy", "Polars", "SciPy", "Dask", "Hadoop", "Bloomberg", "Refinitiv", "FIX", "Aladdin", "Tableau", "Power BI"],
