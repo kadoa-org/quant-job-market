@@ -11,6 +11,7 @@ import Treemap from "./Treemap";
 import { query as dbQuery, useDatabase } from "./useDatabase";
 
 const EMPTY_FILTERS = {
+  technologies: [],
   firmTypes: [],
   roleCategories: [],
   locations: [],
@@ -44,6 +45,11 @@ function viewFromPath() {
   if (p === `${BASE_PATH}/locations`) return "locations";
   if (p === `${BASE_PATH}/about`) return "about";
   if (p === `${BASE_PATH}/stacks`) return "stacks";
+  // /job/<slug> pages are build-time static files, so in production this
+  // branch never runs (the file wins). Vite dev has no dist, so its SPA
+  // fallback lands here; show the Jobs table instead of defaulting to the
+  // firms overview, which read as a broken click.
+  if (p.startsWith(`${BASE_PATH}/job/`)) return "table";
   return null;
 }
 
@@ -117,8 +123,8 @@ function InsightsNav({ view, setView, onFirms }) {
 
   const ITEMS = [
     { key: "dashboard", label: "Hiring insights", desc: "Roles, seniority, salaries and demand across all firms" },
-    { key: "techstack", label: "Tech stack", desc: "Languages and tools by firm, the hiring heatmap" },
-    { key: "stacks", label: "Stack cards", desc: "Browse each firm\u2019s stack as layers, from its own postings" },
+    { key: "techstack", label: "Tech heatmap", desc: "Languages and tools by firm, the hiring heatmap" },
+    { key: "stacks", label: "Tech stack by firm", desc: "Browse each firm\u2019s stack as layers, from its own postings" },
     { key: "locations", label: "Locations", desc: "Where quant firms hire, city by city" },
     {
       key: "open-source",
@@ -286,6 +292,12 @@ export default function App() {
       if (filters.locations.length > 0 && !j.locations.some((l) => filters.locations.includes(l))) return false;
       if (filters.assetClasses.length > 0 && !j.assetClasses.some((a) => filters.assetClasses.includes(a)))
         return false;
+      // AND across selected technologies, case-insensitive across both tech
+      // fields, so "kdb+/q" from the stacks page matches "KDB+/Q" in a posting.
+      if (filters.technologies.length > 0) {
+        const mine = [...(j.programmingLanguages ?? []), ...(j.technologies ?? [])].map((t) => t.toLowerCase());
+        if (!filters.technologies.every((t) => mine.includes(t.toLowerCase()))) return false;
+      }
       if (selectedFirm && j.firmName !== selectedFirm) return false;
       return true;
     });
@@ -363,9 +375,14 @@ export default function App() {
           {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
           {view === "techstack" && <TechStackHeatmap jobs={jobs} />}
           {view === "stacks" && (
-            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 pt-6 pb-16">
-              <StackCards />
-            </div>
+            <StackCards
+              jobs={jobs}
+              onApply={(target, sel) => {
+                setFilters((prev) => ({ ...prev, technologies: sel.technologies, firmTypes: sel.firmTypes }));
+                setSelectedFirm(sel.firm ?? null);
+                setView(target);
+              }}
+            />
           )}
           {view === "locations" && <LocationHeatmap jobs={jobs} />}
           {view === "about" && <AboutPage />}

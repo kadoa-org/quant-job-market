@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useRef, useEffect } from "react";
 import { FIRM_TYPE_LABELS, ROLE_LABELS, SENIORITY_LABELS, SENIORITY_ORDER } from "./constants";
 
-function FilterDropdown({ options, selected, onChange, onClose, singleSelect }) {
+export function FilterDropdown({ options, selected, onChange, onClose, singleSelect }) {
   const ref = useRef(null);
   const [search, setSearch] = useState("");
   const inputRef = useRef(null);
@@ -117,6 +117,16 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
       .map(([loc, count]) => ({ value: loc, label: loc, count }));
   }, [jobs]);
 
+  const technologyOptions = useMemo(() => {
+    const counts = {};
+    for (const j of jobs)
+      for (const x of [...(j.programmingLanguages || []), ...(j.technologies || [])]) counts[x] = (counts[x] || 0) + 1;
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 40)
+      .map(([x, count]) => ({ value: x, label: x, count }));
+  }, [jobs]);
+
   const assetClassOptions = useMemo(() => {
     const counts = {};
     for (const j of jobs) for (const ac of j.assetClasses || []) counts[ac] = (counts[ac] || 0) + 1;
@@ -130,6 +140,7 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
 
   const filterConfigs = [
     { key: "firmTypes", label: "Firm Type", options: firmTypeOptions },
+    { key: "technologies", label: "Technology", options: technologyOptions },
     { key: "roleCategories", label: "Role", options: roleOptions },
     { key: "seniorityLevels", label: "Seniority", options: seniorityOptions },
     { key: "locations", label: "Location", options: locationOptions },
@@ -195,7 +206,7 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
       {activeCount > 0 && (
         <button
           onClick={() => {
-            setFilters({ firmTypes: [], roleCategories: [], locations: [], seniorityLevels: [], workModes: [], assetClasses: [] });
+            setFilters({ technologies: [], firmTypes: [], roleCategories: [], locations: [], seniorityLevels: [], workModes: [], assetClasses: [] });
             if (onClearFirm) onClearFirm();
           }}
           className="text-[12px] text-[#9c9ca0] hover:text-[#191919] ml-1"

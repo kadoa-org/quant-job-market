@@ -354,7 +354,7 @@ for (const tech of TECHS) {
         `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">${esc(tech.name)} roles</th><th>Top locations</th>`,
         rows,
       )}
-<a class="dk-btn seo-cta" href="${PREFIX}/tech-stack">Explore the interactive tech-stack heatmap →</a>`,
+<a class="dk-btn seo-cta" href="${PREFIX}/tech-stack">Explore the interactive tech heatmap →</a>`,
     }),
   );
 }
@@ -578,6 +578,25 @@ const descriptions = (() => {
   return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : {};
 })();
 
+// Greenhouse boards-API sources deliver the posting body HTML-escaped
+// ("&lt;p&gt;..."), which used to render as literal tag soup on ~600 pages.
+// Decode exactly the entity-escaped-HTML case (no real tags present), leaving
+// genuinely plain-text descriptions untouched.
+const looksEscapedHtml = (s) => /&lt;(p|div|ul|ol|li|br|strong|em|span|h\d)\b/i.test(s) && !/<[a-z][^>]*>/i.test(s);
+const decodeEntities = (s) =>
+  s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
+// Descriptions are third-party scraped content injected as raw HTML into the
+// page: strip active content (script/style/event handlers/javascript: URLs).
+const sanitizeJd = (s) =>
+  s
+    .replace(/<(script|style|iframe|object|embed)\b[^]*?<\/\1>/gi, "")
+    .replace(/\son\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "")
+    .replace(/\shref\s*=\s*(["'])\s*javascript:[^]*?\1/gi, "");
+const cleanDescription = (raw) => {
+  if (!raw) return raw;
+  return sanitizeJd(looksEscapedHtml(raw) ? decodeEntities(raw) : raw);
+};
+
 const EMPLOYMENT_TYPE = [
   [/full.?time/i, "FULL_TIME"],
   [/part.?time/i, "PART_TIME"],
@@ -713,7 +732,7 @@ const WORK_MODE_LABEL = { onsite: "On-site", hybrid: "Hybrid", remote: "Remote" 
 let jobPages = 0;
 const jobSitemapEntries = [];
 for (const j of jobs) {
-  const desc = j.slug && descriptions[j.id];
+  const desc = j.slug && cleanDescription(descriptions[j.id]);
   if (!desc) continue;
   const applyHref = j.applyUrl || j.url;
   if (!applyHref) continue;
@@ -913,7 +932,7 @@ if (github.firms.length) {
   <div class="insights-panel-inner">
     <div style="display:flex;flex-wrap:wrap;gap:20px 40px">
       ${navItem(`${PREFIX}/?view=dashboard`, "Hiring insights", "Roles, seniority, salaries and demand across all firms", false)}
-      ${navItem(`${PREFIX}/tech-stack`, "Tech stack", "Languages and tools by firm, the hiring heatmap", false)}
+      ${navItem(`${PREFIX}/tech-stack`, "Tech heatmap", "Languages and tools by firm, the hiring heatmap", false)}
       ${navItem(`${PREFIX}/locations`, "Locations", "Where quant firms hire, city by city", false)}
       ${navItem(`${PREFIX}/open-source/`, "Open source", "Firms ranked by GitHub footprint", true)}
     </div>
@@ -1059,12 +1078,12 @@ const HEAD_CONTENT = {
     intro: `A live, daily-updated dataset of ${jobsStr} open quant roles across ${firms.size} hedge funds, prop trading firms, market makers, and asset managers. The 20 firms with the most open postings are listed below; use the interactive board above to filter by role, language, location, and seniority.`,
   },
   "tech-stack.html": {
-    h1: `Quant Jobs by Tech Stack: Languages &amp; Tools Across ${firmsWithLang} Firms`,
-    intro: `Which programming languages, frameworks, and accelerators quant firms hire for — across ${firmsWithLang} buy-side firms and ${jobsStr} open roles. Explore the interactive tech-stack heatmap above; the firms with the most open roles are listed below.`,
+    h1: `Quant Tech Heatmap: Languages &amp; Tools Across ${firmsWithLang} Firms`,
+    intro: `Which programming languages, frameworks, and accelerators quant firms hire for — across ${firmsWithLang} buy-side firms and ${jobsStr} open roles. Explore the interactive heatmap above; the firms with the most open roles are listed below.`,
   },
   "stacks.html": {
-    h1: `Quant Firm Stack Cards: Each Firm&#x27;s Stack, Layer by Layer`,
-    intro: `Every firm&#x27;s hiring stack as frontend, backend, data, and infra layers, tiered by how often the firm&#x27;s own postings name each technology. Browse the interactive cards above; the firms with the most open roles are listed below.`,
+    h1: `Quant Tech Stack by Firm: Every Firm&#x27;s Stack, Layer by Layer`,
+    intro: `Every firm&#x27;s hiring stack as language, data, and infra layers, built from how often the firm&#x27;s own postings name each technology. Browse the interactive cards above; the firms with the most open roles are listed below.`,
   },
   "locations.html": {
     h1: `Quant Jobs by Location: Where Hedge Funds &amp; Prop Shops Hire`,

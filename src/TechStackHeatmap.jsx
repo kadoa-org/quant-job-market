@@ -218,7 +218,7 @@ export default function TechStackHeatmap({ jobs }) {
     <div className="bg-[#fbfbfa]">
       <div className="px-6 py-6 sm:px-10 sm:py-8 max-w-[1380px] mx-auto">
         <h1 className="text-[26px] sm:text-[30px] font-bold leading-tight tracking-tight text-[#1a1a1a] mb-1">
-          Quant tech stack
+          Quant tech heatmap
         </h1>
         <p className="text-[13.5px] text-[#6b6b6b] leading-snug max-w-[1100px] mb-3">
           Heatmap of {totalJobs.toLocaleString()} open postings across {numFirms} buy-side quant firms (≥{MIN_JOBS} listings). Each cell counts that firm's open postings that explicitly mention the tech. Darker = more.
