@@ -215,7 +215,9 @@ ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
   .seo-jd h2,.seo-jd h3,.seo-jd h4{font-weight:700;margin:22px 0 8px;line-height:1.3}
   .seo-jd h2{font-size:var(--dk-fs-l)}
   .seo-jd p,.seo-jd li{margin:0 0 10px}
-  .seo-jd ul,.seo-jd ol{padding-left:22px}
+  /* Tailwind preflight in the shared app CSS strips list-style; restore it. */
+  .seo-jd ul{list-style:disc;padding-left:22px}
+  .seo-jd ol{list-style:decimal;padding-left:22px}
   .seo-back{margin-top:28px;font-size:var(--dk-fs-s)}
   .seo-back a{color:var(--dk-link)}
   .oss-about{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--dk-muted);font-size:var(--dk-fs-s);line-height:1.4}
