@@ -124,7 +124,7 @@ function InsightsNav({ view, setView, onFirms }) {
   const ITEMS = [
     { key: "dashboard", label: "Hiring insights", desc: "Roles, seniority, salaries and demand across all firms" },
     { key: "techstack", label: "Tech heatmap", desc: "Languages and tools by firm, the hiring heatmap" },
-    { key: "stacks", label: "Tech stack by firm", desc: "Browse each firm\u2019s stack as layers, from its own postings" },
+    { key: "stacks", label: "Tech stack", desc: "Browse each firm\u2019s stack as layers, from its own postings" },
     { key: "locations", label: "Locations", desc: "Where quant firms hire, city by city" },
     {
       key: "open-source",
