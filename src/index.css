@@ -49,9 +49,13 @@
 .stk-tech-h { font-size: 24px; margin-bottom: 16px; }
 .stk-tech-h .stk-chip { font-size: 18px; cursor: default; vertical-align: 2px; }
 .stk-tech-list { display: grid; gap: 0; max-width: 880px; border: 1px solid #b1b4b6; background: #fff; }
-.stk-tech-row { display: grid; grid-template-columns: 200px 140px 1fr; gap: 12px; align-items: center; padding: 10px 15px; border-top: 1px solid #f1f0ec; }
+.stk-tech-row { display: grid; grid-template-columns: 200px 140px 1fr 90px; gap: 12px; align-items: center; padding: 10px 15px; border-top: 1px solid #f1f0ec; }
 .stk-tech-row:first-child { border-top: 0; }
 .stk-minichips { display: flex; flex-wrap: wrap; gap: 4px; }
+/* Lens rows: share bar (how much of the firm's hiring names the tech) + jobs link. */
+.stk-lens-track { height: 18px; background: #f3f2f1; position: relative; align-self: center; }
+.stk-lens-bar { position: absolute; left: 0; top: 0; bottom: 0; }
+.stk-lens-jobs { font-size: 14px; white-space: nowrap; justify-self: end; }
 .stk-count { font-variant-numeric: tabular-nums; }
 /* Matrix view: firms x techs, layer-tinted squares, sticky firm column. */
 .stk-mx-scroll { overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }

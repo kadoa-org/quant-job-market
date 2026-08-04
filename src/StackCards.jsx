@@ -233,6 +233,16 @@ export default function StackCards({ jobs = [], onApply }) {
     return { layer: L, clusters };
   }).filter((g) => g.clusters.length);
 
+  const maxLensShare = lensTech
+    ? Math.max(
+        ...firms.map((f) => {
+          const hit = f.techs.find((t) => t.t === lensTech);
+          return hit ? hit.n / f.tagged : 0;
+        }),
+        0.0001,
+      )
+    : 1;
+
   const lensFirms = lensTech
     ? firms
         .map((f) => ({ f, hit: f.techs.find((t) => t.t === lensTech) }))
@@ -426,14 +436,24 @@ export default function StackCards({ jobs = [], onApply }) {
                   <span className="dk-hint stk-count">
                     {hit.n} of {f.tagged} postings
                   </span>
-                  <span className="stk-minichips">
-                    {f.techs
-                      .filter((t) => t.t !== lensTech)
-                      .slice(0, 4)
-                      .map((t) => (
-                        <Chip key={t.t} tech={t} firmTagged={f.tagged} onClick={() => pickLens(t.t)} />
-                      ))}
+                  <span className="stk-lens-track">
+                    <span
+                      className="stk-lens-bar"
+                      style={{
+                        width: `${Math.max(Math.round(((hit.n / f.tagged) / maxLensShare) * 100), 3)}%`,
+                        background: (LAYER_TAG[hit.layer] ?? LAYER_TAG.data).mid,
+                      }}
+                    />
                   </span>
+                  {onApply && (
+                    <button
+                      type="button"
+                      className="stk-link stk-lens-jobs"
+                      onClick={() => onApply("table", { technologies: [lensTech], firmTypes: [], firm: f.firm })}
+                    >
+                      Show jobs
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
