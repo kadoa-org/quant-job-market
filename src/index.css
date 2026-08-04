@@ -54,7 +54,7 @@
 .stk-minichips { display: flex; flex-wrap: wrap; gap: 4px; }
 .stk-count { font-variant-numeric: tabular-nums; }
 /* Matrix view: firms x techs, layer-tinted squares, sticky firm column. */
-.stk-mx-scroll { overflow-x: auto; padding-bottom: 8px; }
+.stk-mx-scroll { overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
 .stk-mx { border-collapse: collapse; }
 .stk-mx-grp { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; text-align: left; padding: 0 6px 6px; }
 .stk-mx-tech { height: 100px; vertical-align: bottom; padding: 0 0 6px; }
@@ -62,7 +62,7 @@
 .stk-mx-techbtn:hover span { text-decoration: underline; color: #1d70b8; }
 .stk-mx-techbtn:focus-visible { outline: 3px solid #ffdd00; }
 .stk-mx-corner { position: sticky; left: 0; background: #fff; z-index: 2; }
-.stk-mx-firm { position: sticky; left: 0; background: #fff; z-index: 1; font-size: 13.5px; text-align: right; padding: 0 10px; white-space: nowrap; }
+.stk-mx-firm { position: sticky; left: 0; background: #fff; z-index: 1; font-size: 13.5px; text-align: right; padding: 0 10px; white-space: nowrap; box-shadow: 6px 0 6px -6px rgba(11, 12, 12, 0.25); }
 .stk-mx tbody tr:nth-child(even) td { background: #f7f6f5; }
 .stk-mx tbody tr:nth-child(odd) td.stk-mx-firm { background: #fff; }
 .stk-mx tbody tr:nth-child(even) td.stk-mx-firm { background: #f7f6f5; }
@@ -72,6 +72,16 @@
 .stk-mx-sq:focus-visible { outline: 3px solid #ffdd00; }
 .stk-mx-div { border-left: 2px solid #e8e6e3; }
 .stk-mx-divx { border-left: 2px solid #b8b6b2; }
+@media (max-width: 720px) {
+  /* Full-bleed scroll area; the sticky firm column stays pinned. */
+  .stk-mx-scroll { margin: 0 -16px; padding: 0 0 8px 16px; }
+  .stk-mx-firm { font-size: 12px; padding: 0 8px; }
+  .stk-mx-firm .stk-firmlink { display: inline-block; max-width: 118px; overflow: hidden; text-overflow: ellipsis; vertical-align: middle; }
+  .stk-mx-cell { width: 38px; min-width: 38px; height: 32px; }
+  .stk-mx-sq { width: 20px; height: 20px; }
+  .stk-mx-tech { height: 92px; }
+  .stk-mx-techbtn { font-size: 12px; }
+}
 
 /* GOV.UK-style sub navigation for the firm/technology grouping: plain text
    items with a blue bar under the active one (tabs are for secondary content

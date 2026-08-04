@@ -50,10 +50,10 @@ const LAYER_ORDER = ["be", "data", "ai", "infra"];
 // GOV.UK Design System tag tints (govuk-tag--yellow/orange/blue/green):
 // tinted background + dark text of the same hue, square corners.
 const LAYER_TAG = {
-  be: { bg: "#fcd6c3", fg: "#6e3619" },
-  data: { bg: "#d2e2f1", fg: "#144e81" },
-  ai: { bg: "#dbd5e9", fg: "#3d2375" },
-  infra: { bg: "#cce2d8", fg: "#005a30" },
+  be: { bg: "#fcd6c3", fg: "#6e3619", mid: "#c0937c" },
+  data: { bg: "#d2e2f1", fg: "#144e81", mid: "#6a95ba" },
+  ai: { bg: "#dbd5e9", fg: "#3d2375", mid: "#8b79b1" },
+  infra: { bg: "#cce2d8", fg: "#005a30", mid: "#5e9e81" },
 };
 
 function Chip({ tech, firmTagged, onClick, highlight }) {
@@ -506,7 +506,7 @@ export default function StackCards({ jobs = [], onApply }) {
                                   type="button"
                                   className="stk-mx-sq"
                                   style={{
-                                    background: LAYER_TAG[g.layer].bg,
+                                    background: LAYER_TAG[g.layer].mid,
                                     ...(techSet.has(t) ? { outline: "3px solid #ffdd00", outlineOffset: 0 } : {}),
                                   }}
                                   title={`${t}: named in ${e.n} of ${f.tagged} tech-tagged postings`}
