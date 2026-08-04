@@ -208,7 +208,7 @@ export default function TechStackHeatmap({ jobs }) {
           Quant tech heatmap
         </h1>
         <p className="text-[13.5px] text-[#6b6b6b] leading-snug max-w-[1100px] mb-3">
-          Heatmap of {totalJobs.toLocaleString()} open postings across {numFirms} buy-side quant firms (≥{MIN_JOBS} listings). Each cell counts that firm's open postings that explicitly mention the tech. Darker = more.
+          Heatmap of {totalJobs.toLocaleString()} open postings across {numFirms} hedge funds, prop trading firms, market makers, and asset managers (≥{MIN_JOBS} listings). Each cell counts that firm's open postings that explicitly mention the tech. Darker = more.
         </p>
         <div className="overflow-x-auto -mx-6 sm:mx-0">
           <div
