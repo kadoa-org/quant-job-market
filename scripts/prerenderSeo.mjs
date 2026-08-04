@@ -1211,6 +1211,37 @@ for (const [tech, carriers] of stackTechFirms) {
 }
 console.log(`stacks lens pages: ${lensPages}`);
 
+// ── /stacks/* SPA shells ──────────────────────────────────────────────────────
+//
+// The matrix layer tabs, view routes, and firm cards are client-side routes;
+// the proxy serves static files only, so a direct load 404s unless a file
+// exists. Emit copies of the built stacks shell (absolute asset URLs, so they
+// work from any depth) with route-specific title + canonical; the app parses
+// the path on boot and lands on the right view.
+const stacksShell = fs.readFileSync(path.join(DIST, "stacks.html"), "utf8");
+const spaShell = (route, title) =>
+  stacksShell
+    .replace(/<title>[^<]*<\/title>/, `<title>${title} | Quant Job Market</title>`)
+    .replace(/<link rel="canonical" href="[^"]*"/, `<link rel="canonical" href="${BASE}${route}"`)
+    .replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${BASE}${route}"`);
+const SPA_ROUTES = [
+  ["/stacks/languages", "The Language Stack at Quant Firms"],
+  ["/stacks/data-ai", "The Data & AI Stack at Quant Firms"],
+  ["/stacks/infra", "The Infrastructure Stack at Quant Firms"],
+  ["/stacks/firms", "Tech Stacks by Firm"],
+  ["/stacks/technologies", "Tech Stacks by Technology"],
+];
+const slugStackFirm = (f) =>
+  f
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+for (const f of stacksData.firms) {
+  SPA_ROUTES.push([`/stacks/firm/${slugStackFirm(f.firm)}`, `${f.firm} Tech Stack`]);
+}
+for (const [route, title] of SPA_ROUTES) write(route, spaShell(route, title));
+console.log(`stacks SPA shells: ${SPA_ROUTES.length}`);
+
 // ── sitemaps ──────────────────────────────────────────────────────────────────
 //
 // Segmented by page TYPE (not firm) so Search Console reports indexation per
