@@ -44,7 +44,7 @@ function viewFromPath() {
   if (p === `${BASE_PATH}/tech-stack` || p === `${BASE_PATH}/heatmap`) return "techstack";
   if (p === `${BASE_PATH}/locations`) return "locations";
   if (p === `${BASE_PATH}/about`) return "about";
-  if (p === `${BASE_PATH}/stacks`) return "stacks";
+  if (p === `${BASE_PATH}/stacks` || p.startsWith(`${BASE_PATH}/stacks/`)) return "stacks";
   // /job/<slug> pages are build-time static files, so in production this
   // branch never runs (the file wins). Vite dev has no dist, so its SPA
   // fallback lands here; show the Jobs table instead of defaulting to the
@@ -57,7 +57,12 @@ function pathForView(view) {
   if (view === "techstack") return `${BASE_PATH}/tech-stack`;
   if (view === "locations") return `${BASE_PATH}/locations`;
   if (view === "about") return `${BASE_PATH}/about`;
-  if (view === "stacks") return `${BASE_PATH}/stacks`;
+  if (view === "stacks") {
+    // StackCards owns sub-routes (/stacks/tech/<slug>, /stacks/firm/<slug>,
+    // /stacks/firms, /stacks/technologies); preserve them on URL sync.
+    const cur = window.location.pathname.replace(/\/$/, "");
+    return cur.startsWith(`${BASE_PATH}/stacks`) ? cur : `${BASE_PATH}/stacks`;
+  }
   return `${BASE_PATH}/`;
 }
 

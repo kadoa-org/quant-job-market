@@ -1147,6 +1147,70 @@ for (const shell of ["index.html", "tech-stack.html", "locations.html", "stacks.
   fs.writeFileSync(p, html);
 }
 
+// ── /stacks/tech/<slug> — who-hires-for lens pages ───────────────────────────
+//
+// Static twins of the interactive lens sub-routes (client-side pushState).
+// One page per stack-qualifying technology, EXCEPT the eight legacy
+// /tech/<slug> targets (python, cpp, ...) so the two page families never
+// compete for the same query.
+const stacksData = (() => {
+  const sp = path.join(DIST, "data", "stacks.json");
+  return fs.existsSync(sp) ? JSON.parse(fs.readFileSync(sp, "utf8")) : { firms: [] };
+})();
+const LEGACY_TECH_PAGES = new Set(["Python", "C++", "Rust", "Java", "C#", "Go", "SQL", "FPGA"]);
+const TECH_SLUG_SPECIAL = { "C++": "cpp", "C#": "csharp", ".NET": "dotnet", "kdb+/q": "kdb-q" };
+const slugStackTech = (t) =>
+  TECH_SLUG_SPECIAL[t] ??
+  t
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+const stackTechFirms = new Map(); // tech -> [{firm, n, tagged}]
+const stackHeavy = new Set();
+for (const f of stacksData.firms) {
+  for (const t of f.techs) {
+    if (!stackTechFirms.has(t.t)) stackTechFirms.set(t.t, []);
+    stackTechFirms.get(t.t).push({ firm: f.firm, n: t.n, tagged: f.tagged });
+    if (t.n / Math.max(f.tagged, 1) >= 0.2) stackHeavy.add(t.t);
+  }
+}
+let lensPages = 0;
+for (const [tech, carriers] of stackTechFirms) {
+  if (LEGACY_TECH_PAGES.has(tech)) continue;
+  if (carriers.length < 2 && !stackHeavy.has(tech)) continue;
+  const sorted = [...carriers].sort((a, b) => b.n / b.tagged - a.n / a.tagged);
+  const rows = sorted
+    .map(
+      (c, i) =>
+        `<tr><td class="dk-num">${i + 1}</td><td>${firmLink(c.firm)}</td><td class="dk-num">${c.n} of ${c.tagged}</td><td class="dk-num">${Math.round((c.n / c.tagged) * 100)}%</td></tr>`,
+    )
+    .join("\n");
+  const slug = slugStackTech(tech);
+  write(
+    `/stacks/tech/${slug}`,
+    page({
+      pathname: `/stacks/tech/${slug}`,
+      title: `Quant Firms Using ${tech} (${monthYear}): ${carriers.length} Firm${carriers.length === 1 ? "" : "s"} | Quant Job Market`,
+      description: `${carriers.length} hedge fund${carriers.length === 1 ? "" : "s"}, prop shops, and market makers with ${tech} in their hiring stack, ranked by how much of their hiring names it. Live data from the firms' own job postings, updated daily.`,
+      jsonLd: datasetLd(
+        `Quant firms using ${tech}`,
+        `${carriers.length} quant firms with ${tech} in their tech stack, from live job postings.`,
+        `${BASE}/stacks/tech/${slug}`,
+      ),
+      h1: `Quant Firms Using ${tech}`,
+      intro: `${carriers.length} quant firm${carriers.length === 1 ? "" : "s"} carr${carriers.length === 1 ? "ies" : "y"} <strong>${esc(tech)}</strong> in their hiring stack — counted from each firm's own live job postings. Share = how much of the firm's tech-tagged hiring names it. <a href="${PREFIX}/stacks">Explore the interactive stack matrix →</a>`,
+      bodyHtml: `${kitTable(
+        `<th class="dk-num">#</th><th>Firm</th><th class="dk-num">Postings naming it</th><th class="dk-num">Share</th>`,
+        rows,
+      )}
+<a class="dk-btn seo-cta" href="${PREFIX}/stacks">Browse every firm's full stack →</a>`,
+    }),
+  );
+  lensPages++;
+}
+console.log(`stacks lens pages: ${lensPages}`);
+
 // ── sitemaps ──────────────────────────────────────────────────────────────────
 //
 // Segmented by page TYPE (not firm) so Search Console reports indexation per

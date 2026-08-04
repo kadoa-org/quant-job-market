@@ -11,6 +11,34 @@ import { FilterDropdown } from "./FilterBar";
 // straight to one firm. Clicking any chip flips to the "who hires for X" lens.
 
 const BASE = import.meta.env.BASE_URL;
+const STACKS_BASE = `${BASE.replace(/\/$/, "")}/stacks`;
+
+// URL slugs for sub-routes. Specials cover names whose generic slug would
+// collide or vanish (C++ -> "c"); everything else lowercases to kebab.
+const TECH_SLUG_SPECIAL = { "C++": "cpp", "C#": "csharp", ".NET": "dotnet", "kdb+/q": "kdb-q" };
+const slugTech = (t) =>
+  TECH_SLUG_SPECIAL[t] ??
+  t
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+const slugFirm = (f) =>
+  f
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+// /stacks -> matrix, /stacks/firms, /stacks/technologies,
+// /stacks/tech/<slug> (lens), /stacks/firm/<slug> (detail card)
+function parseStacksRoute() {
+  const rest = window.location.pathname.replace(/\/$/, "").slice(STACKS_BASE.length);
+  const seg = rest.split("/").filter(Boolean);
+  if (seg[0] === "tech" && seg[1]) return { groupBy: "matrix", lensSlug: seg[1], firmSlug: null };
+  if (seg[0] === "firm" && seg[1]) return { groupBy: "matrix", lensSlug: null, firmSlug: seg[1] };
+  if (seg[0] === "firms") return { groupBy: "firm", lensSlug: null, firmSlug: null };
+  if (seg[0] === "technologies") return { groupBy: "tech", lensSlug: null, firmSlug: null };
+  return { groupBy: "matrix", lensSlug: null, firmSlug: null };
+}
 
 // Matrix view: semantically clustered columns, same order as the shareable
 // charts. Only techs in >=2 firms' stacks (or a single firm's main tech,
@@ -119,7 +147,7 @@ export default function StackCards({ jobs = [], onApply }) {
   const [techSel, setTechSel] = useState([]);
   const [lensTech, setLensTech] = useState(null); // chip-click "who hires for X" lens
   const [openFilter, setOpenFilter] = useState(null);
-  const [groupBy, setGroupBy] = useState("matrix"); // "matrix" = grid, "firm" = cards, "tech" = counted index
+  const [groupBy, setGroupBy] = useState(() => parseStacksRoute().groupBy); // "matrix" | "firm" | "tech"
 
   useEffect(() => {
     fetch(`${BASE}data/stacks.json`)
@@ -127,6 +155,37 @@ export default function StackCards({ jobs = [], onApply }) {
       .then(setData)
       .catch(() => setData({ firms: [] }));
   }, []);
+
+  // Sub-routes: push on navigation, re-apply on back/forward and direct load.
+  const navTo = (sub) => {
+    window.history.pushState(null, "", `${STACKS_BASE}${sub}${window.location.search}`);
+  };
+  const applyRoute = (route, firmList) => {
+    setGroupBy(route.groupBy);
+    if (route.lensSlug) {
+      const all = new Set();
+      for (const f of firmList) for (const t of f.techs) all.add(t.t);
+      const match = [...all].find((t) => slugTech(t) === route.lensSlug);
+      setLensTech(match ?? null);
+      setFirmSel([]);
+    } else if (route.firmSlug) {
+      const f = firmList.find((x) => slugFirm(x.firm) === route.firmSlug);
+      setLensTech(null);
+      setFirmSel(f ? [f.firm] : []);
+    } else {
+      setLensTech(null);
+      setFirmSel([]);
+    }
+  };
+  const routeReady = data !== null;
+  useEffect(() => {
+    if (!routeReady) return;
+    const firmList = data?.firms ?? [];
+    applyRoute(parseStacksRoute(), firmList);
+    const onPop = () => applyRoute(parseStacksRoute(), firmList);
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, [routeReady]);
 
   const firms = data?.firms ?? [];
 
@@ -152,13 +211,26 @@ export default function StackCards({ jobs = [], onApply }) {
     setTypeSel([]);
     setTechSel([]);
     setLensTech(null);
+    navTo(groupBy === "firm" ? "/firms" : groupBy === "tech" ? "/technologies" : "");
   };
   const activeCount = firmSel.length + typeSel.length + techSel.length + (lensTech ? 1 : 0);
 
   const pickLens = (t) => {
     setLensTech(t);
+    setFirmSel([]);
     setOpenFilter(null);
+    navTo(`/tech/${slugTech(t)}`);
     window.scrollTo(0, 0);
+  };
+  const pickFirm = (name) => {
+    setLensTech(null);
+    setFirmSel([name]);
+    navTo(`/firm/${slugFirm(name)}`);
+    window.scrollTo(0, 0);
+  };
+  const pickGroup = (g) => {
+    setGroupBy(g);
+    navTo(g === "firm" ? "/firms" : g === "tech" ? "/technologies" : "");
   };
 
   // Same matching rule App.filteredJobs applies, so the button's count equals
@@ -356,7 +428,7 @@ export default function StackCards({ jobs = [], onApply }) {
                 type="button"
                 aria-current={groupBy === "matrix" ? "page" : undefined}
                 className={`stk-subnav-item${groupBy === "matrix" ? " stk-subnav-on" : ""}`}
-                onClick={() => setGroupBy("matrix")}
+                onClick={() => pickGroup("matrix")}
               >
                 Matrix
               </button>
@@ -364,7 +436,7 @@ export default function StackCards({ jobs = [], onApply }) {
                 type="button"
                 aria-current={groupBy === "firm" ? "page" : undefined}
                 className={`stk-subnav-item${groupBy === "firm" ? " stk-subnav-on" : ""}`}
-                onClick={() => setGroupBy("firm")}
+                onClick={() => pickGroup("firm")}
               >
                 By firm
               </button>
@@ -372,7 +444,7 @@ export default function StackCards({ jobs = [], onApply }) {
                 type="button"
                 aria-current={groupBy === "tech" ? "page" : undefined}
                 className={`stk-subnav-item${groupBy === "tech" ? " stk-subnav-on" : ""}`}
-                onClick={() => setGroupBy("tech")}
+                onClick={() => pickGroup("tech")}
               >
                 By technology
               </button>
@@ -426,10 +498,7 @@ export default function StackCards({ jobs = [], onApply }) {
                   <button
                     type="button"
                     className="stk-firmlink"
-                    onClick={() => {
-                      setFirmSel([f.firm]);
-                      setLensTech(null);
-                    }}
+                    onClick={() => pickFirm(f.firm)}
                   >
                     {f.firm}
                   </button>
@@ -510,7 +579,7 @@ export default function StackCards({ jobs = [], onApply }) {
                   return (
                     <tr key={f.firm}>
                       <td className="stk-mx-firm">
-                        <button type="button" className="stk-firmlink" onClick={() => setFirmSel([f.firm])}>
+                        <button type="button" className="stk-firmlink" onClick={() => pickFirm(f.firm)}>
                           {f.firm}
                         </button>
                       </td>
@@ -607,7 +676,7 @@ export default function StackCards({ jobs = [], onApply }) {
             {visible.map((f) => (
               <div key={f.firm} className="stk-card">
                 <div className="stk-card-head">
-                  <button type="button" className="stk-firmlink" onClick={() => setFirmSel([f.firm])}>
+                  <button type="button" className="stk-firmlink" onClick={() => pickFirm(f.firm)}>
                     {f.firm}
                   </button>
                   <span className="dk-hint">{f.tagged} postings</span>
