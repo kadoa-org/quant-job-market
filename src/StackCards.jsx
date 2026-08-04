@@ -12,6 +12,39 @@ import { FilterDropdown } from "./FilterBar";
 
 const BASE = import.meta.env.BASE_URL;
 
+// Matrix view: semantically clustered columns, same order as the shareable
+// charts. Only techs in >=2 firms' stacks (or a single firm's main tech,
+// e.g. OCaml at Jane Street) get a column; leftovers append per layer.
+const MATRIX_CLUSTERS = {
+  be: [
+    ["Python", "C++", "Java", "C", "C#", "Rust", "Go"],
+    ["SQL", "R", "MATLAB", "Julia", "VBA"],
+    ["JavaScript", "TypeScript", "React", "Angular", ".NET"],
+    ["OCaml", "CUDA", "Verilog/VHDL"],
+  ],
+  data: [
+    ["Pandas", "NumPy", "Polars", "SciPy", "Arrow"],
+    ["Kafka", "Airflow", "Spark", "Flink", "Hadoop", "dbt"],
+    ["PostgreSQL", "MySQL", "SQL Server", "MongoDB", "Redis", "Elasticsearch", "ClickHouse", "kdb+/q"],
+    ["Snowflake", "Databricks", "Iceberg", "Parquet"],
+    ["Bloomberg", "Refinitiv", "FIX", "Aladdin"],
+    ["Tableau", "Power BI"],
+  ],
+  ai: [
+    ["PyTorch", "TensorFlow", "JAX", "scikit-learn"],
+    ["Claude", "ChatGPT", "Copilot", "MCP"],
+  ],
+  infra: [
+    ["Linux", "Windows", "PowerShell", "Bash"],
+    ["AWS", "GCP", "Azure", "S3"],
+    ["Kubernetes", "Docker"],
+    ["Terraform", "Ansible", "CloudFormation"],
+    ["Jenkins", "GitHub Actions", "GitLab CI"],
+    ["Grafana", "Prometheus", "Splunk", "Datadog"],
+    ["FPGA", "InfiniBand", "Slurm"],
+  ],
+};
+
 const LAYER_LABEL = { be: "Languages", data: "Data", ai: "AI & ML", infra: "Infra" };
 const LAYER_ORDER = ["be", "data", "ai", "infra"];
 // GOV.UK Design System tag tints (govuk-tag--yellow/orange/blue/green):
@@ -86,7 +119,7 @@ export default function StackCards({ jobs = [], onApply }) {
   const [techSel, setTechSel] = useState([]);
   const [lensTech, setLensTech] = useState(null); // chip-click "who hires for X" lens
   const [openFilter, setOpenFilter] = useState(null);
-  const [groupBy, setGroupBy] = useState("firm"); // "firm" = cards, "tech" = counted index
+  const [groupBy, setGroupBy] = useState("matrix"); // "matrix" = grid, "firm" = cards, "tech" = counted index
 
   useEffect(() => {
     fetch(`${BASE}data/stacks.json`)
@@ -174,6 +207,31 @@ export default function StackCards({ jobs = [], onApply }) {
       .filter((e) => e.layer === L)
       .sort((a, b) => b.firms.length - a.firms.length)
       .map((e) => ({ ...e, firms: [...e.firms].sort((a, b) => b.n / b.tagged - a.n / a.tagged) }));
+
+  // Matrix columns: intersect the cluster order with what the data carries.
+  const layerCarry = {};
+  const layerHeavy = {};
+  for (const f of firms) {
+    for (const t of f.techs) {
+      layerCarry[t.layer] = layerCarry[t.layer] ?? {};
+      layerCarry[t.layer][t.t] = (layerCarry[t.layer][t.t] ?? 0) + 1;
+      if (t.n / Math.max(f.tagged, 1) >= 0.2) {
+        (layerHeavy[t.layer] = layerHeavy[t.layer] ?? new Set()).add(t.t);
+      }
+    }
+  }
+  const matrixGroups = LAYER_ORDER.map((L) => {
+    const qualifies = new Set(
+      Object.entries(layerCarry[L] ?? {})
+        .filter(([t, n]) => n >= 2 || layerHeavy[L]?.has(t))
+        .map(([t]) => t),
+    );
+    const clustered = new Set(MATRIX_CLUSTERS[L].flat());
+    const clusters = MATRIX_CLUSTERS[L].map((c) => c.filter((t) => qualifies.has(t))).filter((c) => c.length);
+    const leftovers = [...qualifies].filter((t) => !clustered.has(t)).sort();
+    if (leftovers.length) clusters.push(leftovers);
+    return { layer: L, clusters };
+  }).filter((g) => g.clusters.length);
 
   const lensFirms = lensTech
     ? firms
@@ -286,6 +344,14 @@ export default function StackCards({ jobs = [], onApply }) {
             <nav className="stk-subnav" aria-label="Group stacks">
               <button
                 type="button"
+                aria-current={groupBy === "matrix" ? "page" : undefined}
+                className={`stk-subnav-item${groupBy === "matrix" ? " stk-subnav-on" : ""}`}
+                onClick={() => setGroupBy("matrix")}
+              >
+                Matrix
+              </button>
+              <button
+                type="button"
                 aria-current={groupBy === "firm" ? "page" : undefined}
                 className={`stk-subnav-item${groupBy === "firm" ? " stk-subnav-on" : ""}`}
                 onClick={() => setGroupBy("firm")}
@@ -382,6 +448,87 @@ export default function StackCards({ jobs = [], onApply }) {
               </span>
             </div>
             <Strata firm={detailFirm} onTech={pickLens} highlightTechs={techSet} />
+          </div>
+        ) : groupBy === "matrix" ? (
+          <div className="stk-mx-scroll">
+            <table className="stk-mx">
+              <thead>
+                <tr>
+                  <th className="stk-mx-corner" />
+                  {matrixGroups.map((g) => (
+                    <th
+                      key={g.layer}
+                      colSpan={g.clusters.reduce((s2, c) => s2 + c.length, 0)}
+                      className="stk-mx-grp"
+                      style={{ color: LAYER_TAG[g.layer].fg, borderBottom: `3px solid ${LAYER_TAG[g.layer].fg}` }}
+                    >
+                      {LAYER_LABEL[g.layer]}
+                    </th>
+                  ))}
+                </tr>
+                <tr>
+                  <th className="stk-mx-corner" />
+                  {matrixGroups.flatMap((g, gi) =>
+                    g.clusters.flatMap((cluster, ci) =>
+                      cluster.map((t, ti) => (
+                        <th
+                          key={t}
+                          className={`stk-mx-tech${ti === 0 && !(gi === 0 && ci === 0) ? (ci === 0 ? " stk-mx-divx" : " stk-mx-div") : ""}`}
+                        >
+                          <button type="button" className="stk-mx-techbtn" onClick={() => pickLens(t)} title={`Who hires for ${t}?`}>
+                            <span>{t}</span>
+                          </button>
+                        </th>
+                      )),
+                    ),
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {visible.map((f) => {
+                  const byt = new Map(f.techs.map((t) => [t.t, t]));
+                  return (
+                    <tr key={f.firm}>
+                      <td className="stk-mx-firm">
+                        <button type="button" className="stk-firmlink" onClick={() => setFirmSel([f.firm])}>
+                          {f.firm}
+                        </button>
+                      </td>
+                      {matrixGroups.flatMap((g, gi) =>
+                        g.clusters.flatMap((cluster, ci) =>
+                          cluster.map((t, ti) => {
+                            const e = byt.get(t);
+                            const div = ti === 0 && !(gi === 0 && ci === 0) ? (ci === 0 ? " stk-mx-divx" : " stk-mx-div") : "";
+                            if (!e) return <td key={t} className={`stk-mx-cell${div}`} />;
+                            return (
+                              <td key={t} className={`stk-mx-cell${div}`}>
+                                <button
+                                  type="button"
+                                  className="stk-mx-sq"
+                                  style={{
+                                    background: LAYER_TAG[g.layer].bg,
+                                    ...(techSet.has(t) ? { outline: "3px solid #ffdd00", outlineOffset: 0 } : {}),
+                                  }}
+                                  title={`${t}: named in ${e.n} of ${f.tagged} tech-tagged postings`}
+                                  onClick={() => pickLens(t)}
+                                />
+                              </td>
+                            );
+                          }),
+                        ),
+                      )}
+                    </tr>
+                  );
+                })}
+                {visible.length === 0 && (
+                  <tr>
+                    <td className="stk-mx-firm">
+                      <span className="dk-hint">No firm matches those filters.</span>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         ) : groupBy === "tech" ? (
           <div>
