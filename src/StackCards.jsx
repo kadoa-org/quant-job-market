@@ -28,16 +28,25 @@ const slugFirm = (f) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-// /stacks -> matrix, /stacks/firms, /stacks/technologies,
+// Matrix layer tabs: /stacks/languages, /stacks/data-ai, /stacks/infra.
+const MATRIX_TABS = [
+  { key: null, label: "All layers", sub: "" },
+  { key: "languages", label: "Languages", sub: "/languages", layers: ["be"] },
+  { key: "data-ai", label: "Data & AI", sub: "/data-ai", layers: ["data", "ai"] },
+  { key: "infra", label: "Infra", sub: "/infra", layers: ["infra"] },
+];
+
+// /stacks -> matrix, /stacks/<layer-tab>, /stacks/firms, /stacks/technologies,
 // /stacks/tech/<slug> (lens), /stacks/firm/<slug> (detail card)
 function parseStacksRoute() {
   const rest = window.location.pathname.replace(/\/$/, "").slice(STACKS_BASE.length);
   const seg = rest.split("/").filter(Boolean);
-  if (seg[0] === "tech" && seg[1]) return { groupBy: "matrix", lensSlug: seg[1], firmSlug: null };
-  if (seg[0] === "firm" && seg[1]) return { groupBy: "matrix", lensSlug: null, firmSlug: seg[1] };
-  if (seg[0] === "firms") return { groupBy: "firm", lensSlug: null, firmSlug: null };
-  if (seg[0] === "technologies") return { groupBy: "tech", lensSlug: null, firmSlug: null };
-  return { groupBy: "matrix", lensSlug: null, firmSlug: null };
+  if (seg[0] === "tech" && seg[1]) return { groupBy: "matrix", lensSlug: seg[1], firmSlug: null, layerTab: null };
+  if (seg[0] === "firm" && seg[1]) return { groupBy: "matrix", lensSlug: null, firmSlug: seg[1], layerTab: null };
+  if (seg[0] === "firms") return { groupBy: "firm", lensSlug: null, firmSlug: null, layerTab: null };
+  if (seg[0] === "technologies") return { groupBy: "tech", lensSlug: null, firmSlug: null, layerTab: null };
+  const tab = MATRIX_TABS.find((t) => t.key && t.key === seg[0]);
+  return { groupBy: "matrix", lensSlug: null, firmSlug: null, layerTab: tab?.key ?? null };
 }
 
 // Matrix view: semantically clustered columns, same order as the shareable
@@ -148,6 +157,7 @@ export default function StackCards({ jobs = [], onApply }) {
   const [lensTech, setLensTech] = useState(null); // chip-click "who hires for X" lens
   const [openFilter, setOpenFilter] = useState(null);
   const [groupBy, setGroupBy] = useState(() => parseStacksRoute().groupBy); // "matrix" | "firm" | "tech"
+  const [layerTab, setLayerTab] = useState(() => parseStacksRoute().layerTab); // null = all layers
 
   useEffect(() => {
     fetch(`${BASE}data/stacks.json`)
@@ -162,6 +172,7 @@ export default function StackCards({ jobs = [], onApply }) {
   };
   const applyRoute = (route, firmList) => {
     setGroupBy(route.groupBy);
+    setLayerTab(route.layerTab ?? null);
     if (route.lensSlug) {
       const all = new Set();
       for (const f of firmList) for (const t of f.techs) all.add(t.t);
@@ -230,7 +241,13 @@ export default function StackCards({ jobs = [], onApply }) {
   };
   const pickGroup = (g) => {
     setGroupBy(g);
+    setLayerTab(null);
     navTo(g === "firm" ? "/firms" : g === "tech" ? "/technologies" : "");
+  };
+  const pickLayerTab = (tab) => {
+    setLayerTab(tab.key);
+    setGroupBy("matrix");
+    navTo(tab.sub);
   };
 
   // Same matching rule App.filteredJobs applies, so the button's count equals
@@ -292,7 +309,9 @@ export default function StackCards({ jobs = [], onApply }) {
       }
     }
   }
-  const matrixGroups = LAYER_ORDER.map((L) => {
+  const activeTab = MATRIX_TABS.find((t) => t.key === layerTab) ?? MATRIX_TABS[0];
+  const shownLayers = activeTab.layers ?? LAYER_ORDER;
+  const matrixGroups0 = LAYER_ORDER.filter((L) => shownLayers.includes(L)).map((L) => {
     const qualifies = new Set(
       Object.entries(layerCarry[L] ?? {})
         .filter(([t, n]) => n >= 2 || layerHeavy[L]?.has(t))
@@ -303,7 +322,11 @@ export default function StackCards({ jobs = [], onApply }) {
     const leftovers = [...qualifies].filter((t) => !clustered.has(t)).sort();
     if (leftovers.length) clusters.push(leftovers);
     return { layer: L, clusters };
-  }).filter((g) => g.clusters.length);
+  });
+  const matrixGroups = matrixGroups0.filter((g) => g.clusters.length);
+  // With a layer tab active, hide firms with nothing in the shown columns.
+  const matrixCols = new Set(matrixGroups.flatMap((g) => g.clusters.flat()));
+  const matrixVisible = layerTab ? visible.filter((f) => f.techs.some((t) => matrixCols.has(t.t))) : visible;
 
   const maxLensShare = lensTech
     ? Math.max(
@@ -539,6 +562,20 @@ export default function StackCards({ jobs = [], onApply }) {
             <Strata firm={detailFirm} onTech={pickLens} highlightTechs={techSet} />
           </div>
         ) : groupBy === "matrix" ? (
+          <div>
+            <div className="stk-mx-tabs">
+              {MATRIX_TABS.map((tab) => (
+                <button
+                  key={tab.key ?? "all"}
+                  type="button"
+                  aria-current={layerTab === tab.key ? "page" : undefined}
+                  className={`stk-mx-tab${layerTab === tab.key ? " stk-mx-tab-on" : ""}`}
+                  onClick={() => pickLayerTab(tab)}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
           <div className="stk-mx-scroll">
             <table className="stk-mx">
               <thead>
@@ -574,7 +611,7 @@ export default function StackCards({ jobs = [], onApply }) {
                 </tr>
               </thead>
               <tbody>
-                {visible.map((f) => {
+                {matrixVisible.map((f) => {
                   const byt = new Map(f.techs.map((t) => [t.t, t]));
                   return (
                     <tr key={f.firm}>
@@ -609,7 +646,7 @@ export default function StackCards({ jobs = [], onApply }) {
                     </tr>
                   );
                 })}
-                {visible.length === 0 && (
+                {matrixVisible.length === 0 && (
                   <tr>
                     <td className="stk-mx-firm">
                       <span className="dk-hint">No firm matches those filters.</span>
@@ -618,6 +655,7 @@ export default function StackCards({ jobs = [], onApply }) {
                 )}
               </tbody>
             </table>
+          </div>
           </div>
         ) : groupBy === "tech" ? (
           <div>

@@ -57,6 +57,13 @@
 .stk-lens-bar { position: absolute; left: 0; top: 0; bottom: 0; }
 .stk-lens-jobs { font-size: 14px; white-space: nowrap; justify-self: end; }
 .stk-count { font-variant-numeric: tabular-nums; }
+/* Matrix layer tabs: quick jump to one stack layer without horizontal scroll. */
+.stk-mx-tabs { display: flex; gap: 8px; margin: 0 0 16px; flex-wrap: wrap; }
+.stk-mx-tab { font: inherit; font-size: 14px; padding: 5px 12px; background: #f3f2f1; border: 1px solid #b1b4b6; cursor: pointer; color: #1d70b8; }
+.stk-mx-tab:hover { background: #e8e6e3; }
+.stk-mx-tab:focus-visible { outline: 3px solid #ffdd00; }
+.stk-mx-tab-on { background: #0b0c0c; border-color: #0b0c0c; color: #fff; cursor: default; }
+
 /* Matrix view: firms x techs, layer-tinted squares, sticky firm column. */
 .stk-mx-scroll { overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
 .stk-mx { border-collapse: collapse; }
