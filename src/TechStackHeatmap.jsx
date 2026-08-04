@@ -131,10 +131,6 @@ function buildSvg(jobs) {
   let globalMax = 0;
   for (const f of ordered) for (const l of TECHS) if (f.counts[l] > globalMax) globalMax = f.counts[l];
 
-  // Column totals (sum of mentions per tech across all firms).
-  const colTotals = Object.fromEntries(TECHS.map((l) => [l, 0]));
-  for (const f of ordered) for (const l of TECHS) colTotals[l] += f.counts[l];
-
   // Layout
   const width = 1300;
   const firmW = 160;
@@ -156,7 +152,7 @@ function buildSvg(jobs) {
     curY += rowH;
   }
   const totalH = curY;
-  const height = totalH + 80;
+  const height = totalH + 16;
 
   const headerBaselineY = top - 8;
   const ruleY = top - 3;
@@ -193,19 +189,10 @@ function buildSvg(jobs) {
     })
     .join("");
 
-  // Bottom column-totals row
-  const totalsY = totalH + 4;
-  const totalsRowH = 22;
-  const bottomRule = `<line x1="${left}" y1="${totalsY - 2}" x2="${plotStartX + plotW}" y2="${totalsY - 2}" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>`;
-  const totalsLabel = `<text x="${nColX + nW - 4}" y="${totalsY + totalsRowH / 2 + 4}" text-anchor="end" font-size="11" font-weight="600" fill="#1a1a1a">Total</text>`;
-  const colTotalCells = TECHS.map((l, j) => {
-    const cellX = plotStartX + j * cellW;
-    const c = colTotals[l];
-    return `<text x="${cellX + cellW / 2}" y="${totalsY + totalsRowH / 2 + 4}" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1a1a" font-variant-numeric="tabular-nums">${c}</text>`;
-  }).join("");
+  const bottomRule = `<line x1="${left}" y1="${totalH + 2}" x2="${plotStartX + plotW}" y2="${totalH + 2}" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>`;
 
   return {
-    svg: `<svg width="${width}" height="${height + 30}" viewBox="0 0 ${width} ${height + 30}" xmlns="http://www.w3.org/2000/svg"><g>${colHeaders}</g>${nHeader}${topRule}<g>${rows}</g>${bottomRule}${totalsLabel}<g>${colTotalCells}</g></svg>`,
+    svg: `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg"><g>${colHeaders}</g>${nHeader}${topRule}<g>${rows}</g>${bottomRule}</svg>`,
     totalJobs,
     numFirms,
   };
