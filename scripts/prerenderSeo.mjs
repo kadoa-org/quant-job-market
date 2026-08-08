@@ -666,6 +666,7 @@ const CITY_GEO = {
   "Noord-Holland": { locality: null, country: "NL" },
   Netherlands: { locality: null, country: "NL" },
   Dublin: { country: "IE" },
+  "Dublin Ireland": { locality: "Dublin", country: "IE" },
   Ireland: { locality: null, country: "IE" },
   Shanghai: { country: "CN" },
   China: { locality: null, country: "CN" },
@@ -708,6 +709,16 @@ const dedupePlaces = (places) => {
   return places.filter((p, i) => !addrs.some((other) => isSubset(addrs[i], other)));
 };
 
+const COUNTRY_NAMES = new Intl.DisplayNames(["en"], { type: "region" });
+// Google requires fully remote JobPostings to name the countries applicants
+// may work from. The normalized job-location countries are the grounded
+// boundary available in this dataset (and match Google's jobLocation default).
+const applicantCountriesFor = (places) =>
+  [...new Set(places.map((place) => place.address.addressCountry).filter(Boolean))].map((country) => ({
+    "@type": "Country",
+    name: COUNTRY_NAMES.of(country),
+  }));
+
 // Pay-transparency ranges published in the posting text itself. Only the
 // employer's own numbers qualify for baseSalary (Google forbids estimates
 // there), so this stays keyword-anchored and bounded to plausible annual
@@ -740,6 +751,13 @@ for (const j of jobs) {
   if (!applyHref) continue;
 
   const locStr = (j.locations || []).join(", ");
+  const jobLocations = dedupePlaces((j.locations || []).map(placeFor));
+  const applicantLocationRequirements = applicantCountriesFor(jobLocations);
+  if (j.datePosted && j.workMode === "remote" && !applicantLocationRequirements.length) {
+    throw new Error(
+      `Remote JobPosting ${j.slug} has no normalized applicant country for locations: ${locStr || "(none)"}`,
+    );
+  }
   const chips = [
     j.firmName,
     FIRM_TYPE_LABEL[j.firmType],
@@ -764,8 +782,13 @@ for (const j of jobs) {
           name: j.firmName,
           ...(j.companyLogo ? { logo: j.companyLogo } : {}),
         },
-        ...(j.locations?.length ? { jobLocation: dedupePlaces(j.locations.map(placeFor)) } : {}),
-        ...(j.workMode === "remote" ? { jobLocationType: "TELECOMMUTE" } : {}),
+        ...(jobLocations.length ? { jobLocation: jobLocations } : {}),
+        ...(j.workMode === "remote"
+          ? {
+              jobLocationType: "TELECOMMUTE",
+              applicantLocationRequirements,
+            }
+          : {}),
         employmentType: employmentType(j.jobType, j.jobTitle),
         ...(j.salary
           ? {
