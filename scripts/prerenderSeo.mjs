@@ -194,7 +194,7 @@ function page({
 <meta name="twitter:description" content="${esc(description)}" />
 <meta name="twitter:image" content="${BASE}/screenshot.png" />
 ${cssHref ? `<link rel="stylesheet" href="${cssHref}" />` : ""}
-<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ""}
 <style>
   /* Page-only styles; the look comes from the kit's .dk-* classes in the bundle CSS. */
   body{margin:0;background:var(--dk-bg);color:var(--dk-ink);font-family:var(--dk-font)}
@@ -768,8 +768,14 @@ for (const j of jobs) {
     j.datePosted ? `Posted ${j.datePosted}` : null,
   ].filter(Boolean);
 
-  // JobPosting structured data (only with datePosted — required by Google).
-  const jsonLd = j.datePosted
+  // JobPosting structured data. Google requires datePosted AND a location
+  // (jobLocation, or jobLocationType TELECOMMUTE with applicantLocationRequirements),
+  // so a posting missing either cannot produce a valid item. Those pages ship with
+  // no structured data rather than an invalid JobPosting or a Dataset claiming a
+  // single job listing is a dataset, which is what Google was rejecting.
+  const canMarkUp =
+    Boolean(j.datePosted) && (jobLocations.length > 0 || (j.workMode === "remote" && applicantLocationRequirements.length > 0));
+  const jsonLd = canMarkUp
     ? {
         "@context": "https://schema.org",
         "@type": "JobPosting",
@@ -804,7 +810,7 @@ for (const j of jobs) {
         directApply: false,
         url: `${BASE}/job/${j.slug}`,
       }
-    : datasetLd(`${j.jobTitle} at ${j.firmName}`, `Open quant role at ${j.firmName}.`, `${BASE}/job/${j.slug}`);
+    : null;
 
   write(
     `/job/${j.slug}`,
