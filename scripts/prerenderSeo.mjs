@@ -22,11 +22,31 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createServer } from "vite";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = path.join(ROOT, "dist", "quant"); // vite outDir (site lives under /quant/)
 const PREFIX = "/quant"; // public path prefix behind the www.kadoa.com reverse proxy
 const BASE = `https://www.kadoa.com${PREFIX}`;
+
+async function buildShell() {
+  const server = await createServer({
+    configFile: false,
+    root: ROOT,
+    server: { middlewareMode: true, hmr: false },
+    appType: "custom",
+    logLevel: "error",
+    optimizeDeps: { noDiscovery: true },
+  });
+  try {
+    const mod = await server.ssrLoadModule("/src/renderPrerenderShell.jsx");
+    return mod.renderPrerenderShell();
+  } finally {
+    await server.close();
+  }
+}
+
+const shellMarkup = await buildShell();
 
 const esc = (s) =>
   String(s ?? "")
@@ -1091,8 +1111,8 @@ const firmsWithLoc = [...firms.values()].filter((f) => f.locs.size > 0).length;
 const jobsStr = jobs.length.toLocaleString();
 
 // Head-term content: a real crawler-visible <h1> + intro + top-firm table for the
-// otherwise-empty SPA shells (#root is blank until JS runs). Placed with the footer
-// AFTER #root so it survives React hydration, same as the link footer above.
+// SPA entry points. Placed with the footer after #root so it remains crawlable
+// without becoming part of the React hydration tree.
 const headRows = ranked
   .slice(0, 20)
   .map(
@@ -1130,6 +1150,18 @@ const headSectionFor = (shell) => {
       <p style="margin-top:16px"><a href="${PREFIX}/hiring">See all ${firms.size} firms ranked by open roles →</a> · <a href="${PREFIX}/salaries">Quant salaries</a></p>
     </section>`;
 };
+
+// Every Vite SPA entry ships the same first React render that the browser will
+// hydrate. SEO copy remains outside #root and therefore stays crawlable.
+for (const shell of ["index.html", "tech-stack.html", "locations.html", "stacks.html", "about.html"]) {
+  const p = path.join(DIST, shell);
+  if (!fs.existsSync(p)) continue;
+  const html = fs.readFileSync(p, "utf8").replace(
+    /(<div id="root">)(<\/div>)/,
+    (_m, open, close) => `${open}${shellMarkup}${close}`,
+  );
+  fs.writeFileSync(p, html);
+}
 
 for (const shell of ["index.html", "tech-stack.html", "locations.html", "stacks.html"]) {
   const p = path.join(DIST, shell);

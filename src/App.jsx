@@ -6,6 +6,7 @@ import StackCards from "./StackCards";
 import FilterBar from "./FilterBar";
 import { Button, GitHubButton, LiveBadge, NavBar, SiteFooter, SiteHeader } from "./kit";
 import LocationHeatmap from "./LocationHeatmap";
+import PrerenderShell from "./PrerenderShell";
 import TechStackHeatmap from "./TechStackHeatmap";
 import Treemap from "./Treemap";
 import { query as dbQuery, useDatabase } from "./useDatabase";
@@ -217,6 +218,7 @@ function InsightsNav({ view, setView, onFirms }) {
 }
 
 export default function App() {
+  const [clientReady, setClientReady] = useState(false);
   const { db, loading: dbLoading } = useDatabase();
   const [jobs, setJobs] = useState([]);
   const [firms, setFirms] = useState([]);
@@ -229,18 +231,14 @@ export default function App() {
   const [selectedFirm, setSelectedFirm] = useState(initial.firm);
   const [search, setSearch] = useState(initial.search);
 
+  useEffect(() => {
+    setClientReady(true);
+  }, []);
+
   // Sync state to URL on change
   useEffect(() => {
     syncUrl(view, filters, selectedFirm, search);
   }, [view, filters, selectedFirm, search]);
-
-  // The prerendered shells carry crawler-only content after #root (h1 + firm
-  // table + link footer, class "seo-shell") so the head-term pages aren't
-  // empty for search engines. Once the app is mounted the interactive views
-  // replace it — drop it so it doesn't render below the app.
-  useEffect(() => {
-    for (const el of document.querySelectorAll(".seo-shell")) el.remove();
-  }, []);
 
   // Load data from SQLite
   useEffect(() => {
@@ -323,6 +321,8 @@ export default function App() {
 
   const totalJobs = filteredJobs.length;
   const totalFirms = filteredFirms.length;
+
+  if (!clientReady) return <PrerenderShell />;
 
   return (
     // The app locks to the viewport on desktop (inner views scroll themselves);

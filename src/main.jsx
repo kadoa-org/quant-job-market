@@ -1,6 +1,12 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
-createRoot(document.getElementById("root")).render(<App />);
+const root = document.getElementById("root");
+const app = <App />;
+
+if (root.hasChildNodes()) hydrateRoot(root, app);
+else createRoot(root).render(app);
+
+for (const element of document.querySelectorAll(".seo-shell")) element.remove();
