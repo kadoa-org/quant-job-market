@@ -164,6 +164,22 @@ const siteHeader = `<header class="dk-header">
   </div>
 </header>`;
 
+// The SPA renders SiteHeader + NavBar above every view. Prerendered pages got
+// the masthead but no nav, so a search visitor landed on a page with no way
+// into the tracker (only /open-source built its own). Static tabs mirroring the
+// app's: Insights is a plain link here rather than the SPA's dropdown, since
+// the dataset CSP blocks inline JS and a crawlable link beats a dead toggle.
+const seoNav = `<nav class="dk-nav" aria-label="Primary">
+  <div class="dk-container">
+    <ul class="dk-nav-list">
+      <li><a href="${PREFIX}/">Firms</a></li>
+      <li><a href="${PREFIX}/?view=table">Jobs</a></li>
+      <li><a href="${PREFIX}/?view=dashboard">Insights</a></li>
+      <li><a href="${PREFIX}/about">About</a></li>
+    </ul>
+  </div>
+</nav>`;
+
 const siteFooter = `<footer class="dk-footer">
   <div class="dk-container dk-footer-inner">
     <h2 class="dk-footer-heading">Kadoa open datasets</h2>
@@ -189,7 +205,7 @@ function page({
   intro,
   bodyHtml,
   showMeta = true,
-  navHtml = "",
+  navHtml = seoNav,
   showCrumbs = true,
 }) {
   const url = `${BASE}${pathname}`;
