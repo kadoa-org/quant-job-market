@@ -18,7 +18,10 @@ const servePrerendered = () => ({
       let file = resolve(__dirname, "dist", decodeURIComponent(path.slice(1)));
       if (existsSync(file) && statSync(file).isDirectory()) file = resolve(file, "index.html");
       if (!existsSync(file)) return next();
-      res.setHeader("content-type", file.endsWith(".css") ? "text/css" : file.endsWith(".js") ? "text/javascript" : "text/html");
+      res.setHeader(
+        "content-type",
+        file.endsWith(".css") ? "text/css" : file.endsWith(".js") ? "text/javascript" : "text/html",
+      );
       res.end(readFileSync(file));
     });
   },
@@ -40,6 +43,7 @@ export default defineConfig({
         techStack: resolve(__dirname, "tech-stack.html"),
         stacks: resolve(__dirname, "stacks.html"),
         locations: resolve(__dirname, "locations.html"),
+        internships: resolve(__dirname, "internships.html"),
         about: resolve(__dirname, "about.html"),
       },
     },

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { FIRM_TYPE_LABELS, ROLE_LABELS, SENIORITY_LABELS, SENIORITY_ORDER } from "./constants";
+import { EMPTY_FILTERS, FIRM_TYPE_LABELS, ROLE_LABELS, SENIORITY_LABELS, SENIORITY_ORDER } from "./constants";
 
 function FilterSection({ title, options, selected, onChange }) {
   const toggle = (value) => {
@@ -130,16 +130,7 @@ export default function Sidebar({ filters, setFilters, firms, stats, jobs }) {
         <span className="text-xs font-medium text-white/60">Filters</span>
         {activeFilterCount > 0 && (
           <button
-            onClick={() =>
-              setFilters({
-                firmTypes: [],
-                roleCategories: [],
-                locations: [],
-                seniorityLevels: [],
-                workModes: [],
-                assetClasses: [],
-              })
-            }
+            onClick={() => setFilters({ ...EMPTY_FILTERS })}
             className="text-[9px] text-violet-400 hover:text-violet-300"
           >
             clear all ({activeFilterCount})

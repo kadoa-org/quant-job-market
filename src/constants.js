@@ -93,3 +93,19 @@ export function salaryToColor(salary) {
   const t = Math.min(1, Math.max(0, (Math.log(salary) - Math.log(50000)) / (Math.log(500000) - Math.log(50000))));
   return pctToColor(t * 100);
 }
+
+// The filter model, in one place: every facet the app can filter on, all empty.
+// Import this instead of writing the object literal, so adding a facet cannot
+// leave a "Clear all" button that silently keeps the new one applied.
+export const EMPTY_FILTERS = {
+  technologies: [],
+  firmTypes: [],
+  roleCategories: [],
+  locations: [],
+  seniorityLevels: [],
+  workModes: [],
+  assetClasses: [],
+  // Skill areas group the skills and tools a posting names into the kind of work
+  // it is for (see src/skillAreas.js).
+  skillAreas: [],
+};

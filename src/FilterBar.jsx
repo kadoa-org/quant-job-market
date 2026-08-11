@@ -1,5 +1,6 @@
-import React, { useMemo, useState, useRef, useEffect } from "react";
-import { FIRM_TYPE_LABELS, ROLE_LABELS, SENIORITY_LABELS, SENIORITY_ORDER } from "./constants";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { EMPTY_FILTERS, FIRM_TYPE_LABELS, ROLE_LABELS, SENIORITY_LABELS, SENIORITY_ORDER } from "./constants";
+import { matchesSkillArea, SKILL_AREA_NAMES } from "./skillAreas";
 
 export function FilterDropdown({ options, selected, onChange, onClose, singleSelect }) {
   const ref = useRef(null);
@@ -7,19 +8,24 @@ export function FilterDropdown({ options, selected, onChange, onClose, singleSel
   const inputRef = useRef(null);
 
   useEffect(() => {
-    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) onClose(); };
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) onClose();
+    };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, [onClose]);
 
-  useEffect(() => { inputRef.current?.focus(); }, []);
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
-  const filtered = search
-    ? options.filter((o) => o.label.toLowerCase().includes(search.toLowerCase()))
-    : options;
+  const filtered = search ? options.filter((o) => o.label.toLowerCase().includes(search.toLowerCase())) : options;
 
   return (
-    <div ref={ref} className="absolute top-full left-0 mt-1 z-[200] bg-white border border-[#e0e0e0]  shadow-lg min-w-[180px] sm:min-w-[220px] max-h-[60vh] sm:max-h-[340px] flex flex-col overflow-hidden">
+    <div
+      ref={ref}
+      className="absolute top-full left-0 mt-1 z-[200] bg-white border border-[#e0e0e0]  shadow-lg min-w-[180px] sm:min-w-[220px] max-h-[60vh] sm:max-h-[340px] flex flex-col overflow-hidden"
+    >
       {options.length > 6 && (
         <div className="px-2 py-1.5 border-b border-[#f0f0f0]">
           <input
@@ -49,21 +55,30 @@ export function FilterDropdown({ options, selected, onChange, onClose, singleSel
             >
               <div className="flex items-center gap-2 min-w-0 flex-1">
                 {!singleSelect && (
-                  <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center flex-shrink-0 ${
-                    isSelected ? "bg-[#5e6ad2] border-[#5e6ad2]" : "border-[#d4d4d4]"
-                  }`}>
-                    {isSelected && <svg width="8" height="8" viewBox="0 0 8 8" fill="none" stroke="white" strokeWidth="1.5"><path d="M1.5 4L3 5.5L6.5 2"/></svg>}
+                  <div
+                    className={`w-3.5 h-3.5 rounded border flex items-center justify-center flex-shrink-0 ${
+                      isSelected ? "bg-[#5e6ad2] border-[#5e6ad2]" : "border-[#d4d4d4]"
+                    }`}
+                  >
+                    {isSelected && (
+                      <svg width="8" height="8" viewBox="0 0 8 8" fill="none" stroke="white" strokeWidth="1.5">
+                        <path d="M1.5 4L3 5.5L6.5 2" />
+                      </svg>
+                    )}
                   </div>
                 )}
-                <span className={`truncate ${isSelected ? "text-[#191919] font-medium" : "text-[#191919]"}`} title={label}>{label}</span>
+                <span
+                  className={`truncate ${isSelected ? "text-[#191919] font-medium" : "text-[#191919]"}`}
+                  title={label}
+                >
+                  {label}
+                </span>
               </div>
               <span className="text-[12px] text-[#b0b0b0] ml-4 flex-shrink-0">{count}</span>
             </button>
           );
         })}
-        {filtered.length === 0 && (
-          <div className="px-3 py-2 text-[12px] text-[#b0b0b0]">No results</div>
-        )}
+        {filtered.length === 0 && <div className="px-3 py-2 text-[12px] text-[#b0b0b0]">No results</div>}
       </div>
     </div>
   );
@@ -103,9 +118,11 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
   const seniorityOptions = useMemo(() => {
     const counts = {};
     for (const j of jobs) counts[j.seniorityLevel] = (counts[j.seniorityLevel] || 0) + 1;
-    return SENIORITY_ORDER
-      .filter((s) => counts[s])
-      .map((s) => ({ value: s, label: SENIORITY_LABELS[s], count: counts[s] }));
+    return SENIORITY_ORDER.filter((s) => counts[s]).map((s) => ({
+      value: s,
+      label: SENIORITY_LABELS[s],
+      count: counts[s],
+    }));
   }, [jobs]);
 
   const locationOptions = useMemo(() => {
@@ -127,6 +144,18 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
       .map(([x, count]) => ({ value: x, label: x, count }));
   }, [jobs]);
 
+  // Areas with no matching posting are dropped, so the list never offers a
+  // filter that returns nothing.
+  const skillAreaOptions = useMemo(() => {
+    return SKILL_AREA_NAMES.map((name) => ({
+      value: name,
+      label: name,
+      count: jobs.filter((j) => matchesSkillArea(j, name)).length,
+    }))
+      .filter((o) => o.count > 0)
+      .sort((a, b) => b.count - a.count);
+  }, [jobs]);
+
   const assetClassOptions = useMemo(() => {
     const counts = {};
     for (const j of jobs) for (const ac of j.assetClasses || []) counts[ac] = (counts[ac] || 0) + 1;
@@ -143,15 +172,31 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
     { key: "technologies", label: "Technology", options: technologyOptions },
     { key: "roleCategories", label: "Role", options: roleOptions },
     { key: "seniorityLevels", label: "Seniority", options: seniorityOptions },
+    { key: "skillAreas", label: "Skill Area", options: skillAreaOptions },
     { key: "locations", label: "Location", options: locationOptions },
     { key: "assetClasses", label: "Asset Class", options: assetClassOptions },
   ];
 
-  const chipClass = (active) => `flex items-center gap-1 h-[22px]  text-[12px] sm:text-[13.5px] font-normal bg-white border transition-colors whitespace-nowrap ${
-    active ? "border-[#d4d4d4] text-[#191919]" : "border-[#d4d4d4] text-[#5c5c5f] hover:text-[#191919] hover:border-[#b0b0b0]"
-  }`;
+  const chipClass = (active) =>
+    `flex items-center gap-1 h-[22px]  text-[12px] sm:text-[13.5px] font-normal bg-white border transition-colors whitespace-nowrap ${
+      active
+        ? "border-[#d4d4d4] text-[#191919]"
+        : "border-[#d4d4d4] text-[#5c5c5f] hover:text-[#191919] hover:border-[#b0b0b0]"
+    }`;
 
-  const closeIcon = <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M3 3l6 6M9 3l-6 6"/></svg>;
+  const closeIcon = (
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 12 12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    >
+      <path d="M3 3l6 6M9 3l-6 6" />
+    </svg>
+  );
 
   return (
     <div className="flex flex-wrap sm:flex-nowrap items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-[5px] border-b border-black/[0.04] bg-[#fcfcfc] relative z-[100]">
@@ -160,8 +205,15 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
         <button onClick={() => toggle("firm")} className={chipClass(!!selectedFirm)}>
           <span className="px-[6px]">{selectedFirm || "Firm"}</span>
           {selectedFirm && (
-            <span className="border-l border-[#d4d4d4] px-[5px] text-[#9c9ca0] hover:text-[#191919] cursor-pointer flex items-center"
-              onClick={(e) => { e.stopPropagation(); onClearFirm(); }}>{closeIcon}</span>
+            <span
+              className="border-l border-[#d4d4d4] px-[5px] text-[#9c9ca0] hover:text-[#191919] cursor-pointer flex items-center"
+              onClick={(e) => {
+                e.stopPropagation();
+                onClearFirm();
+              }}
+            >
+              {closeIcon}
+            </span>
           )}
         </button>
         {openFilter === "firm" && (
@@ -187,8 +239,15 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
             {filters[key].length > 0 && (
               <>
                 <span className="border-l border-[#d4d4d4] px-[6px] text-[#5c5c5f]">{filters[key].length}</span>
-                <span className="border-l border-[#d4d4d4] px-[5px] text-[#9c9ca0] hover:text-[#191919] cursor-pointer flex items-center"
-                  onClick={(e) => { e.stopPropagation(); updateFilter(key)([]); }}>{closeIcon}</span>
+                <span
+                  className="border-l border-[#d4d4d4] px-[5px] text-[#9c9ca0] hover:text-[#191919] cursor-pointer flex items-center"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    updateFilter(key)([]);
+                  }}
+                >
+                  {closeIcon}
+                </span>
               </>
             )}
           </button>
@@ -206,7 +265,7 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
       {activeCount > 0 && (
         <button
           onClick={() => {
-            setFilters({ technologies: [], firmTypes: [], roleCategories: [], locations: [], seniorityLevels: [], workModes: [], assetClasses: [] });
+            setFilters({ ...EMPTY_FILTERS });
             if (onClearFirm) onClearFirm();
           }}
           className="text-[12px] text-[#9c9ca0] hover:text-[#191919] ml-1"

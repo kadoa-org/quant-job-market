@@ -34,6 +34,11 @@
     </image:image>
   </url>
   <url>
+    <loc>https://www.kadoa.com/quant/internships</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.kadoa.com/quant/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Quant Internships: Live Market Map by Firm, Skill, City and Pay</title>
+    <meta name="description" content="Every live quant internship, from the firms' own careers pages: which firms are hiring, how many roles already name 2027, what the work is, which cities, and the intern pay each firm prints. Updated daily." />
+    <meta name="keywords" content="quant internships, quant internship 2027, quantitative research internship, trading internship, hedge fund internship, prop trading internship, quant intern pay, jane street internship, citadel internship, sig internship" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Kadoa" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Quant Job Market" />
+    <meta property="og:title" content="Quant Internship Market Map" />
+    <meta property="og:description" content="Live quant internships by firm, skill area, city, and disclosed pay, with the 2027 cycle already underway." />
+    <meta property="og:url" content="https://www.kadoa.com/quant/internships" />
+    <meta property="og:image" content="https://www.kadoa.com/quant/screenshot.png" />
+    <meta property="article:section" content="Data" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Quant Internship Market Map" />
+    <meta name="twitter:description" content="Live quant internships by firm, skill area, city, and disclosed pay." />
+    <meta name="twitter:image" content="https://www.kadoa.com/quant/screenshot.png" />
+
+    <link rel="canonical" href="https://www.kadoa.com/quant/internships" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "Quant internships: the live intern market",
+        "description": "Live internship postings at quantitative trading firms: counts by firm, the 2027 versus 2026 cycle split, skill areas, cities, and disclosed intern pay, refreshed daily from the firms' own careers pages.",
+        "url": "https://www.kadoa.com/quant/internships",
+        "isAccessibleForFree": true,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": {
+          "@type": "Organization",
+          "name": "Kadoa",
+          "url": "https://kadoa.com"
+        },
+        "keywords": [
+          "quant internships",
+          "quant internship 2027",
+          "quantitative research internship",
+          "intern pay",
+          "hedge fund internship",
+          "prop trading internship"
+        ],
+        "variableMeasured": [
+          "firm",
+          "internship posting count",
+          "target year",
+          "skill area",
+          "city",
+          "disclosed annualized intern pay"
+        ],
+        "distribution": [
+          {
+            "@type": "DataDownload",
+            "encodingFormat": "application/json",
+            "contentUrl": "https://www.kadoa.com/quant/data/jobs.json"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-[#f2f2f3] text-[#191919] font-['Inter',sans-serif]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

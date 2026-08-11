@@ -23,6 +23,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createServer } from "vite";
+// Plain-JS module, shared with the app so the /internships tables and the live
+// view group postings identically.
+import { rankSkillAreas } from "../src/skillAreas.js";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = path.join(ROOT, "dist", "quant"); // vite outDir (site lives under /quant/)
@@ -622,7 +625,12 @@ const descriptions = (() => {
 // genuinely plain-text descriptions untouched.
 const looksEscapedHtml = (s) => /&lt;(p|div|ul|ol|li|br|strong|em|span|h\d)\b/i.test(s) && !/<[a-z][^>]*>/i.test(s);
 const decodeEntities = (s) =>
-  s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
+  s
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&");
 // Descriptions are third-party scraped content injected as raw HTML into the
 // page: strip active content (script/style/event handlers/javascript: URLs).
 const sanitizeJd = (s) =>
@@ -707,7 +715,7 @@ const CITY_GEO = {
   Shanghai: { country: "CN" },
   China: { locality: null, country: "CN" },
   Montreal: { region: "QC", country: "CA" },
-  "Montréal": { locality: "Montreal", region: "QC", country: "CA" },
+  Montréal: { locality: "Montreal", region: "QC", country: "CA" },
   Toronto: { region: "ON", country: "CA" },
   Warsaw: { country: "PL" },
   Tokyo: { country: "JP" },
@@ -763,7 +771,9 @@ const SALARY_RANGE =
   /(?:base salary|salary|compensation|pay)[^$£€]{0,80}([$£€])\s?([\d,]{5,9})(?:\s?(?:-|–|to)\s?)(?:[$£€]\s?)?([\d,]{5,9})/i;
 const CURRENCY = { $: "USD", "£": "GBP", "€": "EUR" };
 function salaryFromDescription(html) {
-  const m = String(html || "").replace(/<[^>]+>/g, " ").match(SALARY_RANGE);
+  const m = String(html || "")
+    .replace(/<[^>]+>/g, " ")
+    .match(SALARY_RANGE);
   if (!m) return null;
   const lo = Number(m[2].replace(/,/g, ""));
   const hi = Number(m[3].replace(/,/g, ""));
@@ -810,7 +820,8 @@ for (const j of jobs) {
   // no structured data rather than an invalid JobPosting or a Dataset claiming a
   // single job listing is a dataset, which is what Google was rejecting.
   const canMarkUp =
-    Boolean(j.datePosted) && (jobLocations.length > 0 || (j.workMode === "remote" && applicantLocationRequirements.length > 0));
+    Boolean(j.datePosted) &&
+    (jobLocations.length > 0 || (j.workMode === "remote" && applicantLocationRequirements.length > 0));
   const jsonLd = canMarkUp
     ? {
         "@context": "https://schema.org",
@@ -928,6 +939,49 @@ for (const f of ranked) {
 }
 console.log(`firm pages: ${firmPages}`);
 
+// ── insights-page shared helpers (used by /open-source and /internships) ─────
+// Sortable-header helpers for the static tables. Click-to-sort is wired in
+// oss-chart.js (dataset CSP blocks inline JS); sortable cells carry a
+// data-sort attribute so the JS sorts on raw values, not formatted text.
+const thCls = (o) => [o.num ? "dk-num" : "", o.cls || ""].filter(Boolean).join(" ");
+const sortTh = (label, col, type, o = {}) => {
+  const c = thCls(o);
+  return `<th${c ? ` class="${c}"` : ""}${o.width ? ` style="width:${o.width}"` : ""} aria-sort="${o.active ? (o.dir === "asc" ? "ascending" : "descending") : "none"}"><button type="button" class="dk-th-btn" data-col="${col}" data-type="${type}">${label} <span class="dk-sort-ind" aria-hidden="true">${o.active ? (o.dir === "asc" ? "▲" : "▼") : "↕"}</span></button></th>`;
+};
+const plainTh = (label, o = {}) => {
+  const c = thCls(o);
+  return `<th${c ? ` class="${c}"` : ""}${o.width ? ` style="width:${o.width}"` : ""}>${label}</th>`;
+};
+const sortableTable = (head, rows, cls = "") =>
+  `<div class="dk-table-wrap"><table class="dk-table dk-sortable${cls ? ` ${cls}` : ""}" data-rank-col="0"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
+
+// gov.uk-style nav for the insights pages: same tabs + Insights toggle as the
+// SPA. Static HTML; the expand/collapse is wired in oss-chart.js (dataset CSP
+// blocks inline JS). Panel links stay in the DOM for crawlers either way.
+const insightsNavItem = (href, label, desc, current) =>
+  `<div style="width:208px"><a href="${href}"${current ? ' aria-current="true"' : ""} style="font:${current ? 700 : 600} 15px/1.3 var(--dk-font);color:#1d70b8;text-underline-offset:2px">${label}</a><p style="margin:4px 0 0;font:400 13px/1.35 var(--dk-font);color:#505a5f">${desc}</p></div>`;
+const insightsNav = (current) => `<nav class="dk-nav" aria-label="Primary">
+  <div class="dk-container">
+    <ul class="dk-nav-list">
+      <li><a href="${PREFIX}/">Firms</a></li>
+      <li><a href="${PREFIX}/?view=table">Jobs</a></li>
+      <li><a href="#insights" id="insights-toggle" aria-expanded="false" aria-controls="insights-panel">Insights <svg width="11" height="8" viewBox="0 0 11 8" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:2px;margin-top:-2px"><path id="insights-chevron" d="M1 1.5 L5.5 6 L10 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></li>
+    </ul>
+  </div>
+</nav>
+<div id="insights-panel" hidden style="background:#fff;border-bottom:1px solid #b1b4b6">
+  <div class="insights-panel-inner">
+    <div style="display:flex;flex-wrap:wrap;gap:20px 40px">
+      ${insightsNavItem(`${PREFIX}/?view=dashboard`, "Hiring insights", "Roles, seniority, salaries and demand across all firms", false)}
+      ${insightsNavItem(`${PREFIX}/tech-stack`, "Tech heatmap", "Languages and tools by firm, the hiring heatmap", false)}
+      ${insightsNavItem(`${PREFIX}/stacks`, "Tech stack", "Browse each firm's stack as layers, from its own postings", false)}
+      ${insightsNavItem(`${PREFIX}/locations`, "Locations", "Where quant firms hire, city by city", false)}
+      ${insightsNavItem(`${PREFIX}/open-source/`, "Open source", "Firms ranked by GitHub footprint", current === "open-source")}
+      ${insightsNavItem(`${PREFIX}/internships`, "Internships", "Live intern market: firms, skills, cities, pay", current === "internships")}
+    </div>
+  </div>
+</div>`;
+
 // ── /open-source — quant firms on GitHub ─────────────────────────────────────
 // SERP gap: "quant firms github" queries return stale listicles; nobody ranks
 // firms by live OSS footprint. Data ships daily from the jobs pipeline
@@ -944,20 +998,6 @@ if (github.firms.length) {
     const pct = Math.max(1, Math.round((stars / maxStars) * 100));
     return `<div class="starcell"><span class="starbar" style="width:${pct}%"></span><span class="starval">${fmtStars(stars)}</span></div>`;
   };
-  // Sortable-header helpers for the static tables. Click-to-sort is wired in
-  // oss-chart.js (dataset CSP blocks inline JS); sortable cells carry a
-  // data-sort attribute so the JS sorts on raw values, not formatted text.
-  const thCls = (o) => [o.num ? "dk-num" : "", o.cls || ""].filter(Boolean).join(" ");
-  const sortTh = (label, col, type, o = {}) => {
-    const c = thCls(o);
-    return `<th${c ? ` class="${c}"` : ""}${o.width ? ` style="width:${o.width}"` : ""} aria-sort="${o.active ? (o.dir === "asc" ? "ascending" : "descending") : "none"}"><button type="button" class="dk-th-btn" data-col="${col}" data-type="${type}">${label} <span class="dk-sort-ind" aria-hidden="true">${o.active ? (o.dir === "asc" ? "▲" : "▼") : "↕"}</span></button></th>`;
-  };
-  const plainTh = (label, o = {}) => {
-    const c = thCls(o);
-    return `<th${c ? ` class="${c}"` : ""}${o.width ? ` style="width:${o.width}"` : ""}>${label}</th>`;
-  };
-  const sortableTable = (head, rows, cls = "") =>
-    `<div class="dk-table-wrap"><table class="dk-table dk-sortable${cls ? ` ${cls}` : ""}" data-rank-col="0"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
 
   const leaderHead = `${plainTh("#", { num: true, width: "44px" })}${sortTh("Firm", 1, "text")}${sortTh("GitHub stars", 2, "num", { active: true, dir: "desc", cls: "oss-stars-col" })}${sortTh("Repos", 3, "num", { num: true, cls: "dk-hide-sm" })}${sortTh("Active (1y)", 4, "num", { num: true, cls: "dk-hide-sm" })}${plainTh("Top repo", { cls: "dk-hide-md" })}`;
   const leaderRows = active
@@ -981,31 +1021,6 @@ if (github.firms.length) {
 
   const emptyOrgs = github.firms.filter((f) => f.public_repos === 0);
 
-  // gov.uk-style nav for this page: same tabs + Insights toggle as the SPA.
-  // Static HTML here; the expand/collapse is wired in oss-chart.js (dataset
-  // CSP blocks inline JS). Panel links stay in the DOM for crawlers either way.
-  const navItem = (href, label, desc, current) =>
-    `<div style="width:208px"><a href="${href}"${current ? ' aria-current="true"' : ""} style="font:${current ? 700 : 600} 15px/1.3 var(--dk-font);color:#1d70b8;text-underline-offset:2px">${label}</a><p style="margin:4px 0 0;font:400 13px/1.35 var(--dk-font);color:#505a5f">${desc}</p></div>`;
-  const ossNav = `<nav class="dk-nav" aria-label="Primary">
-  <div class="dk-container">
-    <ul class="dk-nav-list">
-      <li><a href="${PREFIX}/">Firms</a></li>
-      <li><a href="${PREFIX}/?view=table">Jobs</a></li>
-      <li><a href="#insights" id="insights-toggle" aria-expanded="false" aria-controls="insights-panel">Insights <svg width="11" height="8" viewBox="0 0 11 8" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:2px;margin-top:-2px"><path id="insights-chevron" d="M1 1.5 L5.5 6 L10 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></li>
-    </ul>
-  </div>
-</nav>
-<div id="insights-panel" hidden style="background:#fff;border-bottom:1px solid #b1b4b6">
-  <div class="insights-panel-inner">
-    <div style="display:flex;flex-wrap:wrap;gap:20px 40px">
-      ${navItem(`${PREFIX}/?view=dashboard`, "Hiring insights", "Roles, seniority, salaries and demand across all firms", false)}
-      ${navItem(`${PREFIX}/tech-stack`, "Tech heatmap", "Languages and tools by firm, the hiring heatmap", false)}
-      ${navItem(`${PREFIX}/locations`, "Locations", "Where quant firms hire, city by city", false)}
-      ${navItem(`${PREFIX}/open-source/`, "Open source", "Firms ranked by GitHub footprint", true)}
-    </div>
-  </div>
-</div>`;
-
   write(
     "/open-source",
     page({
@@ -1027,14 +1042,18 @@ ${sortableTable(repoHead, repoRows, "oss-projects")}
 ${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no public repos yet: ${emptyOrgs.map((f) => `<a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer">${esc(f.firm_name)}</a>`).join(", ")}.</p>` : ""}
 <script src="${PREFIX}/oss-chart.js" defer></script>`,
       showMeta: false,
-      navHtml: ossNav,
+      navHtml: insightsNav("open-source"),
       showCrumbs: false,
     }),
   );
-  // Same-origin JS file (dataset CSP blocks inline scripts): Insights toggle +
-  // click-to-sort on the leaderboard/projects tables. Rows are sorted on the
-  // raw data-sort value (not the formatted text), and the rank column
-  // (data-rank-col) is renumbered to match the visible order.
+  console.log(`open-source page: ${active.length} firms`);
+}
+
+// Same-origin JS file (dataset CSP blocks inline scripts): Insights toggle +
+// click-to-sort on the insights-page tables (/open-source, /internships).
+// Rows are sorted on the raw data-sort value (not the formatted text), and
+// the rank column (data-rank-col) is renumbered to match the visible order.
+{
   fs.writeFileSync(
     path.join(DIST, "oss-chart.js"),
     `(function () {
@@ -1097,7 +1116,146 @@ ${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no pu
 })();
 `,
   );
-  console.log(`open-source page: ${active.length} firms`);
+}
+
+// ── /internships — the live quant intern market ──────────────────────────────
+// SERP gap: "quant internships 2027" queries land on stale megathreads; nobody
+// tracks the live cycle. The URL is served by the SPA (src/InternshipsView.jsx,
+// path-routed in App.jsx); these ranked tables are injected after #root in the
+// built internships.html shell for crawlers and no-JS visitors. Companion share
+// card: kadoa-backend services/custom/datasets/jobs/scripts/buildInternshipCycle.ts
+// (keep the panel definitions and city filter in sync).
+let internshipsSeoSection = null;
+{
+  // Quant roles only, same set as the SPA (src/App.jsx QUANT_ROLES) and the
+  // share card, so the tables match the live view above them. Drops the
+  // marketing, ETF sales, legal, and investor-relations internships these firms
+  // also post: real jobs, not quant internships.
+  const QUANT_ROLES = new Set([
+    "quantitative_research",
+    "quantitative_trading",
+    "quantitative_development",
+    "hft_systems",
+    "machine_learning",
+    "data_science",
+    "software_engineering",
+    "risk_management",
+    "portfolio_management",
+  ]);
+  const interns = jobs.filter((j) => j.seniorityLevel === "intern" && QUANT_ROLES.has(j.roleCategory));
+  if (interns.length) {
+    const names2027 = (j) => /2027/.test(j.jobTitle);
+    const target2027 = interns.filter(names2027).length;
+    const target2026 = interns.filter((j) => /2026/.test(j.jobTitle)).length;
+    const internFirms = new Set(interns.map((j) => j.firmName));
+
+    const rankTags = (tagsForJob) => {
+      const counts = new Map();
+      for (const j of interns) {
+        for (const tag of new Set(tagsForJob(j))) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+      }
+      return [...counts.entries()]
+        .map(([name, count]) => ({ name, count }))
+        .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+    };
+    const share = (n) => `${Math.round((n / interns.length) * 100)}%`;
+
+    // The locations array carries region tags alongside cities (an ad in Bala
+    // Cynwyd also emits "Pennsylvania"). Keep cities only so nothing counts twice.
+    const NON_CITY = new Set([
+      "Pennsylvania",
+      "Illinois",
+      "Ireland",
+      "Australia",
+      "Virginia",
+      "Brazil",
+      "United Kingdom",
+      "United States",
+      "Netherlands",
+      "France",
+      "India",
+      "Remote",
+    ]);
+    const cityName = (loc) => (loc === "Bala Cynwyd (Philadelphia Area)" ? "Philadelphia area" : loc);
+    const cities = rankTags((j) => (j.locations ?? []).filter((l) => l && !NON_CITY.has(l)).map(cityName));
+
+    const areas = rankSkillAreas(interns);
+
+    const allByFirm = new Map();
+    for (const j of jobs) allByFirm.set(j.firmName, (allByFirm.get(j.firmName) ?? 0) + 1);
+    const firm2027 = new Map();
+    for (const j of interns) {
+      if (names2027(j)) firm2027.set(j.firmName, (firm2027.get(j.firmName) ?? 0) + 1);
+    }
+    const firmRanks = rankTags((j) => [j.firmName]);
+    const techRanks = rankTags((j) => [...(j.programmingLanguages ?? []), ...(j.technologies ?? [])]);
+
+    const salaryByFirm = new Map();
+    for (const j of interns) {
+      if (j.salary == null) continue;
+      salaryByFirm.set(j.firmName, Math.max(salaryByFirm.get(j.firmName) ?? 0, j.salary));
+    }
+    const pay = [...salaryByFirm.entries()]
+      .map(([firm, salary]) => ({ firm, salary }))
+      .sort((a, b) => b.salary - a.salary || a.firm.localeCompare(b.firm));
+
+    const attr = `<p class="oss-attr">Source: <strong>kadoa.com/quant/internships</strong> · live careers-page ads, updated daily</p>`;
+    const h2 = (t) => `<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:32px 0 10px">${t}</h2>`;
+    const hint = (t) => `<p class="dk-hint" style="margin:0 0 12px">${t}</p>`;
+
+    const firmHead = `${plainTh("#", { num: true, width: "44px" })}${sortTh("Firm", 1, "text")}${sortTh("Internships", 2, "num", { num: true, active: true, dir: "desc", width: "120px" })}${sortTh("Names 2027", 3, "num", { num: true, width: "120px" })}${sortTh("Share of firm's ads", 4, "num", { num: true, width: "160px", cls: "dk-hide-sm" })}`;
+    const firmRows = firmRanks
+      .map((row, i) => {
+        const total = allByFirm.get(row.name) ?? row.count;
+        const shareOfFirm = Math.round((row.count / total) * 100);
+        return `<tr><td class="dk-num" style="color:var(--dk-muted)">${i + 1}</td><td data-sort="${esc(row.name)}"><strong>${firmLink(row.name)}</strong></td><td class="dk-num" data-sort="${row.count}">${row.count}</td><td class="dk-num" data-sort="${firm2027.get(row.name) ?? 0}">${firm2027.get(row.name) ?? 0}</td><td class="dk-num dk-hide-sm" data-sort="${shareOfFirm}">${shareOfFirm}%</td></tr>`;
+      })
+      .join("\n");
+
+    const countHead = (label) =>
+      `${plainTh("#", { num: true, width: "44px" })}${sortTh(label, 1, "text")}${sortTh("Ads", 2, "num", { num: true, active: true, dir: "desc", width: "100px" })}${sortTh("Share of interns", 3, "num", { num: true, width: "140px" })}`;
+    const countRows = (rows, top = 15) =>
+      rows
+        .slice(0, top)
+        .map(
+          (row, i) =>
+            `<tr><td class="dk-num" style="color:var(--dk-muted)">${i + 1}</td><td data-sort="${esc(row.name)}">${esc(row.name)}</td><td class="dk-num" data-sort="${row.count}">${row.count}</td><td class="dk-num" data-sort="${Math.round((row.count / interns.length) * 100)}">${share(row.count)}</td></tr>`,
+        )
+        .join("\n");
+
+    const payHead = `${plainTh("#", { num: true, width: "44px" })}${sortTh("Firm", 1, "text")}${sortTh("Annualized base", 2, "num", { num: true, active: true, dir: "desc", width: "160px" })}`;
+    const payRows = pay
+      .map(
+        (row, i) =>
+          `<tr><td class="dk-num" style="color:var(--dk-muted)">${i + 1}</td><td data-sort="${esc(row.firm)}"><strong>${firmLink(row.firm)}</strong></td><td class="dk-num" data-sort="${row.salary}">$${row.salary.toLocaleString("en-US")}</td></tr>`,
+      )
+      .join("\n");
+
+    // /internships is a live SPA view (InternshipsView). These tables ship
+    // after #root in the built shell, so crawlers and no-JS visitors get the
+    // full rankings while the interactive view owns the same URL.
+    internshipsSeoSection = `    <section class="dk-container seo-shell" style="padding:8px 15px 8px">
+      <h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:32px 0 10px">Every firm hiring interns</h2>
+      ${hint(`${interns.length} live internship ads across ${internFirms.size} firms. "Names 2027" counts ads with 2027 in the title; share is internships as a percentage of all the firm's live ads.`)}
+      ${sortableTable(firmHead, firmRows)}
+      ${attr}
+      ${h2("What the internships are for")}
+      ${hint("Skill areas: a named skill or a named tool counts an ad into an area, once. General-purpose languages (Python, C++, Linux, Excel) belong to no area; their raw counts are in the technology table below.")}
+      ${sortableTable(countHead("Skill area"), countRows(areas, areas.length))}
+      ${h2("Technology mentioned most")}
+      ${hint("Programming languages and tools; each internship ad is counted once per item.")}
+      ${sortableTable(countHead("Language or tool"), countRows(techRanks, 25))}
+      ${h2("Where the internships are")}
+      ${hint("Cities named in internship ads; an ad listing several cities counts once per city.")}
+      ${sortableTable(countHead("City"), countRows(cities))}
+      ${h2("Highest disclosed intern pay")}
+      ${hint("Highest annualized base rate printed in an internship ad, USD. Annualized rate, not summer take-home pay.")}
+      ${sortableTable(payHead, payRows)}
+      <p class="dk-hint" style="margin-top:10px">${pay.length} of ${internFirms.size} firms print a figure; the rest are omitted, not zero.</p>
+      <script src="${PREFIX}/oss-chart.js" defer></script>
+    </section>`;
+    console.log(`internships SEO tables: ${interns.length} ads, ${internFirms.size} firms`);
+  }
 }
 
 // ── internal links (so the new pages aren't orphaned) ────────────────────────
@@ -1117,6 +1275,7 @@ const footer = `    <footer class="seo-shell" style="max-width:960px;margin:0 au
       <a href="${PREFIX}/hiring">Which firms are hiring</a>
       <a href="${PREFIX}/salaries">Quant salaries</a>
       <a href="${PREFIX}/open-source/">Quant firms on GitHub</a>
+      <a href="${PREFIX}/internships">Quant internships</a>
       ${roleLinks}
       ${techLinks}
       ${locationLinks}
@@ -1169,17 +1328,23 @@ const headSectionFor = (shell) => {
 
 // Every Vite SPA entry ships the same first React render that the browser will
 // hydrate. SEO copy remains outside #root and therefore stays crawlable.
-for (const shell of ["index.html", "tech-stack.html", "locations.html", "stacks.html", "about.html"]) {
+for (const shell of [
+  "index.html",
+  "tech-stack.html",
+  "locations.html",
+  "stacks.html",
+  "internships.html",
+  "about.html",
+]) {
   const p = path.join(DIST, shell);
   if (!fs.existsSync(p)) continue;
-  const html = fs.readFileSync(p, "utf8").replace(
-    /(<div id="root">)(<\/div>)/,
-    (_m, open, close) => `${open}${shellMarkup}${close}`,
-  );
+  const html = fs
+    .readFileSync(p, "utf8")
+    .replace(/(<div id="root">)(<\/div>)/, (_m, open, close) => `${open}${shellMarkup}${close}`);
   fs.writeFileSync(p, html);
 }
 
-for (const shell of ["index.html", "tech-stack.html", "locations.html", "stacks.html"]) {
+for (const shell of ["index.html", "tech-stack.html", "locations.html", "stacks.html", "internships.html"]) {
   const p = path.join(DIST, shell);
   if (!fs.existsSync(p)) continue;
   let html = fs.readFileSync(p, "utf8");
@@ -1187,7 +1352,9 @@ for (const shell of ["index.html", "tech-stack.html", "locations.html", "stacks.
   // Refresh stale hardcoded firm/posting counts against live data.
   if (shell === "tech-stack.html") html = html.replace(/\b42\b/g, String(firmsWithLang)).replace(/3,900\+/g, jobsStr);
   if (shell === "locations.html") html = html.replace(/\b38\b/g, String(firmsWithLoc)).replace(/2,700\+/g, jobsStr);
-  html = html.replace("</body>", `${headSectionFor(shell)}\n${footer}\n  </body>`);
+  // /internships ships its own ranked tables; the others get the head-term block.
+  const section = shell === "internships.html" ? (internshipsSeoSection ?? "") : headSectionFor(shell);
+  html = html.replace("</body>", `${section}\n${footer}\n  </body>`);
   fs.writeFileSync(p, html);
 }
 

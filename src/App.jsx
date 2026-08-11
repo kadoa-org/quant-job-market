@@ -1,25 +1,20 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import AboutPage from "./AboutPage";
+import { EMPTY_FILTERS } from "./constants";
 import Dashboard from "./Dashboard";
 import DataTable from "./DataTable";
-import StackCards from "./StackCards";
 import FilterBar from "./FilterBar";
+import InternshipsView from "./InternshipsView";
 import { Button, GitHubButton, LiveBadge, NavBar, SiteFooter, SiteHeader } from "./kit";
 import LocationHeatmap from "./LocationHeatmap";
 import PrerenderShell from "./PrerenderShell";
+import StackCards from "./StackCards";
+import { matchesAnySkillArea } from "./skillAreas";
 import TechStackHeatmap from "./TechStackHeatmap";
 import Treemap from "./Treemap";
 import { query as dbQuery, useDatabase } from "./useDatabase";
 
-const EMPTY_FILTERS = {
-  technologies: [],
-  firmTypes: [],
-  roleCategories: [],
-  locations: [],
-  seniorityLevels: [],
-  workModes: [],
-  assetClasses: [],
-};
+// Filter model lives in constants.js so every "clear all" covers every facet.
 
 const QUANT_ROLES = new Set([
   "quantitative_research",
@@ -44,6 +39,7 @@ function viewFromPath() {
   const p = window.location.pathname.replace(/\/$/, "");
   if (p === `${BASE_PATH}/tech-stack` || p === `${BASE_PATH}/heatmap`) return "techstack";
   if (p === `${BASE_PATH}/locations`) return "locations";
+  if (p === `${BASE_PATH}/internships`) return "internships";
   if (p === `${BASE_PATH}/about`) return "about";
   if (p === `${BASE_PATH}/stacks` || p.startsWith(`${BASE_PATH}/stacks/`)) return "stacks";
   // /job/<slug> pages are build-time static files, so in production this
@@ -57,6 +53,7 @@ function viewFromPath() {
 function pathForView(view) {
   if (view === "techstack") return `${BASE_PATH}/tech-stack`;
   if (view === "locations") return `${BASE_PATH}/locations`;
+  if (view === "internships") return `${BASE_PATH}/internships`;
   if (view === "about") return `${BASE_PATH}/about`;
   if (view === "stacks") {
     // StackCards owns sub-routes (/stacks/tech/<slug>, /stacks/firm/<slug>,
@@ -80,23 +77,33 @@ function parseUrl() {
     if (val) filters[key] = val.split(",");
   }
   const search = params.get("q") || "";
-  return { view, firm, filters, search };
+  // Which overview a drill-down came from, so the destination can offer a way
+  // back. Carried in the URL so Back, Forward, and shared links all agree.
+  const from = params.get("from") || null;
+  return { view, firm, filters, search, from };
 }
 
-// Write state to URL params (replace, no history spam)
-function syncUrl(view, filters, selectedFirm, search) {
+// Write state to URL params. Filter tweaks replace (no history spam); a
+// deliberate drill-down pushes, so the browser Back button returns to the
+// overview it came from.
+function syncUrl(view, filters, selectedFirm, search, from, push) {
   const params = new URLSearchParams();
-  // /tech-stack and /locations carry their own view; do not duplicate as ?view=
-  if (view !== "firms" && view !== "techstack" && view !== "locations" && view !== "about" && view !== "stacks") params.set("view", view);
+  // Path-routed views carry their own view; do not duplicate as ?view=
+  if (!["firms", "techstack", "locations", "internships", "about", "stacks"].includes(view)) params.set("view", view);
   if (selectedFirm) params.set("firm", selectedFirm);
   for (const [key, values] of Object.entries(filters)) {
     if (values.length > 0) params.set(key, values.join(","));
   }
   if (search) params.set("q", search);
+  if (from) params.set("from", from);
   const qs = params.toString();
   const path = pathForView(view);
   const url = qs ? `${path}?${qs}` : path;
-  window.history.replaceState(null, "", url);
+  if (push && url !== `${window.location.pathname}${window.location.search}`) {
+    window.history.pushState(null, "", url);
+  } else {
+    window.history.replaceState(null, "", url);
+  }
 }
 
 // Top nav: Firms | Jobs | Insights. The Insights item works like GOV.UK's
@@ -105,7 +112,7 @@ function syncUrl(view, filters, selectedFirm, search) {
 // with one-line descriptions. Toggle-only close, like gov.uk.
 function InsightsNav({ view, setView, onFirms }) {
   const [open, setOpen] = useState(false);
-  const insightsActive = ["dashboard", "techstack", "locations", "stacks"].includes(view);
+  const insightsActive = ["dashboard", "techstack", "locations", "stacks", "internships"].includes(view);
 
   const go = (k) => {
     setView(k);
@@ -138,6 +145,7 @@ function InsightsNav({ view, setView, onFirms }) {
       desc: "Firms ranked by GitHub footprint",
       href: `${import.meta.env.BASE_URL}open-source/`,
     },
+    { key: "internships", label: "Internships", desc: "Live intern market: firms, skills, cities, pay" },
   ];
 
   return (
@@ -230,6 +238,10 @@ export default function App() {
   const [filters, setFilters] = useState(initial.filters);
   const [selectedFirm, setSelectedFirm] = useState(initial.firm);
   const [search, setSearch] = useState(initial.search);
+  const [from, setFrom] = useState(initial.from);
+  // Set by a drill-down so the next URL sync pushes a history entry instead of
+  // replacing one; reset immediately after, so filter edits stay replace-only.
+  const pushNext = useRef(false);
 
   useEffect(() => {
     setClientReady(true);
@@ -237,8 +249,40 @@ export default function App() {
 
   // Sync state to URL on change
   useEffect(() => {
-    syncUrl(view, filters, selectedFirm, search);
-  }, [view, filters, selectedFirm, search]);
+    syncUrl(view, filters, selectedFirm, search, from, pushNext.current);
+    pushNext.current = false;
+  }, [view, filters, selectedFirm, search, from]);
+
+  // Back/Forward: the URL is the source of truth, so re-read it. Without this
+  // the pushed drill-down entry would change the address bar but not the view.
+  useEffect(() => {
+    const onPop = () => {
+      const next = parseUrl();
+      setView(next.view);
+      setFilters(next.filters);
+      setSelectedFirm(next.firm);
+      setSearch(next.search);
+      setFrom(next.from);
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  // A drill-down from an overview: push, and remember where it came from.
+  const drillTo = useCallback((nextView, { filters: nextFilters, firm = null, source }) => {
+    pushNext.current = true;
+    setFilters({ ...EMPTY_FILTERS, ...nextFilters });
+    setSelectedFirm(firm);
+    setSearch("");
+    setFrom(source ?? null);
+    setView(nextView);
+  }, []);
+
+  // Nav clicks leave any drill-down context behind.
+  const goView = useCallback((next) => {
+    setFrom(null);
+    setView(next);
+  }, []);
 
   // Load data from SQLite
   useEffect(() => {
@@ -295,6 +339,8 @@ export default function App() {
       if (filters.locations.length > 0 && !j.locations.some((l) => filters.locations.includes(l))) return false;
       if (filters.assetClasses.length > 0 && !j.assetClasses.some((a) => filters.assetClasses.includes(a)))
         return false;
+      // OR across selected skill areas: a posting in any of them qualifies.
+      if (!matchesAnySkillArea(j, filters.skillAreas)) return false;
       // AND across selected technologies, case-insensitive across both tech
       // fields, so "kdb+/q" from the stacks page matches "KDB+/Q" in a posting.
       if (filters.technologies.length > 0) {
@@ -345,9 +391,17 @@ export default function App() {
             </span>
           }
         />
-        <InsightsNav view={view} setView={setView} onFirms={() => setSelectedFirm(null)} />
+        <InsightsNav view={view} setView={goView} onFirms={() => setSelectedFirm(null)} />
 
-        {view !== "techstack" && view !== "locations" && view !== "about" && view !== "stacks" && (
+        {from === "internships" && view === "table" && (
+          <div className="dk-container int-back">
+            <button type="button" className="int-backlink" onClick={() => goView("internships")}>
+              ← Back to all internships
+            </button>
+          </div>
+        )}
+
+        {!["techstack", "locations", "internships", "about", "stacks"].includes(view) && (
           <FilterBar
             filters={filters}
             setFilters={setFilters}
@@ -390,6 +444,22 @@ export default function App() {
             />
           )}
           {view === "locations" && <LocationHeatmap jobs={jobs} />}
+          {view === "internships" && (
+            <InternshipsView
+              jobs={jobs}
+              onApply={(sel) =>
+                drillTo("table", {
+                  filters: {
+                    seniorityLevels: ["intern"],
+                    locations: sel.locations,
+                    skillAreas: sel.skillAreas,
+                  },
+                  firm: sel.firm ?? null,
+                  source: "internships",
+                })
+              }
+            />
+          )}
           {view === "about" && <AboutPage />}
         </main>
       </div>
