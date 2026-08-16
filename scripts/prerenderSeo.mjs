@@ -725,7 +725,48 @@ const CITY_GEO = {
   Geneva: { country: "CH" },
   Zurich: { country: "CH" },
   "São Paulo": { country: "BR" },
+  // Surfaced by splitLocations: these sat inside compound strings such as
+  // "Geneva OR London OR Paris OR Zug", so they never appeared in the location
+  // counts this table was built from despite clearing its 10+ postings bar.
+  Zug: { country: "CH" },
+  Hanoi: { country: "VN" },
+  "Ho Chi Minh City": { country: "VN" },
+  Madrid: { country: "ES" },
+  Beijing: { country: "CN" },
+  "Old Greenwich": { region: "CT", country: "US" },
+  IL: { locality: null, region: "IL", country: "US" },
+  // Present as bare cities, missed when the table was last extended.
+  "Washington DC": { locality: "Washington", region: "DC", country: "US" },
+  "Jersey City": { region: "NJ", country: "US" },
+  Connecticut: { locality: null, region: "CT", country: "US" },
+  "US-NY-New York": { locality: "New York", region: "NY", country: "US" },
+  "Central Singapore": { locality: "Singapore", country: "SG" },
+  "Taipei City": { locality: "Taipei", country: "TW" },
+  "Tel Aviv": { country: "IL" },
+  Yerevan: { country: "AM" },
+  Aarhus: { country: "DK" },
+  France: { locality: null, country: "FR" },
+  Brazil: { locality: null, country: "BR" },
+  // "Wilmington" is ambiguous in general, but every posting carrying it in
+  // this dataset is BlackRock's, whose Wilmington office is in Delaware.
+  Wilmington: { region: "DE", country: "US" },
 };
+
+// Feeds sometimes put several cities in one string ("Sydney or Singapore",
+// "Hanoi OR Ho Chi Minh City", "Geneva OR London OR Paris OR Zug"). Those are
+// genuinely several locations, but as one string they match nothing in
+// CITY_GEO, so the posting emitted a locality of "Sydney or Singapore" and no
+// country at all. That is what broke the 2026-08-15 build on a remote Jump
+// Trading posting: a fully remote JobPosting with no applicant country cannot
+// be marked up, and the guard below refuses to ship an invalid one. Splitting
+// first recovers a country for all 35 affected postings, not just remote ones.
+// No CITY_GEO key is itself split by this, including "Bala Cynwyd
+// (Philadelphia Area)" and "Hong Kong Island".
+const splitLocations = (loc) =>
+  String(loc ?? "")
+    .split(/\s+(?:or|and)\s+|\s*\/\s*|\s*;\s*/i)
+    .map((s) => s.trim())
+    .filter(Boolean);
 
 const placeFor = (loc) => {
   const geo = CITY_GEO[loc];
@@ -797,7 +838,7 @@ for (const j of jobs) {
   if (!applyHref) continue;
 
   const locStr = (j.locations || []).join(", ");
-  const jobLocations = dedupePlaces((j.locations || []).map(placeFor));
+  const jobLocations = dedupePlaces((j.locations || []).flatMap(splitLocations).map(placeFor));
   const applicantLocationRequirements = applicantCountriesFor(jobLocations);
   if (j.datePosted && j.workMode === "remote" && !applicantLocationRequirements.length) {
     throw new Error(
