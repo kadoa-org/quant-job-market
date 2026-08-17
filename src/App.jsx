@@ -435,7 +435,14 @@ export default function App() {
               />
             </div>
           )}
-          {view === "table" && <DataTable jobs={filteredJobs} search={search} onSearchChange={setSearch} />}
+          {view === "table" && (
+            <DataTable
+              jobs={filteredJobs}
+              search={search}
+              onSearchChange={setSearch}
+              onClearAll={() => setFilters({ ...EMPTY_FILTERS })}
+            />
+          )}
           {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
           {view === "techstack" && <TechStackHeatmap jobs={jobs} />}
           {view === "stacks" && (

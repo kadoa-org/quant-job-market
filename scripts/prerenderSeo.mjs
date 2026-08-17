@@ -25,7 +25,7 @@ import { fileURLToPath } from "node:url";
 import { createServer } from "vite";
 // Plain-JS module, shared with the app so the /internships tables and the live
 // view group postings identically.
-import { ROLE_LABELS, SENIORITY_LABELS } from "../src/constants.js";
+import { ROLE_LABELS, SENIORITY_LABELS, SENIORITY_ORDER } from "../src/constants.js";
 import { rankSkillAreas } from "../src/skillAreas.js";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -923,6 +923,23 @@ console.log(`job pages: ${jobPages}`);
 // the firm's open roles (linked), and the firm names in every aggregate table
 // above now link here — a crawl path from indexed pages down to each job page.
 // Also a strong "<firm> quant jobs" landing page in its own right.
+// Sortable-header helpers for the static tables. Click-to-sort is wired in
+// oss-chart.js (dataset CSP blocks inline JS); sortable cells carry a
+// data-sort attribute so the JS sorts on raw values, not formatted text.
+const thCls = (o) => [o.num ? "dk-num" : "", o.cls || ""].filter(Boolean).join(" ");
+const sortTh = (label, col, type, o = {}) => {
+  const c = thCls(o);
+  return `<th${c ? ` class="${c}"` : ""}${o.width ? ` style="width:${o.width}"` : ""} aria-sort="${o.active ? (o.dir === "asc" ? "ascending" : "descending") : "none"}"><button type="button" class="dk-th-btn" data-col="${col}" data-type="${type}">${label} <span class="dk-sort-ind" aria-hidden="true">${o.active ? (o.dir === "asc" ? "▲" : "▼") : "↕"}</span></button></th>`;
+};
+const plainTh = (label, o = {}) => {
+  const c = thCls(o);
+  return `<th${c ? ` class="${c}"` : ""}${o.width ? ` style="width:${o.width}"` : ""}>${label}</th>`;
+};
+const sortableFirmTable = (head, rows) =>
+  `<div class="dk-table-wrap"><table class="dk-table dk-sortable"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
+const sortableTable = (head, rows, cls = "") =>
+  `<div class="dk-table-wrap"><table class="dk-table dk-sortable${cls ? ` ${cls}` : ""}" data-rank-col="0"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
+
 let firmPages = 0;
 for (const f of ranked) {
   if (!f.slug) continue;
@@ -941,7 +958,7 @@ for (const f of ranked) {
     .slice(0, 500)
     .map(
       (j) =>
-        `<tr><td><a href="${PREFIX}/job/${esc(j.slug)}">${esc(j.jobTitle)}</a></td><td class="dk-hide-sm">${esc(ROLE_LABELS[j.roleCategory] ?? j.roleCategory ?? "")}</td><td>${esc((j.locations || []).slice(0, 2).join(", "))}</td><td class="dk-hide-md">${esc(SENIORITY_LABELS[j.seniorityLevel] ?? j.seniorityLevel ?? "")}</td><td class="dk-num dk-hide-md">${j.salary ? `$${Math.round(j.salary / 1000)}k` : ""}</td><td class="dk-hide-md">${esc((j.programmingLanguages || []).slice(0, 3).join(", "))}</td><td class="dk-num">${esc(j.datePosted || "")}</td></tr>`,
+        `<tr><td><a href="${PREFIX}/job/${esc(j.slug)}">${esc(j.jobTitle)}</a></td><td class="dk-hide-sm">${esc(ROLE_LABELS[j.roleCategory] ?? j.roleCategory ?? "")}</td><td>${esc((j.locations || []).slice(0, 2).join(", "))}</td><td class="dk-hide-md" data-sort="${SENIORITY_ORDER.indexOf(j.seniorityLevel)}">${esc(SENIORITY_LABELS[j.seniorityLevel] ?? j.seniorityLevel ?? "")}</td><td class="dk-num dk-hide-md" data-sort="${j.salary ?? 0}">${j.salary ? `$${Math.round(j.salary / 1000)}k` : ""}</td><td class="dk-hide-md">${esc((j.programmingLanguages || []).slice(0, 3).join(", "))}</td><td class="dk-num">${esc(j.datePosted || "")}</td></tr>`,
     )
     .join("\n");
   write(
@@ -953,10 +970,11 @@ for (const f of ranked) {
       jsonLd: datasetLd(`${f.name} open quant roles`, `${f.count} open roles at ${f.name}.`, `${BASE}/firm/${f.slug}`),
       h1: `${f.name} Quant Jobs`,
       intro: `${esc(f.name)} has <strong>${f.count} open quant role${f.count === 1 ? "" : "s"}</strong> right now${where ? `, hiring in ${esc(where)}` : ""}. Each posting below links to full details and a direct apply link. <a href="${PREFIX}/hiring">See all firms hiring →</a>`,
-      bodyHtml: `${kitTable(
-        `<th>Title</th><th class="dk-hide-sm">Role</th><th>Location</th><th class="dk-hide-md">Seniority</th><th class="dk-num dk-hide-md">Salary</th><th class="dk-hide-md">Languages</th><th class="dk-num">Posted</th>`,
+      bodyHtml: `${sortableFirmTable(
+        `${sortTh("Title", 0, "text")}${sortTh("Role", 1, "text", { cls: "dk-hide-sm" })}${sortTh("Location", 2, "text")}${sortTh("Seniority", 3, "num", { cls: "dk-hide-md" })}${sortTh("Salary", 4, "num", { num: true, cls: "dk-hide-md" })}${sortTh("Languages", 5, "text", { cls: "dk-hide-md" })}${sortTh("Posted", 6, "text", { num: true, active: true, dir: "desc" })}`,
         rows,
-      )}${linkable.length > 500 ? `<p class="dk-hint">Showing 500 of ${f.count} open roles.</p>` : ""}`,
+      )}${linkable.length > 500 ? `<p class="dk-hint">Showing 500 of ${f.count} open roles.</p>` : ""}
+<script src="${PREFIX}/oss-chart.js" defer></script>`,
     }),
   );
   firmPages++;
@@ -964,21 +982,6 @@ for (const f of ranked) {
 console.log(`firm pages: ${firmPages}`);
 
 // ── insights-page shared helpers (used by /open-source and /internships) ─────
-// Sortable-header helpers for the static tables. Click-to-sort is wired in
-// oss-chart.js (dataset CSP blocks inline JS); sortable cells carry a
-// data-sort attribute so the JS sorts on raw values, not formatted text.
-const thCls = (o) => [o.num ? "dk-num" : "", o.cls || ""].filter(Boolean).join(" ");
-const sortTh = (label, col, type, o = {}) => {
-  const c = thCls(o);
-  return `<th${c ? ` class="${c}"` : ""}${o.width ? ` style="width:${o.width}"` : ""} aria-sort="${o.active ? (o.dir === "asc" ? "ascending" : "descending") : "none"}"><button type="button" class="dk-th-btn" data-col="${col}" data-type="${type}">${label} <span class="dk-sort-ind" aria-hidden="true">${o.active ? (o.dir === "asc" ? "▲" : "▼") : "↕"}</span></button></th>`;
-};
-const plainTh = (label, o = {}) => {
-  const c = thCls(o);
-  return `<th${c ? ` class="${c}"` : ""}${o.width ? ` style="width:${o.width}"` : ""}>${label}</th>`;
-};
-const sortableTable = (head, rows, cls = "") =>
-  `<div class="dk-table-wrap"><table class="dk-table dk-sortable${cls ? ` ${cls}` : ""}" data-rank-col="0"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
-
 // gov.uk-style nav for the insights pages: same tabs + Insights toggle as the
 // SPA. Static HTML; the expand/collapse is wired in oss-chart.js (dataset CSP
 // blocks inline JS). Panel links stay in the DOM for crawlers either way.

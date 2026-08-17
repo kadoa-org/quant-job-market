@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { ROLE_LABELS, SENIORITY_LABELS } from "./constants";
 
-export default function DataTable({ jobs, search: externalSearch, onSearchChange }) {
+export default function DataTable({ jobs, search: externalSearch, onSearchChange, onClearAll }) {
   const [internalSearch, setInternalSearch] = useState("");
   const search = externalSearch !== undefined ? externalSearch : internalSearch;
   const setSearch = onSearchChange || setInternalSearch;
@@ -181,29 +181,53 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
             ))}
           </tbody>
         </table>
+
+        {sorted.length === 0 && (
+          <div className="px-5 py-16 text-center">
+            <p className="text-[15px] font-semibold text-gray-900 m-0">No matching roles</p>
+            <p className="text-[13px] text-gray-500 mt-1.5 mb-4">
+              {/* Name the narrower cause: jobs is already filter-narrowed
+                  upstream, so an empty `jobs` means the filters did it, while
+                  a non-empty `jobs` filtered to nothing here means the search. */}
+              {jobs.length === 0 ? "No postings match the selected filters." : `No postings match “${search}”.`}
+            </p>
+            <button
+              onClick={() => {
+                setSearch("");
+                setPage(1);
+                onClearAll?.();
+              }}
+              className="px-4 py-1.5 text-[13px] border border-gray-300 text-gray-700 hover:bg-gray-50"
+            >
+              Clear search{onClearAll ? " and filters" : ""}
+            </button>
+          </div>
+        )}
       </div>
 
-      <div className="flex items-center justify-between px-5 py-2 border-t border-gray-100 text-[12px] text-gray-500">
-        <span>
-          Page {page} of {totalPages}
-        </span>
-        <div className="flex gap-1.5">
-          <button
-            disabled={page <= 1}
-            onClick={() => setPage(page - 1)}
-            className="px-3 py-1  border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            Prev
-          </button>
-          <button
-            disabled={page >= totalPages}
-            onClick={() => setPage(page + 1)}
-            className="px-3 py-1  bg-[#191919] text-white border border-[#191919] hover:bg-[#333] disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            Next
-          </button>
+      {sorted.length > 0 && (
+        <div className="flex items-center justify-between px-5 py-2 border-t border-gray-100 text-[12px] text-gray-500">
+          <span>
+            Page {page} of {totalPages}
+          </span>
+          <div className="flex gap-1.5">
+            <button
+              disabled={page <= 1}
+              onClick={() => setPage(page - 1)}
+              className="px-3 py-1  border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              Prev
+            </button>
+            <button
+              disabled={page >= totalPages}
+              onClick={() => setPage(page + 1)}
+              className="px-3 py-1  bg-[#191919] text-white border border-[#191919] hover:bg-[#333] disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
