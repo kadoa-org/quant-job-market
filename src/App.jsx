@@ -69,7 +69,10 @@ function parseUrl() {
   const params = new URLSearchParams(window.location.search);
   // Accept legacy "heatmap" view name from old shared URLs
   const queryView = params.get("view") === "heatmap" ? "techstack" : params.get("view");
-  const view = viewFromPath() || queryView || "firms";
+  // Bare /quant/ lands on the Jobs table: the postings are the product, and
+  // most inbound links (role pages, firm pages, Reddit) are looking for jobs,
+  // not the firm treemap. ?view=firms still reaches the old default.
+  const view = viewFromPath() || queryView || "table";
   const firm = params.get("firm") || null;
   const filters = { ...EMPTY_FILTERS };
   for (const key of Object.keys(EMPTY_FILTERS)) {
@@ -88,8 +91,10 @@ function parseUrl() {
 // overview it came from.
 function syncUrl(view, filters, selectedFirm, search, from, push) {
   const params = new URLSearchParams();
-  // Path-routed views carry their own view; do not duplicate as ?view=
-  if (!["firms", "techstack", "locations", "internships", "about", "stacks"].includes(view)) params.set("view", view);
+  // Path-routed views carry their own view; do not duplicate as ?view=.
+  // "table" is the bare-URL default, so it is omitted too — and "firms" must
+  // now be written explicitly or its URL would render the table instead.
+  if (!["table", "techstack", "locations", "internships", "about", "stacks"].includes(view)) params.set("view", view);
   if (selectedFirm) params.set("firm", selectedFirm);
   for (const [key, values] of Object.entries(filters)) {
     if (values.length > 0) params.set(key, values.join(","));
@@ -153,8 +158,8 @@ function InsightsNav({ view, setView, onFirms }) {
       <nav className="dk-nav" aria-label="Primary">
         <div className="dk-container">
           <ul className="dk-nav-list">
-            <li>{tab("firms", "Firms")}</li>
             <li>{tab("table", "Jobs")}</li>
+            <li>{tab("firms", "Firms")}</li>
             <li>
               <a
                 href="#insights"

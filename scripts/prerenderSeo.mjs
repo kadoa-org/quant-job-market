@@ -25,6 +25,7 @@ import { fileURLToPath } from "node:url";
 import { createServer } from "vite";
 // Plain-JS module, shared with the app so the /internships tables and the live
 // view group postings identically.
+import { ROLE_LABELS, SENIORITY_LABELS } from "../src/constants.js";
 import { rankSkillAreas } from "../src/skillAreas.js";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -69,7 +70,6 @@ const jobs = JSON.parse(fs.readFileSync(path.join(DIST, "data", "jobs.json"), "u
 // forks/first builds — the /open-source page and firm sections just skip).
 const githubPath = path.join(DIST, "data", "github.json");
 const github = fs.existsSync(githubPath) ? JSON.parse(fs.readFileSync(githubPath, "utf8")) : { firms: [] };
-const ghByName = new Map(github.firms.map((f) => [f.firm_name, f]));
 const fmtStars = (n) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, "")}k` : String(n));
 
 const FIRM_TYPE_LABEL = {
@@ -175,8 +175,8 @@ const siteHeader = `<header class="dk-header">
 const seoNav = `<nav class="dk-nav" aria-label="Primary">
   <div class="dk-container">
     <ul class="dk-nav-list">
-      <li><a href="${PREFIX}/">Firms</a></li>
-      <li><a href="${PREFIX}/?view=table">Jobs</a></li>
+      <li><a href="${PREFIX}/">Jobs</a></li>
+      <li><a href="${PREFIX}/?view=firms">Firms</a></li>
       <li><a href="${PREFIX}/?view=dashboard">Insights</a></li>
       <li><a href="${PREFIX}/about">About</a></li>
     </ul>
@@ -199,18 +199,7 @@ const siteFooter = `<footer class="dk-footer">
   </div>
 </footer>`;
 
-function page({
-  pathname,
-  title,
-  description,
-  jsonLd,
-  h1,
-  intro,
-  bodyHtml,
-  showMeta = true,
-  navHtml = seoNav,
-  showCrumbs = true,
-}) {
+function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml, navHtml = seoNav, showCrumbs = true }) {
   const url = `${BASE}${pathname}`;
   return `<!doctype html>
 <html lang="en">
@@ -246,8 +235,15 @@ ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script
   h1{font:700 var(--dk-fs-xxl)/1.15 var(--dk-font);letter-spacing:-0.02em;margin:0 0 10px}
   .seo-lede{font:400 var(--dk-fs-l)/1.5 var(--dk-font);color:var(--dk-muted);max-width:70ch;margin:0 0 24px}
   .seo-lede a,.dk-hint a{color:var(--dk-link)}
-  .seo-cta{display:inline-block;margin-top:20px}
-  .seo-meta{margin-top:20px}
+  /* GOV.UK primary button (govuk-frontend .govuk-button): green fill, 2px
+     bottom shadow, darker hover, yellow focus fill, presses down on :active.
+     Previously this was the kit's compact bordered .dk-btn, which kept the
+     anchor's blue underlined text inside a white box. */
+  .seo-cta{display:inline-block;position:relative;margin-top:20px;padding:8px 14px 7px;background:#00703c;color:#fff;text-decoration:none;font:600 var(--dk-fs-m)/1.2 var(--dk-font);border:2px solid transparent;box-shadow:0 2px 0 #002d18}
+  .seo-cta:visited{color:#fff}
+  .seo-cta:hover{background:#005a30;color:#fff}
+  .seo-cta:active{top:2px;box-shadow:none}
+  .seo-cta:focus-visible{border-color:#ffdd00;background:#ffdd00;color:#0b0c0c;box-shadow:0 2px 0 #0b0c0c;outline:none}
   .seo-apply{background:var(--dk-link);border-color:var(--dk-link);color:#fff !important;font-weight:600}
   .seo-apply:hover{background:#144e81;border-color:#144e81}
   .seo-jd{max-width:75ch;font:400 var(--dk-fs-m)/1.55 var(--dk-font);margin-top:24px}
@@ -288,7 +284,6 @@ ${showCrumbs ? `<nav class="seo-crumbs"><a href="${PREFIX}">Quant Job Market</a>
 <h1>${esc(h1)}</h1>
 ${intro ? `<p class="seo-lede">${intro}</p>` : ""}
 ${bodyHtml}
-${showMeta ? `<p class="dk-hint seo-meta">Aggregated from ${jobs.length.toLocaleString()} live job postings across ${firms.size} quant firms. Updated daily. <a href="${PREFIX}/data/jobs.json">Open dataset (JSON)</a>.</p>` : ""}
 </main>
 ${siteFooter}
 </body>
@@ -346,7 +341,7 @@ write(
       `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Open roles</th><th>Top locations</th>`,
       hiringRows,
     )}
-<a class="dk-btn seo-cta" href="${PREFIX}">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
+<a class="seo-cta" href="${PREFIX}">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
   }),
 );
 
@@ -395,7 +390,7 @@ for (const tech of TECHS) {
         `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">${esc(tech.name)} roles</th><th>Top locations</th>`,
         rows,
       )}
-<a class="dk-btn seo-cta" href="${PREFIX}/tech-stack">Explore the interactive tech heatmap →</a>`,
+<a class="seo-cta" href="${PREFIX}/tech-stack">Explore the interactive tech heatmap →</a>`,
     }),
   );
 }
@@ -458,7 +453,7 @@ for (const loc of LOCATIONS) {
         `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">${esc(loc.name)} roles</th><th>Top tech</th>`,
         rows,
       )}
-<a class="dk-btn seo-cta" href="${PREFIX}">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
+<a class="seo-cta" href="${PREFIX}">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
     }),
   );
 }
@@ -520,7 +515,7 @@ for (const role of ROLES) {
         `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Open roles</th><th>Top locations</th>`,
         rows,
       )}
-<a class="dk-btn seo-cta" href="${PREFIX}">Browse all ${jobs.length.toLocaleString()} quant roles →</a>`,
+<a class="seo-cta" href="${PREFIX}">Browse all ${jobs.length.toLocaleString()} quant roles →</a>`,
     }),
   );
 }
@@ -601,7 +596,7 @@ ${kitTable(
   `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Postings</th><th class="dk-num">Median base</th><th class="dk-num">Range</th>`,
   firmRows,
 )}
-<a class="dk-btn seo-cta" href="${PREFIX}">Browse all ${jobs.length.toLocaleString()} quant roles →</a>`,
+<a class="seo-cta" href="${PREFIX}">Browse all ${jobs.length.toLocaleString()} quant roles →</a>`,
     }),
   );
 }
@@ -915,7 +910,6 @@ for (const j of jobs) {
 </p>
 <article class="seo-jd">${desc}</article>
 <p class="seo-back"><a href="${PREFIX}">← Browse all ${jobs.length.toLocaleString()} quant roles</a></p>`,
-      showMeta: false,
     }),
   );
   jobSitemapEntries.push({ path: `/job/${j.slug}`, lastmod: j.datePosted || today });
@@ -929,22 +923,6 @@ console.log(`job pages: ${jobPages}`);
 // the firm's open roles (linked), and the firm names in every aggregate table
 // above now link here — a crawl path from indexed pages down to each job page.
 // Also a strong "<firm> quant jobs" landing page in its own right.
-// "Open source at <firm>" section for firm pages with a mapped GitHub org.
-function firmOssSection(firmName) {
-  const gh = ghByName.get(firmName);
-  if (!gh || !gh.public_repos) return "";
-  const repoRows = gh.top_repos
-    .slice(0, 5)
-    .map(
-      (r) =>
-        `<tr><td><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.name)}</a></td><td>${esc(r.language ?? "")}</td><td class="dk-num">${fmtStars(r.stars)}</td><td>${esc((r.description ?? "").slice(0, 90))}</td></tr>`,
-    )
-    .join("\n");
-  return `<h2 style="font:700 var(--dk-fs-l)/1.3 var(--dk-font);margin:32px 0 10px">Open source at ${esc(firmName)}</h2>
-<p class="dk-hint" style="margin:0 0 12px"><a href="${esc(gh.org_url)}" target="_blank" rel="noopener noreferrer">github.com/${esc(gh.org)}</a> — ${gh.public_repos} public repos, ${fmtStars(gh.total_stars)} stars, ${gh.active_repos_1y ?? gh.active_repos_90d} active in the last year. <a href="${PREFIX}/open-source/">Full quant OSS leaderboard →</a></p>
-${kitTable(`<th>Repository</th><th>Language</th><th class="dk-num">Stars</th><th>About</th>`, repoRows)}`;
-}
-
 let firmPages = 0;
 for (const f of ranked) {
   if (!f.slug) continue;
@@ -955,11 +933,15 @@ for (const f of ranked) {
   if (!linkable.length) continue;
   const typeLabel = FIRM_TYPE_LABEL[f.type] ?? "finance firm";
   const where = topLocs(f.locs);
+  // Same columns as the interactive Jobs table (minus the redundant Firm
+  // column), so drilling from a location or firm link lands on a familiar
+  // layout. Responsive hides approximate the SPA's: role drops first, then
+  // seniority/salary/languages.
   const rows = linkable
     .slice(0, 500)
     .map(
       (j) =>
-        `<tr><td><a href="${PREFIX}/job/${esc(j.slug)}">${esc(j.jobTitle)}</a></td><td>${esc((j.locations || []).slice(0, 2).join(", "))}</td><td class="dk-num">${esc(j.datePosted || "")}</td></tr>`,
+        `<tr><td><a href="${PREFIX}/job/${esc(j.slug)}">${esc(j.jobTitle)}</a></td><td class="dk-hide-sm">${esc(ROLE_LABELS[j.roleCategory] ?? j.roleCategory ?? "")}</td><td>${esc((j.locations || []).slice(0, 2).join(", "))}</td><td class="dk-hide-md">${esc(SENIORITY_LABELS[j.seniorityLevel] ?? j.seniorityLevel ?? "")}</td><td class="dk-num dk-hide-md">${j.salary ? `$${Math.round(j.salary / 1000)}k` : ""}</td><td class="dk-hide-md">${esc((j.programmingLanguages || []).slice(0, 3).join(", "))}</td><td class="dk-num">${esc(j.datePosted || "")}</td></tr>`,
     )
     .join("\n");
   write(
@@ -971,9 +953,10 @@ for (const f of ranked) {
       jsonLd: datasetLd(`${f.name} open quant roles`, `${f.count} open roles at ${f.name}.`, `${BASE}/firm/${f.slug}`),
       h1: `${f.name} Quant Jobs`,
       intro: `${esc(f.name)} has <strong>${f.count} open quant role${f.count === 1 ? "" : "s"}</strong> right now${where ? `, hiring in ${esc(where)}` : ""}. Each posting below links to full details and a direct apply link. <a href="${PREFIX}/hiring">See all firms hiring →</a>`,
-      bodyHtml: `${kitTable(`<th>Role</th><th>Locations</th><th class="dk-num">Posted</th>`, rows)}${
-        linkable.length > 500 ? `<p class="dk-hint">Showing 500 of ${f.count} open roles.</p>` : ""
-      }${firmOssSection(f.name)}`,
+      bodyHtml: `${kitTable(
+        `<th>Title</th><th class="dk-hide-sm">Role</th><th>Location</th><th class="dk-hide-md">Seniority</th><th class="dk-num dk-hide-md">Salary</th><th class="dk-hide-md">Languages</th><th class="dk-num">Posted</th>`,
+        rows,
+      )}${linkable.length > 500 ? `<p class="dk-hint">Showing 500 of ${f.count} open roles.</p>` : ""}`,
     }),
   );
   firmPages++;
@@ -1004,8 +987,8 @@ const insightsNavItem = (href, label, desc, current) =>
 const insightsNav = (current) => `<nav class="dk-nav" aria-label="Primary">
   <div class="dk-container">
     <ul class="dk-nav-list">
-      <li><a href="${PREFIX}/">Firms</a></li>
-      <li><a href="${PREFIX}/?view=table">Jobs</a></li>
+      <li><a href="${PREFIX}/">Jobs</a></li>
+      <li><a href="${PREFIX}/?view=firms">Firms</a></li>
       <li><a href="#insights" id="insights-toggle" aria-expanded="false" aria-controls="insights-panel">Insights <svg width="11" height="8" viewBox="0 0 11 8" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:2px;margin-top:-2px"><path id="insights-chevron" d="M1 1.5 L5.5 6 L10 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></li>
     </ul>
   </div>
@@ -1082,7 +1065,6 @@ ${sortableTable(repoHead, repoRows, "oss-projects")}
 <p class="oss-attr">Source: <strong>kadoa.com/quant/open-source</strong> · live GitHub data, updated daily</p>
 ${emptyOrgs.length ? `<p class="dk-hint" style="margin-top:16px">Orgs with no public repos yet: ${emptyOrgs.map((f) => `<a href="${esc(f.org_url)}" target="_blank" rel="noopener noreferrer">${esc(f.firm_name)}</a>`).join(", ")}.</p>` : ""}
 <script src="${PREFIX}/oss-chart.js" defer></script>`,
-      showMeta: false,
       navHtml: insightsNav("open-source"),
       showCrumbs: false,
     }),
@@ -1489,7 +1471,7 @@ for (const [tech, carriers] of stackTechFirms) {
         `<th class="dk-num">#</th><th>Firm</th><th class="dk-num">Postings naming it</th><th class="dk-num">Share</th>`,
         rows,
       )}
-<a class="dk-btn seo-cta" href="${PREFIX}/stacks">Browse every firm's full stack →</a>`,
+<a class="seo-cta" href="${PREFIX}/stacks">Browse every firm's full stack →</a>`,
     }),
   );
   lensPages++;
