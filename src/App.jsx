@@ -12,21 +12,13 @@ import StackCards from "./StackCards";
 import { matchesAnySkillArea } from "./skillAreas";
 import TechStackHeatmap from "./TechStackHeatmap";
 import Treemap from "./Treemap";
-import { query as dbQuery, useDatabase } from "./useDatabase";
+import { useDatabase } from "./useDatabase";
+
+import { readJobData } from "./jobData";
 
 // Filter model lives in constants.js so every "clear all" covers every facet.
 
-const QUANT_ROLES = new Set([
-  "quantitative_research",
-  "quantitative_trading",
-  "quantitative_development",
-  "hft_systems",
-  "machine_learning",
-  "data_science",
-  "software_engineering",
-  "risk_management",
-  "portfolio_management",
-]);
+
 
 // /tech-stack and /locations are pre-rendered HTML pages with custom OG/SEO.
 // All other views live under / and use ?view=... so a single HTML carries them.
@@ -35,8 +27,8 @@ const QUANT_ROLES = new Set([
 // "/quant/" in production, "/" in dev).
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-function viewFromPath() {
-  const p = window.location.pathname.replace(/\/$/, "");
+function viewFromPath(pathname) {
+  const p = pathname.replace(/\/$/, "");
   if (p === `${BASE_PATH}/tech-stack` || p === `${BASE_PATH}/heatmap`) return "techstack";
   if (p === `${BASE_PATH}/locations`) return "locations";
   if (p === `${BASE_PATH}/internships`) return "internships";
@@ -65,25 +57,25 @@ function pathForView(view) {
 }
 
 // Read state from URL (path picks tech-stack/locations, then ?view=... for the rest)
-function parseUrl() {
-  const params = new URLSearchParams(window.location.search);
+export function parseUrl(pathname = window.location.pathname, search = window.location.search) {
+  const params = new URLSearchParams(search);
   // Accept legacy "heatmap" view name from old shared URLs
   const queryView = params.get("view") === "heatmap" ? "techstack" : params.get("view");
   // Bare /quant/ lands on the Jobs table: the postings are the product, and
   // most inbound links (role pages, firm pages, Reddit) are looking for jobs,
   // not the firm treemap. ?view=firms still reaches the old default.
-  const view = viewFromPath() || queryView || "table";
+  const view = viewFromPath(pathname) || queryView || "table";
   const firm = params.get("firm") || null;
   const filters = { ...EMPTY_FILTERS };
   for (const key of Object.keys(EMPTY_FILTERS)) {
     const val = params.get(key);
     if (val) filters[key] = val.split(",");
   }
-  const search = params.get("q") || "";
+  const searchText = params.get("q") || "";
   // Which overview a drill-down came from, so the destination can offer a way
   // back. Carried in the URL so Back, Forward, and shared links all agree.
   const from = params.get("from") || null;
-  return { view, firm, filters, search, from };
+  return { view, firm, filters, search: searchText, from };
 }
 
 // Write state to URL params. Filter tweaks replace (no history spam); a
@@ -230,15 +222,14 @@ function InsightsNav({ view, setView, onFirms }) {
   );
 }
 
-export default function App() {
-  const [clientReady, setClientReady] = useState(false);
-  const { db, loading: dbLoading } = useDatabase();
-  const [jobs, setJobs] = useState([]);
-  const [firms, setFirms] = useState([]);
-  const [stats, setStats] = useState(null);
+export default function App({ initialPage = null }) {
+  const { db, error } = useDatabase(!initialPage?.data);
+  const [jobs, setJobs] = useState(initialPage?.data.jobs ?? []);
+  const [firms, setFirms] = useState(initialPage?.data.firms ?? []);
+  const [stats, setStats] = useState(initialPage?.data ? {} : null);
 
   // Init from URL
-  const initial = useMemo(() => parseUrl(), []);
+  const initial = useMemo(() => initialPage?.route ?? parseUrl(), []);
   const [view, setView] = useState(initial.view);
   const [filters, setFilters] = useState(initial.filters);
   const [selectedFirm, setSelectedFirm] = useState(initial.firm);
@@ -248,12 +239,16 @@ export default function App() {
   // replacing one; reset immediately after, so filter edits stay replace-only.
   const pushNext = useRef(false);
 
-  useEffect(() => {
-    setClientReady(true);
-  }, []);
+  const urlReady = useRef(false);
 
   // Sync state to URL on change
   useEffect(() => {
+    if (!urlReady.current) {
+      urlReady.current = true;
+      const next = parseUrl();
+      setView(next.view); setFilters(next.filters); setSelectedFirm(next.firm); setSearch(next.search); setFrom(next.from);
+      return;
+    }
     syncUrl(view, filters, selectedFirm, search, from, pushNext.current);
     pushNext.current = false;
   }, [view, filters, selectedFirm, search, from]);
@@ -293,46 +288,10 @@ export default function App() {
   useEffect(() => {
     if (!db) return;
 
-    const rawJobs = dbQuery(db, "SELECT * FROM jobs").map((r) => ({
-      ...r,
-      firmName: r.firm_name,
-      firmSlug: r.firm_slug,
-      firmType: r.firm_type,
-      jobTitle: r.job_title,
-      datePosted: r.date_posted,
-      applyUrl: r.apply_url,
-      locations: r.locations ? JSON.parse(r.locations) : [],
-      jobType: r.job_type,
-      roleCategory: r.role_category,
-      seniorityLevel: r.seniority_level,
-      educationRequirement: r.education_requirement,
-      experienceYears: { min: r.experience_min, max: r.experience_max },
-      programmingLanguages: r.programming_languages ? JSON.parse(r.programming_languages) : [],
-      technologies: r.technologies ? JSON.parse(r.technologies) : [],
-      skills: r.skills ? JSON.parse(r.skills) : [],
-      assetClasses: r.asset_classes ? JSON.parse(r.asset_classes) : [],
-      workMode: r.work_mode,
-    }));
-
-    const rawFirms = dbQuery(db, "SELECT * FROM firms").map((r) => ({
-      firmName: r.firm_name,
-      firmSlug: r.firm_slug,
-      firmType: r.firm_type,
-      totalJobs: r.total_jobs,
-      phdDemandPct: r.phd_demand_pct,
-      mlAiFocusPct: r.ml_ai_focus_pct,
-      remotePct: r.remote_pct,
-      salaryStats: r.salary_median ? { median: r.salary_median, avg: r.salary_avg, count: r.salary_count } : null,
-      topLanguages: r.top_languages ? JSON.parse(r.top_languages) : [],
-      topSkills: r.top_skills ? JSON.parse(r.top_skills) : [],
-      locationDistribution: r.location_distribution ? JSON.parse(r.location_distribution) : [],
-      jobsByRole: r.jobs_by_role ? JSON.parse(r.jobs_by_role) : {},
-      jobsBySeniority: r.jobs_by_seniority ? JSON.parse(r.jobs_by_seniority) : {},
-    }));
-
-    setJobs(rawJobs.filter((job) => QUANT_ROLES.has(job.roleCategory)));
-    setFirms(rawFirms);
-    setStats({}); // stats computed from jobs in Dashboard
+    const data = readJobData(db);
+    setJobs(data.jobs);
+    setFirms(data.firms);
+    setStats({});
   }, [db]);
 
   const filteredJobs = useMemo(() => {
@@ -373,7 +332,8 @@ export default function App() {
   const totalJobs = filteredJobs.length;
   const totalFirms = filteredFirms.length;
 
-  if (!clientReady) return <PrerenderShell />;
+  if (error) return <p role="alert" className="p-8">Could not load job data. Reload to try again.</p>;
+  if (stats === null) return <PrerenderShell />;
 
   return (
     // The app locks to the viewport on desktop (inner views scroll themselves);
@@ -436,17 +396,22 @@ export default function App() {
             </div>
           )}
           {view === "table" && (
+            <>
+            <h1 className="dk-h1 dk-container" style={{ paddingTop: 20 }}>Quant jobs</h1>
             <DataTable
               jobs={filteredJobs}
               search={search}
               onSearchChange={setSearch}
               onClearAll={() => setFilters({ ...EMPTY_FILTERS })}
             />
+            </>
           )}
           {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
           {view === "techstack" && <TechStackHeatmap jobs={jobs} />}
           {view === "stacks" && (
             <StackCards
+              initialData={initialPage?.stacks}
+              initialPath={initialPage?.pathname}
               jobs={jobs}
               onApply={(target, sel) => {
                 setFilters((prev) => ({ ...prev, technologies: sel.technologies, firmTypes: sel.firmTypes }));

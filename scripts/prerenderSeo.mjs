@@ -23,6 +23,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createServer } from "vite";
+import initSqlJs from "sql.js";
 // Plain-JS module, shared with the app so the /internships tables and the live
 // view group postings identically.
 import { ROLE_LABELS, SENIORITY_LABELS, SENIORITY_ORDER } from "../src/constants.js";
@@ -37,20 +38,27 @@ async function buildShell() {
   const server = await createServer({
     configFile: false,
     root: ROOT,
+    base: "/quant/",
+    esbuild: { jsx: "automatic" },
     server: { middlewareMode: true, hmr: false },
     appType: "custom",
     logLevel: "error",
     optimizeDeps: { noDiscovery: true },
   });
   try {
-    const mod = await server.ssrLoadModule("/src/renderPrerenderShell.jsx");
-    return mod.renderPrerenderShell();
+    const mod = await server.ssrLoadModule("/src/renderPage.jsx");
+    const SQL = await initSqlJs();
+    const db = new SQL.Database(fs.readFileSync(path.join(DIST, "data/jobs.db")));
+    const data = mod.readJobData(db);
+    db.close();
+    const stacks = JSON.parse(fs.readFileSync(path.join(DIST, "data/stacks.json"), "utf8"));
+    return { ...mod, data, stacks };
   } finally {
     await server.close();
   }
 }
 
-const shellMarkup = await buildShell();
+const renderer = await buildShell();
 
 const esc = (s) =>
   String(s ?? "")
@@ -1286,7 +1294,7 @@ const locationLinks = LOCATIONS.filter((l) => written.includes(`/location/${l.sl
 const roleLinks = ROLES.filter((r) => written.includes(`/${r.slug}`))
   .map((r) => `<a href="${PREFIX}/${r.slug}">${esc(r.name)} jobs</a>`)
   .join("\n      ");
-const footer = `    <footer class="seo-shell" style="max-width:960px;margin:0 auto;padding:24px 15px;font-family:var(--dk-font,Inter,system-ui,sans-serif);font-size:var(--dk-fs-s,.82rem);color:var(--dk-muted,#888);border-top:1px solid var(--dk-rule-soft,#e5e6e7);display:flex;flex-wrap:wrap;gap:6px 14px">
+const footer = `    <footer class="dataset-links" style="max-width:960px;margin:0 auto;padding:24px 15px;font-family:var(--dk-font,Inter,system-ui,sans-serif);font-size:var(--dk-fs-s,.82rem);color:var(--dk-muted,#888);border-top:1px solid var(--dk-rule-soft,#e5e6e7);display:flex;flex-wrap:wrap;gap:6px 14px">
       <strong style="color:var(--dk-ink,#555)">Explore the data:</strong>
       <a href="${PREFIX}/hiring">Which firms are hiring</a>
       <a href="${PREFIX}/salaries">Quant salaries</a>
@@ -1342,8 +1350,13 @@ const headSectionFor = (shell) => {
     </section>`;
 };
 
-// Every Vite SPA entry ships the same first React render that the browser will
-// hydrate. SEO copy remains outside #root and therefore stays crawlable.
+function renderShell(html, pathname) {
+  const initialPage = { pathname, route: renderer.parseUrl(pathname, ""), data: renderer.data, stacks: renderer.stacks };
+  const payload = JSON.stringify(initialPage).replace(/</g, "\\u003c");
+  const template = html.replace(/<div id="root">[\s\S]*?<\/div><script id="page-data" type="application\/json">[\s\S]*?<\/script>/, '<div id="root"></div>');
+  return template.replace('<div id="root"></div>', () => `<div id="root">${renderer.renderPage(initialPage)}</div><script id="page-data" type="application/json">${payload}</script>`);
+}
+
 for (const shell of [
   "index.html",
   "tech-stack.html",
@@ -1354,9 +1367,8 @@ for (const shell of [
 ]) {
   const p = path.join(DIST, shell);
   if (!fs.existsSync(p)) continue;
-  const html = fs
-    .readFileSync(p, "utf8")
-    .replace(/(<div id="root">)(<\/div>)/, (_m, open, close) => `${open}${shellMarkup}${close}`);
+  const pathname = PREFIX + (shell === "index.html" ? "" : "/" + shell.replace(/\.html$/, ""));
+  const html = renderShell(fs.readFileSync(p, "utf8"), pathname);
   fs.writeFileSync(p, html);
 }
 
@@ -1369,7 +1381,7 @@ for (const shell of ["index.html", "tech-stack.html", "locations.html", "stacks.
   if (shell === "tech-stack.html") html = html.replace(/\b42\b/g, String(firmsWithLang)).replace(/3,900\+/g, jobsStr);
   if (shell === "locations.html") html = html.replace(/\b38\b/g, String(firmsWithLoc)).replace(/2,700\+/g, jobsStr);
   // /internships ships its own ranked tables; the others get the head-term block.
-  const section = shell === "internships.html" ? (internshipsSeoSection ?? "") : headSectionFor(shell);
+  const section = `<details class="dk-container" style="padding:20px 15px"><summary>Browse firms hiring quant roles</summary><ul>${ranked.map(f => `<li>${firmLink(f.name)}</li>`).join("")}</ul></details>`;
   html = html.replace("</body>", `${section}\n${footer}\n  </body>`);
   fs.writeFileSync(p, html);
 }
@@ -1480,7 +1492,7 @@ console.log(`stacks lens pages: ${lensPages}`);
 // the path on boot and lands on the right view.
 const stacksShell = fs.readFileSync(path.join(DIST, "stacks.html"), "utf8");
 const spaShell = (route, title) =>
-  stacksShell
+  renderShell(stacksShell, PREFIX + route)
     .replace(/<title>[^<]*<\/title>/, `<title>${title} | Quant Job Market</title>`)
     .replace(/<link rel="canonical" href="[^"]*"/, `<link rel="canonical" href="${BASE}${route}"`)
     .replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${BASE}${route}"`);

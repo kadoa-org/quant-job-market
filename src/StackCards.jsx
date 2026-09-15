@@ -38,8 +38,8 @@ const MATRIX_TABS = [
 
 // /stacks -> matrix, /stacks/<layer-tab>, /stacks/firms, /stacks/technologies,
 // /stacks/tech/<slug> (lens), /stacks/firm/<slug> (detail card)
-function parseStacksRoute() {
-  const rest = window.location.pathname.replace(/\/$/, "").slice(STACKS_BASE.length);
+function parseStacksRoute(pathname = typeof window === "undefined" ? STACKS_BASE : window.location.pathname) {
+  const rest = pathname.replace(/\/$/, "").slice(STACKS_BASE.length);
   const seg = rest.split("/").filter(Boolean);
   if (seg[0] === "tech" && seg[1]) return { groupBy: "matrix", lensSlug: seg[1], firmSlug: null, layerTab: null };
   if (seg[0] === "firm" && seg[1]) return { groupBy: "matrix", lensSlug: null, firmSlug: seg[1], layerTab: null };
@@ -149,22 +149,25 @@ function Strata({ firm, onTech, highlightTechs, compact }) {
   );
 }
 
-export default function StackCards({ jobs = [], onApply }) {
-  const [data, setData] = useState(null);
-  const [firmSel, setFirmSel] = useState([]); // FilterDropdown API: array
+export default function StackCards({ jobs = [], onApply, initialData, initialPath }) {
+  const initialRoute = parseStacksRoute(initialPath);
+  const [data, setData] = useState(initialData ?? null);
+  const [error, setError] = useState(null);
+  const [firmSel, setFirmSel] = useState(() => { const firm = initialData?.firms.find(f => slugFirm(f.firm) === initialRoute.firmSlug); return firm ? [firm.firm] : []; }); // FilterDropdown API: array
   const [typeSel, setTypeSel] = useState([]);
   const [techSel, setTechSel] = useState([]);
   const [lensTech, setLensTech] = useState(null); // chip-click "who hires for X" lens
   const [openFilter, setOpenFilter] = useState(null);
-  const [groupBy, setGroupBy] = useState(() => parseStacksRoute().groupBy); // "matrix" | "firm" | "tech"
-  const [layerTab, setLayerTab] = useState(() => parseStacksRoute().layerTab); // null = all layers
+  const [groupBy, setGroupBy] = useState(() => initialRoute.groupBy); // "matrix" | "firm" | "tech"
+  const [layerTab, setLayerTab] = useState(() => initialRoute.layerTab); // null = all layers
 
   useEffect(() => {
+    if (initialData) return;
     fetch(`${BASE}data/stacks.json`)
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error(`stacks.json: ${r.status}`); return r.json(); })
       .then(setData)
-      .catch(() => setData({ firms: [] }));
-  }, []);
+      .catch(error => { console.error("Quant stacks load failed", error); setError(error); });
+  }, [initialData]);
 
   // Sub-routes: push on navigation, re-apply on back/forward and direct load.
   const navTo = (sub) => {
@@ -266,7 +269,8 @@ export default function StackCards({ jobs = [], onApply }) {
     }).length;
   }, [jobs, firmSel, typeSel, techSel, activeCount]);
 
-  if (!data) return <p className="dk-hint">Loading stacks…</p>;
+  if (error) return <p role="alert">Could not load tech stack data.</p>;
+  if (!data) return <div aria-busy="true" className="bg-gray-100 min-h-[520px] p-6"><p role="status">Loading stacks…</p></div>;
 
   const techSet = new Set(techSel);
   const visible = firms.filter((f) => {

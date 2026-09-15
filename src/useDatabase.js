@@ -12,6 +12,7 @@ function getDb() {
     dbPromise = (async () => {
       const SQL = await initSqlJs({ locateFile: () => SQL_WASM_URL });
       const response = await fetch(`${import.meta.env.BASE_URL}data/jobs.db`);
+      if (!response.ok) throw new Error(`jobs.db: ${response.status}`);
       const buffer = await response.arrayBuffer();
       return new SQL.Database(new Uint8Array(buffer));
     })();
@@ -19,22 +20,24 @@ function getDb() {
   return dbPromise;
 }
 
-export function useDatabase() {
+export function useDatabase(enabled = true) {
   const [db, setDb] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(enabled);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!enabled) return;
     getDb()
       .then((d) => {
         setDb(d);
         setLoading(false);
       })
       .catch((e) => {
+        console.error("Quant dataset load failed", e);
         setError(e);
         setLoading(false);
       });
-  }, []);
+  }, [enabled]);
 
   return { db, loading, error };
 }
