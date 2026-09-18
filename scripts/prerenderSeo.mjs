@@ -399,7 +399,7 @@ for (const tech of TECHS) {
 // Same winnable pattern as /hiring and /tech: "quant jobs [city]" SERPs are
 // owned by LinkedIn/Indeed and unwinnable, but "which quant firms are hiring in
 // [city]" has no live data-backed page — a firm-ranked table is the gap we fill.
-// Curated to hub cities where coverage is broad (built only if >= 8 firms).
+// Keep these public city URLs stable as daily firm and posting counts change.
 const LOCATIONS = [
   { slug: "new-york", name: "New York" },
   { slug: "london", name: "London" },
@@ -427,7 +427,6 @@ for (const loc of LOCATIONS) {
     .filter((f) => f.locs.has(loc.name))
     .map((f) => ({ name: f.name, type: f.type, n: f.locs.get(loc.name), langs: f.langs }))
     .sort((a, b) => b.n - a.n);
-  if (matched.length < 8) continue;
   const totalPostings = matched.reduce((s, f) => s + f.n, 0);
   const rows = matched
     .map(

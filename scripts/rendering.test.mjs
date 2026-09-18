@@ -28,3 +28,12 @@ const job = read(`job/${jobDir}/index.html`);
 assert.match(job, /JobPosting/);
 assert(!job.includes('id="page-data"'), 'standalone job details keep their existing rendering');
 console.log('Quant rendering: real jobs, route-specific stacks and standalone job pages verified');
+
+// These public city URLs must survive changes in daily posting and firm counts.
+for (const slug of ['new-york', 'london', 'singapore', 'hong-kong', 'chicago', 'sydney', 'boston', 'paris', 'mumbai', 'miami', 'amsterdam', 'austin']) {
+  const html = read(`location/${slug}/index.html`);
+  assert.match(html, /<table/);
+  assert.ok(html.includes(`https://www.kadoa.com/quant/location/${slug}`));
+}
+const miamiJobs = JSON.parse(fs.readFileSync(new URL('../public/data/jobs.json', import.meta.url), 'utf8')).filter(job => job.locations?.includes('Miami'));
+assert.ok(read('location/miami/index.html').includes(`${miamiJobs.length} postings`), 'Miami must show current published posting counts');
