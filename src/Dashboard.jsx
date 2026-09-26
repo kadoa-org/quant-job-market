@@ -181,10 +181,9 @@ export default function Dashboard({ jobs, firms }) {
     <div className="p-3 sm:p-5 bg-[#fbfbfa]">
       {/* Headline figures: a snapshot of the postings open now, so the heading names it and the date runs to the
           newest posting. */}
+      <h1 className="dk-h1">Hiring insights</h1>
       <KeyFigures
-        title="Open quant jobs"
-        description="Postings on quant firms' own career pages, updated daily."
-        date={latestPosted ? `Up to and including ${fmtDay(latestPosted)}` : undefined}
+        context={`Open postings on quant firms' own career pages${latestPosted ? `, up to ${fmtDay(latestPosted)}` : ""}.`}
         items={[
           { label: "Open jobs", value: jobs.length.toLocaleString("en-US"), note: `at ${firms.length} firms` },
           { label: "Median salary", value: medianSalary ? `$${(medianSalary / 1000).toFixed(0)}k` : "n/a", note: `from ${salaries.length} disclosed` },
