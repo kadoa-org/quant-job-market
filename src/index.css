@@ -152,3 +152,6 @@
 .int-backlink { border: 0; background: none; font: inherit; font-size: var(--dk-fs-s); padding: 0; cursor: pointer; color: var(--dk-link); text-decoration: underline; text-underline-offset: 2px; }
 .int-backlink:hover { color: #144e81; text-decoration-thickness: 3px; }
 .int-backlink:focus-visible { outline: 3px solid var(--dk-focus); background: var(--dk-focus); color: #0b0c0c; text-decoration: none; }
+
+/* Chart cards sit in a grid here, so the grid gap spaces them rather than each card's own margin. */
+.dk-card-grid > .dk-card { margin: 0; }

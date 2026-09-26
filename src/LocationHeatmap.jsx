@@ -41,7 +41,7 @@ export default function LocationHeatmap({ jobs }) {
           listings, hedge funds, prop trading, market makers).
         </p>
 
-        <div className="grid grid-cols-1 gap-4">
+        <div className="dk-card-grid grid grid-cols-1 gap-6">
           <ChartCard title="Top quant cities">
             {/* Mobile: compact chart that scales down to viewport */}
             <div
