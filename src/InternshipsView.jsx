@@ -139,7 +139,7 @@ export default function InternshipsView({ jobs = [], onApply }) {
 
   return (
     <div className="dk-container int-wrap">
-      <h1 className="int-h1">Quant internships</h1>
+      <h1 className="dk-h1">Quant internships</h1>
       <p className="int-lede">
         <strong>{total} open internships</strong> at {firmCount} firms.{" "}
         <strong>{Math.round((named2027 / total) * 100)}%</strong> are already for 2027. Click any row to open the
