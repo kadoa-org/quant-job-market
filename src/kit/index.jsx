@@ -155,6 +155,8 @@ export function SiteFooter({ current }) {
     ["congress", "https://www.kadoa.com/congress", "Congress Trades"],
     ["potus", "https://www.kadoa.com/potus", "POTUS Tracker"],
     ["mining", "https://www.kadoa.com/mining", "Mining Monitor"],
+    ["datacenter", "https://www.kadoa.com/datacenter", "Datacenter Tracker"],
+    ["food-prices", "https://www.kadoa.com/food-prices", "US Food Prices"],
   ];
   return (
     <footer className="dk-footer">
