@@ -1,12 +1,21 @@
 import React, { useMemo, useState } from "react";
+
+// GOV.UK dates, "25 Sep 2026", on one line; the ISO date stays in the data and the CSV export.
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const govDate = (iso) => {
+  if (!iso) return "";
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${d} ${MONTHS[m - 1]} ${y}`;
+};
 import { ROLE_LABELS, SENIORITY_LABELS } from "./constants";
 
 export default function DataTable({ jobs, search: externalSearch, onSearchChange, onClearAll }) {
   const [internalSearch, setInternalSearch] = useState("");
   const search = externalSearch !== undefined ? externalSearch : internalSearch;
   const setSearch = onSearchChange || setInternalSearch;
-  const [sortBy, setSortBy] = useState("firmName");
-  const [sortOrder, setSortOrder] = useState("asc");
+  // Newest first: sorted by firm name, the first screen was a wall of AQR postings from February.
+  const [sortBy, setSortBy] = useState("datePosted");
+  const [sortOrder, setSortOrder] = useState("desc");
   const [page, setPage] = useState(1);
   const pageSize = 50;
 
@@ -115,7 +124,7 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
                 { key: "seniorityLevel", label: "Seniority", w: "w-20", hide: "hidden md:table-cell" },
                 { key: "salary", label: "Salary", w: "w-16", hide: "hidden md:table-cell" },
                 { key: "programmingLanguages", label: "Languages", w: "w-32", hide: "hidden lg:table-cell" },
-                { key: "datePosted", label: "Posted", w: "w-20", hide: "hidden lg:table-cell" },
+                { key: "datePosted", label: "Posted", w: "w-28", hide: "hidden lg:table-cell" },
               ].map(({ key, label, w, hide }) => (
                 <th
                   key={key}
@@ -176,7 +185,7 @@ export default function DataTable({ jobs, search: externalSearch, onSearchChange
                     </span>
                   ))}
                 </td>
-                <td className="hidden lg:table-cell px-3 sm:px-4 py-2.5 text-gray-400">{j.datePosted || "-"}</td>
+                <td className="hidden lg:table-cell px-3 sm:px-4 py-2.5 text-gray-500 whitespace-nowrap">{govDate(j.datePosted) || "-"}</td>
               </tr>
             ))}
           </tbody>

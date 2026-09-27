@@ -3,7 +3,8 @@ import AboutPage from "./AboutPage";
 import { EMPTY_FILTERS } from "./constants";
 import Dashboard from "./Dashboard";
 import DataTable from "./DataTable";
-import FilterBar from "./FilterBar";
+import FilterBar, { FIRM_FILTER_KEYS, JOB_FILTER_KEYS } from "./FilterBar";
+import FirmsTable from "./FirmsTable";
 import InternshipsView from "./InternshipsView";
 import { Button, GitHubButton, LiveBadge, NavBar, SiteFooter, SiteHeader } from "./kit";
 import LocationHeatmap from "./LocationHeatmap";
@@ -11,7 +12,6 @@ import PrerenderShell from "./PrerenderShell";
 import StackCards from "./StackCards";
 import { matchesAnySkillArea } from "./skillAreas";
 import TechStackHeatmap from "./TechStackHeatmap";
-import Treemap from "./Treemap";
 import { useDatabase } from "./useDatabase";
 
 import { readJobData } from "./jobData";
@@ -332,6 +332,20 @@ export default function App({ initialPage = null }) {
   const totalJobs = filteredJobs.length;
   const totalFirms = filteredFirms.length;
 
+  // Each view places the filters under its own title and offers the ones that fit it.
+  const filterBar = (keys) => (
+    <FilterBar
+      keys={keys}
+      filters={filters}
+      setFilters={setFilters}
+      jobs={filteredJobs}
+      allJobs={jobs}
+      selectedFirm={selectedFirm}
+      onClearFirm={() => setSelectedFirm(null)}
+      onSelectFirm={setSelectedFirm}
+    />
+  );
+
   if (error) return <p role="alert" className="p-8">Could not load job data. Reload to try again.</p>;
   if (stats === null) return <PrerenderShell />;
 
@@ -366,38 +380,19 @@ export default function App({ initialPage = null }) {
           </div>
         )}
 
-        {!["techstack", "locations", "internships", "about", "stacks"].includes(view) && (
-          <FilterBar
-            filters={filters}
-            setFilters={setFilters}
-            jobs={filteredJobs}
-            allJobs={jobs}
-            selectedFirm={selectedFirm}
-            onClearFirm={() => setSelectedFirm(null)}
-            onSelectFirm={setSelectedFirm}
-          />
-        )}
-
         <main className="flex-1 relative">
-          {view === "firms" && (
-            // Desktop: fill the leftover viewport space (main is flex-1 of a
-            // min-h-dvh column) so the treemap fits one screen; the document
-            // stays the only scroller. Mobile: normal flow (card list).
-            <div className="sm:absolute sm:inset-0">
-              <Treemap
-                firms={filteredFirms}
-                colorLayer="firmType"
-                onFirmClick={(f) => {
-                  setSelectedFirm(f);
-                  setView("table");
-                }}
-                selectedFirm={selectedFirm}
-              />
-            </div>
-          )}
+          {view === "firms" && <FirmsTable jobs={filteredJobs} filters={filterBar(FIRM_FILTER_KEYS)} />}
           {view === "table" && (
             <>
-            <h1 className="dk-h1 dk-container" style={{ paddingTop: 20 }}>Quant jobs</h1>
+            {/* A job board opens on the list: title, one line of scope, then search and the table, as openquant,
+                eFinancialCareers and Wellfound do. Market figures live on the Insights pages. */}
+            <div className="home-intro">
+              <h1 className="dk-h1">Quant jobs</h1>
+              <p className="home-lede">
+                {filteredJobs.length.toLocaleString("en-US")} open roles at {new Set(filteredJobs.map((j) => j.firmName)).size} quant firms. Updated daily.
+              </p>
+            </div>
+            {filterBar(JOB_FILTER_KEYS)}
             <DataTable
               jobs={filteredJobs}
               search={search}
@@ -406,7 +401,7 @@ export default function App({ initialPage = null }) {
             />
             </>
           )}
-          {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} />}
+          {view === "dashboard" && <Dashboard jobs={filteredJobs} firms={filteredFirms} stats={stats} filters={filterBar(JOB_FILTER_KEYS)} />}
           {view === "techstack" && <TechStackHeatmap jobs={jobs} />}
           {view === "stacks" && (
             <StackCards

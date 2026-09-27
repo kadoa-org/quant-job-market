@@ -154,3 +154,27 @@
 
 /* Chart cards sit in a grid here, so the grid gap spaces them rather than each card's own margin. */
 .dk-card-grid > .dk-card { margin: 0; }
+
+/* Home: title and one line of scope above the jobs table, aligned with the table's left edge. */
+.home-intro { padding: 20px 20px 4px; max-width: 1100px; }
+@media (max-width: 640px) { .home-intro { padding: 16px 12px 0; } }
+.home-lede { font-size: 17px; line-height: 1.45; color: var(--dk-muted); margin: 0 0 12px; max-width: 80ch; }
+/* Firms table (FirmsTable.jsx): header buttons that sort, styled as plain header text. */
+.firms-table__wrap { margin: 0 20px 36px; }
+@media (max-width: 640px) { .firms-table__wrap { margin: 0 12px 24px; } }
+.firms-table__sort { appearance: none; background: none; border: 0; padding: 0; font: inherit; font-weight: 700; color: inherit; cursor: pointer; white-space: nowrap; }
+.firms-table__sort:focus-visible { outline: 3px solid var(--dk-focus); }
+
+/* Filter bar (FilterBar.jsx): below the page title, a "Filter by" label and buttons that look like controls. */
+.filter-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0 20px 14px; position: relative; z-index: 100; }
+@media (max-width: 640px) { .filter-bar { padding: 0 12px 12px; } }
+.filter-bar__label { font-size: 16px; font-weight: 700; margin-right: 4px; }
+.filter-chip { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 10px; background: #fff; border: 1px solid var(--dk-gov-border, #b1b4b6); color: #0b0c0c; font-size: 16px; white-space: nowrap; cursor: pointer; }
+.filter-chip:hover { border-color: #0b0c0c; }
+.filter-chip:focus-visible { outline: 3px solid var(--dk-focus, #fd0); outline-offset: 0; box-shadow: inset 0 0 0 2px #0b0c0c; }
+.filter-chip--active { border-color: #1d70b8; box-shadow: inset 0 0 0 1px #1d70b8; }
+.filter-chip__chev { color: #505a5f; }
+.filter-chip__clear { display: inline-flex; align-items: center; padding-left: 6px; margin-left: 2px; border-left: 1px solid var(--dk-gov-border, #b1b4b6); color: #505a5f; }
+.filter-chip__clear:hover { color: #0b0c0c; }
+.filter-bar__clear { font-size: 16px; color: var(--dk-link); text-decoration: underline; text-underline-offset: 3px; background: none; border: 0; cursor: pointer; margin-left: 4px; }
+.dash-filters .filter-bar { padding: 0 0 16px; }

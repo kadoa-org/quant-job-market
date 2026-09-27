@@ -36,16 +36,14 @@ const HEAT_PALETTE = [
 ];
 
 const FIRM_TYPE_LABEL = {
-  market_maker: "Market maker",
-  proprietary: "Prop trading",
+  proprietary: "Prop trading & market making",
   hedge_fund: "Hedge fund",
 };
 const FIRM_TYPE_COLOR = {
-  market_maker: "#06b6d4",
   proprietary: "#f97316",
   hedge_fund: "#8b5cf6",
 };
-const FIRM_TYPE_ORDER = ["proprietary", "market_maker", "hedge_fund"];
+const FIRM_TYPE_ORDER = ["proprietary", "hedge_fund"];
 const ALLOWED_TYPES = new Set(FIRM_TYPE_ORDER);
 
 const MIN_JOBS = 10;

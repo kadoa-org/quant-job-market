@@ -52,10 +52,10 @@ const tooltipStyle = {
 import { KeyFigures } from "./kit";
 import { ChartCard } from "./lib/ChartCard";
 
-export default function Dashboard({ jobs, firms }) {
+export default function Dashboard({ jobs, firms, filters }) {
   // --- Tech stack by firm type ---
   const techByFirmType = useMemo(() => {
-    const types = ["proprietary", "hedge_fund", "market_maker", "bank", "asset_manager"];
+    const types = ["proprietary", "hedge_fund", "asset_manager"];
     const langs = ["Python", "C++", "Java", "Rust", "R", "SQL", "KDB+/Q"];
     return langs.map((lang) => {
       const row = { name: lang };
@@ -168,13 +168,11 @@ export default function Dashboard({ jobs, firms }) {
       : 0;
 
   const COLORS = ["#8b5cf6", "#3b82f6", "#06b6d4", "#10b981", "#eab308", "#f97316", "#ef4444", "#ec4899", "#6b7280"];
-  const firmTypeColors = ["#f97316", "#8b5cf6", "#06b6d4", "#3b82f6", "#10b981"];
+  const firmTypeColors = ["#f97316", "#8b5cf6", "#10b981"];
   const firmTypeLabels = {
-    proprietary: "Prop",
-    hedge_fund: "HF",
-    market_maker: "MM",
-    bank: "Bank",
-    asset_manager: "AM",
+    proprietary: "Prop trading & market making",
+    hedge_fund: "Hedge fund",
+    asset_manager: "Asset manager",
   };
 
   return (
@@ -182,6 +180,8 @@ export default function Dashboard({ jobs, firms }) {
       {/* Headline figures: a snapshot of the postings open now, so the heading names it and the date runs to the
           newest posting. */}
       <h1 className="dk-h1">Hiring insights</h1>
+      {/* The filter bar pads itself for full-width pages; here the page already has its padding. */}
+      <div className="dash-filters">{filters}</div>
       <KeyFigures
         context={`Open postings on quant firms' own career pages${latestPosted ? `, up to ${fmtDay(latestPosted)}` : ""}.`}
         items={[
@@ -201,7 +201,7 @@ export default function Dashboard({ jobs, firms }) {
               <YAxis type="category" dataKey="name" tick={{ fill: "#0b0c0c", fontSize: 12 }} width={40} />
               <Tooltip contentStyle={tooltipStyle} formatter={(v) => `${v}%`} />
               <Legend formatter={(v) => firmTypeLabels[v] || v} wrapperStyle={{ fontSize: 10 }} />
-              {["proprietary", "hedge_fund", "market_maker", "bank", "asset_manager"].map((type, i) => (
+              {["proprietary", "hedge_fund", "asset_manager"].map((type, i) => (
                 <Bar key={type} dataKey={type} fill={firmTypeColors[i]} radius={[0, 2, 2, 0]} barSize={6} />
               ))}
             </BarChart>

@@ -1,15 +1,5 @@
 import { query as dbQuery } from "./useDatabase";
-const QUANT_ROLES = new Set([
-  "quantitative_research",
-  "quantitative_trading",
-  "quantitative_development",
-  "hft_systems",
-  "machine_learning",
-  "data_science",
-  "software_engineering",
-  "risk_management",
-  "portfolio_management",
-]);
+import { QUANT_ROLES } from "./constants";
 
 export function readJobData(db) {
     const rawJobs = dbQuery(db, "SELECT * FROM jobs").map((r) => ({
@@ -49,5 +39,5 @@ export function readJobData(db) {
       jobsBySeniority: r.jobs_by_seniority ? JSON.parse(r.jobs_by_seniority) : {},
     }));
 
-    return { jobs: rawJobs.filter(job => QUANT_ROLES.has(job.roleCategory)), firms: rawFirms };
+    return { jobs: rawJobs.filter((job) => QUANT_ROLES.has(job.roleCategory)), firms: rawFirms };
 }

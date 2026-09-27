@@ -8,12 +8,25 @@ assert.match(home, /<h1[^>]*>Quant jobs<\/h1>/);
 assert.match(home, /<table/);
 const publishedJobs = new Set(seed(home).data.jobs.map(job => job.slug));
 const linkedJobs = [...home.matchAll(/href="\/quant\/job\/([^"/]+)\/"/g)].map(match => match[1]);
-assert.equal(linkedJobs.length, 50, "first page contains 50 actual job links");
+// The table opens newest first. A fresh posting can lack a job page (no description scraped yet), so the first page
+// links every one of its 50 rows that has a page, in the table's order: the check follows the data, not a fixed 50.
+const firstPage = [...seed(home).data.jobs].sort((a, b) => (b.datePosted || "").localeCompare(a.datePosted || "")).slice(0, 50);
+assert.equal(firstPage.length, 50, "first page has 50 rows");
+assert.deepEqual(linkedJobs, firstPage.filter((job) => job.slug).map((job) => job.slug), "first page links every row that has a job page, newest first");
 assert(linkedJobs.every(slug => publishedJobs.has(slug)), "every visible job belongs to the published dataset");
 assert(!home.includes('seo-shell'));
 assert(!home.includes('Loading quant job data'));
 assert(seed(home).data.jobs.length > 0);
-assert.match(home, /\/quant\/quant-researcher-jobs/);
+// Generated pages are linked in context, not from a footer link block: a firm page links its roles and cities, and a
+// job page links back to its firm's page (with BreadcrumbList data for the trail).
+const firmPage = read('firm/qube-rt-qrt/index.html');
+assert.match(firmPage, /href="\/quant\/location\/london"/, "firm page links its city pages");
+assert.match(firmPage, /href="\/quant\/quant-[a-z-]+-jobs"/, "firm page links its role pages");
+const aJob = fs.readdirSync(new URL('job/', root))[0];
+const jobPage = read(`job/${aJob}/index.html`);
+assert.match(jobPage, /href="\/quant\/firm\/[a-z0-9-]+"/, "job page links its firm page");
+assert.match(jobPage, /"@type":"BreadcrumbList"/, "job page carries breadcrumb data");
+assert(!home.includes('Explore the data:'), "no injected footer link block");
 for (const file of ['tech-stack.html', 'locations.html', 'internships.html', 'stacks.html']) {
   const html = read(file);
   assert.match(html, /<h1/);

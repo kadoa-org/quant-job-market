@@ -82,7 +82,7 @@ const CITY_ISO = {
   Berkeley: "US",
 };
 
-const ALLOWED_TYPES = new Set(["proprietary", "market_maker", "hedge_fund"]);
+const ALLOWED_TYPES = new Set(["proprietary", "hedge_fund"]);
 const EXCLUDE_FIRMS = new Set(["TransMarket Group"]);
 const EXCLUDE_CITIES = new Set(["India", "United States", "Europe", "Asia"]);
 const MIN_FIRM_JOBS = 10;
@@ -151,7 +151,7 @@ export function aggregateLocations(jobs) {
       m.set(j.firmName, (m.get(j.firmName) || 0) + 1);
       let t = cityTypeCounts.get(c);
       if (!t) {
-        t = { proprietary: 0, market_maker: 0, hedge_fund: 0 };
+        t = { proprietary: 0, hedge_fund: 0 };
         cityTypeCounts.set(c, t);
       }
       if (j.firmType in t) t[j.firmType]++;
@@ -168,7 +168,7 @@ export function aggregateLocations(jobs) {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 4)
       .map(([firm, count]) => ({ firm: shortenFirm(firm), count }));
-    const byType = cityTypeCounts.get(name) || { proprietary: 0, market_maker: 0, hedge_fund: 0 };
+    const byType = cityTypeCounts.get(name) || { proprietary: 0, hedge_fund: 0 };
     cities.push({ name, total, topFirms, byType });
   }
   cities.sort((a, b) => b.total - a.total);

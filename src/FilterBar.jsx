@@ -84,7 +84,12 @@ export function FilterDropdown({ options, selected, onChange, onClose, singleSel
   );
 }
 
-export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onClearFirm, onSelectFirm, allJobs }) {
+// `keys` picks the filters a page offers, in order. The jobs list offers all of them; the firms table only those that
+// describe a firm's hiring (a firm filter, skill area and asset class describe single postings, not firms).
+export const JOB_FILTER_KEYS = ["firm", "firmTypes", "roleCategories", "seniorityLevels", "locations", "technologies", "skillAreas", "assetClasses"];
+export const FIRM_FILTER_KEYS = ["firmTypes", "roleCategories", "seniorityLevels", "locations", "technologies"];
+
+export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onClearFirm, onSelectFirm, allJobs, keys = JOB_FILTER_KEYS }) {
   const [openFilter, setOpenFilter] = useState(null);
 
   const toggle = (key) => setOpenFilter(openFilter === key ? null : key);
@@ -167,22 +172,25 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
 
   const activeCount = Object.values(filters).reduce((sum, arr) => sum + arr.length, 0) + (selectedFirm ? 1 : 0);
 
-  const filterConfigs = [
-    { key: "firmTypes", label: "Firm Type", options: firmTypeOptions },
-    { key: "technologies", label: "Technology", options: technologyOptions },
-    { key: "roleCategories", label: "Role", options: roleOptions },
-    { key: "seniorityLevels", label: "Seniority", options: seniorityOptions },
-    { key: "skillAreas", label: "Skill Area", options: skillAreaOptions },
-    { key: "locations", label: "Location", options: locationOptions },
-    { key: "assetClasses", label: "Asset Class", options: assetClassOptions },
-  ];
+  const allConfigs = {
+    firmTypes: { label: "Firm type", options: firmTypeOptions },
+    roleCategories: { label: "Role", options: roleOptions },
+    seniorityLevels: { label: "Seniority", options: seniorityOptions },
+    locations: { label: "Location", options: locationOptions },
+    technologies: { label: "Technology", options: technologyOptions },
+    skillAreas: { label: "Skill area", options: skillAreaOptions },
+    assetClasses: { label: "Asset class", options: assetClassOptions },
+  };
+  const filterConfigs = keys.filter((k) => allConfigs[k]).map((key) => ({ key, ...allConfigs[key] }));
 
+  // Buttons that read as controls, not tags: 16px text, a visible border and a chevron, the selected count in the label.
   const chipClass = (active) =>
-    `flex items-center gap-1 h-[22px]  text-[12px] sm:text-[13.5px] font-normal bg-white border transition-colors whitespace-nowrap ${
-      active
-        ? "border-[#d4d4d4] text-[#191919]"
-        : "border-[#d4d4d4] text-[#5c5c5f] hover:text-[#191919] hover:border-[#b0b0b0]"
-    }`;
+    `filter-chip${active ? " filter-chip--active" : ""}`;
+  const chevron = (
+    <svg width="10" height="7" viewBox="0 0 11 8" aria-hidden="true" className="filter-chip__chev">
+      <path d="M1 1.5 L5.5 6 L10 1.5" fill="none" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
 
   const closeIcon = (
     <svg
@@ -199,14 +207,16 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
   );
 
   return (
-    <div className="flex flex-wrap sm:flex-nowrap items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-[5px] border-b border-black/[0.04] bg-[#fcfcfc] relative z-[100]">
+    <div className="filter-bar">
+      <span className="filter-bar__label">Filter by</span>
       {/* Firm single-select */}
-      <div className="relative">
+      {keys.includes("firm") && <div className="relative">
         <button onClick={() => toggle("firm")} className={chipClass(!!selectedFirm)}>
-          <span className="px-[6px]">{selectedFirm || "Firm"}</span>
+          <span>{selectedFirm || "Firm"}</span>
+          {!selectedFirm && chevron}
           {selectedFirm && (
             <span
-              className="border-l border-[#d4d4d4] px-[5px] text-[#9c9ca0] hover:text-[#191919] cursor-pointer flex items-center"
+              className="filter-chip__clear" aria-label="Clear"
               onClick={(e) => {
                 e.stopPropagation();
                 onClearFirm();
@@ -229,18 +239,18 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
             onClose={() => setOpenFilter(null)}
           />
         )}
-      </div>
+      </div>}
 
       {/* Multi-select filters */}
       {filterConfigs.map(({ key, label, options }) => (
         <div key={key} className="relative">
           <button onClick={() => toggle(key)} className={chipClass(filters[key].length > 0)}>
-            <span className="px-[6px]">{label}</span>
+            <span>{label}{filters[key].length > 0 ? ` (${filters[key].length})` : ""}</span>
+            {filters[key].length === 0 && chevron}
             {filters[key].length > 0 && (
               <>
-                <span className="border-l border-[#d4d4d4] px-[6px] text-[#5c5c5f]">{filters[key].length}</span>
                 <span
-                  className="border-l border-[#d4d4d4] px-[5px] text-[#9c9ca0] hover:text-[#191919] cursor-pointer flex items-center"
+                  className="filter-chip__clear" aria-label="Clear"
                   onClick={(e) => {
                     e.stopPropagation();
                     updateFilter(key)([]);
@@ -268,9 +278,9 @@ export default function FilterBar({ filters, setFilters, jobs, selectedFirm, onC
             setFilters({ ...EMPTY_FILTERS });
             if (onClearFirm) onClearFirm();
           }}
-          className="text-[12px] text-[#9c9ca0] hover:text-[#191919] ml-1"
+          className="filter-bar__clear"
         >
-          Clear all
+          Clear filters
         </button>
       )}
     </div>

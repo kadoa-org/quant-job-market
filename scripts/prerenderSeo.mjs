@@ -28,6 +28,8 @@ import initSqlJs from "sql.js";
 // view group postings identically.
 import { ROLE_LABELS, SENIORITY_LABELS, SENIORITY_ORDER } from "../src/constants.js";
 import { rankSkillAreas } from "../src/skillAreas.js";
+// The generated page lists, shared with the app so its "Explore the data" links and the pages stay in step.
+import { LOCATIONS, ROLES, TECHS } from "../src/seoPages.js";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = path.join(ROOT, "dist", "quant"); // vite outDir (site lives under /quant/)
@@ -82,8 +84,7 @@ const fmtStars = (n) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, ""
 
 const FIRM_TYPE_LABEL = {
   hedge_fund: "Hedge fund",
-  proprietary: "Prop trading",
-  market_maker: "Market maker",
+  proprietary: "Prop trading & market making",
   asset_manager: "Asset manager",
   private_equity: "Private equity",
 };
@@ -182,23 +183,42 @@ const seoNav = `<nav class="dk-nav" aria-label="Primary">
   </div>
 </nav>`;
 
+// Same footer as the kit's SiteFooter: the other datasets, alphabetically, in columns (the current site is left out).
+const OTHER_DATASETS = [
+  ["https://www.kadoa.com/congress", "Congress Trades"],
+  ["https://www.kadoa.com/datacenter", "Datacenter Tracker"],
+  ["https://www.kadoa.com/layoffs", "Layoffs Tracker"],
+  ["https://www.kadoa.com/mining", "Mining Monitor"],
+  ["https://www.kadoa.com/potus", "POTUS Tracker"],
+  ["https://www.kadoa.com/food-prices", "US Food Prices"],
+];
 const siteFooter = `<footer class="dk-footer">
   <div class="dk-container dk-footer-inner">
-    <h2 class="dk-footer-heading">Kadoa open datasets</h2>
-    <nav aria-label="Kadoa open datasets">
+    <h2 class="dk-footer-heading">Other open datasets</h2>
+    <nav aria-label="Other open datasets">
       <ul class="dk-footer-links">
-        <li><span class="dk-footer-here" aria-current="page">Quant Jobs</span></li>
-        <li><a href="https://www.kadoa.com/layoffs">Layoffs Tracker</a></li>
-        <li><a href="https://www.kadoa.com/congress">Congress Trades</a></li>
-        <li><a href="https://www.kadoa.com/potus">POTUS Tracker</a></li>
-        <li><a href="https://www.kadoa.com/mining">Mining Monitor</a></li>
+        ${OTHER_DATASETS.map(([href, label]) => `<li><a href="${href}">${label}</a></li>`).join("\n        ")}
       </ul>
     </nav>
     <p class="dk-footer-meta">Free and open, refreshed daily&nbsp;· <a href="https://www.kadoa.com/datasets">All datasets</a>&nbsp;· built by <a href="https://www.kadoa.com/">Kadoa</a></p>
   </div>
 </footer>`;
 
-function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml, navHtml = seoNav, showCrumbs = true }) {
+// `crumbs` is the trail above the h1 as [href, label] pairs, the page itself last and unlinked. It is also emitted as
+// BreadcrumbList structured data, so search results show the trail instead of the raw URL.
+function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml, navHtml = seoNav, showCrumbs = true, crumbs = null }) {
+  const trail = crumbs ?? [[PREFIX, "Quant Job Market"], [null, h1]];
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map(([href, label], i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: label,
+      item: `https://www.kadoa.com${href ?? pathname.replace(/^/, PREFIX)}`,
+    })),
+  };
+  jsonLd = showCrumbs ? [jsonLd, breadcrumbLd].filter(Boolean) : jsonLd;
   const url = `${BASE}${pathname}`;
   return `<!doctype html>
 <html lang="en">
@@ -231,7 +251,9 @@ ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script
   @media (min-width:40.0625em){.insights-panel-inner{padding:24px 20px}}
   .seo-crumbs{font-size:var(--dk-fs-s);color:var(--dk-muted);margin:0 0 20px}
   .seo-crumbs a{color:var(--dk-link)}
-  h1{font:700 var(--dk-fs-xxl)/1.15 var(--dk-font);letter-spacing:-0.02em;margin:0 0 10px}
+  /* 32px, 27px on a phone: the page-title size shared by every dataset site. */
+  h1{font:700 32px/1.2 var(--dk-font);margin:0 0 10px}
+  @media (max-width:640px){h1{font-size:27px}}
   .seo-lede{font:400 var(--dk-fs-l)/1.5 var(--dk-font);color:var(--dk-muted);max-width:70ch;margin:0 0 24px}
   .seo-lede a,.dk-hint a{color:var(--dk-link)}
   /* GOV.UK primary button (govuk-frontend .govuk-button): green fill, 2px
@@ -254,6 +276,20 @@ ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script
   .seo-jd ol{list-style:decimal;padding-left:22px}
   .seo-back{margin-top:28px;font-size:var(--dk-fs-s)}
   .seo-back a{color:var(--dk-link)}
+  /* Firm pages. A GOV.UK summary list without borders, the weekly bars, and dates that never wrap mid-date. */
+  .firm-summary{margin:0 0 36px;font-size:16px;max-width:75ch}
+  .firm-summary>div{display:grid;grid-template-columns:160px 1fr;gap:15px;padding:8px 0;border-bottom:1px solid var(--dk-rule-soft)}
+  .firm-summary dt{font-weight:700;margin:0}
+  .firm-summary dd{margin:0}
+  .firm-summary a,.seo-crumbs a{color:var(--dk-link);text-decoration:underline;text-underline-offset:3px}
+  .firm-section{margin:0 0 36px}
+  .firm-weeks{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;align-items:end;height:170px;max-width:760px;border-bottom:1px solid var(--dk-gov-border)}
+  .firm-weeks__col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative;padding-bottom:22px}
+  .firm-weeks__bar{display:block;width:100%;background:#12436d;min-height:1px}
+  .firm-weeks__n{font-size:13px;font-variant-numeric:tabular-nums;margin-bottom:3px}
+  .firm-weeks__label{position:absolute;bottom:0;font-size:12px;color:var(--dk-muted);white-space:nowrap}
+  .firm-date{white-space:nowrap}
+  @media (max-width:640px){.firm-summary>div{grid-template-columns:1fr;gap:2px}.firm-weeks__label{font-size:10px}.firm-weeks__col:nth-child(odd) .firm-weeks__label{visibility:hidden}}
   .oss-about{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--dk-muted);font-size:var(--dk-fs-s);line-height:1.4}
   /* Subtle source line under each table — carries attribution into shared screenshots. */
   .oss-attr{margin:10px 0 0;font-size:12px;color:var(--dk-muted)}
@@ -279,7 +315,7 @@ ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script
 ${siteHeader}
 ${navHtml}
 <main class="dk-container seo-main">
-${showCrumbs ? `<nav class="seo-crumbs"><a href="${PREFIX}">Quant Job Market</a> › ${esc(h1)}</nav>` : ""}
+${showCrumbs ? `<nav class="seo-crumbs" aria-label="Breadcrumb">${trail.map(([href, label]) => (href ? `<a href="${href}">${esc(label)}</a>` : esc(label))).join(" › ")}</nav>` : ""}
 <h1>${esc(h1)}</h1>
 ${intro ? `<p class="seo-lede">${intro}</p>` : ""}
 ${bodyHtml}
@@ -290,6 +326,18 @@ ${siteFooter}
 }
 
 const today = new Date().toISOString().slice(0, 10);
+// Age of a posting in days at build time, for the "posted in the last 30 days" figures.
+const DAY_MS = 86400000;
+const buildDay = new Date(`${today}T00:00:00Z`);
+const daysAgo = (iso) => (iso ? Math.floor((buildDay - new Date(`${iso}T00:00:00Z`)) / DAY_MS) : Infinity);
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+// GOV.UK dates: "24 Sep 2026"; the ISO date stays in data-sort so the column still sorts.
+const govDate = (iso) => {
+  if (!iso) return "";
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${d} ${MONTHS[m - 1]} ${y}`;
+};
+
 const datasetLd = (name, desc, url) => ({
   "@context": "https://schema.org",
   "@type": "Dataset",
@@ -320,7 +368,7 @@ const ranked = [...firms.values()].sort((a, b) => b.count - a.count);
 const hiringRows = ranked
   .map(
     (f, i) =>
-      `<tr><td class="dk-num">${i + 1}</td><td>${firmLink(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.count}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
+      `<tr><td class="dk-num">${i + 1}</td><td>${firmLink(f.name)}</td><td>${esc(FIRM_TYPE_LABEL[f.type] ?? "Other")}</td><td class="dk-num">${f.count}</td><td class="dk-num">${f.jobs.some((j) => j.datePosted) ? f.jobs.filter((j) => daysAgo(j.datePosted) < 30).length : `<span title="This firm's postings carry no date">–</span>`}</td><td>${esc(topLocs(f.locs))}</td></tr>`,
   )
   .join("\n");
 write(
@@ -337,7 +385,7 @@ write(
     h1: "Which Quant Firms Are Hiring Right Now",
     intro: `A live, ranked snapshot of where the quant industry is hiring: ${jobs.length.toLocaleString()} open roles across ${firms.size} hedge funds, prop trading firms, and market makers, updated daily. Unlike static "top firms" lists, these counts reflect what's actually open today. <a href="${PREFIX}">Explore the interactive job board →</a>`,
     bodyHtml: `${kitTable(
-      `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Open roles</th><th>Top locations</th>`,
+      `<th class="dk-num">#</th><th>Firm</th><th>Type</th><th class="dk-num">Open roles</th><th class="dk-num">New in 30 days</th><th>Top locations</th>`,
       hiringRows,
     )}
 <a class="seo-cta" href="${PREFIX}">Filter all ${jobs.length.toLocaleString()} roles →</a>`,
@@ -348,16 +396,7 @@ write(
 
 // Curated set: well-covered (>= ~15 firms) AND a real search query. OCaml is
 // skipped (Jane-Street-only; their own posts own that SERP).
-const TECHS = [
-  { slug: "python", name: "Python" },
-  { slug: "cpp", name: "C++" },
-  { slug: "rust", name: "Rust" },
-  { slug: "java", name: "Java" },
-  { slug: "csharp", name: "C#" },
-  { slug: "go", name: "Go" },
-  { slug: "sql", name: "SQL" },
-  { slug: "fpga", name: "FPGA" },
-];
+
 
 for (const tech of TECHS) {
   const matched = ranked
@@ -400,20 +439,7 @@ for (const tech of TECHS) {
 // owned by LinkedIn/Indeed and unwinnable, but "which quant firms are hiring in
 // [city]" has no live data-backed page — a firm-ranked table is the gap we fill.
 // Keep these public city URLs stable as daily firm and posting counts change.
-const LOCATIONS = [
-  { slug: "new-york", name: "New York" },
-  { slug: "london", name: "London" },
-  { slug: "singapore", name: "Singapore" },
-  { slug: "hong-kong", name: "Hong Kong" },
-  { slug: "chicago", name: "Chicago" },
-  { slug: "sydney", name: "Sydney" },
-  { slug: "boston", name: "Boston" },
-  { slug: "paris", name: "Paris" },
-  { slug: "mumbai", name: "Mumbai" },
-  { slug: "miami", name: "Miami" },
-  { slug: "amsterdam", name: "Amsterdam" },
-  { slug: "austin", name: "Austin" },
-];
+
 
 const topLangs = (m, n = 3) =>
   [...m.entries()]
@@ -470,15 +496,7 @@ const median = (arr) => {
 };
 const fmtSal = (n) => `$${Math.round(n / 1000)}k`;
 
-const ROLES = [
-  { slug: "quant-researcher-jobs", key: "quantitative_research", name: "Quantitative Researcher" },
-  { slug: "quant-developer-jobs", key: "quantitative_development", name: "Quantitative Developer" },
-  { slug: "quant-trader-jobs", key: "quantitative_trading", name: "Quantitative Trader" },
-  { slug: "machine-learning-engineer-jobs", key: "machine_learning", name: "Machine Learning Engineer" },
-  { slug: "data-scientist-jobs", key: "data_science", name: "Data Scientist" },
-  { slug: "quant-software-engineer-jobs", key: "software_engineering", name: "Software Engineer" },
-  { slug: "hft-jobs", key: "hft_systems", name: "HFT" },
-];
+
 
 for (const role of ROLES) {
   const matched = ranked
@@ -631,9 +649,49 @@ const sanitizeJd = (s) =>
     .replace(/<(script|style|iframe|object|embed)\b[^]*?<\/\1>/gi, "")
     .replace(/\son\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "")
     .replace(/\shref\s*=\s*(["'])\s*javascript:[^]*?\1/gi, "");
+// About 1,200 descriptions arrive as plain text: the extraction kept the line breaks but not the source's HTML (QRT's
+// Greenhouse board publishes headings and bullets; our copy has neither). Injected as HTML, those line breaks
+// collapsed into one unbroken block. Plain text is rebuilt instead: a line of its own is a paragraph, a bullet or
+// markdown list line is a list item, and a short line that introduces what follows ("Your current skillset",
+// "Interviewing:") is a heading. Markdown "#" headings are headings.
+const hasTags = (s) => /<(p|div|ul|ol|li|br|h\d|strong|span|table)\b[^>]*>/i.test(s);
+const BULLET = /^\s*(?:[•·▪◦*]|-(?!-)|\d+[.)])\s+/;
+const looksLikeHeading = (line, next) => {
+  const t = line.replace(/^#+\s*/, "");
+  if (/^#+\s/.test(line)) return true;
+  if (t.length > 70 || !next) return false;
+  if (/:$/.test(t)) return true;
+  // No closing punctuation, few words, and not the start of a sentence that runs on to the next line.
+  // "Location: London, Paris" is a label and its value, not a heading.
+  if (/:\s*\S/.test(t)) return false;
+  return !/[.!?,;]$/.test(t) && t.split(/\s+/).length <= 8 && /^[A-Z0-9]/.test(t) && !BULLET.test(line) && next.length > t.length;
+};
+function plainToHtml(text) {
+  const lines = text.replace(/\r\n?/g, "\n").split("\n").map((l) => l.trim());
+  const out = [];
+  let list = [];
+  const flush = () => {
+    if (list.length) out.push(`<ul>${list.map((li) => `<li>${esc(li)}</li>`).join("")}</ul>`);
+    list = [];
+  };
+  const content = lines.filter(Boolean);
+  content.forEach((line, i) => {
+    const next = content[i + 1];
+    if (BULLET.test(line)) {
+      list.push(line.replace(BULLET, ""));
+      return;
+    }
+    flush();
+    if (looksLikeHeading(line, next)) out.push(`<h3>${esc(line.replace(/^#+\s*/, "").replace(/:$/, ""))}</h3>`);
+    else out.push(`<p>${esc(line)}</p>`);
+  });
+  flush();
+  return out.join("\n");
+}
 const cleanDescription = (raw) => {
   if (!raw) return raw;
-  return sanitizeJd(looksEscapedHtml(raw) ? decodeEntities(raw) : raw);
+  const html = looksEscapedHtml(raw) ? decodeEntities(raw) : raw;
+  return sanitizeJd(hasTags(html) ? html : plainToHtml(html));
 };
 
 const EMPLOYMENT_TYPE = [
@@ -845,7 +903,7 @@ for (const j of jobs) {
     SENIORITY_LABEL[j.seniorityLevel],
     WORK_MODE_LABEL[j.workMode],
     j.salary ? `$${Math.round(j.salary / 1000)}k` : null,
-    j.datePosted ? `Posted ${j.datePosted}` : null,
+    j.datePosted ? `Posted ${govDate(j.datePosted)}` : null,
   ].filter(Boolean);
 
   // JobPosting structured data. Google requires datePosted AND a location
@@ -900,13 +958,14 @@ for (const j of jobs) {
       description: `${j.jobTitle} at ${j.firmName}${locStr ? ` (${locStr})` : ""}. Live posting aggregated from the firm's careers page — apply directly. One of ${jobs.length.toLocaleString()} open quant roles tracked daily.`,
       jsonLd,
       h1: j.jobTitle,
+      crumbs: [[PREFIX, "Quant Job Market"], [`${PREFIX}/firm/${firmSlugify(j.firmName)}`, `${j.firmName} careers`], [null, j.jobTitle]],
       intro: `<span class="dk-hint">${chips.map(esc).join(" · ")}</span>`,
       bodyHtml: `<p>
   <a class="dk-btn seo-apply" href="${esc(applyHref)}" target="_blank" rel="noopener noreferrer nofollow">Apply now →</a>
   <span class="dk-hint" style="margin-left:12px">Applications go to ${esc(j.firmName)}'s own site.</span>
 </p>
 <article class="seo-jd">${desc}</article>
-<p class="seo-back"><a href="${PREFIX}">← Browse all ${jobs.length.toLocaleString()} quant roles</a></p>`,
+<p class="seo-back"><a href="${PREFIX}/firm/${firmSlugify(j.firmName)}">All open roles at ${esc(j.firmName)}</a> · <a href="${PREFIX}">Browse all quant roles</a></p>`,
     }),
   );
   jobSitemapEntries.push({ path: `/job/${j.slug}`, lastmod: j.datePosted || today });
@@ -937,6 +996,50 @@ const sortableFirmTable = (head, rows) =>
 const sortableTable = (head, rows, cls = "") =>
   `<div class="dk-table-wrap"><table class="dk-table dk-sortable${cls ? ` ${cls}` : ""}" data-rank-col="0"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
 
+// ── /firm/<slug> ─────────────────────────────────────────────────────────────
+// Search Console (Jun to Sep 2026): firm pages drew 36k impressions at about position 7, mostly for "<firm> careers",
+// and 32 clicks. The title answered a different question ("Quant Jobs") and gave no reason to pick us over the
+// firm's own careers site. So the page now leads with "careers", and with what only we have: how many roles are
+// open, how many are new, internships and disclosed pay, and where the firm hires, before the full list.
+const kFmt = (v) => `$${Math.round(v / 1000)}k`;
+const plural = (n, one, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;
+// The kit's headline row (figures.css), rendered as static HTML.
+const keyFigures = (items, context) => {
+  const shown = items.filter(Boolean);
+  return `<section class="dk-figures"><div class="dk-heading"><h2 class="dk-heading__title">Headlines</h2></div>
+<dl class="dk-figures__row${shown.length % 2 ? " dk-figures__row--odd" : ""}" style="--dk-figures-columns:${shown.length}">${shown
+    .map((f) => `<div class="dk-figures__item"><dt class="dk-figures__label">${f.label}</dt><dd class="dk-figures__value">${f.value}</dd>${f.note ? `<dd class="dk-figures__note">${f.note}</dd>` : ""}</div>`)
+    .join("")}</dl>${context ? `<p class="dk-figures__context">${context}</p>` : ""}</section>`;
+};
+const sectionHeading = (title, desc) =>
+  `<div class="dk-heading"><h2 class="dk-heading__title">${title}</h2>${desc ? `<p class="dk-heading__desc">${desc}</p>` : ""}</div>`;
+// New postings per week over the last 12 weeks, as plain bars: a firm's hiring pace at a glance, from the posting
+// dates of roles still open (roles that closed are gone from the feed, so older weeks read low).
+const weeklyBars = (list) => {
+  const weeks = Array.from({ length: 12 }, (_, k) => ({ start: 7 * (11 - k), n: 0 }));
+  for (const j of list) {
+    const a = daysAgo(j.datePosted);
+    if (a < 84) weeks[11 - Math.floor(a / 7)].n++;
+  }
+  const max = Math.max(1, ...weeks.map((w) => w.n));
+  const label = (w) => govDate(new Date(buildDay - w.start * DAY_MS - 6 * DAY_MS).toISOString().slice(0, 10)).replace(/ \d{4}$/, "");
+  return `<div class="firm-weeks" role="img" aria-label="Open roles by week posted, last 12 weeks: ${weeks.map((w) => `${label(w)} ${w.n}`).join(", ")}">${weeks
+    .map((w) => `<div class="firm-weeks__col"><span class="firm-weeks__n">${w.n || ""}</span><span class="firm-weeks__bar" style="height:${Math.round((w.n / max) * 100)}%"></span><span class="firm-weeks__label">${label(w)}</span></div>`)
+    .join("")}</div>`;
+};
+
+// Cities and roles on a firm page link to their own pages where one was generated: the in-context links that tie the
+// page set together, in place of a block of footer links.
+const cityLink = (c) => {
+  const loc = LOCATIONS.find((l) => l.name === c);
+  return loc && written.includes(`/location/${loc.slug}`) ? `<a href="${PREFIX}/location/${loc.slug}">${esc(c)}</a>` : esc(c);
+};
+const roleLink = (key) => {
+  const role = ROLES.find((r) => r.key === key);
+  const label = esc(ROLE_LABELS[key] ?? key);
+  return role && written.includes(`/${role.slug}`) ? `<a href="${PREFIX}/${role.slug}">${label}</a>` : label;
+};
+
 let firmPages = 0;
 for (const f of ranked) {
   if (!f.slug) continue;
@@ -947,30 +1050,72 @@ for (const f of ranked) {
   if (!linkable.length) continue;
   const typeLabel = FIRM_TYPE_LABEL[f.type] ?? "finance firm";
   const where = topLocs(f.locs);
-  // Same columns as the interactive Jobs table (minus the redundant Firm
-  // column), so drilling from a location or firm link lands on a familiar
-  // layout. Responsive hides approximate the SPA's: role drops first, then
-  // seniority/salary/languages.
+  // Some firms publish no posting dates (the exporter clears placeholder ones), so "new" figures are only shown for
+  // firms whose postings carry real dates.
+  const dated = f.jobs.filter((j) => j.datePosted);
+  const fresh = dated.filter((j) => daysAgo(j.datePosted) < 30).length;
+  const interns = f.jobs.filter((j) => j.seniorityLevel === "intern");
+  const interns2027 = interns.filter((j) => /2027/.test(j.jobTitle || "")).length;
+  const pay = f.jobs.map((j) => j.salary).filter((v) => typeof v === "number" && v > 0);
+  const medianPay = median(pay);
+  const topRoles = [...f.roles.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3);
+  const cities = [...f.locs.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+  const newest = linkable[0]?.datePosted;
+
+  const headlines = keyFigures(
+    [
+      { label: "Open roles", value: String(f.count), note: `${typeLabel}, live today` },
+      dated.length
+        ? { label: "Posted in the last 30 days", value: String(fresh), note: `${Math.round((fresh / f.count) * 100)}% of open roles` }
+        : { label: "Posted in the last 30 days", value: "Not published", note: "The firm's postings carry no date" },
+      {
+        label: "Internships",
+        value: String(interns.length),
+        note: interns.length ? `${interns2027} name 2027` : "None open right now",
+      },
+      {
+        label: "Median disclosed base",
+        value: medianPay ? kFmt(medianPay) : "Not disclosed",
+        note: pay.length ? `From ${plural(pay.length, "posting")} with pay` : "No posting prints a salary",
+      },
+    ],
+    newest
+      ? `Newest role posted ${govDate(newest)}. Counts come from the firm's own job postings, checked daily.`
+      : "Counts come from the firm's own job postings, checked daily. The firm does not publish posting dates.",
+  );
+  // GOV.UK summary list: the firm at a glance, one fact per row.
+  const summary = `<dl class="firm-summary">
+<div><dt>Type</dt><dd>${esc(typeLabel.charAt(0).toUpperCase() + typeLabel.slice(1))}</dd></div>
+<div><dt>Hiring in</dt><dd>${cities.map(([c, n]) => `${cityLink(c)} (${n})`).join(", ")}</dd></div>
+<div><dt>Most open roles</dt><dd>${topRoles.map(([r, n]) => `${roleLink(r)} (${n})`).join(", ")}</dd></div>
+</dl>`;
+
+  // Same columns as the interactive Jobs table (minus the redundant Firm column), so drilling from a location or
+  // firm link lands on a familiar layout. Responsive hides approximate the SPA's.
   const rows = linkable
     .slice(0, 500)
     .map(
       (j) =>
-        `<tr><td><a href="${PREFIX}/job/${esc(j.slug)}">${esc(j.jobTitle)}</a></td><td class="dk-hide-sm">${esc(ROLE_LABELS[j.roleCategory] ?? j.roleCategory ?? "")}</td><td>${esc((j.locations || []).slice(0, 2).join(", "))}</td><td class="dk-hide-md" data-sort="${SENIORITY_ORDER.indexOf(j.seniorityLevel)}">${esc(SENIORITY_LABELS[j.seniorityLevel] ?? j.seniorityLevel ?? "")}</td><td class="dk-num dk-hide-md" data-sort="${j.salary ?? 0}">${j.salary ? `$${Math.round(j.salary / 1000)}k` : ""}</td><td class="dk-hide-md">${esc((j.programmingLanguages || []).slice(0, 3).join(", "))}</td><td class="dk-num">${esc(j.datePosted || "")}</td></tr>`,
+        `<tr><td><a href="${PREFIX}/job/${esc(j.slug)}">${esc(j.jobTitle)}</a></td><td class="dk-hide-sm">${esc(ROLE_LABELS[j.roleCategory] ?? j.roleCategory ?? "")}</td><td>${esc((j.locations || []).slice(0, 2).join(", "))}</td><td class="dk-hide-md" data-sort="${SENIORITY_ORDER.indexOf(j.seniorityLevel)}">${esc(SENIORITY_LABELS[j.seniorityLevel] ?? j.seniorityLevel ?? "")}</td><td class="dk-num dk-hide-md" data-sort="${j.salary ?? 0}">${j.salary ? kFmt(j.salary) : ""}</td><td class="dk-hide-md">${esc((j.programmingLanguages || []).slice(0, 3).join(", "))}</td><td class="dk-num firm-date" data-sort="${esc(j.datePosted || "")}">${esc(govDate(j.datePosted))}</td></tr>`,
     )
     .join("\n");
+  const roleCounts = topRoles.map(([r, n]) => `${n} ${ROLE_LABELS[r] ?? r}`).join(", ");
   write(
     `/firm/${f.slug}`,
     page({
       pathname: `/firm/${f.slug}`,
-      title: `${f.name} Quant Jobs (${monthYear}): ${f.count} Open Role${f.count === 1 ? "" : "s"} | Quant Job Market`,
-      description: `${f.count} open quant role${f.count === 1 ? "" : "s"} at ${f.name} (${typeLabel})${where ? `, hiring in ${where}` : ""}. Titles, locations, and dates — live data updated daily.`,
+      title: `${f.name} Careers: ${f.count} Open Quant Job${f.count === 1 ? "" : "s"} (${monthYear}) | Quant Job Market`,
+      description: `${f.name} is hiring for ${plural(f.count, "role")}${where ? ` in ${where}` : ""}: ${roleCounts}.${interns.length ? ` ${plural(interns.length, "internship")}.` : ""} ${dated.length ? `${fresh} posted in the last 30 days` : "Live roles"}${medianPay ? `, median disclosed base ${kFmt(medianPay)}` : ""}. Updated daily.`,
       jsonLd: datasetLd(`${f.name} open quant roles`, `${f.count} open roles at ${f.name}.`, `${BASE}/firm/${f.slug}`),
-      h1: `${f.name} Quant Jobs`,
-      intro: `${esc(f.name)} has <strong>${f.count} open quant role${f.count === 1 ? "" : "s"}</strong> right now${where ? `, hiring in ${esc(where)}` : ""}. Each posting below links to full details and a direct apply link. <a href="${PREFIX}/hiring">See all firms hiring →</a>`,
-      bodyHtml: `${sortableFirmTable(
+      h1: `${f.name} careers`,
+      intro: `Every open role at ${esc(f.name)}, from its own careers pages, with the hiring pace, internships and pay the postings disclose. Updated daily. <a href="${PREFIX}/hiring">Compare all firms hiring</a>`,
+      bodyHtml: `${headlines}
+${summary}
+<section class="firm-section">${sectionHeading("New roles by week", "Open roles by the week they were posted, last 12 weeks. Roles that have since closed are not counted.")}${!dated.length ? `<p class="dk-hint">${esc(f.name)} does not publish posting dates, so its roles cannot be placed by week.</p>` : dated.some((j) => daysAgo(j.datePosted) < 84) ? weeklyBars(dated) : `<p class="dk-hint">No open role was posted in the last 12 weeks.</p>`}</section>
+<section class="firm-section">${sectionHeading(`All ${plural(f.count, "open role")}`, "Newest first. Each role links to its details and the firm's apply page.")}${sortableFirmTable(
         `${sortTh("Title", 0, "text")}${sortTh("Role", 1, "text", { cls: "dk-hide-sm" })}${sortTh("Location", 2, "text")}${sortTh("Seniority", 3, "num", { cls: "dk-hide-md" })}${sortTh("Salary", 4, "num", { num: true, cls: "dk-hide-md" })}${sortTh("Languages", 5, "text", { cls: "dk-hide-md" })}${sortTh("Posted", 6, "text", { num: true, active: true, dir: "desc" })}`,
         rows,
-      )}${linkable.length > 500 ? `<p class="dk-hint">Showing 500 of ${f.count} open roles.</p>` : ""}
+      )}${linkable.length > 500 ? `<p class="dk-hint">Showing 500 of ${f.count} open roles.</p>` : ""}</section>
 <script src="${PREFIX}/oss-chart.js" defer></script>`,
     }),
   );
@@ -1281,28 +1426,6 @@ let internshipsSeoSection = null;
   }
 }
 
-// ── internal links (so the new pages aren't orphaned) ────────────────────────
-// React only owns #root, so a <footer> placed AFTER it survives hydration and
-// gives crawlers real anchor links into every generated page from the SPA shells.
-const techLinks = TECHS.filter((t) => written.includes(`/tech/${t.slug}`))
-  .map((t) => `<a href="${PREFIX}/tech/${t.slug}">${esc(t.name)} firms</a>`)
-  .join("\n      ");
-const locationLinks = LOCATIONS.filter((l) => written.includes(`/location/${l.slug}`))
-  .map((l) => `<a href="${PREFIX}/location/${l.slug}">${esc(l.name)}</a>`)
-  .join("\n      ");
-const roleLinks = ROLES.filter((r) => written.includes(`/${r.slug}`))
-  .map((r) => `<a href="${PREFIX}/${r.slug}">${esc(r.name)} jobs</a>`)
-  .join("\n      ");
-const footer = `    <footer class="dataset-links" style="max-width:960px;margin:0 auto;padding:24px 15px;font-family:var(--dk-font,Inter,system-ui,sans-serif);font-size:var(--dk-fs-s,.82rem);color:var(--dk-muted,#888);border-top:1px solid var(--dk-rule-soft,#e5e6e7);display:flex;flex-wrap:wrap;gap:6px 14px">
-      <strong style="color:var(--dk-ink,#555)">Explore the data:</strong>
-      <a href="${PREFIX}/hiring">Which firms are hiring</a>
-      <a href="${PREFIX}/salaries">Quant salaries</a>
-      <a href="${PREFIX}/open-source/">Quant firms on GitHub</a>
-      <a href="${PREFIX}/internships">Quant internships</a>
-      ${roleLinks}
-      ${techLinks}
-      ${locationLinks}
-    </footer>`;
 // Live counts to replace the stale hardcoded numbers baked into the static shells.
 const firmsWithLang = [...firms.values()].filter((f) => f.langs.size > 0).length;
 const firmsWithLoc = [...firms.values()].filter((f) => f.locs.size > 0).length;
@@ -1375,13 +1498,9 @@ for (const shell of ["index.html", "tech-stack.html", "locations.html", "stacks.
   const p = path.join(DIST, shell);
   if (!fs.existsSync(p)) continue;
   let html = fs.readFileSync(p, "utf8");
-  if (html.includes("Explore the data:")) continue; // already injected on an earlier run
   // Refresh stale hardcoded firm/posting counts against live data.
   if (shell === "tech-stack.html") html = html.replace(/\b42\b/g, String(firmsWithLang)).replace(/3,900\+/g, jobsStr);
   if (shell === "locations.html") html = html.replace(/\b38\b/g, String(firmsWithLoc)).replace(/2,700\+/g, jobsStr);
-  // /internships ships its own ranked tables; the others get the head-term block.
-  const section = `<details class="dk-container" style="padding:20px 15px"><summary>Browse firms hiring quant roles</summary><ul>${ranked.map(f => `<li>${firmLink(f.name)}</li>`).join("")}</ul></details>`;
-  html = html.replace("</body>", `${section}\n${footer}\n  </body>`);
   fs.writeFileSync(p, html);
 }
 
