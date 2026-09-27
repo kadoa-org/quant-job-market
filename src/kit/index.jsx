@@ -146,33 +146,31 @@ export function SiteHeader({ brand, brandHref = "/", brandSuffix, right, LinkCom
 
 // Cross-dataset footer: links the sibling open-data sites (all under
 // www.kadoa.com/*) to each other — internal linking for SEO. `current` marks
-// the active site (plain text, not a self-link). Cross-site links are full
+// the active site, which is left out of the list. Cross-site links are full
 // navigations, so plain anchors.
 export function SiteFooter({ current }) {
+  // Alphabetical, so a reader finds a site without scanning, however long the list gets. The current site is left
+  // out: the heading says "Other".
   const sites = [
-    ["quant", "https://www.kadoa.com/quant", "Quant Jobs"],
-    ["layoffs", "https://www.kadoa.com/layoffs", "Layoffs Tracker"],
     ["congress", "https://www.kadoa.com/congress", "Congress Trades"],
-    ["potus", "https://www.kadoa.com/potus", "POTUS Tracker"],
-    ["mining", "https://www.kadoa.com/mining", "Mining Monitor"],
     ["datacenter", "https://www.kadoa.com/datacenter", "Datacenter Tracker"],
+    ["layoffs", "https://www.kadoa.com/layoffs", "Layoffs Tracker"],
+    ["mining", "https://www.kadoa.com/mining", "Mining Monitor"],
+    ["potus", "https://www.kadoa.com/potus", "POTUS Tracker"],
+    ["quant", "https://www.kadoa.com/quant", "Quant Jobs"],
     ["food-prices", "https://www.kadoa.com/food-prices", "US Food Prices"],
-  ];
+  ].filter(([key]) => key !== current);
   return (
     <footer className="dk-footer">
       <div className="dk-container dk-footer-inner">
         <h2 className="dk-footer-heading">Other open datasets</h2>
         <nav aria-label="Other open datasets">
+          {/* In columns, as the GOV.UK footer lists its links (govuk-footer__list--columns-3): three on desktop, two on
+              a phone, so the list grows sideways instead of down. */}
           <ul className="dk-footer-links">
             {sites.map(([key, href, label]) => (
               <li key={key}>
-                {key === current ? (
-                  <span className="dk-footer-here" aria-current="page">
-                    {label}
-                  </span>
-                ) : (
-                  <a href={href}>{label}</a>
-                )}
+                <a href={href}>{label}</a>
               </li>
             ))}
           </ul>
