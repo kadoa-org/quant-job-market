@@ -284,13 +284,8 @@ ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script
   .firm-summary dd{margin:0}
   .firm-summary a,.seo-crumbs a{color:var(--dk-link);text-decoration:underline;text-underline-offset:3px}
   .firm-section{margin:0 0 36px}
-  .firm-weeks{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;align-items:end;height:170px;max-width:760px;border-bottom:1px solid var(--dk-gov-border)}
-  .firm-weeks__col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative;padding-bottom:22px}
-  .firm-weeks__bar{display:block;width:100%;background:#12436d;min-height:1px}
-  .firm-weeks__n{font-size:13px;font-variant-numeric:tabular-nums;margin-bottom:3px}
-  .firm-weeks__label{position:absolute;bottom:0;font-size:12px;color:var(--dk-muted);white-space:nowrap}
   .firm-date{white-space:nowrap}
-  @media (max-width:640px){.firm-summary>div{grid-template-columns:1fr;gap:2px}.firm-weeks__label{font-size:10px}.firm-weeks__col:nth-child(odd) .firm-weeks__label{visibility:hidden}}
+  @media (max-width:640px){.firm-summary>div{grid-template-columns:1fr;gap:2px}}
   .oss-about{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--dk-muted);font-size:var(--dk-fs-s);line-height:1.4}
   /* Subtle source line under each table — carries attribution into shared screenshots. */
   .oss-attr{margin:10px 0 0;font-size:12px;color:var(--dk-muted)}
@@ -1016,21 +1011,6 @@ const keyFigures = (items, context) => {
 };
 const sectionHeading = (title, desc) =>
   `<div class="dk-heading"><h2 class="dk-heading__title">${title}</h2>${desc ? `<p class="dk-heading__desc">${desc}</p>` : ""}</div>`;
-// New postings per week over the last 12 weeks, as plain bars: a firm's hiring pace at a glance, from the posting
-// dates of roles still open (roles that closed are gone from the feed, so older weeks read low).
-const weeklyBars = (list) => {
-  const weeks = Array.from({ length: 12 }, (_, k) => ({ start: 7 * (11 - k), n: 0 }));
-  for (const j of list) {
-    const a = daysAgo(j.datePosted);
-    if (a < 84) weeks[11 - Math.floor(a / 7)].n++;
-  }
-  const max = Math.max(1, ...weeks.map((w) => w.n));
-  const label = (w) => govDate(new Date(buildDay - w.start * DAY_MS - 6 * DAY_MS).toISOString().slice(0, 10)).replace(/ \d{4}$/, "");
-  return `<div class="firm-weeks" role="img" aria-label="Open roles by week posted, last 12 weeks: ${weeks.map((w) => `${label(w)} ${w.n}`).join(", ")}">${weeks
-    .map((w) => `<div class="firm-weeks__col"><span class="firm-weeks__n">${w.n || ""}</span><span class="firm-weeks__bar" style="height:${Math.round((w.n / max) * 100)}%"></span><span class="firm-weeks__label">${label(w)}</span></div>`)
-    .join("")}</div>`;
-};
-
 // Cities and roles on a firm page link to their own pages where one was generated: the in-context links that tie the
 // page set together, in place of a block of footer links.
 const cityLink = (c) => {
@@ -1133,11 +1113,10 @@ for (const f of ranked) {
       description: `${f.name} is hiring for ${plural(f.count, "role")}${where ? ` in ${where}` : ""}: ${roleCounts}.${interns.length ? ` ${plural(interns.length, "internship")}.` : ""} ${dated.length ? `${fresh} posted in the last 30 days` : "Live roles"}${medianPay ? `, median disclosed base ${kFmt(medianPay)}` : ""}. Updated daily.`,
       jsonLd: datasetLd(`${f.name} open quant roles`, `${f.count} open roles at ${f.name}.`, `${BASE}/firm/${f.slug}`),
       h1: `${f.name} careers`,
-      intro: `Every open role at ${esc(f.name)}, from its own careers pages, with the hiring pace, internships and pay the postings disclose. Updated daily. <a href="${PREFIX}/hiring">Compare all firms hiring</a>`,
+      intro: `Every open role at ${esc(f.name)}, from its own careers pages, with its internships and the pay its postings disclose. Updated daily. <a href="${PREFIX}/hiring">Compare all firms hiring</a>`,
       bodyHtml: `${headlines}
 ${summary}
 ${internSection}
-<section class="firm-section">${sectionHeading("New roles by week", "Open roles by the week they were posted, last 12 weeks. Roles that have since closed are not counted.")}${!dated.length ? `<p class="dk-hint">${esc(f.name)} does not publish posting dates, so its roles cannot be placed by week.</p>` : dated.some((j) => daysAgo(j.datePosted) < 84) ? weeklyBars(dated) : `<p class="dk-hint">No open role was posted in the last 12 weeks.</p>`}</section>
 <section class="firm-section">${sectionHeading(`All ${plural(f.count, "open role")}`, "Newest first. Each role links to its details and the firm's apply page.")}${sortableFirmTable(
         `${sortTh("Title", 0, "text")}${sortTh("Role", 1, "text", { cls: "dk-hide-sm" })}${sortTh("Location", 2, "text")}${sortTh("Seniority", 3, "num", { cls: "dk-hide-md" })}${sortTh("Salary", 4, "num", { num: true, cls: "dk-hide-md" })}${sortTh("Languages", 5, "text", { cls: "dk-hide-md" })}${sortTh("Posted", 6, "text", { num: true, active: true, dir: "desc" })}`,
         rows,
