@@ -161,8 +161,8 @@ export function SiteFooter({ current }) {
   return (
     <footer className="dk-footer">
       <div className="dk-container dk-footer-inner">
-        <h2 className="dk-footer-heading">Kadoa open datasets</h2>
-        <nav aria-label="Kadoa open datasets">
+        <h2 className="dk-footer-heading">Other open datasets</h2>
+        <nav aria-label="Other open datasets">
           <ul className="dk-footer-links">
             {sites.map(([key, href, label]) => (
               <li key={key}>
