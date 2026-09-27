@@ -2,7 +2,12 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const root = new URL('../dist/quant/', import.meta.url);
 const read = file => fs.readFileSync(new URL(file, root), 'utf8');
-const seed = html => JSON.parse(html.match(/<script id="page-data" type="application\/json">([\s\S]*?)<\/script>/)[1]);
+// The shells carry a small seed that points at the shared data file (dataUrl); the test reads it the way the browser does.
+const seed = html => {
+  const page = JSON.parse(html.match(/<script id="page-data" type="application\/json">([\s\S]*?)<\/script>/)[1]);
+  assert(page.dataUrl && !page.data, "the shell points at the data file instead of embedding the data");
+  return { ...page, data: JSON.parse(read(page.dataUrl.replace(/^\/quant\//, ''))) };
+};
 const home = read('index.html');
 assert.match(home, /<h1[^>]*>Quant jobs<\/h1>/);
 assert.match(home, /<table/);

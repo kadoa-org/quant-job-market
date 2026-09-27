@@ -20,6 +20,7 @@
  */
 
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createServer } from "vite";
@@ -454,6 +455,8 @@ for (const loc of LOCATIONS) {
     .map((f) => ({ name: f.name, type: f.type, n: f.locs.get(loc.name), langs: f.langs }))
     .sort((a, b) => b.n - a.n);
   const totalPostings = matched.reduce((s, f) => s + f.n, 0);
+  // A city page ranks firms, so one with fewer than 3 firms or 20 roles would be thin; it is skipped until it grows.
+  if (matched.length < 3 || totalPostings < 20) continue;
   const rows = matched
     .map(
       (f, i) =>
@@ -1083,6 +1086,28 @@ for (const f of ranked) {
       ? `Newest role posted ${govDate(newest)}. Counts come from the firm's own job postings, checked daily.`
       : "Counts come from the firm's own job postings, checked daily. The firm does not publish posting dates.",
   );
+  // Internships get their own section: "<firm> internship" and "<firm> quant internship" are common searches that
+  // landed on these pages without the word appearing anywhere. Intern pay is shown where the posting prints it.
+  const internRows = interns
+    .filter((j) => j.slug && descriptions[j.id])
+    .sort((a, b) => (b.datePosted || "").localeCompare(a.datePosted || ""));
+  const internPay = internRows.some((j) => j.salary);
+  const internSection = internRows.length
+    ? `<section class="firm-section">${sectionHeading(
+        `${esc(f.name)} internships`,
+        `${plural(interns.length, "open internship")}${interns2027 ? `, ${interns2027} for 2027` : ""}.${internPay ? " Pay is the annual base the posting prints." : ""}`,
+      )}${kitTable(
+        `<th>Internship</th><th>Location</th>${internPay ? `<th class="dk-num dk-hide-sm">Pay</th>` : ""}`,
+        internRows
+          .slice(0, 25)
+          .map(
+            (j) =>
+              `<tr><td><a href="${PREFIX}/job/${esc(j.slug)}">${esc(j.jobTitle)}</a></td><td>${esc((j.locations || []).slice(0, 2).join(", "))}</td>${internPay ? `<td class="dk-num dk-hide-sm">${j.salary ? kFmt(j.salary) : ""}</td>` : ""}</tr>`,
+          )
+          .join("\n"),
+      )}${internRows.length > 25 ? `<p class="dk-hint">Showing 25 of ${internRows.length} internships; all are in the table below.</p>` : ""}</section>`
+    : "";
+
   // GOV.UK summary list: the firm at a glance, one fact per row.
   const summary = `<dl class="firm-summary">
 <div><dt>Type</dt><dd>${esc(typeLabel.charAt(0).toUpperCase() + typeLabel.slice(1))}</dd></div>
@@ -1111,6 +1136,7 @@ for (const f of ranked) {
       intro: `Every open role at ${esc(f.name)}, from its own careers pages, with the hiring pace, internships and pay the postings disclose. Updated daily. <a href="${PREFIX}/hiring">Compare all firms hiring</a>`,
       bodyHtml: `${headlines}
 ${summary}
+${internSection}
 <section class="firm-section">${sectionHeading("New roles by week", "Open roles by the week they were posted, last 12 weeks. Roles that have since closed are not counted.")}${!dated.length ? `<p class="dk-hint">${esc(f.name)} does not publish posting dates, so its roles cannot be placed by week.</p>` : dated.some((j) => daysAgo(j.datePosted) < 84) ? weeklyBars(dated) : `<p class="dk-hint">No open role was posted in the last 12 weeks.</p>`}</section>
 <section class="firm-section">${sectionHeading(`All ${plural(f.count, "open role")}`, "Newest first. Each role links to its details and the firm's apply page.")}${sortableFirmTable(
         `${sortTh("Title", 0, "text")}${sortTh("Role", 1, "text", { cls: "dk-hide-sm" })}${sortTh("Location", 2, "text")}${sortTh("Seniority", 3, "num", { cls: "dk-hide-md" })}${sortTh("Salary", 4, "num", { num: true, cls: "dk-hide-md" })}${sortTh("Languages", 5, "text", { cls: "dk-hide-md" })}${sortTh("Posted", 6, "text", { num: true, active: true, dir: "desc" })}`,
@@ -1472,9 +1498,16 @@ const headSectionFor = (shell) => {
     </section>`;
 };
 
+// The app pages render in full at build time, but the data behind them (every job, 3.9 MB of JSON) no longer rides
+// inside each page: it is written once to a content-versioned file that the browser fetches after first paint and
+// caches across pages, and the app hydrates when it arrives (src/main.jsx). The same pattern as the food prices
+// site, which ships the first view and loads the rest from its CDN. Before, all five shells embedded the full set.
+const pageDataBody = JSON.stringify(renderer.data);
+const pageDataFile = `page-data.${createHash("sha256").update(pageDataBody).digest("hex").slice(0, 12)}.json`;
+fs.writeFileSync(path.join(DIST, "data", pageDataFile), pageDataBody);
 function renderShell(html, pathname) {
   const initialPage = { pathname, route: renderer.parseUrl(pathname, ""), data: renderer.data, stacks: renderer.stacks };
-  const payload = JSON.stringify(initialPage).replace(/</g, "\\u003c");
+  const payload = JSON.stringify({ ...initialPage, data: undefined, dataUrl: `${PREFIX}/data/${pageDataFile}` }).replace(/</g, "\\u003c");
   const template = html.replace(/<div id="root">[\s\S]*?<\/div><script id="page-data" type="application\/json">[\s\S]*?<\/script>/, '<div id="root"></div>');
   return template.replace('<div id="root"></div>', () => `<div id="root">${renderer.renderPage(initialPage)}</div><script id="page-data" type="application/json">${payload}</script>`);
 }

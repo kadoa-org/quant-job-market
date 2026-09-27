@@ -24,6 +24,23 @@ export const LOCATIONS = [
   { slug: "miami", name: "Miami" },
   { slug: "amsterdam", name: "Amsterdam" },
   { slug: "austin", name: "Austin" },
+  // Added 27 Sep 2026: every city with 20+ open roles at 3+ firms. City pages have the site's best click-through.
+  { slug: "bangalore", name: "Bangalore" },
+  { slug: "dublin", name: "Dublin" },
+  { slug: "toronto", name: "Toronto" },
+  { slug: "montreal", name: "Montreal" },
+  { slug: "greenwich", name: "Greenwich" },
+  { slug: "stamford", name: "Stamford" },
+  { slug: "houston", name: "Houston" },
+  { slug: "san-francisco", name: "San Francisco" },
+  { slug: "warsaw", name: "Warsaw" },
+  { slug: "budapest", name: "Budapest" },
+  { slug: "geneva", name: "Geneva" },
+  { slug: "zug", name: "Zug" },
+  { slug: "tokyo", name: "Tokyo" },
+  { slug: "shanghai", name: "Shanghai" },
+  { slug: "gurgaon", name: "Gurgaon" },
+  { slug: "dubai", name: "Dubai" },
 ];
 
 export const ROLES = [
