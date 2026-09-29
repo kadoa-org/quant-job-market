@@ -145,12 +145,13 @@ export function SiteHeader({ brand, brandHref = "/", brandSuffix, right, LinkCom
 }
 
 // Cross-dataset footer: links the sibling open-data sites (all under
-// www.kadoa.com/*) to each other — internal linking for SEO. `current` marks
-// the active site, which is left out of the list. Cross-site links are full
-// navigations, so plain anchors.
+// www.kadoa.com/*) to each other, internal linking for SEO. It is the same list on
+// every site, so the footer never shifts between them; `current` marks the site
+// being read, shown as plain text rather than a link to itself. Cross-site links
+// are full navigations, so plain anchors.
 export function SiteFooter({ current }) {
-  // Alphabetical, so a reader finds a site without scanning, however long the list gets. The current site is left
-  // out: the heading says "Other".
+  // Alphabetical, so a reader finds a site without scanning. Eight entries fill four columns of two on desktop and
+  // two columns of four on a phone; keep the count even when adding a site.
   const sites = [
     ["congress", "https://www.kadoa.com/congress", "Congress Trades"],
     ["datacenter", "https://www.kadoa.com/datacenter", "Datacenter Tracker"],
@@ -158,19 +159,20 @@ export function SiteFooter({ current }) {
     ["mining", "https://www.kadoa.com/mining", "Mining Monitor"],
     ["potus", "https://www.kadoa.com/potus", "POTUS Tracker"],
     ["quant", "https://www.kadoa.com/quant", "Quant Jobs"],
+    ["energy-prices", "https://www.kadoa.com/energy-prices", "US Energy Prices"],
     ["food-prices", "https://www.kadoa.com/food-prices", "US Food Prices"],
-  ].filter(([key]) => key !== current);
+  ];
   return (
     <footer className="dk-footer">
       <div className="dk-container dk-footer-inner">
-        <h2 className="dk-footer-heading">Other open datasets</h2>
-        <nav aria-label="Other open datasets">
-          {/* In columns, as the GOV.UK footer lists its links (govuk-footer__list--columns-3): three on desktop, two on
+        <h2 className="dk-footer-heading">Open datasets</h2>
+        <nav aria-label="Open datasets">
+          {/* In columns, as the GOV.UK footer lists its links (govuk-footer__list--columns-3): four on desktop, two on
               a phone, so the list grows sideways instead of down. */}
           <ul className="dk-footer-links">
             {sites.map(([key, href, label]) => (
               <li key={key}>
-                <a href={href}>{label}</a>
+                {key === current ? <span className="dk-footer-current" aria-current="page">{label}</span> : <a href={href}>{label}</a>}
               </li>
             ))}
           </ul>

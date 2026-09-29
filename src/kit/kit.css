@@ -83,7 +83,8 @@
 @media (min-width: 40.0625em) { .dk-footer-inner { padding-top: 40px; } }
 .dk-footer-heading { margin: 0 0 15px; padding-bottom: 10px; border-bottom: 1px solid var(--dk-faint); font: 700 19px/1.25 var(--dk-font); color: var(--dk-ink); }
 .dk-footer-links { list-style: none; margin: 0; padding: 0; column-count: 2; column-gap: 30px; }
-@media (min-width: 40.0625em) { .dk-footer-links { column-count: 3; } }
+@media (min-width: 40.0625em) { .dk-footer-links { column-count: 4; } }
+.dk-footer-current { color: var(--dk-ink); font-weight: 700; }
 .dk-footer-links li { margin-bottom: 15px; break-inside: avoid; }
 .dk-footer-links a { color: var(--dk-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .dk-footer-links a:hover { text-decoration-thickness: 3px; }
