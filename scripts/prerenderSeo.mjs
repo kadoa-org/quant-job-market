@@ -27,7 +27,7 @@ import { createServer } from "vite";
 import initSqlJs from "sql.js";
 // Plain-JS module, shared with the app so the /internships tables and the live
 // view group postings identically.
-import { ROLE_LABELS, SENIORITY_LABELS, SENIORITY_ORDER } from "../src/constants.js";
+import { QUANT_ROLES as BOARD_ROLES, ROLE_LABELS, SENIORITY_LABELS, SENIORITY_ORDER } from "../src/constants.js";
 import { rankSkillAreas } from "../src/skillAreas.js";
 // The generated page lists, shared with the app so its "Explore the data" links and the pages stay in step.
 import { LOCATIONS, ROLES, TECHS } from "../src/seoPages.js";
@@ -158,12 +158,12 @@ const GH_ICON = `<svg width="14" height="14" viewBox="0 0 16 16" fill="currentCo
 const siteHeader = `<header class="dk-header">
   <div class="dk-container dk-header-inner">
     <span class="dk-header-brand-group">
-      <a href="${PREFIX}" class="dk-header-brand">📊 Quant Job Market</a>
+      <a href="${PREFIX}" class="dk-header-brand">📊 Quant Jobs</a>
       <a href="https://www.kadoa.com" target="_blank" rel="noreferrer" class="dk-header-link">by Kadoa</a>
     </span>
     <span style="display:flex;align-items:center;gap:14px">
       <span class="dk-live"><span class="dk-live-dot" aria-hidden="true"></span>Updated daily</span>
-      <a class="dk-btn dk-btn--inverse" href="https://github.com/kadoa-org/quant-job-market" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub" style="text-decoration:none">${GH_ICON}<span class="dk-btn-label">Star on GitHub</span></a>
+      <a class="dk-btn dk-btn--inverse" href="https://github.com/kadoa-org/quant-jobs" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub" style="text-decoration:none">${GH_ICON}<span class="dk-btn-label">Star on GitHub</span></a>
     </span>
   </div>
 </header>`;
@@ -208,7 +208,7 @@ const siteFooter = `<footer class="dk-footer">
 // `crumbs` is the trail above the h1 as [href, label] pairs, the page itself last and unlinked. It is also emitted as
 // BreadcrumbList structured data, so search results show the trail instead of the raw URL.
 function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml, navHtml = seoNav, showCrumbs = true, crumbs = null }) {
-  const trail = crumbs ?? [[PREFIX, "Quant Job Market"], [null, h1]];
+  const trail = crumbs ?? [[PREFIX, "Quant Jobs"], [null, h1]];
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -232,7 +232,7 @@ function page({ pathname, title, description, jsonLd, h1, intro, bodyHtml, navHt
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <link rel="canonical" href="${url}" />
 <meta property="og:type" content="article" />
-<meta property="og:site_name" content="Quant Job Market" />
+<meta property="og:site_name" content="Quant Jobs" />
 <meta property="og:title" content="${esc(title)}" />
 <meta property="og:description" content="${esc(description)}" />
 <meta property="og:url" content="${url}" />
@@ -371,7 +371,7 @@ write(
   "/hiring",
   page({
     pathname: "/hiring",
-    title: `Which Quant Firms Are Hiring Right Now (${monthYear}, Live) | Quant Job Market`,
+    title: `Which Quant Firms Are Hiring Right Now (${monthYear}, Live) | Quant Jobs`,
     description: `Live count of open roles across ${firms.size} hedge funds, prop shops, and market makers, ranked by number of postings. Updated daily from ${jobs.length.toLocaleString()} job listings.`,
     jsonLd: datasetLd(
       "Quant firms hiring: live open-role counts",
@@ -411,7 +411,7 @@ for (const tech of TECHS) {
     `/tech/${tech.slug}`,
     page({
       pathname: `/tech/${tech.slug}`,
-      title: `Which Quant Firms Hire ${tech.name} Developers (${monthYear}, Live Data) | Quant Job Market`,
+      title: `Which Quant Firms Hire ${tech.name} Developers (${monthYear}, Live Data) | Quant Jobs`,
       description: `${matched.length} hedge funds, prop shops, and market makers with open ${tech.name} roles, ranked by posting count, with locations. Live data from ${jobs.length.toLocaleString()} quant job listings, updated daily.`,
       jsonLd: datasetLd(
         `Quant firms hiring ${tech.name} developers`,
@@ -462,7 +462,7 @@ for (const loc of LOCATIONS) {
     `/location/${loc.slug}`,
     page({
       pathname: `/location/${loc.slug}`,
-      title: `Quant Firms Hiring in ${loc.name} (${monthYear}, Live Data) | Quant Job Market`,
+      title: `Quant Firms Hiring in ${loc.name} (${monthYear}, Live Data) | Quant Jobs`,
       description: `${matched.length} hedge funds, prop shops, and market makers with open quant roles in ${loc.name} — ${totalPostings} postings, ranked by firm. Live data updated daily.`,
       jsonLd: datasetLd(
         `Quant firms hiring in ${loc.name}`,
@@ -516,7 +516,7 @@ for (const role of ROLES) {
     `/${role.slug}`,
     page({
       pathname: `/${role.slug}`,
-      title: `${role.name} Jobs at Quant Firms (${monthYear}): ${totalPostings} Live Roles | Quant Job Market`,
+      title: `${role.name} Jobs at Quant Firms (${monthYear}): ${totalPostings} Live Roles | Quant Jobs`,
       description: `${totalPostings} open ${role.name} roles at ${matched.length} hedge funds, prop shops, and market makers, ranked by firm${medSal ? `. Median disclosed salary ${fmtSal(medSal)}` : ""}. Live data updated daily.`,
       jsonLd: datasetLd(
         `${role.name} jobs at quant firms`,
@@ -592,7 +592,7 @@ for (const role of ROLES) {
     "/salaries",
     page({
       pathname: "/salaries",
-      title: `Quant Salaries (${monthYear}): Live Comp Data from ${disclosed.length} Job Postings | Quant Job Market`,
+      title: `Quant Salaries (${monthYear}): Live Comp Data from ${disclosed.length} Job Postings | Quant Jobs`,
       description: `Quant compensation from ${disclosed.length} live job postings that disclose salary: medians by role, seniority, and firm (${byFirm.length} firms). Base salary only, updated daily.`,
       jsonLd: datasetLd(
         "Quant salaries: live disclosed compensation",
@@ -952,11 +952,11 @@ for (const j of jobs) {
     `/job/${j.slug}`,
     page({
       pathname: `/job/${j.slug}`,
-      title: `${j.jobTitle} at ${j.firmName}${locStr ? ` – ${(j.locations || [])[0]}` : ""} | Quant Job Market`,
+      title: `${j.jobTitle} at ${j.firmName}${locStr ? ` – ${(j.locations || [])[0]}` : ""} | Quant Jobs`,
       description: `${j.jobTitle} at ${j.firmName}${locStr ? ` (${locStr})` : ""}. Live posting aggregated from the firm's careers page — apply directly. One of ${jobs.length.toLocaleString()} open quant roles tracked daily.`,
       jsonLd,
       h1: j.jobTitle,
-      crumbs: [[PREFIX, "Quant Job Market"], [`${PREFIX}/firm/${firmSlugify(j.firmName)}`, `${j.firmName} careers`], [null, j.jobTitle]],
+      crumbs: [[PREFIX, "Quant Jobs"], [`${PREFIX}/firm/${firmSlugify(j.firmName)}`, `${j.firmName} careers`], [null, j.jobTitle]],
       intro: `<span class="dk-hint">${chips.map(esc).join(" · ")}</span>`,
       bodyHtml: `<p>
   <a class="dk-btn seo-apply" href="${esc(applyHref)}" target="_blank" rel="noopener noreferrer nofollow">Apply now →</a>
@@ -1109,7 +1109,7 @@ for (const f of ranked) {
     `/firm/${f.slug}`,
     page({
       pathname: `/firm/${f.slug}`,
-      title: `${f.name} Careers: ${f.count} Open Quant Job${f.count === 1 ? "" : "s"} (${monthYear}) | Quant Job Market`,
+      title: `${f.name} Careers: ${f.count} Open Quant Job${f.count === 1 ? "" : "s"} (${monthYear}) | Quant Jobs`,
       description: `${f.name} is hiring for ${plural(f.count, "role")}${where ? ` in ${where}` : ""}: ${roleCounts}.${interns.length ? ` ${plural(interns.length, "internship")}.` : ""} ${dated.length ? `${fresh} posted in the last 30 days` : "Live roles"}${medianPay ? `, median disclosed base ${kFmt(medianPay)}` : ""}. Updated daily.`,
       jsonLd: datasetLd(`${f.name} open quant roles`, `${f.count} open roles at ${f.name}.`, `${BASE}/firm/${f.slug}`),
       h1: `${f.name} careers`,
@@ -1199,7 +1199,7 @@ if (github.firms.length) {
     "/open-source",
     page({
       pathname: "/open-source",
-      title: `Quant Firms on GitHub: Open Source Leaderboard | Quant Job Market`,
+      title: `Quant Firms on GitHub: Open Source Leaderboard | Quant Jobs`,
       description: `Which quant firms actually open-source? ${active.length} hedge funds, prop shops, and market makers ranked by GitHub footprint: ${totalRepos.toLocaleString()} public repos, ${fmtStars(totalStars)} stars. Updated daily.`,
       jsonLd: datasetLd(
         "Quant firms on GitHub: open-source footprint",
@@ -1435,6 +1435,8 @@ let internshipsSeoSection = null;
 const firmsWithLang = [...firms.values()].filter((f) => f.langs.size > 0).length;
 const firmsWithLoc = [...firms.values()].filter((f) => f.locs.size > 0).length;
 const jobsStr = jobs.length.toLocaleString();
+// What the board itself shows: quant roles only, as src/jobData.js filters.
+const boardStr = jobs.filter((j) => BOARD_ROLES.has(j.roleCategory)).length.toLocaleString();
 
 // Head-term content: a real crawler-visible <h1> + intro + top-firm table for the
 // SPA entry points. Placed with the footer after #root so it remains crawlable
@@ -1451,8 +1453,8 @@ const headRows = ranked
 // table below is shared supporting content; the heading and lede differentiate.
 const HEAD_CONTENT = {
   "index.html": {
-    h1: `Quant Job Market: ${firms.size} Firms Hiring Across ${jobsStr} Open Roles`,
-    intro: `A live, daily-updated dataset of ${jobsStr} open quant roles across ${firms.size} hedge funds, prop trading firms, market makers, and asset managers. The 20 firms with the most open postings are listed below; use the interactive board above to filter by role, language, location, and seniority.`,
+    h1: `Quant Jobs: ${firms.size} Firms Hiring Across ${jobsStr} Open Roles`,
+    intro: `The most comprehensive quant job board: ${boardStr} open quant roles, updated daily, across ${firms.size} hedge funds, prop trading firms, market makers, and asset managers. The 20 firms with the most open postings are listed below; use the interactive board above to filter by role, language, location, and seniority.`,
   },
   "tech-stack.html": {
     h1: `Quant Tech Heatmap: Languages &amp; Tools Across ${firmsWithLang} Firms`,
@@ -1523,25 +1525,28 @@ for (const shell of ["index.html", "tech-stack.html", "locations.html", "stacks.
 // contain `$`, see renderRoute in the congress prerender for the war story).
 {
   const p = path.join(DIST, "index.html");
-  const homeTitle = `Quant Jobs & Hiring Trends: Live Data from ${firms.size} Hedge Funds & Prop Shops`;
+  // The counts match what the board shows: quant roles only (src/jobData.js filters on QUANT_ROLES), rounded down to
+  // the hundred and the ten so the head never overclaims between refreshes.
+  const boardJobs = jobs.filter((j) => BOARD_ROLES.has(j.roleCategory));
+  const roles = `${(Math.floor(boardJobs.length / 100) * 100).toLocaleString()}+`;
+  const firmCount = `${Math.floor(new Set(boardJobs.map((j) => j.firmName)).size / 10) * 10}+`;
+  const homeTitle = `Quant Jobs: The Most Comprehensive Quant Job Board, ${roles} Roles at ${firmCount} Firms`;
   let html = fs.readFileSync(p, "utf8");
   html = html
     .replace(/<title>[^<]*<\/title>/, () => `<title>${esc(homeTitle)}</title>`)
-    .replace(/(<meta property="og:title" content=")[^"]*(")/, (_m, a, b) => `${a}${esc(homeTitle)}${b}`)
+    .replace(/(<meta property="og:title" content=")[^"]*(")/, (_m, a, b) => `${a}${esc("Quant Jobs: The Most Comprehensive Quant Job Board")}${b}`)
     .replace(
       /(<meta property="og:description" content=")[^"]*(")/,
-      (_m, a, b) =>
-        `${a}${esc(`${jobs.length.toLocaleString()} open postings from ${firms.size} hedge funds, prop shops, and market makers. Interactive treemap, filters, salaries, and tech stack heatmap.`)}${b}`,
+      (_m, a, b) => `${a}${esc(`${roles} open roles at ${firmCount} hedge funds, prop shops and market makers, updated daily. Filter, search and download.`)}${b}`,
     )
     .replace(
       /(<meta name="description" content=")[^"]*(")/,
       (_m, a, b) =>
-        `${a}${esc(`Open dataset and interactive viz of ${jobs.length.toLocaleString()} live job postings from ${firms.size} quant firms: hedge funds, prop trading firms, market makers, and asset managers. Filter by role, language, location, and seniority.`)}${b}`,
+        `${a}${esc(`The most comprehensive quant job board: ${roles} open roles at ${firmCount} hedge funds, prop trading firms, market makers and asset managers, updated daily. Filter by role, language, location and seniority, or download the open dataset.`)}${b}`,
     )
     .replace(
       /(<meta name="twitter:description" content=")[^"]*(")/,
-      (_m, a, b) =>
-        `${a}${esc(`${jobs.length.toLocaleString()} open postings from ${firms.size} hedge funds, prop shops, and market makers. Filter, search, explore.`)}${b}`,
+      (_m, a, b) => `${a}${esc(`The most comprehensive quant job board: ${roles} open roles at ${firmCount} firms, updated daily.`)}${b}`,
     )
     // Homepage JSON-LD carries the same stale firm counts as the sub-page shells.
     .replace(/\b42 buy-side/g, `${firmsWithLang} buy-side`)
@@ -1593,7 +1598,7 @@ for (const [tech, carriers] of stackTechFirms) {
     `/stacks/tech/${slug}`,
     page({
       pathname: `/stacks/tech/${slug}`,
-      title: `Quant Firms Using ${tech} (${monthYear}): ${carriers.length} Firm${carriers.length === 1 ? "" : "s"} | Quant Job Market`,
+      title: `Quant Firms Using ${tech} (${monthYear}): ${carriers.length} Firm${carriers.length === 1 ? "" : "s"} | Quant Jobs`,
       description: `${carriers.length} hedge fund${carriers.length === 1 ? "" : "s"}, prop shops, and market makers with ${tech} in their hiring stack, ranked by how much of their hiring names it. Live data from the firms' own job postings, updated daily.`,
       jsonLd: datasetLd(
         `Quant firms using ${tech}`,
@@ -1623,7 +1628,7 @@ console.log(`stacks lens pages: ${lensPages}`);
 const stacksShell = fs.readFileSync(path.join(DIST, "stacks.html"), "utf8");
 const spaShell = (route, title) =>
   renderShell(stacksShell, PREFIX + route)
-    .replace(/<title>[^<]*<\/title>/, `<title>${title} | Quant Job Market</title>`)
+    .replace(/<title>[^<]*<\/title>/, `<title>${title} | Quant Jobs</title>`)
     .replace(/<link rel="canonical" href="[^"]*"/, `<link rel="canonical" href="${BASE}${route}"`)
     .replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${BASE}${route}"`);
 const SPA_ROUTES = [

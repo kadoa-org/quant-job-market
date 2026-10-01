@@ -216,12 +216,12 @@ export default function TechStackHeatmap({ jobs }) {
           <span className="text-[#1a1a1a] font-semibold">kadoa.com/quant</span>
           <span className="mx-2">·</span>
           <a
-            href="https://github.com/kadoa-org/quant-job-market"
+            href="https://github.com/kadoa-org/quant-jobs"
             target="_blank"
             rel="noopener noreferrer"
             className="text-inherit no-underline"
           >
-            github.com/kadoa-org/quant-job-market
+            github.com/kadoa-org/quant-jobs
           </a>
         </div>
       </div>

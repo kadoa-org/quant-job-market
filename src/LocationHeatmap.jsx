@@ -81,12 +81,12 @@ export default function LocationHeatmap({ jobs }) {
           <span className="text-gray-700 font-semibold">kadoa.com/quant</span>
           <span className="mx-2">·</span>
           <a
-            href="https://github.com/kadoa-org/quant-job-market"
+            href="https://github.com/kadoa-org/quant-jobs"
             target="_blank"
             rel="noopener noreferrer"
             className="text-inherit no-underline"
           >
-            github.com/kadoa-org/quant-job-market
+            github.com/kadoa-org/quant-jobs
           </a>
         </div>
       </div>

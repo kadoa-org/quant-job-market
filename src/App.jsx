@@ -356,7 +356,7 @@ export default function App({ initialPage = null }) {
     <>
       <div className="min-h-screen sm:min-h-dvh w-full flex flex-col">
         <SiteHeader
-          brand="📊 Quant Job Market"
+          brand="📊 Quant Jobs"
           LinkComponent={(p) => <a {...p} />}
           brandSuffix={
             <a href="https://www.kadoa.com" target="_blank" rel="noreferrer" className="dk-header-link">
@@ -366,7 +366,7 @@ export default function App({ initialPage = null }) {
           right={
             <span style={{ display: "flex", alignItems: "center", gap: 14 }}>
               <LiveBadge>Updated daily</LiveBadge>
-              <GitHubButton repo="kadoa-org/quant-job-market" />
+              <GitHubButton repo="kadoa-org/quant-jobs" />
             </span>
           }
         />
@@ -389,7 +389,7 @@ export default function App({ initialPage = null }) {
             <div className="home-intro">
               <h1 className="dk-h1">Quant jobs</h1>
               <p className="home-lede">
-                {filteredJobs.length.toLocaleString("en-US")} open roles at {new Set(filteredJobs.map((j) => j.firmName)).size} quant firms. Updated daily.
+                The most comprehensive quant job board: {filteredJobs.length.toLocaleString("en-US")} open roles at {new Set(filteredJobs.map((j) => j.firmName)).size} firms, updated daily.
               </p>
             </div>
             {filterBar(JOB_FILTER_KEYS)}

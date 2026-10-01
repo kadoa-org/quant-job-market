@@ -1,62 +1,35 @@
-# Quant Job Market
+# Quant Jobs
 
-**Live demo: [kadoa.com/quant](https://www.kadoa.com/quant/)**
+**Live: [kadoa.com/quant](https://www.kadoa.com/quant)**
 
-![Quant Job Market](public/screenshot.png)
+[![The Quant Jobs board: open roles at hedge funds, prop trading firms and market makers, with filters](public/screenshot.png)](https://www.kadoa.com/quant)
 
-Interactive visualization and open dataset of job postings of all major quantitative finance firms.
+The most comprehensive quant job board. Every open quant role at 70+ hedge funds, prop trading firms, market makers and asset managers, collected daily from their careers pages.
 
-For each firm we scrape their careers page and extract interesting data like role category, seniority level, programming languages, skills, asset classes, education requirements, and work mode.
+## What is in it
 
-## What's in the data?
-
-- **2,500+ quant-relevant job postings from 50+ firms** from hedge funds, prop trading firms, market makers, and asset managers
-- Role classification: quant research, quant trading, quant dev, HFT systems, ML/AI, data science, software engineering, risk, portfolio management
-- Tech stack extraction: programming languages, etc.
-- Seniority, education requirements (PhD demand), asset classes, locations
-
-## Quick start
-
-```bash
-bun install && bun run dev
-```
-
-Open [http://localhost:5181](http://localhost:5181)
-
-## Features
-
-- **Treemap** of firms sized by quant job count, colored by firm type
-- **Filterable** by firm type, role, seniority, location, work mode, and asset class
-- **Jobs table** with search, sort, and CSV export
-- **Insights dashboard**: tech stack by firm type, PhD demand by firm, top languages, role distribution, locations, seniority, asset classes, education requirements
+- Around 3,000 open quant roles: research, trading, development, HFT, machine learning and data science
+- Each role tagged with seniority, location, salary where posted, programming languages, tools and asset classes
+- A page for every firm, role type, location and technology, plus salaries and tech stack heatmaps
+- The full dataset as SQLite and JSON, free to download
 
 ## Data
 
-The dataset is stored as a SQLite database (`public/data/jobs.db`) and loaded client-side using [sql.js](https://sql.js.org/) (SQLite compiled to WASM). No backend required. A JSON export (`public/data/jobs.json`) is also available for direct use with pandas, R, etc.
+**Sources.** Public careers pages of the firms on the board.
 
-| File | Description |
-|------|-------------|
-| `public/data/jobs.db` | SQLite database with all classified jobs |
-| `public/data/jobs.json` | JSON export of all classified job postings |
+**Pipeline.** A [Kadoa](https://www.kadoa.com) pipeline collects the postings every day and classifies each one. The dataset is in `public/data/` as `jobs.db` (SQLite) and `jobs.json`.
 
-## Data sources
+## Run it locally
 
-All data is scraped from publicly available company career pages.
-We use [kadoa.com](https://kadoa.com) to source the data and classify each posting. Free trial available if you need it for your own research.
+```sh
+bun install
+bun run dev   # http://localhost:5181/quant/
+```
+
+React and Vite. The board queries the SQLite file in the browser with [sql.js](https://sql.js.org/). No backend.
 
 ## Missing a firm?
 
-[Open an issue](https://github.com/kadoa-org/quant-job-market/issues) with the firm name and careers page URL, or submit a PR. We'll add it to the next data refresh.
+[Open an issue](https://github.com/kadoa-org/quant-jobs/issues) with the firm's name and careers page.
 
-## What's next
-
-- Historical tracking: posting velocity, time-to-removal, seasonal patterns
-- Expand firm coverage
-- Salary normalization (CoL-adjusted, base vs total comp)
-- Skill co-occurrence analysis
-
-## License
-
-MIT -- see [LICENSE](LICENSE).
-
-Job posting data is sourced from public career pages and provided for research and educational purposes.
+MIT licensed. Built by [Kadoa](https://www.kadoa.com). Job postings are from public careers pages and provided for research.

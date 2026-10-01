@@ -17,7 +17,7 @@ export default function AboutPage() {
           A holistic live view of the quant job market: postings from all top quant firms, updated daily with{" "}
           <ExtLink href="https://kadoa.com">kadoa.com</ExtLink>. Every posting is pulled from the firm's own careers
           page and classified by role, seniority, location, work mode, asset class, and tech stack. The code and the
-          full dataset are open source on <ExtLink href="https://github.com/kadoa-org/quant-job-market">GitHub</ExtLink>
+          full dataset are open source on <ExtLink href="https://github.com/kadoa-org/quant-jobs">GitHub</ExtLink>
           .
         </p>
       </div>
