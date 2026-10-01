@@ -387,9 +387,9 @@ export default function App({ initialPage = null }) {
             {/* A job board opens on the list: title, one line of scope, then search and the table, as openquant,
                 eFinancialCareers and Wellfound do. Market figures live on the Insights pages. */}
             <div className="home-intro">
-              <h1 className="dk-h1">Quant jobs</h1>
+              <h1 className="dk-h1">The most comprehensive quant job board</h1>
               <p className="home-lede">
-                The most comprehensive quant job board: {filteredJobs.length.toLocaleString("en-US")} open roles at {new Set(filteredJobs.map((j) => j.firmName)).size} firms, updated daily.
+                {filteredJobs.length.toLocaleString("en-US")} open roles at {new Set(filteredJobs.map((j) => j.firmName)).size} firms, updated daily.
               </p>
             </div>
             {filterBar(JOB_FILTER_KEYS)}
