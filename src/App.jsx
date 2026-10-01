@@ -357,6 +357,7 @@ export default function App({ initialPage = null }) {
       <div className="min-h-screen sm:min-h-dvh w-full flex flex-col">
         <SiteHeader
           brand="📊 Quant Jobs"
+          brandHref={import.meta.env.BASE_URL}
           LinkComponent={(p) => <a {...p} />}
           brandSuffix={
             <a href="https://www.kadoa.com" target="_blank" rel="noreferrer" className="dk-header-link">
